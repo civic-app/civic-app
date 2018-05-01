@@ -4,6 +4,7 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Table of Contents
 
+* [Starting up Civic for local development](#local-development)
 * [Updating to New Releases](#updating-to-new-releases)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
@@ -25,6 +26,18 @@ Below you'll find information about performing common tasks. The most recent ver
   * [Networking](#networking)
   * [iOS Simulator won't open](#ios-simulator-wont-open)
   * [QR Code does not scan](#qr-code-does-not-scan)
+
+## Local Development
+
+Before trying to run the app, be sure to run the command
+
+`yarn`
+
+to install local dependencies necessary. Then run
+
+`yarn run start`
+
+to run the local server. Then follow instructions in [Available Scripts](#available-scripts).
 
 ## Updating to New Releases
 
