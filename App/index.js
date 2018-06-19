@@ -3,9 +3,10 @@ import { applyMiddleware, createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import { StyleSheet, Text, View } from 'react-native'
-import Placeholder from '../src/welcome/WelcomeContainer'
+import Placeholder from '../src/screen-welcome/WelcomeContainer'
 import appReducer from './appReducer';
 import appSaga from './appSagas';
+import CandidateDetail from '../src/screen-candidate-detail/CandidateDetailContainer';
 
 /*eslint-disable */
 const composeSetup = process.env.NODE_ENV !== 'production' && typeof window === 'object' &&
@@ -29,6 +30,7 @@ const App = () => (
       <Placeholder />
       <Text>Changes you make will automatically reload.</Text>
       <Text>Shake your phone to open the developer menu.</Text>
+      <CandidateDetail candidateId={'aaa'} />
     </View>
   </Provider>
 )
