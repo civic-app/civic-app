@@ -1,22 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Placeholder from '../src/welcome/WelcomeContainer';
+import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
+import { registerScreens } from '../src/screens';
+import store from './configureStore';
 
-const App = () => (
-  <View style={styles.container}>
-    <Placeholder />
-    <Text>Changes you make will automatically reload.</Text>
-    <Text>Shake your phone to open the developer menu.</Text>
-  </View>
-);
+registerScreens(store, Provider);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-export default App;
+Navigation.startTabBasedApp({});

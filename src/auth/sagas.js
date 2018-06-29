@@ -1,10 +1,5 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import {
-  subscribeToAuthStateChanges,
-  logIn,
-  logOut,
-  register,
-} from '../auth/api';
+import { subscribeToAuthStateChanges, logIn, logOut, register } from './api';
 import { AuthActionType, logOutSuccess, loginSuccess } from './redux';
 
 const authSaga = function*() {
