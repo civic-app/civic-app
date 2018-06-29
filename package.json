@@ -31,7 +31,7 @@
     "firebase": "^5.0.4",
     "react": "16.3.1",
     "react-native": "~0.55.2",
-    "react-native-navigation": "^1.1.473",
+    "react-navigation": "^2.5.5",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0"
