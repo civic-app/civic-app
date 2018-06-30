@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import appReducer from '../reducers';
-import appSaga from '../sagas';
+import appReducer from './appReducer';
+import appSaga from './appSagas';
 
 const composeSetup =
   process.env.NODE_ENV !== 'production' &&
