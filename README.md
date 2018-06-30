@@ -71,6 +71,12 @@ and through the vast library of Extensions can support many more custom actions.
 
 All of our Javascript code wouldn't run on a real mobile device without the help of [Expo](https://expo.io/). Expo manages, configures, and contains all of the native code needed to run the app, so all we have to do is write Javascript. To be able to view your local development version of the app on your phone, download Expo from the App Store. We will also use the Expo app to distribute alpha/beta versions to our test users.
 
+You may also require [Watchman](https://facebook.github.io/watchman/), which allows React Native to detect changes in files and hot reload the app during development. If on Mac run
+
+`brew install watchman`
+
+to install Watchman using [Homebrew](https://brew.sh/).
+
 In order to be able to run the application and see it on a device, run
 
 `npm install -g exp`
