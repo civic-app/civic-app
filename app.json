@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "Civic App",
+    "slug": "civic-app",
+    "description":
+      "The #1 source of information about local & national elections, candidates, and ballot measures.",
+    "sdkVersion": "27.0.0",
+    "version": "0.1.0"
   }
 }

@@ -1,43 +1,95 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+Below you'll find information about performing common tasks. The most recent version of the Create React Native App guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
 ## Table of Contents
 
-* [Starting up Civic for local development](#local-development)
-* [Updating to New Releases](#updating-to-new-releases)
-* [Available Scripts](#available-scripts)
-  * [npm start](#npm-start)
-  * [npm test](#npm-test)
-  * [npm run ios](#npm-run-ios)
-  * [npm run android](#npm-run-android)
-  * [npm run eject](#npm-run-eject)
-* [Writing and Running Tests](#writing-and-running-tests)
-* [Environment Variables](#environment-variables)
-  * [Configuring Packager IP Address](#configuring-packager-ip-address)
-* [Customizing App Display Name and Icon](#customizing-app-display-name-and-icon)
-* [Sharing and Deployment](#sharing-and-deployment)
-  * [Publishing to Expo's React Native Community](#publishing-to-expos-react-native-community)
-  * [Building an Expo "standalone" app](#building-an-expo-standalone-app)
-  * [Ejecting from Create React Native App](#ejecting-from-create-react-native-app)
-    * [Build Dependencies (Xcode & Android Studio)](#build-dependencies-xcode-android-studio)
-    * [Should I Use ExpoKit?](#should-i-use-expokit)
-* [Troubleshooting](#troubleshooting)
-  * [Networking](#networking)
-  * [iOS Simulator won't open](#ios-simulator-wont-open)
-  * [QR Code does not scan](#qr-code-does-not-scan)
+- [Starting up Civic for local development](#local-development)
+  - [Using VS Code](#using-vs-code)
+  - [Running the App](#running-the-app)
+- [Updating to New Releases](#updating-to-new-releases)
+- [Available Scripts](#available-scripts)
+  - [npm start](#npm-start)
+  - [npm test](#npm-test)
+  - [npm run ios](#npm-run-ios)
+  - [npm run android](#npm-run-android)
+  - [npm run eject](#npm-run-eject)
+- [Writing and Running Tests](#writing-and-running-tests)
+- [Environment Variables](#environment-variables)
+  - [Configuring Packager IP Address](#configuring-packager-ip-address)
+- [Customizing App Display Name and Icon](#customizing-app-display-name-and-icon)
+- [Sharing and Deployment](#sharing-and-deployment)
+  - [Publishing to Expo's React Native Community](#publishing-to-expos-react-native-community)
+  - [Building an Expo "standalone" app](#building-an-expo-standalone-app)
+  - [Ejecting from Create React Native App](#ejecting-from-create-react-native-app)
+    - [Build Dependencies (Xcode & Android Studio)](#build-dependencies-xcode-android-studio)
+    - [Should I Use ExpoKit?](#should-i-use-expokit)
+- [Troubleshooting](#troubleshooting)
+  - [Networking](#networking)
+  - [iOS Simulator won't open](#ios-simulator-wont-open)
+  - [QR Code does not scan](#qr-code-does-not-scan)
 
 ## Local Development
 
-Before trying to run the app, be sure to run the command
+Clone the remote repository into your local filesystem by running
+
+`git clone https://github.com/civic-app/civic-app.git`
+
+from the command line. You may be prompted for your GitHub username and password. Then run
+
+`git checkout develop`
+
+to switch to the main development branch.
+
+You will also need to have Node.js installed in order to run the application. Node comes with the command line tool npm, used for package management. [Click here](https://nodejs.org/en/download/) to download the latest version of Node and follow the instructions to install it.
+
+Once you have node, run
+
+`npm install -g yarn eslint`
+
+to install the yarn package manager and eslint _globally_ (available to all projects on your computer).
+
+Then, be sure to run the command
 
 `yarn`
 
-to install local dependencies necessary. Then run
+to install local dependencies necessary.
 
-`yarn run start`
+### Using VS Code
 
-to run the local server. Then follow instructions in [Available Scripts](#available-scripts).
+[Visual Studio Code](https://code.visualstudio.com/) is a great IDE for developing in Javascript. It comes with features like
+
+- Integrated terminal window - Run command prompts without switching programs
+- Intellisense - An autocomplete for your code. Easily see the available properties on an object, parameters for a function, import paths in your project, and more
+- Integrated git client - View diffs, stage changes, make commits, and push to remote all at the click of a button
+- A rich full text code search
+- Configurable interactive debugger
+
+and through the vast library of Extensions can support many more custom actions. Two extensions recommended are ESLint, which gives real-time feedback based on eslint rules, and Prettier, which auto formats your code according to your eslint rules.
+
+### Running the app
+
+All of our Javascript code wouldn't run on a real mobile device without the help of [Expo](https://expo.io/). Expo manages, configures, and contains all of the native code needed to run the app, so all we have to do is write Javascript. To be able to view your local development version of the app on your phone, download Expo from the App Store. We will also use the Expo app to distribute alpha/beta versions to our test users.
+
+In order to be able to run the application and see it on a device, run
+
+`npm install -g exp`
+
+to globally install the Expo Command Line Interface. Then, run
+
+`exp start`
+
+to begin running the project. It may take awhile to build the app, but you should see some logged statements indicating progress. When the app is built, expo will log a QR code, a URL to view the app, and instructions for running the app on a simulator or your own device.
+
+If you are connected to the same wi-fi network on both your phone and your laptop, you should see your project available to view in the Expo app on your phone. If you don't see it, open up a new terminal window and run
+
+`exp send -s <your-phone-number-or-email>`
+
+to be sent a text message or email containing the link to open the app on your phone in Expo.
+
+Now, Civic App is running on your phone! Any changes you make to the source code will cause the app to rebuild and reload on your phone. Any errors will be shown both on your phone and in the terminal window where you first ran `exp start`.
+
+At any time, you can shake your phone to bring up the Expo developer menu. When you are done, type `ctrl + c` at the command line to stop the Expo dev server. For a complete list of Expo CLI commands, [see the documentation](https://docs.expo.io/versions/v28.0.0/workflow/exp-cli).
 
 ## Updating to New Releases
 
@@ -79,14 +131,14 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 
 ##### Using Android Studio's `adb`
 
-1. Make sure that you can run adb from your terminal.
-2. Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
+1.  Make sure that you can run adb from your terminal.
+2.  Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
 
 ##### Using Genymotion's `adb`
 
-1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
-2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
-3. Make sure that you can run adb from your terminal.
+1.  Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
+2.  Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
+3.  Make sure that you can run adb from your terminal.
 
 #### `npm run eject`
 
@@ -108,7 +160,7 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## Environment Variables
 
-You can configure some of Create React Native App's behavior using environment variables.
+You can configure some of Create React Native App's behavior using environment variables. For example, the variable `__DEV__` is set to `true` when developing and `false` in production. Configuration specified in `app.json` can be accessed in code via `Expo.Constants.manifest`.
 
 ### Configuring Packager IP Address
 
@@ -129,6 +181,7 @@ REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname' npm start
 ```
 
 Windows:
+
 ```
 set REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname'
 npm start
@@ -197,15 +250,15 @@ If you're not able to load the `http` URL in your phone's web browser, try using
 
 If you're on a Mac, there are a few errors that users sometimes see when attempting to `npm run ios`:
 
-* "non-zero exit code: 107"
-* "You may need to install Xcode" but it is already installed
-* and others
+- "non-zero exit code: 107"
+- "You may need to install Xcode" but it is already installed
+- and others
 
 There are a few steps you may want to take to troubleshoot these kinds of errors:
 
-1. Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
-2. Open Xcode's Preferences, the Locations tab, and make sure that the `Command Line Tools` menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run `npm/yarn run ios` after doing so.
-3. If that doesn't work, open the Simulator, and under the app menu select `Reset Contents and Settings...`. After that has finished, quit the Simulator, and re-run `npm/yarn run ios`.
+1.  Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
+2.  Open Xcode's Preferences, the Locations tab, and make sure that the `Command Line Tools` menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run `npm/yarn run ios` after doing so.
+3.  If that doesn't work, open the Simulator, and under the app menu select `Reset Contents and Settings...`. After that has finished, quit the Simulator, and re-run `npm/yarn run ios`.
 
 ### QR Code does not scan
 

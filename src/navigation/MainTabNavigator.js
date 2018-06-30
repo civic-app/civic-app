@@ -7,6 +7,10 @@ import ActivismStack from './ActivismStack';
 
 import colors from '../styles/colors';
 
+/*
+ * Create a bottom navigation tab for each of our main screens. Each screen
+ * has its own navigation stack (think browser history).
+ */
 const MainTabNavigator = createBottomTabNavigator(
   {
     Home: HomeStack,
