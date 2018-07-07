@@ -9,4 +9,4 @@ const appReducer = combineReducers({
   [POSITIONS_NAMESPACE]: positionsReducer,
 })
 
-export default appReducer
+export default appReducer;

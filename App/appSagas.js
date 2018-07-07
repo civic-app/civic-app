@@ -1,10 +1,8 @@
-import { all } from 'redux-saga/effects'
-import authSaga from '../src/auth/sagas'
+import { all } from 'redux-saga/effects';
+import authSaga from '../src/auth/sagas';
 
-const appSaga = function* () {
-  yield all([
-    authSaga()
-  ])
-}
+const appSaga = function*() {
+  yield all([authSaga()]);
+};
 
-export default appSaga
+export default appSaga;
