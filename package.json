@@ -19,7 +19,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "jest",
-    "lint": "eslint 'src/**' 'App/**'"
+    "lint": "eslint 'src/**.js' 'App/**.js'"
   },
   "jest": {
     "preset": "jest-expo",
