@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
+import Welcome from '../welcome/Welcome';
 
-class LoginScreen extends React.Component {
+class WelcomeScreen extends React.Component {
   static propTypes = propTypes;
-  goToSurvey = () => this.props.navigation.navigate('Survey');
 
   render() {
     return (
       <View style={styles.container}>
-        <Button title={'Go to Survey'} onPress={this.goToSurvey} />
+        <Welcome />
       </View>
     );
   }
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default WelcomeScreen;
