@@ -45,7 +45,7 @@ class WelcomeCarousel extends React.Component {
   render() {
     const screenWidth = Dimensions.get('window').width;
     return (
-      <View>
+      <View style={styles.container}>
         <Carousel
           data={this.images}
           renderItem={this.renderItem}
@@ -66,6 +66,7 @@ class WelcomeCarousel extends React.Component {
           inactiveDotColor={colors.lightBlue}
           inactiveDotScale={1}
           dotStyle={styles.dot}
+          containerStyle={styles.paginationContainer}
         />
       </View>
     );
@@ -73,9 +74,15 @@ class WelcomeCarousel extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   dot: {
     borderWidth: 1,
     borderColor: colors.white,
+  },
+  paginationContainer: {
+    marginBottom: 30,
   },
 });
 

@@ -5,12 +5,12 @@ import colors from '../styles/colors';
 
 const WelcomeCarouselItem = props => {
   return (
-    <View style={styles.container}>
-      <View {...props} style={styles.badge}>
+    <View style={stylesSmallScreen.container}>
+      <View {...props} style={stylesSmallScreen.badge}>
         {props.image}
       </View>
-      <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.subtitle}>{props.subtitle}</Text>
+      <Text style={stylesSmallScreen.title}>{props.title}</Text>
+      <Text style={stylesSmallScreen.subtitle}>{props.subtitle}</Text>
     </View>
   );
 };
@@ -21,17 +21,17 @@ WelcomeCarouselItem.propTypes = {
   subtitle: PropTypes.string,
 };
 
-const styles = StyleSheet.create({
+// const stylesLargeScreen = StyleSheet.create({});
+
+const stylesSmallScreen = StyleSheet.create({
   container: {
-    width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   badge: {
-    height: 280,
-    width: 280,
-    margin: 20,
-    borderRadius: 140,
+    height: 250,
+    width: 250,
+    marginTop: 20,
+    borderRadius: 125,
     backgroundColor: colors.offWhite,
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.5,
-    shadowRadius: 2,
+    shadowRadius: 3,
   },
   title: {
     color: colors.white,
     fontSize: 20,
     textAlign: 'center',
-    paddingTop: 24,
+    paddingTop: 20,
     paddingBottom: 8,
   },
   subtitle: {
