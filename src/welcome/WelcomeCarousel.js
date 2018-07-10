@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   paginationContainer: {
-    marginBottom: 30,
+    marginBottom: 24,
   },
 });
 
