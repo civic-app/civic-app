@@ -7,6 +7,7 @@ Below you'll find information about performing common tasks. The most recent ver
 - [Starting up Civic for local development](#local-development)
   - [Using VS Code](#using-vs-code)
   - [Running the App](#running-the-app)
+  - [Expo Snack](#expo-snack)
 - [Updating to New Releases](#updating-to-new-releases)
 - [Available Scripts](#available-scripts)
   - [npm start](#npm-start)
@@ -30,6 +31,8 @@ Below you'll find information about performing common tasks. The most recent ver
   - [QR Code does not scan](#qr-code-does-not-scan)
 
 ## Local Development
+
+If you use Mac to develop, `git` is already installed on your computer. If not, you will need to first [download it](https://git-scm.com/downloads). During the installation process, there is no need to change any of the default settings unless you absolutely know what you're doing.
 
 Clone the remote repository into your local filesystem by running
 
@@ -67,15 +70,15 @@ to install local dependencies necessary.
 
 and through the vast library of Extensions can support many more custom actions. Two extensions recommended are ESLint, which gives real-time feedback based on eslint rules, and Prettier, which auto formats your code according to your eslint rules.
 
+However, feel free to use whatever code editor/IDE is most comfortable for you. Most modern editors ([Atom](https://atom.io/), [Sublime](https://www.sublimetext.com/), [Visual Studio](https://visualstudio.microsoft.com/), etc.) have the necessary features out of the box or via plugins to make your Javascript/React Native development experience easier.
+
 ### Running the app
 
-All of our Javascript code wouldn't run on a real mobile device without the help of [Expo](https://expo.io/). Expo manages, configures, and contains all of the native code needed to run the app, so all we have to do is write Javascript. To be able to view your local development version of the app on your phone, download Expo from the App Store. We will also use the Expo app to distribute alpha/beta versions to our test users.
+All of our Javascript code wouldn't run on a real mobile device without the help of [Expo](https://expo.io/). Expo manages, configures, and contains all of the native code needed to run the app, so all we have to do is write Javascript. To be able to view your local development version of the app on your phone, download Expo from the App Store. We will also use the Expo app to distribute alpha/beta versions to our test users. To begin, you will need an account, which can be created online or through the mobile app.
 
-You may also require [Watchman](https://facebook.github.io/watchman/), which allows React Native to detect changes in files and hot reload the app during development. If on Mac run
+Note: If you use a Mac, you may also require [Watchman](https://facebook.github.io/watchman/), which allows React Native to detect changes in files and hot reload the app during development. Run `brew install watchman` to install Watchman using [Homebrew](https://brew.sh/).
 
-`brew install watchman`
-
-to install Watchman using [Homebrew](https://brew.sh/).
+#### Expo CLI
 
 In order to be able to run the application and see it on a device, run
 
@@ -85,17 +88,25 @@ to globally install the Expo Command Line Interface. Then, run
 
 `exp start`
 
-to begin running the project. It may take awhile to build the app, but you should see some logged statements indicating progress. When the app is built, expo will log a QR code, a URL to view the app, and instructions for running the app on a simulator or your own device.
+to begin running the project. First, you should be prompted to enter your username and password. It may take awhile to build the app, but you should see some logged statements indicating progress. When the app is built, expo will log a QR code, a URL to view the app, and instructions for running the app on a simulator or your own device.
 
 If you are connected to the same wi-fi network on both your phone and your laptop, you should see your project available to view in the Expo app on your phone. If you don't see it, open up a new terminal window and run
 
 `exp send -s <your-phone-number-or-email>`
 
-to be sent a text message or email containing the link to open the app on your phone in Expo.
+to be sent a text message or email containing the link to open the app on your phone in Expo. If you have an Android phone, you can also use the QR code from the console output to connect your phone to the dev server.
 
 Now, Civic App is running on your phone! Any changes you make to the source code will cause the app to rebuild and reload on your phone. Any errors will be shown both on your phone and in the terminal window where you first ran `exp start`.
 
 At any time, you can shake your phone to bring up the Expo developer menu. When you are done, type `ctrl + c` at the command line to stop the Expo dev server. For a complete list of Expo CLI commands, [see the documentation](https://docs.expo.io/versions/v28.0.0/workflow/exp-cli).
+
+#### XDE
+
+If you prefer, Expo provides a tool called XDE ([download here](https://github.com/expo/xde/releases)) that allows you to perform through an interactive user interface all the same functions as you would at the command line. Once you enter your account information, click "Open an existing project" and open civic-app. That should start building the project. If you see an error message, make sure you have installed all of civic-app's dependencies with `yarn` before using XDE. To see the the development version of civic-app in the Expo app on your phone, either enter the project url, use the QR code (Android only), or request that a link be sent to your phone number.
+
+### Expo Snack
+
+If you have an idea that you want to test, or are developing a feature that doesn't quite fit into the existing app framework yet, Expo has [Snack](https://snack.expo.io/), a browser tool that lets you write code and see the result immediately in either an Android or iOS emulator.
 
 ## Updating to New Releases
 
@@ -109,7 +120,7 @@ Upgrading to a new version of React Native requires updating the `react-native`,
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
-### `npm start`
+### `yarn start`
 
 Runs your app in development mode.
 
@@ -123,15 +134,19 @@ npm start --reset-cache
 yarn start --reset-cache
 ```
 
-#### `npm test`
+#### `yarn test`
 
-Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
+Runs the [jest](https://github.com/facebook/jest) test runner on your tests. All tests must pass before PRs can be merged.
 
-#### `npm run ios`
+#### `yarn lint`
+
+Runs [eslint](https://eslint.org/) on all of your Javascript files (configured via `.eslintrc`. All code needs to pass a linter check before PRs can be merged. If you have sugggestions for eslint rules, add them to your PR and we'll discuss as a team.
+
+#### `yarn run ios`
 
 Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
-#### `npm run android`
+#### `yarn run android`
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of `adb` available to Create React Native App:
 
@@ -146,7 +161,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 2.  Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
 3.  Make sure that you can run adb from your terminal.
 
-#### `npm run eject`
+#### `yarn run eject`
 
 This will start the process of "ejecting" from Create React Native App's build scripts. You'll be asked a couple of questions about how you'd like to build your project.
 
