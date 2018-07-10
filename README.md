@@ -10,11 +10,12 @@ Below you'll find information about performing common tasks. The most recent ver
   - [Expo Snack](#expo-snack)
 - [Updating to New Releases](#updating-to-new-releases)
 - [Available Scripts](#available-scripts)
-  - [npm start](#npm-start)
-  - [npm test](#npm-test)
-  - [npm run ios](#npm-run-ios)
-  - [npm run android](#npm-run-android)
-  - [npm run eject](#npm-run-eject)
+  - [yarn start](#yarn-start)
+  - [yarn test](#yarn-test)
+  - [yarn lint](#yarn-lint)
+  - [yarn run ios](#yarn-run-ios)
+  - [yarn run android](#yarn-run-android)
+  - [yarn run eject](#yarn-run-eject)
 - [Writing and Running Tests](#writing-and-running-tests)
 - [Environment Variables](#environment-variables)
   - [Configuring Packager IP Address](#configuring-packager-ip-address)
@@ -178,6 +179,16 @@ To set an app icon, set the `expo.icon` key in `app.json` to be either a local p
 ## Writing and Running Tests
 
 This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test` extension to have the files loaded by jest. See the [the template project](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/App.test.js) for an example test. The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
+
+### Writing Good Tests
+
+Best practice for writing tests involves testing a specific, targeted behavior while mocking or carefully ignoring any external dependencies. These are called unit tests. To write tests efficiently, consider testing only boundary conditions, such as what happens when a prop is `null`, `undefined`, or passed as expected, rather than testing every conceivable scenario. A good rule of thumb is that every `.js` file you write should have an accompanying `.test.js` file. If that relationship seems off, consider if you may be trying to force too many features into one file or uncessarily splitting functionality across many files. But of course, exceptional cases exist.
+
+[Snapshot testing](https://jestjs.io/docs/en/snapshot-testing) is a great way to test that our React components render as expected. Consider using [shallow rendering](https://reactjs.org/docs/shallow-renderer.html) to ensure your tests aren't dependent on the contents of its children (which should also be tested!!). The first time you run a snapshot test, a file will be automatically generated containing a textual rendering of your component. Any deviation from this exact rendering in subsequent tests will result in a failure. If you feel like new changes are needed, run `yarn test -u` (shorthand for update snapshot) to generate a new baseline.
+
+For React components that are connected to the store with react-redux (otherwise known as containers), use the `WrappedComponent` property of the component for testing. This allows you to explicitly pass in all props to the component and eliminate a dependency on the store, which can unpredictable and be hard to configure.
+
+When testing api calls, sagas, or other async functions, special consideration needs to be taken to avoid missing failed tests. If you set up an async test as you would a synchronous test, the assertions will likely be skipped before the result of the async function returns. Thus, any failures will not be detected by the test runner. The best practice in this case is to put your assertions in a `then()` handler on the async function and return that promise from the test or use the `done()` callback. `done.fail(error)` can be used to explicitly fail a test, such as by placing it in a code block that should be unreachable if the test passes.
 
 ## Environment Variables
 
