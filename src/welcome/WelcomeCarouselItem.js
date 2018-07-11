@@ -6,9 +6,7 @@ import colors from '../styles/colors';
 const WelcomeCarouselItem = props => {
   return (
     <View style={stylesSmallScreen.container}>
-      <View {...props} style={stylesSmallScreen.badge}>
-        {props.image}
-      </View>
+      <View style={stylesSmallScreen.badge}>{props.image}</View>
       <Text style={stylesSmallScreen.title}>{props.title}</Text>
       <Text style={stylesSmallScreen.subtitle}>{props.subtitle}</Text>
     </View>

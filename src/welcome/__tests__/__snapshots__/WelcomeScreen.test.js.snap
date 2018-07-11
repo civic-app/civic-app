@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeScreen renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#2d9cdb",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+      "padding": 10,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 65,
+        "marginTop": 20,
+        "width": 178,
+      }
+    }
+  />
+  <WelcomeCarousel />
+</Component>
+`;

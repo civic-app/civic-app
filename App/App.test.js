@@ -1,9 +1,9 @@
-import React from 'react';
 import App from './index';
+import { createSnapshot } from '../src/util/tests';
 
-import renderer from 'react-test-renderer';
-
-it('renders without crashing', () => {
-  const rendered = renderer.create(<App />).toJSON();
-  expect(rendered).toBeTruthy();
+describe('App', () => {
+  it('renders without crashing', () => {
+    const snapshot = createSnapshot(App);
+    expect(snapshot).toMatchSnapshot();
+  });
 });
