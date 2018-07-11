@@ -22,7 +22,7 @@ Welcome.propTypes = {
 const LoggedInPlaceholder = props => (
   <View>
     <Text>Welcome! You are logged in!</Text>
-    <Button title='Log out' onPress={props.onLogOutClick}/>
+    <Button title='Sign Out' onPress={props.onLogOutClick}/>
   </View>
 )
 

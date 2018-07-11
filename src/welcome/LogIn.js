@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 
 const LogIn = props => (
   <View style={styles.container}>
-    <Text>Welcome! You are not logged in</Text>
+    <Text>Welcome! You are not logged in to civic-app</Text>
     <Button title='Sign In' onPress={() => undefined}/>
     <CredentialInput onSubmit={props.onLogInSubmit} />
     <Button title='Register' onPress={() => undefined}/>
