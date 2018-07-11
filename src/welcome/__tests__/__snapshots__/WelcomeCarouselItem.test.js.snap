@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeCarouselItem renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#f2f2f2",
+        "borderRadius": 125,
+        "height": 250,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.5,
+        "shadowRadius": 3,
+        "width": 250,
+      }
+    }
+  >
+    <Image />
+  </Component>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontSize": 20,
+        "paddingBottom": 8,
+        "paddingTop": 20,
+        "textAlign": "center",
+      }
+    }
+  >
+    Welcome Carousel
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontSize": 16,
+        "lineHeight": 24,
+        "paddingLeft": 20,
+        "paddingRight": 20,
+        "textAlign": "center",
+      }
+    }
+  >
+    Some more text
+  </Text>
+</Component>
+`;

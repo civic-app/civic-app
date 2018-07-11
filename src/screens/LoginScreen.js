@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Button } from 'react-native';
-import styles from './styles';
+import { Button, StyleSheet, View } from 'react-native';
+import colors from '../styles/colors';
 
 class LoginScreen extends React.Component {
   static propTypes = propTypes;
@@ -22,5 +22,13 @@ const propTypes = {
     push: PropTypes.func,
   }),
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: colors.lightBlue,
+  },
+});
 
 export default LoginScreen;
