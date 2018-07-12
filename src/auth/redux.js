@@ -1,13 +1,7 @@
-import { createSelector } from 'reselect';
-import _ from 'lodash';
-
 // Selectors
 export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
-export const getIsSurveyCompleted = state => state[AUTH_NAMESPACE].isSurveyCompleted;
-export const getIsEmailVerified = state => state[AUTH_NAMESPACE].isEmailVerified;
-export const getIsRegisteredToVote = state => state[AUTH_NAMESPACE].isRegisteredToVote;
 
-export const getIsLoggedIn = createSelector(getLoggedInUser, user => !_.isNil(user));
+export const getIsLoggedIn = state => !!getLoggedInUser(state);
 
 // Action Creators
 export const logIn = (email, password) => ({
@@ -45,26 +39,24 @@ export const AuthActionType = {
 // Reducer
 export const AUTH_NAMESPACE = 'auth';
 
-const initialState = {
-  user: null,
-  isSurveyCompleted: false,
-  isEmailVerified: false,
-  isRegisteredToVote: false,
-};
-
 // TODO: errors and maybe loading
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case AuthActionType.LoginSuccess:
       return {
-        ...state,
         user: action.payload,
       };
     case AuthActionType.LogOutSuccess:
-      return initialState;
+      return {
+        user: undefined,
+      };
     default:
       return state;
   }
+};
+
+const initialState = {
+  user: undefined,
 };
 
 export default reducer;
