@@ -1,33 +1,33 @@
-import firebasemock from 'firebase-mock'
+import firebasemock from 'firebase-mock';
 
-const mockauth = new firebasemock.MockAuthentication()
-mockauth.onAuthStateChanged = () => undefined // missing from mock
+const mockauth = new firebasemock.MockAuthentication();
+mockauth.onAuthStateChanged = () => undefined; // missing from mock
 
-const mockdatabase = new firebasemock.MockFirebase()
-const mockfirestore = new firebasemock.MockFirestore()
-const mockstorage = new firebasemock.MockStorage()
-const mockmessaging = new firebasemock.MockMessaging()
+const mockdatabase = new firebasemock.MockFirebase();
+const mockfirestore = new firebasemock.MockFirestore();
+const mockstorage = new firebasemock.MockStorage();
+const mockmessaging = new firebasemock.MockMessaging();
 const mockFirebaseSdk = new firebasemock.MockFirebaseSdk(
   // use null if your code does not use RTDB
-  (path) => {
-    return path ? mockdatabase.child(path) : mockdatabase
+  path => {
+    return path ? mockdatabase.child(path) : mockdatabase;
   },
   // use null if your code does not use AUTHENTICATION
   () => {
-    return mockauth
+    return mockauth;
   },
   // use null if your code does not use FIRESTORE
   () => {
-    return mockfirestore
+    return mockfirestore;
   },
   // use null if your code does not use STORAGE
   () => {
-    return mockstorage
+    return mockstorage;
   },
   // use null if your code does not use MESSAGING
   () => {
-    return mockmessaging
-  }
-)
+    return mockmessaging;
+  },
+);
 
-export default mockFirebaseSdk
+export default mockFirebaseSdk;

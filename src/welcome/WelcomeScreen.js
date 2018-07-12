@@ -7,10 +7,7 @@ import WelcomePanel from './WelcomePanel';
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.civicLogo}
-        source={require('../assets/images/civic-logo-white.png')}
-      />
+      <Image style={styles.civicLogo} source={require('../assets/images/civic-logo-white.png')} />
       <WelcomeCarousel />
       <WelcomePanel />
     </View>
