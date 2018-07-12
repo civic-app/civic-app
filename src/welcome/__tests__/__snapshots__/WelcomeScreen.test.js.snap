@@ -9,7 +9,9 @@ exports[`WelcomeScreen renders correctly 1`] = `
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
-      "padding": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
     }
   }
 >
@@ -24,5 +26,8 @@ exports[`WelcomeScreen renders correctly 1`] = `
     }
   />
   <WelcomeCarousel />
+  <WelcomePanel
+    onButtonPress={[Function]}
+  />
 </Component>
 `;

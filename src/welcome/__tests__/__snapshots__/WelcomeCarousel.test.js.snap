@@ -5,6 +5,7 @@ exports[`WelcomeCarousel renders correctly 1`] = `
   style={
     Object {
       "flex": 1,
+      "justifyContent": "flex-start",
     }
   }
 >
@@ -24,17 +25,14 @@ exports[`WelcomeCarousel renders correctly 1`] = `
       Array [
         Object {
           "image": <CandidatesImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Learn About Candidates",
         },
         Object {
           "image": <StayInformedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Stay Informed",
         },
         Object {
           "image": <GetInvolvedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Get Involved",
         },
       ]
@@ -63,11 +61,6 @@ exports[`WelcomeCarousel renders correctly 1`] = `
   />
   <Pagination
     activeDotIndex={0}
-    containerStyle={
-      Object {
-        "marginBottom": 24,
-      }
-    }
     dotColor="#ffffff"
     dotStyle={
       Object {

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomePanel renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffff",
+      "borderTopLeftRadius": 25,
+      "borderTopRightRadius": 25,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+    }
+  }
+>
+  <Button
+    backgroundColor="#eb5757"
+    borderRadius={3}
+    color="#ffffff"
+    containerViewStyle={
+      Object {
+        "flex": 1,
+        "marginBottom": 20,
+        "marginTop": 20,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.5,
+        "shadowRadius": 3,
+      }
+    }
+    fontSize={18}
+    onPress={undefined}
+    title="Register"
+  />
+  <Button
+    backgroundColor="#f2f2f2"
+    borderRadius={3}
+    color="#000000"
+    containerViewStyle={
+      Object {
+        "flex": 1,
+        "marginBottom": 20,
+        "marginTop": 20,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.5,
+        "shadowRadius": 3,
+      }
+    }
+    fontSize={18}
+    onPress={undefined}
+    title="Sign In"
+  />
+</Component>
+`;
