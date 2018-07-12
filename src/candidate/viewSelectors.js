@@ -1,7 +1,8 @@
 import { getCandidate } from './redux/candidates';
 
 export const getCandidateSummary = (state, candidateId) => {
-  const candidate = getCandidate(state, candidateId);
+  // const candidate =
+  getCandidate(state, candidateId);
   return {
     name: 'Barach Obama',
     imageURI:
