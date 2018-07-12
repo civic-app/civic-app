@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
-import { GoogleIcon } from './WelcomeImages';
 import colors from '../styles/colors';
 
 var styles = StyleSheet.create({
@@ -28,27 +28,15 @@ var styles = StyleSheet.create({
 });
 
 class WelcomePanel extends React.Component {
+  static propTypes = {
+    onButtonPress: PropTypes.func,
+  };
+
   sharedButtonProps = {
     borderRadius: 3,
     containerViewStyle: styles.buttonContainer,
     fontSize: 18,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.icons = {
-      google: <GoogleIcon />,
-    };
-
-    this.state = {
-      image: <GoogleIcon />,
-      title: 'Sign In With Google',
-      expanded: true,
-    };
-  }
-
-  toggle() {}
 
   render() {
     return (
@@ -58,17 +46,18 @@ class WelcomePanel extends React.Component {
           color={colors.white}
           backgroundColor={colors.red}
           title="Register"
-          onPress={() => undefined}
+          onPress={this.props.onButtonPress}
         />
         <Button
           {...this.sharedButtonProps}
           color={colors.black}
           backgroundColor={colors.offWhite}
           title="Sign In"
-          onPress={() => undefined}
+          onPress={this.props.onButtonPress}
         />
       </View>
     );
   }
 }
+
 export default WelcomePanel;

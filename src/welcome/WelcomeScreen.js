@@ -1,17 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Image, StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = props => {
   return (
     <View style={styles.container}>
       <Image style={styles.civicLogo} source={require('../assets/images/civic-logo-white.png')} />
       <WelcomeCarousel />
-      <WelcomePanel />
+      <WelcomePanel onButtonPress={() => props.navigation.navigate('Survey')} />
     </View>
   );
+};
+
+WelcomeScreen.propTypes = {
+  navigation: PropTypes.objectOf({
+    navigate: PropTypes.func,
+    push: PropTypes.func,
+  }),
 };
 
 const styles = StyleSheet.create({
