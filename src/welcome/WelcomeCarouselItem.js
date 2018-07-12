@@ -8,7 +8,6 @@ const WelcomeCarouselItem = props => {
     <View style={stylesSmallScreen.container}>
       <View style={stylesSmallScreen.badge}>{props.image}</View>
       <Text style={stylesSmallScreen.title}>{props.title}</Text>
-      <Text style={stylesSmallScreen.subtitle}>{props.subtitle}</Text>
     </View>
   );
 };
@@ -16,7 +15,6 @@ const WelcomeCarouselItem = props => {
 WelcomeCarouselItem.propTypes = {
   image: PropTypes.object,
   title: PropTypes.string,
-  subtitle: PropTypes.string,
 };
 
 // const stylesLargeScreen = StyleSheet.create({});
@@ -28,7 +26,7 @@ const stylesSmallScreen = StyleSheet.create({
   badge: {
     height: 250,
     width: 250,
-    marginTop: 20,
+    marginTop: 24,
     borderRadius: 125,
     backgroundColor: colors.offWhite,
     justifyContent: 'center',
@@ -45,16 +43,7 @@ const stylesSmallScreen = StyleSheet.create({
     color: colors.white,
     fontSize: 20,
     textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 8,
-  },
-  subtitle: {
-    color: colors.white,
-    fontSize: 16,
-    lineHeight: 24,
-    paddingLeft: 20,
-    paddingRight: 20,
-    textAlign: 'center',
+    marginTop: 24,
   },
 });
 

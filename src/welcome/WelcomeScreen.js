@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
-import WelcomePanel from './WelcomePanel'
+import WelcomePanel from './WelcomePanel';
 
 const WelcomeScreen = () => {
   return (
@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.lightBlue,
-    padding: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   civicLogo: {
     height: 65,
