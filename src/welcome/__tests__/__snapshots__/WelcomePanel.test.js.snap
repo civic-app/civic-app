@@ -19,6 +19,7 @@ exports[`WelcomePanel renders correctly 1`] = `
     color="#ffffff"
     containerViewStyle={
       Object {
+        "borderRadius": 3,
         "flex": 1,
         "marginBottom": 20,
         "marginTop": 20,
@@ -41,6 +42,7 @@ exports[`WelcomePanel renders correctly 1`] = `
     color="#000000"
     containerViewStyle={
       Object {
+        "borderRadius": 3,
         "flex": 1,
         "marginBottom": 20,
         "marginTop": 20,
