@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput, Image, TouchableHighlight, Animated } from 'react-native'
+import {
+    GoogleIcon,
+} from './WelcomeImages';
 
 const LogIn = props => (
   <View style={styles.container}>
     <Text>Welcome! You are not logged in to civic-app</Text>
-    <Button title='Sign In' onPress={() => undefined}/>
+    <Button title='Sign In' onPress={() => props.onSignInPress} />
     <CredentialInput onSubmit={props.onLogInSubmit} />
     <Button title='Register' onPress={() => undefined}/>
     <CredentialInput onSubmit={props.onRegisterSubmit} />
@@ -15,6 +18,7 @@ const LogIn = props => (
 LogIn.propTypes = {
   onLogInSubmit: PropTypes.func,
   onRegisterSubmit: PropTypes.func,
+
 }
 
 class CredentialInput extends React.Component {
@@ -53,6 +57,43 @@ class CredentialInput extends React.Component {
 
 CredentialInput.propTypes = {
   onSubmit: PropTypes.func
+}
+
+class WelcomePanel extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            image: <GoogleIcon />,
+            title: 'Sign In With Google',
+            expanded: true
+        };
+    }
+
+    toggle() {
+
+    }
+
+    render() {
+        return (
+            <View>
+                <TouchableHighlight
+                    onPress={this.handleSubmit}>
+                    <Image
+                        source={this.state.image}
+                    ></Image>
+                </TouchableHighlight>
+                <View>
+                    <Text>{this.state.title}</Text>
+                </View>
+            </View>
+        );
+    }
+}
+
+WelcomePanel.propTypes = {
+    onSubmit: PropTypes.func
 }
 
 const styles = StyleSheet.create({

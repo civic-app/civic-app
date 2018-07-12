@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { Dimensions, StyleSheet, View, Button } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import WelcomeCarouselItem from './WelcomeCarouselItem';
 import {
@@ -14,17 +15,14 @@ class WelcomeCarousel extends React.Component {
     {
       image: <CandidatesImage />,
       title: 'Learn About Candidates',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
     {
       image: <StayInformedImage />,
       title: 'Stay Informed',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
     {
       image: <GetInvolvedImage />,
       title: 'Get Involved',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
   ];
 
@@ -38,7 +36,6 @@ class WelcomeCarousel extends React.Component {
       key={index}
       image={item.image}
       title={item.title}
-      subtitle={item.subtitle}
     />
   );
 
@@ -67,22 +64,23 @@ class WelcomeCarousel extends React.Component {
           inactiveDotScale={1}
           dotStyle={styles.dot}
           containerStyle={styles.paginationContainer}
-        />
-      </View>
+            />
+        </View>
     );
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
   },
   dot: {
     borderWidth: 1,
     borderColor: colors.white,
   },
   paginationContainer: {
-    marginBottom: 24,
+    marginBottom: 15,
   },
 });
 

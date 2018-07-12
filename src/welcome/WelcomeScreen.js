@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
+import WelcomePanel from './WelcomePanel'
 
 const WelcomeScreen = () => {
   return (
@@ -11,6 +12,7 @@ const WelcomeScreen = () => {
         source={require('../assets/images/civic-logo-white.png')}
       />
       <WelcomeCarousel />
+      <WelcomePanel />
     </View>
   );
 };

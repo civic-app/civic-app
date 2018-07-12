@@ -1,14 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\App",
     "\\src",
-    "\\src\\auth",
-    "\\src\\firebase",
-    "\\src\\navigation",
-    "\\src\\screens",
+    "\\src\\assets",
+    "\\src\\assets\\images",
     "\\src\\welcome"
   ],
-  "SelectedNode": "\\src\\welcome\\WelcomePanel.js",
+  "SelectedNode": "\\src\\welcome\\LogIn.js",
   "PreviewInSolutionExplorer": false
 }
