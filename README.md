@@ -57,7 +57,11 @@ Then, be sure to run the command
 
 `yarn`
 
-to install local dependencies necessary.
+to install local dependencies necessary. Finally, run
+
+`yarn start`
+
+to kick off the development server, and follow the instructions logged in the console to view the app in either a simulator or on your phone. For more information, or to use Expo tools to run the app, see [Running the App](#running-the-app).
 
 ### Using VS Code
 
@@ -73,7 +77,7 @@ and through the vast library of Extensions can support many more custom actions.
 
 However, feel free to use whatever code editor/IDE is most comfortable for you. Most modern editors ([Atom](https://atom.io/), [Sublime](https://www.sublimetext.com/), [Visual Studio](https://visualstudio.microsoft.com/), etc.) have the necessary features out of the box or via plugins to make your Javascript/React Native development experience easier.
 
-### Running the app
+### Running the App
 
 All of our Javascript code wouldn't run on a real mobile device without the help of [Expo](https://expo.io/). Expo manages, configures, and contains all of the native code needed to run the app, so all we have to do is write Javascript. To be able to view your local development version of the app on your phone, download Expo from the App Store. We will also use the Expo app to distribute alpha/beta versions to our test users. To begin, you will need an account, which can be created online or through the mobile app.
 
