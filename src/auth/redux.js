@@ -45,8 +45,8 @@ export const AuthActionType = {
 // Reducer
 export const AUTH_NAMESPACE = 'auth';
 
-const initialState = {
-  user: null,
+export const initialState = {
+  user: undefined,
   isSurveyCompleted: false,
   isEmailVerified: false,
   isRegisteredToVote: false,

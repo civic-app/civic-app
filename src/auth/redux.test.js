@@ -4,12 +4,16 @@ import authReducer, {
   loginSuccess,
   logOutSuccess,
   getIsLoggedIn,
+  initialState,
 } from './redux';
 import { toFakeUser } from './doubles';
 
 const toUser = () => toFakeUser();
-const toLoggedOutState = () => ({ user: undefined });
-const toLoggedInState = () => ({ user: toUser() });
+const toLoggedOutState = () => initialState;
+const toLoggedInState = () => ({
+  ...initialState,
+  user: toUser(),
+});
 const toAuthSelectorState = reducerState => ({
   [AUTH_NAMESPACE]: reducerState,
 });
