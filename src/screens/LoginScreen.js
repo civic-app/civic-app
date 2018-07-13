@@ -10,7 +10,7 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title={'Go to Survey'} onPress={this.goToSurvey} />
+        <Button title="Go to Survey" onPress={this.goToSurvey} />
       </View>
     );
   }

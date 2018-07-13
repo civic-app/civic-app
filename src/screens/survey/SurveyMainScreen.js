@@ -11,7 +11,7 @@ class SurveyMainScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title={'Go to App'} onPress={this.goToApp} />
+        <Button title="Go to App" onPress={this.goToApp} />
       </View>
     );
   }
