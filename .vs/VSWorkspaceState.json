@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\assets",
-    "\\src\\assets\\images",
-    "\\src\\welcome"
+    "\\src\\navigation\\styles"
   ],
-  "SelectedNode": "\\src\\welcome\\LogIn.js",
+  "SelectedNode": "\\src\\navigation",
   "PreviewInSolutionExplorer": false
 }

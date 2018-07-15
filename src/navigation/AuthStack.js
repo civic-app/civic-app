@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 
-import LoginScreen from '../screens/LoginScreen';
+import CredentialInputScreen from '../screens/CredentialInputScreen';
 import WelcomeScreen from '../welcome/WelcomeScreen';
 
 const AuthStack = createStackNavigator(
   {
-    Login: LoginScreen,
+    Credentials: CredentialInputScreen,
     Welcome: WelcomeScreen,
   },
   {

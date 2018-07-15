@@ -10,7 +10,7 @@ const WelcomeScreen = props => {
     <View style={styles.container}>
       <Image style={styles.civicLogo} source={require('../assets/images/civic-logo-white.png')} />
       <WelcomeCarousel />
-      <WelcomePanel onButtonPress={() => props.navigation.navigate('Survey')} />
+      <WelcomePanel onButtonPress={() => props.navigation.navigate('Credentials')} />
     </View>
   );
 };

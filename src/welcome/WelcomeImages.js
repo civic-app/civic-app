@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: 180,
   },
   social: {
-    height: 40,
-    width: 40,
+    height: 10,
+    width: 10,
   },
 });
