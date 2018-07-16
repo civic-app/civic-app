@@ -1,104 +1,146 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, StyleSheet, View, Text, TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import colors from '../styles/colors';
-import { GoogleIcon } from '../welcome/WelcomeImages.js';
+import SocialButton from '../auth/SocialButton';
 
 class CredentialInputScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
-            email: '',
-            password: '',
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      email: '',
+      password: '',
+      duplicatePassword: '',
+    };
+  }
 
-    handleSubmit() {
-        this.props.onSubmit(this.state.email, this.state.password);
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <Text style={{ fontSize: 18 }}>Sign Up for Civic</Text>
-                    <TextInput style={styles.textStyle}
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
-                        placeholder="E-mail address"
-                    />
-                    <TextInput style={styles.textStyle}
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
-                        secureTextEntry={true}
-                        placeholder="Password"
-                    />
-                    <TextInput style={styles.textStyle}
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
-                        secureTextEntry={true}
-                        placeholder="Re-type password"
-                    />
-                    <Text onPress={this.handleSubmit} style={{ textAlign: 'right' }}>SUBMIT</Text>
-                    <Text style={{ textAlign: 'center' }}>or</Text>
-                    <Button 
-                        icon={<GoogleIcon />}
-                        title='Sign up with Google'
-                        buttonStyle={{
-                            marginTop: 5,
-                            borderRadius: 3
-                        }}
-                    />
-                    <Button 
-                        icon={<GoogleIcon />}
-                        title='Continue with Facebook'
-                        buttonStyle={{
-                            backgroundColor: '#3B5998',
-                            marginTop: 5,
-                            borderRadius: 3
-                        }}
-                    />
-                    <Text onPress={this.handleSubmit} style={{ textAlign: 'center' }}>Have an account? Sign In</Text>
-                </View>                
-            </View>
-        );
-    }
+  handleSubmit() {
+    this.props.onSubmit(this.state.email, this.state.password);
+  }
+
+  checkPassword() {
+    return this.state.password === this.state.duplicatePassword;
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.titleText}>Sign Up for Civic</Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoFocus={true}
+            clearButtonMode="while-editing"
+            keyboardType="email-address"
+            style={styles.textInput}
+            onChangeText={email => this.setState({ email })}
+            value={this.state.email}
+            placeholder="E-mail address"
+          />
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="while-editing"
+            style={styles.textInput}
+            onChangeText={password => this.setState({ password })}
+            value={this.state.password}
+            secureTextEntry={true}
+            placeholder="Password"
+          />
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="while-editing"
+            style={styles.textInput}
+            value={this.state.duplicatePassword}
+            onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
+            onEndEditing={this.checkPassword}
+            returnKeyType="done"
+            secureTextEntry={true}
+            placeholder="Re-type password"
+          />
+          <Text onPress={this.handleSubmit} style={styles.submitButton}>
+            SUBMIT
+          </Text>
+          <Text style={styles.text}>or</Text>
+          <SocialButton type="google" title="Sign up with Google" style={styles.social} />
+          <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
+          <Text onPress={this.props.changeFormType} style={styles.text}>
+            Have an account? Sign In
+          </Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 CredentialInputScreen.propTypes = {
-    onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
+  changeFormType: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: colors.lightBlue,
-        paddingTop: 10,
-    },
-    inputContainer: {
-        flex: 1,
-        backgroundColor: colors.white,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 140,
-        marginBottom: 130,
-        paddingLeft: 10,
-        paddingRight: 10,
-        width: 310,
-        alignItems: 'stretch',
-    },
-    textStyle: {
-        color: colors.black,
-        fontSize: 16,
-        paddingTop: 10,
-    },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: colors.lightBlue,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  inputContainer: {
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+    maxHeight: 507,
+    maxWidth: 369,
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  social: {
+    marginBottom: 8,
+    marginLeft: 0,
+    marginRight: 0,
+    alignSelf: 'center',
+    width: '100%',
+    maxWidth: 322,
+  },
+  submitButton: {
+    textAlign: 'right',
+    paddingTop: 20,
+    fontSize: 18,
+    color: colors.darkBlue,
+  },
+  textInput: {
+    color: colors.black,
+    fontSize: 18,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGray2,
+  },
+  titleText: {
+    textAlign: 'left',
+    fontSize: 24,
+    fontWeight: '500',
+    marginBottom: 20,
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 18,
+    paddingTop: 10,
+    paddingBottom: 20,
+  },
 });
 
 export default CredentialInputScreen;

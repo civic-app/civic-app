@@ -25,13 +25,6 @@ export const GetInvolvedImage = props => (
   />
 );
 
-export const GoogleIcon = props => (
-  <Image
-    {...props}
-    style={styles.social}
-    source={require('../assets/images/google-icon.png')}
-  />
-);
 const styles = StyleSheet.create({
   candidates: {
     height: 138,
@@ -44,9 +37,5 @@ const styles = StyleSheet.create({
   getInvolved: {
     height: 144,
     width: 180,
-  },
-  social: {
-    height: 10,
-    width: 10,
   },
 });
