@@ -24,13 +24,23 @@ const FacebookIcon = props => (
   </View>
 );
 
+const EmailIcon = props => (
+  <View style={styles.iconContainer}>
+    <Image
+      {...props}
+      source={require('../assets/images/email-icon.png')}
+      style={styles.emailIcon}
+    />
+  </View>
+);
+
 const SocialButton = props => {
   const config = (type => {
     switch (type) {
       case 'email':
         return {
           textColor: colors.black,
-          icon: 'email',
+          icon: EmailIcon,
         };
       case 'facebook':
         return {
@@ -64,7 +74,7 @@ const SocialButton = props => {
 
 SocialButton.propTypes = {
   onPress: PropTypes.func,
-  style: PropTypes.object,
+  style: PropTypes.any,
   title: PropTypes.string,
   type: PropTypes.oneOf(['google', 'facebook', 'email']),
 };
@@ -77,6 +87,10 @@ const styles = StyleSheet.create({
   email: {
     backgroundColor: colors.white,
     borderColor: colors.lightGray2,
+  },
+  emailIcon: {
+    height: 24,
+    width: 36,
   },
   // eslint-disable-next-line
   facebook: {

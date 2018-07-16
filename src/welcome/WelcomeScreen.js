@@ -1,22 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet, View } from 'react-native';
 import colors from '../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
+import { getFormType, switchFormType as formTypeAction } from '../auth/redux';
 
 const WelcomeScreen = props => {
   return (
     <View style={styles.container}>
       <Image style={styles.civicLogo} source={require('../assets/images/civic-logo-white.png')} />
       <WelcomeCarousel />
-      <WelcomePanel onButtonPress={() => props.navigation.navigate('Credentials')} />
+      <WelcomePanel
+        formType={props.formType}
+        switchFormType={props.switchFormType}
+        navigate={props.navigation.navigate}
+      />
     </View>
   );
 };
 
 WelcomeScreen.propTypes = {
-  navigation: PropTypes.objectOf({
+  formType: PropTypes.string,
+  switchFormType: PropTypes.func,
+  navigation: PropTypes.shape({
     navigate: PropTypes.func,
     push: PropTypes.func,
   }),
@@ -25,8 +33,6 @@ WelcomeScreen.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
@@ -40,4 +46,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+const mapStateToProps = state => ({
+  formType: getFormType(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  switchFormType: type => dispatch(formTypeAction(type)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(WelcomeScreen);
