@@ -1,9 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-    "\\src\\navigation\\styles"
+    "\\App\\__snapshots__",
+    "\\src\\assets",
+    "\\src\\assets\\images",
+    "\\src\\navigation",
+    "\\src\\screens\\survey"
   ],
-  "SelectedNode": "\\src\\navigation",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
