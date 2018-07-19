@@ -3,7 +3,12 @@ import WelcomeScreen from '../WelcomeScreen';
 
 describe('WelcomeScreen', () => {
   it('renders correctly', () => {
-    const snapshot = createSnapshot(WelcomeScreen);
+    const props = {
+      formType: 'foo',
+      switchFormType: jest.fn(),
+      navigation: {},
+    };
+    const snapshot = createSnapshot(WelcomeScreen.WrappedComponent, props);
     expect(snapshot).toMatchSnapshot();
   });
 });

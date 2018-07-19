@@ -1,63 +1,279 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WelcomePanel renders correctly 1`] = `
-<Component
+exports[`WelcomePanel renders correctly in initial view 1`] = `
+<AnimatedComponent
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffff",
-      "borderTopLeftRadius": 25,
-      "borderTopRightRadius": 25,
-      "flexDirection": "row",
-      "justifyContent": "space-around",
-    }
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderTopLeftRadius": 25,
+        "borderTopRightRadius": 25,
+        "flexDirection": "row",
+      },
+      false,
+    ]
   }
 >
-  <Button
-    backgroundColor="#eb5757"
-    borderRadius={3}
-    color="#ffffff"
-    containerViewStyle={
+  <Component
+    style={
       Object {
-        "borderRadius": 3,
+        "alignItems": "center",
         "flex": 1,
-        "marginBottom": 20,
-        "marginTop": 20,
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 2,
-          "width": 0,
-        },
-        "shadowOpacity": 0.5,
-        "shadowRadius": 3,
+        "flexDirection": "row",
+        "justifyContent": "space-around",
       }
     }
-    fontSize={18}
-    onPress={undefined}
-    title="Register"
-  />
-  <Button
-    backgroundColor="#f2f2f2"
-    borderRadius={3}
-    color="#000000"
-    containerViewStyle={
+  >
+    <Button
+      backgroundColor="#eb5757"
+      borderRadius={3}
+      color="#ffffff"
+      containerViewStyle={
+        Object {
+          "borderRadius": 3,
+          "flex": 1,
+          "marginBottom": 20,
+          "marginTop": 20,
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 2,
+            "width": 0,
+          },
+          "shadowOpacity": 0.5,
+          "shadowRadius": 3,
+        }
+      }
+      fontSize={18}
+      onPress={[Function]}
+      title="Register"
+    />
+    <Button
+      backgroundColor="#f2f2f2"
+      borderRadius={3}
+      color="#000000"
+      containerViewStyle={
+        Object {
+          "borderRadius": 3,
+          "flex": 1,
+          "marginBottom": 20,
+          "marginTop": 20,
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 2,
+            "width": 0,
+          },
+          "shadowOpacity": 0.5,
+          "shadowRadius": 3,
+        }
+      }
+      fontSize={18}
+      onPress={[Function]}
+      title="Sign In"
+    />
+  </Component>
+</AnimatedComponent>
+`;
+
+exports[`WelcomePanel renders correctly in login view 1`] = `
+<AnimatedComponent
+  style={
+    Array [
       Object {
-        "borderRadius": 3,
+        "backgroundColor": "#ffffff",
+        "borderTopLeftRadius": 25,
+        "borderTopRightRadius": 25,
+        "flexDirection": "row",
+      },
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
         "flex": 1,
-        "marginBottom": 20,
-        "marginTop": 20,
-        "shadowColor": "#000000",
-        "shadowOffset": Object {
-          "height": 2,
-          "width": 0,
-        },
-        "shadowOpacity": 0.5,
-        "shadowRadius": 3,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "padding": 20,
       }
     }
-    fontSize={18}
-    onPress={undefined}
-    title="Sign In"
-  />
-</Component>
+  >
+    <SocialButton
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Sign in with Google"
+      type="google"
+    />
+    <SocialButton
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Continue with Facebook"
+      type="facebook"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingBottom": 18,
+          "paddingTop": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      or
+    </Text>
+    <SocialButton
+      onPress={[Function]}
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Sign in with email"
+      type="email"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 18,
+            "paddingTop": 10,
+            "textAlign": "center",
+          },
+          Object {
+            "paddingBottom": 0,
+          },
+        ]
+      }
+    >
+      Don't have an account yet? Register
+    </Text>
+  </Component>
+</AnimatedComponent>
+`;
+
+exports[`WelcomePanel renders correctly in sign up view 1`] = `
+<AnimatedComponent
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderTopLeftRadius": 25,
+        "borderTopRightRadius": 25,
+        "flexDirection": "row",
+      },
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+      },
+    ]
+  }
+>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "padding": 20,
+      }
+    }
+  >
+    <SocialButton
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Sign up with Google"
+      type="google"
+    />
+    <SocialButton
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Continue with Facebook"
+      type="facebook"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingBottom": 18,
+          "paddingTop": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      or
+    </Text>
+    <SocialButton
+      onPress={[Function]}
+      style={
+        Object {
+          "marginBottom": 8,
+          "maxWidth": 322,
+          "width": "100%",
+        }
+      }
+      title="Sign up with email"
+      type="email"
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "paddingBottom": 18,
+            "paddingTop": 10,
+            "textAlign": "center",
+          },
+          Object {
+            "paddingBottom": 0,
+          },
+        ]
+      }
+    >
+      Have an account? Sign in
+    </Text>
+  </Component>
+</AnimatedComponent>
 `;

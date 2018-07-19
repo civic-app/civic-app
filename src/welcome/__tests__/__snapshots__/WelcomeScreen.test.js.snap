@@ -7,8 +7,6 @@ exports[`WelcomeScreen renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#2d9cdb",
       "flex": 1,
-      "flexDirection": "column",
-      "justifyContent": "space-between",
       "paddingLeft": 10,
       "paddingRight": 10,
       "paddingTop": 10,
@@ -27,7 +25,9 @@ exports[`WelcomeScreen renders correctly 1`] = `
   />
   <WelcomeCarousel />
   <WelcomePanel
-    onButtonPress={[Function]}
+    formType="foo"
+    navigate={undefined}
+    switchFormType={[MockFunction]}
   />
 </Component>
 `;

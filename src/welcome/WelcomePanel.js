@@ -55,6 +55,8 @@ class WelcomePanel extends React.Component {
             switchText: 'Have an account? Sign in',
             otherFormType: formTypes.LOGIN,
           };
+        default:
+          return {};
       }
     })(formType);
 
