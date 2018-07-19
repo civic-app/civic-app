@@ -6,12 +6,13 @@ import colors from '../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
 import { getFormType, switchFormType as formTypeAction } from '../auth/redux';
+import { getIsSmallScreen } from '../UI/redux';
 
 const WelcomeScreen = props => {
   return (
     <View style={styles.container}>
       <Image style={styles.civicLogo} source={require('../assets/images/civic-logo-white.png')} />
-      <WelcomeCarousel />
+      <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
       <WelcomePanel
         formType={props.formType}
         switchFormType={props.switchFormType}
@@ -23,6 +24,7 @@ const WelcomeScreen = props => {
 
 WelcomeScreen.propTypes = {
   formType: PropTypes.string,
+  isSmallScreen: PropTypes.bool,
   switchFormType: PropTypes.func,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
     paddingLeft: 10,
@@ -42,12 +45,13 @@ const styles = StyleSheet.create({
   civicLogo: {
     height: 65,
     width: 178,
-    marginTop: 20,
+    marginTop: 30,
   },
 });
 
 const mapStateToProps = state => ({
   formType: getFormType(state),
+  isSmallScreen: getIsSmallScreen(state),
 });
 
 const mapDispatchToProps = dispatch => ({

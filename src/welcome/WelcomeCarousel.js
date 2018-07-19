@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import WelcomeCarouselItem from './WelcomeCarouselItem';
@@ -10,16 +11,23 @@ class WelcomeCarousel extends React.Component {
     {
       image: <CandidatesImage />,
       title: 'Learn About Candidates',
+      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
     {
       image: <StayInformedImage />,
       title: 'Stay Informed',
+      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
     {
       image: <GetInvolvedImage />,
       title: 'Get Involved',
+      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     },
   ];
+
+  static propTypes = {
+    isSmallScreen: PropTypes.bool,
+  };
 
   constructor(props) {
     super(props);
@@ -27,7 +35,13 @@ class WelcomeCarousel extends React.Component {
   }
 
   renderItem = ({ item, index }) => (
-    <WelcomeCarouselItem key={index} image={item.image} title={item.title} />
+    <WelcomeCarouselItem
+      key={index}
+      image={item.image}
+      isSmallScreen={this.props.isSmallScreen}
+      title={item.title}
+      subtitle={item.subtitle}
+    />
   );
 
   render() {
@@ -47,14 +61,16 @@ class WelcomeCarousel extends React.Component {
           autoplayInterval={5000}
           lockScrollWhileSnapping={true}
         />
-        <Pagination
-          activeDotIndex={this.state.currentIndex}
-          dotsLength={this.images.length}
-          dotColor={colors.white}
-          inactiveDotColor={colors.lightBlue}
-          inactiveDotScale={1}
-          dotStyle={styles.dot}
-        />
+        {!this.props.isSmallScreen && (
+          <Pagination
+            activeDotIndex={this.state.currentIndex}
+            dotsLength={this.images.length}
+            dotColor={colors.white}
+            inactiveDotColor={colors.lightBlue}
+            inactiveDotScale={1}
+            dotStyle={styles.dot}
+          />
+        )}
       </View>
     );
   }
@@ -64,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
+    maxHeight: 500,
   },
   dot: {
     borderWidth: 1,

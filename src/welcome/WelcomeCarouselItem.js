@@ -5,21 +5,22 @@ import colors from '../styles/colors';
 
 const WelcomeCarouselItem = props => {
   return (
-    <View style={stylesSmallScreen.container}>
-      <View style={stylesSmallScreen.badge}>{props.image}</View>
-      <Text style={stylesSmallScreen.title}>{props.title}</Text>
+    <View style={styles.container}>
+      <View style={styles.badge}>{props.image}</View>
+      <Text style={styles.title}>{props.title}</Text>
+      {!props.isSmallScreen && <Text style={styles.subtitle}>{props.subtitle}</Text>}
     </View>
   );
 };
 
 WelcomeCarouselItem.propTypes = {
   image: PropTypes.object,
+  isSmallScreen: PropTypes.bool,
+  subtitle: PropTypes.string,
   title: PropTypes.string,
 };
 
-// const stylesLargeScreen = StyleSheet.create({});
-
-const stylesSmallScreen = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
@@ -38,6 +39,14 @@ const stylesSmallScreen = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 3,
+  },
+  subtitle: {
+    color: colors.white,
+    fontSize: 16,
+    lineHeight: 24,
+    paddingLeft: 20,
+    paddingRight: 20,
+    textAlign: 'center',
   },
   title: {
     color: colors.white,

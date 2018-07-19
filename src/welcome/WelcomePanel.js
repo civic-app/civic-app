@@ -108,14 +108,13 @@ class WelcomePanel extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
     backgroundColor: colors.white,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
-  containerExpanded: {
-    position: 'absolute',
-    bottom: 0,
-  },
+  containerExpanded: {},
   buttonContainer: {
     flex: 1,
     marginTop: 20,
