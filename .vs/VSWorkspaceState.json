@@ -1,12 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\App\\__snapshots__",
-    "\\src\\assets",
+    "\\src",
     "\\src\\assets\\images",
+    "\\src\\auth",
+    "\\src\\firebase",
     "\\src\\navigation",
-    "\\src\\screens\\survey"
+    "\\src\\screens",
+    "\\src\\screens\\survey",
+    "\\src\\welcome"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\screens\\CredentialInputScreen.js",
   "PreviewInSolutionExplorer": false
 }

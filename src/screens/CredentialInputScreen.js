@@ -5,7 +5,7 @@ import colors from '../styles/colors';
 import SocialButton from '../auth/SocialButton';
 import firebase, { auth, provider } from '../firebase/initialize';
 import Expo from 'expo';
-
+import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -34,39 +34,6 @@ class CredentialInputScreen extends React.Component {
       });
   }
 
- async signInWithGoogleAsync() {
-    try {
-        const result = await Expo.Google.logInAsync({
-            androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
-            iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
-            scopes: ['profile', 'email'],
-        });
-
-        if (result.type === 'success') {
-            return result.accessToken;
-        } else {
-            return { cancelled: true };
-        }
-    } catch (e) {
-        return { error: true };
-    }
- }
-
-  async signInWithFacebookAsync(){
-     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-        permissions: ['public_profile'],
-    });
-    if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-            `https://graph.facebook.com/me?access_token=${token}`);
-        Alert.alert(
-            'Logged in!',
-            `Hi ${(await response.json()).name}!`,
-        );
-    }
-  }
-
   logout = () => {
       auth.signOut()
           .then(() => {
@@ -76,11 +43,54 @@ class CredentialInputScreen extends React.Component {
           });
   }
 
+  expandedView = formType => {
+      const config = (type => {
+          switch (type) {
+              case formTypes.INITIAL:
+                  return {};
+              case formTypes.LOGIN:
+                  return {
+                      preposition: 'in',
+                      title: 'into',
+                      switchText: 'Don\'t have an account yet? Register',
+                      otherFormType: formTypes.SIGN_UP,
+                  };
+              case formTypes.SIGN_UP:
+                  return {
+                      preposition: 'up',
+                      title: 'up for',
+                      switchText: 'Have an account? Sign in',
+                      otherFormType: formTypes.LOGIN,
+                  };
+          }
+      })(formType);
+
+      screenState = () => {
+          if (this.formType == formTypes.LOGIN) {
+              return null;
+          } else {
+              return (
+                  <TextInput
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      clearButtonMode="while-editing"
+                      style={styles.textInput}
+                      value={this.state.duplicatePassword}
+                      onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
+                      onEndEditing={this.checkPassword}
+                      returnKeyType="done"
+                      secureTextEntry={true}
+                      placeholder="Re-type password"
+                  />
+              );
+          }
+      }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <Text style={styles.titleText}>Sign Up for Civic</Text>
+          <Text style={styles.titleText}>{`Sign ${config.title} Civic`}</Text>
           <TextInput
             autoCapitalize="none"
             autoCorrect={false}
@@ -101,26 +111,31 @@ class CredentialInputScreen extends React.Component {
             value={this.state.password}
             secureTextEntry={true}
             placeholder="Password"
-          />
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            value={this.state.duplicatePassword}
-            onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-            onEndEditing={this.checkPassword}
-            returnKeyType="done"
-            secureTextEntry={true}
-            placeholder="Re-type password"
-          />
+                />
+          return (
+            <View>
+              <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  clearButtonMode="while-editing"
+                  style={styles.textInput}
+                  value={this.state.duplicatePassword}
+                  onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
+                  onEndEditing={this.checkPassword}
+                  returnKeyType="done"
+                  secureTextEntry={true}
+                  placeholder="Re-type password"
+              />
+              {this.screenState()}
+            </View>);
+);
           <Text onPress={this.handleSubmit} style={styles.submitButton}>
             SUBMIT
           </Text>
           <Text style={styles.text}>or</Text>
           <SocialButton
               type="google"
-              title="Sign up with Google"
+              title={`Sign ${config.preposition} with Google`}
               style={styles.social}
               onPress={this.signInWithGoogleAsync}
               onLongPress={this.signInWithGoogleAsync} />

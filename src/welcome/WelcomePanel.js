@@ -6,6 +6,7 @@ import colors from '../styles/colors';
 import { formTypes } from '../auth/redux';
 import SocialButton from '../auth/SocialButton';
 import Expo from 'expo';
+import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
 
 class WelcomePanel extends React.Component {
   static propTypes = {
@@ -13,39 +14,6 @@ class WelcomePanel extends React.Component {
     formType: PropTypes.string,
     navigate: PropTypes.func,
   };
-
-   async signInWithGoogleAsync() {
-    try {
-        const result = await Expo.Google.logInAsync({
-            androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
-            iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
-            scopes: ['profile', 'email'],
-        });
-
-        if (result.type === 'success') {
-            return result.accessToken;
-        } else {
-            return { cancelled: true };
-        }
-    } catch (e) {
-        return { error: true };
-    }
-  }
-
-  async signInWithFacebookAsync(){
-     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-        permissions: ['public_profile'],
-    });
-    if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-            `https://graph.facebook.com/me?access_token=${token}`);
-        Alert.alert(
-            'Logged in!',
-            `Hi ${(await response.json()).name}!`,
-        );
-    }
-  }
 
   sharedButtonProps = {
     borderRadius: 3,
