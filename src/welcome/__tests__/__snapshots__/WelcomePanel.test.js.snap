@@ -1,19 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WelcomePanel renders correctly in initial view 1`] = `
-<AnimatedComponent
+<Component
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-        "borderTopLeftRadius": 25,
-        "borderTopRightRadius": 25,
-        "bottom": 0,
-        "flexDirection": "row",
-        "position": "absolute",
-      },
-      false,
-    ]
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderTopLeftRadius": 25,
+      "borderTopRightRadius": 25,
+      "bottom": 0,
+      "flexDirection": "row",
+      "position": "absolute",
+    }
   }
 >
   <Component
@@ -73,23 +70,20 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
       title="Sign In"
     />
   </Component>
-</AnimatedComponent>
+</Component>
 `;
 
 exports[`WelcomePanel renders correctly in login view 1`] = `
-<AnimatedComponent
+<Component
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-        "borderTopLeftRadius": 25,
-        "borderTopRightRadius": 25,
-        "bottom": 0,
-        "flexDirection": "row",
-        "position": "absolute",
-      },
-      Object {},
-    ]
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderTopLeftRadius": 25,
+      "borderTopRightRadius": 25,
+      "bottom": 0,
+      "flexDirection": "row",
+      "position": "absolute",
+    }
   }
 >
   <Component
@@ -174,23 +168,20 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       Don't have an account yet? Register
     </Text>
   </Component>
-</AnimatedComponent>
+</Component>
 `;
 
 exports[`WelcomePanel renders correctly in sign up view 1`] = `
-<AnimatedComponent
+<Component
   style={
-    Array [
-      Object {
-        "backgroundColor": "#ffffff",
-        "borderTopLeftRadius": 25,
-        "borderTopRightRadius": 25,
-        "bottom": 0,
-        "flexDirection": "row",
-        "position": "absolute",
-      },
-      Object {},
-    ]
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderTopLeftRadius": 25,
+      "borderTopRightRadius": 25,
+      "bottom": 0,
+      "flexDirection": "row",
+      "position": "absolute",
+    }
   }
 >
   <Component
@@ -275,5 +266,5 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       Have an account? Sign in
     </Text>
   </Component>
-</AnimatedComponent>
+</Component>
 `;
