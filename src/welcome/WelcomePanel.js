@@ -1,4 +1,4 @@
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
@@ -91,16 +91,11 @@ class WelcomePanel extends React.Component {
 
   render() {
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          this.props.formType !== formTypes.INITIAL && styles.containerExpanded,
-        ]}
-      >
+      <View style={styles.container}>
         {this.props.formType === formTypes.INITIAL
           ? this.defaultView
           : this.expandedView(this.props.formType)}
-      </Animated.View>
+      </View>
     );
   }
 }
@@ -114,7 +109,6 @@ var styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
-  containerExpanded: {},
   buttonContainer: {
     flex: 1,
     marginTop: 20,
