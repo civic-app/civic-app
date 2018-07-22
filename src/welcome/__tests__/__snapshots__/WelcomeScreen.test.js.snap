@@ -7,6 +7,7 @@ exports[`WelcomeScreen renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#2d9cdb",
       "flex": 1,
+      "justifyContent": "center",
       "paddingLeft": 10,
       "paddingRight": 10,
       "paddingTop": 10,
@@ -18,12 +19,14 @@ exports[`WelcomeScreen renders correctly 1`] = `
     style={
       Object {
         "height": 65,
-        "marginTop": 20,
+        "marginTop": 30,
         "width": 178,
       }
     }
   />
-  <WelcomeCarousel />
+  <WelcomeCarousel
+    isSmallScreen={undefined}
+  />
   <WelcomePanel
     formType="foo"
     navigate={undefined}

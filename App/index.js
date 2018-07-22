@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { Dimensions } from 'react-native';
 import NavigationRoot from './NavigationRoot';
 import store from './configureStore';
-import { setSmallScreen } from '../src/UI/redux';
+import { setIsSmallScreen } from '../src/UI/redux';
 
 if (Dimensions.get('window').height < 600) {
-  store.dispatch(setSmallScreen());
+  store.dispatch(setIsSmallScreen());
 }
 
 const CivicApp = () => {

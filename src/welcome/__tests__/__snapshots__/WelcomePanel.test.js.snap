@@ -8,7 +8,9 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
         "backgroundColor": "#ffffff",
         "borderTopLeftRadius": 25,
         "borderTopRightRadius": 25,
+        "bottom": 0,
         "flexDirection": "row",
+        "position": "absolute",
       },
       false,
     ]
@@ -82,12 +84,11 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
         "backgroundColor": "#ffffff",
         "borderTopLeftRadius": 25,
         "borderTopRightRadius": 25,
-        "flexDirection": "row",
-      },
-      Object {
         "bottom": 0,
+        "flexDirection": "row",
         "position": "absolute",
       },
+      Object {},
     ]
   }
 >
@@ -184,12 +185,11 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
         "backgroundColor": "#ffffff",
         "borderTopLeftRadius": 25,
         "borderTopRightRadius": 25,
-        "flexDirection": "row",
-      },
-      Object {
         "bottom": 0,
+        "flexDirection": "row",
         "position": "absolute",
       },
+      Object {},
     ]
   }
 >

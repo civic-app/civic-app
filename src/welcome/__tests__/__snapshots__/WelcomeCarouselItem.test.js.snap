@@ -45,5 +45,22 @@ exports[`WelcomeCarouselItem renders correctly 1`] = `
   >
     Welcome Carousel
   </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontSize": 16,
+        "lineHeight": 24,
+        "paddingLeft": 20,
+        "paddingRight": 20,
+        "textAlign": "center",
+      }
+    }
+  >
+    Some more text
+  </Text>
 </Component>
 `;

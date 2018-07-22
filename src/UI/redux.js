@@ -2,23 +2,23 @@
 export const getIsSmallScreen = state => state[UI_NAMESPACE].isSmallScreen;
 
 // actions
-export const setSmallScreen = () => ({
-  type: SET_SMALL_SCREEN,
+export const setIsSmallScreen = () => ({
+  type: SET_IS_SMALL_SCREEN,
 });
 
 // action types
-export const SET_SMALL_SCREEN = 'civic-app/ui/setSmallScreen';
+export const SET_IS_SMALL_SCREEN = 'civic-app/ui/setIsSmallScreen';
 
 // reducer
 export const UI_NAMESPACE = 'ui';
 
-const initialState = {
+export const initialState = {
   isSmallScreen: false,
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_SMALL_SCREEN:
+    case SET_IS_SMALL_SCREEN:
       return {
         ...state,
         isSmallScreen: true,

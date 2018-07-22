@@ -6,6 +6,7 @@ exports[`WelcomeCarousel renders correctly 1`] = `
     Object {
       "flex": 1,
       "justifyContent": "flex-start",
+      "maxHeight": 500,
     }
   }
 >
@@ -25,14 +26,17 @@ exports[`WelcomeCarousel renders correctly 1`] = `
       Array [
         Object {
           "image": <CandidatesImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Learn About Candidates",
         },
         Object {
           "image": <StayInformedImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Stay Informed",
         },
         Object {
           "image": <GetInvolvedImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
           "title": "Get Involved",
         },
       ]
