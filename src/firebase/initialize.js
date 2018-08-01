@@ -18,3 +18,7 @@ export const storage = firebase.storage()
 export const getByPath = (tablePath) => (
   database.ref(tablePath).once('value').then(snapshot => snapshot.val())
 );
+
+export const setByPath = (tablePath, newVal) => (
+  database.ref(tablePath).set(newVal)
+);
