@@ -1,9 +1,9 @@
-import { createSnapshot } from '../../util/tests';
+import { createConnectedSnapshot } from '../../util/tests';
 import WelcomeScreen from '../WelcomeScreen';
 
 describe('WelcomeScreen', () => {
   it('renders correctly', () => {
-    const snapshot = createSnapshot(WelcomeScreen);
+    const snapshot = createConnectedSnapshot(WelcomeScreen);
     expect(snapshot).toMatchSnapshot();
   });
 });

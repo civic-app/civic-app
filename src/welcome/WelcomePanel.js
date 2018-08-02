@@ -57,21 +57,27 @@ class WelcomePanel extends React.Component {
             switchText: 'Have an account? Sign in',
             otherFormType: formTypes.LOGIN,
           };
+        default:
+          return {};
       }
     })(formType);
 
     return (
       <View style={styles.expandedViewContainer}>
         <SocialButton
-                type="google"
-                title={`Sign ${config.preposition} with Google`}
-                style={styles.social}
-                onPress={this.signInWithGoogleAsync}
-                onLongPress={this.signInWithGoogleAsync}
+          type="google"
+          title={`Sign ${config.preposition} with Google`}
+          style={styles.social}
+          onPress={this.signInWithGoogleAsync}
+          onLongPress={this.signInWithGoogleAsync}
         />
-        <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-                onPress={this.signInWithFacebookAsync}
-                onLongPress={this.signInWithFacebookAsync}/>
+        <SocialButton
+          type="facebook"
+          title="Continue with Facebook"
+          style={styles.social}
+          onPress={this.signInWithFacebookAsync}
+          onLongPress={this.signInWithFacebookAsync}
+        />
         <Text style={styles.text}>or</Text>
         <SocialButton
           type="email"
