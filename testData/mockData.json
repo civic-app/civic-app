@@ -1,0 +1,59 @@
+{
+  "candidates": {
+    "c88d3aa0-6ea8-11e8-b566-0800200c9a66": {
+      "id": "c88d3aa0-6ea8-11e8-b566-0800200c9a66",
+      "name": "Obama",
+      "image": "https://drive.google.com/uc?id=1CmDUgYHA7cvZPnZfZY6pmUeh0EPnUvvw",
+      "about": "Obama is no longer the president and that is sad",
+      "electionIds": [
+        "desfewaefwefawegwagaw"
+      ],
+      "partyPreference": "Democrat"
+    }
+  },
+  "questions": {
+    "8bb9a280-6ea8-11e8-b566-0800200c9a66": {
+      "id": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+      "text": "Would you like a to have a superpower?",
+      "categories": [
+        "awesomeness"
+      ],
+      "image": "https://drive.google.com/uc?id=1oodNhQLQ7feDjSBmMWqhihKK1HXq6fwn"
+    }
+  },
+  "candidateResponses": {
+    "e86e1650-6ea8-11e8-b566-0800200c9a66": {
+      "id": "e86e1650-6ea8-11e8-b566-0800200c9a66",
+      "questionId": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+      "candidateId": "c88d3aa0-6ea8-11e8-b566-0800200c9a66",
+      "questionResponse": 5,
+      "explanation": "Obama is awesome and thereby likes awesome things"
+    }
+  },
+  "users": {
+    "Ra6l4NfjcLcc8XdP4gX1aWdhRRd2": {
+      "id": "Ra6l4NfjcLcc8XdP4gX1aWdhRRd2",
+      "address": "125 W 125th st, New York, NY, 10001",
+      "district": "10",
+      "responseIds": [
+        "Ra6l4NfjcLfewafeX1aWdhRRd2"
+      ],
+      "favorites": [
+        "c88d3aa0-6ea8-11e8-b566-0800200c9a66"
+      ]
+    }
+  },
+  "userResponses": {
+    "Ra6l4NfjcLfewafeX1aWdhRRd2": {
+      "id": "Ra6l4NfjcLfewafeX1aWdhRRd2",
+      "questionId": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+      "questionResponse": 5
+    }
+  },
+  "elections": {
+    "desfewaefwefawegwagaw": {
+      "id": "desfewaefwefawegwagaw",
+      "name": "California Governor"
+    }
+  }
+}

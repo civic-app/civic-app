@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation';
-import SurveyMainScreen from '../screens/survey/SurveyMainScreen';
+import SurveyMainScreen from '../screens/Survey';
 
 import styles from './styles';
 

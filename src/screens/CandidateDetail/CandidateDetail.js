@@ -5,10 +5,13 @@ import { Avatar, Icon } from 'react-native-elements';
 
 const CandidateDetail = props => (
   <View style={styles.container}>
-    <CandidateSummary
-      {...props.summary}
-      onToggleFavorite={props.toggleFavorite}
-    />
+    {props.summary
+      ? <CandidateSummary
+        {...props.summary}
+        onToggleFavorite={props.toggleFavorite}
+      />
+      : <Text>Loading...</Text>
+    }
   </View>
 );
 

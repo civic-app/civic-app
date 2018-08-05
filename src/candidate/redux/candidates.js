@@ -1,8 +1,17 @@
 // Selectors
+
 export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
+export const getCandidates = (state, viewMapper) => (
+  Object.keys(state[CANDIDATE_NAMESPACE]).map(id => viewMapper(getCandidate(state, id)))
+);
 
 // Action Creators
-export const fetchCandidateSuccess = candidate => ({
+
+export const loadCandidates = () => ({
+  type: CandidateActionType.Request,
+});
+
+export const loadCandidatesSuccess = candidate => ({
   type: CandidateActionType.RequestSuccess,
   payload: candidate,
 });
@@ -18,10 +27,13 @@ export const toggleFavoriteSuccess = (candidateId, isFavorite) => ({
 });
 
 export const CandidateActionType = {
-  RequestSuccess: 'civicApp/candidate/requestSuccess',
+  RequestSuccess: 'civicApp/candidates/requestSuccess',
+  Request: 'civicApp/candidates/request',
   ToggleFavorite: 'civicApp/candidate/toggleFavorite',
   ToggleFavoriteSuccess: 'civicApp/candidate/toggleFavoriteSuccess',
 };
+
+// Reducer
 
 export const CANDIDATE_NAMESPACE = 'candidates';
 
@@ -30,7 +42,7 @@ const reducer = (state = initialState, action) => {
     case CandidateActionType.RequestSuccess:
       return {
         ...state,
-        [action.payload.id]: action.payload,
+        ...action.payload,
       };
     default:
       return state;

@@ -14,3 +14,7 @@ firebase.initializeApp(config)
 export const database = firebase.database()
 export const auth = firebase.auth()
 export const storage = firebase.storage()
+
+export const getByPath = (tablePath) => (
+  database.ref(tablePath).once('value').then(snapshot => snapshot.val())
+);
