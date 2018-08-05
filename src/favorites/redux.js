@@ -57,6 +57,7 @@ export const FavoritesActionType = {
 // Reducer
 
 const reducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case FavoritesActionType.RequestSuccess:
       return {
@@ -69,7 +70,7 @@ const reducer = (state = initialState, action) => {
         [action.payload.category]: (new Set(state[action.payload.category])).add(action.payload.id),
       };
     case FavoritesActionType.Remove:
-      const newState = new Set(state[action.payload.category]);
+      newState = new Set(state[action.payload.category]);
       newState.delete(action.payload.id);
       return {
         ...state,
