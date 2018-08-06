@@ -2,14 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\assets\\images",
     "\\src\\auth",
-    "\\src\\firebase",
-    "\\src\\navigation",
     "\\src\\screens",
-    "\\src\\screens\\survey",
     "\\src\\welcome"
   ],
-  "SelectedNode": "\\src\\screens\\CredentialInputScreen.js",
+  "SelectedNode": "\\src\\welcome\\WelcomePanel.js",
   "PreviewInSolutionExplorer": false
 }

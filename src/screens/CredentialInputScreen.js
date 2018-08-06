@@ -5,7 +5,23 @@ import colors from '../styles/colors';
 import SocialButton from '../auth/SocialButton';
 import firebase, { auth, provider } from '../firebase/initialize';
 import Expo from 'expo';
-import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
+import CredentialInput from '../welcome/LogIn';
+//import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
+
+const LogIn = props => (
+    <View style={styles.container}>
+        <Text>Welcome! You are not logged in</Text>
+        <Button title="Sign In" onPress={() => undefined} />
+        <CredentialInput onSubmit={props.onLogInSubmit} />
+        <Button title="Register" onPress={() => undefined} />
+        <CredentialInput onSubmit={props.onRegisterSubmit} />
+    </View>
+);
+
+LogIn.propTypes = {
+    onLogInSubmit: PropTypes.func,
+    onRegisterSubmit: PropTypes.func,
+};
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -43,111 +59,61 @@ class CredentialInputScreen extends React.Component {
           });
   }
 
-  expandedView = formType => {
-      const config = (type => {
-          switch (type) {
-              case formTypes.INITIAL:
-                  return {};
-              case formTypes.LOGIN:
-                  return {
-                      preposition: 'in',
-                      title: 'into',
-                      switchText: 'Don\'t have an account yet? Register',
-                      otherFormType: formTypes.SIGN_UP,
-                  };
-              case formTypes.SIGN_UP:
-                  return {
-                      preposition: 'up',
-                      title: 'up for',
-                      switchText: 'Have an account? Sign in',
-                      otherFormType: formTypes.LOGIN,
-                  };
-          }
-      })(formType);
+  async signInWithGoogleAsync() {
+      try {
+          const result = await Expo.Google.logInAsync({
+              androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
+              iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
+              scopes: ['profile', 'email'],
+          });
 
-      screenState = () => {
-          if (this.formType == formTypes.LOGIN) {
-              return null;
+          if (result.type === 'success') {
+              return result.accessToken;
           } else {
-              return (
-                  <TextInput
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      clearButtonMode="while-editing"
-                      style={styles.textInput}
-                      value={this.state.duplicatePassword}
-                      onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-                      onEndEditing={this.checkPassword}
-                      returnKeyType="done"
-                      secureTextEntry={true}
-                      placeholder="Re-type password"
-                  />
-              );
+              return { cancelled: true };
           }
+      } catch (e) {
+          return { error: true };
       }
+  }
+
+  async signInWithFacebookAsync() {
+      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
+          permissions: ['public_profile'],
+      });
+      if (type === 'success') {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(
+              `https://graph.facebook.com/me?access_token=${token}`);
+          Alert.alert(
+              'Logged in!',
+              `Hi ${(await response.json()).name}!`,
+          );
+      }
+  }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.titleText}>{`Sign ${config.title} Civic`}</Text>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoFocus={true}
-            clearButtonMode="while-editing"
-            keyboardType="email-address"
-            style={styles.textInput}
-            onChangeText={email => this.setState({ email })}
-            value={this.state.email}
-            placeholder="E-mail address"
-          />
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
-            secureTextEntry={true}
-            placeholder="Password"
-                />
-          return (
-            <View>
-              <TextInput
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  clearButtonMode="while-editing"
-                  style={styles.textInput}
-                  value={this.state.duplicatePassword}
-                  onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-                  onEndEditing={this.checkPassword}
-                  returnKeyType="done"
-                  secureTextEntry={true}
-                  placeholder="Re-type password"
-              />
-              {this.screenState()}
-            </View>);
-);
-          <Text onPress={this.handleSubmit} style={styles.submitButton}>
-            SUBMIT
+      return (
+          <View style={styles.container}>
+              <View style={styles.inputContainer}>
+                  <Text style={styles.titleText}>Sign Up for Civic</Text>
+                  <CredentialInput />
+                  <Text style={styles.text}>or</Text>
+                  <SocialButton
+                      type="google"
+                      title="Sign up with Google"
+                      style={styles.social}
+                      onPress={this.signInWithGoogleAsync}
+                      onLongPress={this.signInWithGoogleAsync} />
+                  <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
+                      onPress={this.signInWithFacebookAsync}
+                      onLongPress={this.signInWithFacebookAsync} />
+                  <Text onPress={this.props.changeFormType} style={styles.text}>
+                      Have an account? Sign In
           </Text>
-          <Text style={styles.text}>or</Text>
-          <SocialButton
-              type="google"
-              title={`Sign ${config.preposition} with Google`}
-              style={styles.social}
-              onPress={this.signInWithGoogleAsync}
-              onLongPress={this.signInWithGoogleAsync} />
-          <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-                    onPress={this.signInWithFacebookAsync}
-                    onLongPress={this.signInWithFacebookAsync}/>
-          <Text onPress={this.props.changeFormType} style={styles.text}>
-            Have an account? Sign In
-          </Text>
-        </View>
-      </View>
-    );
+              </View>
+          </View>
+      );
   }
 }
 
