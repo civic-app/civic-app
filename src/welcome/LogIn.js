@@ -17,7 +17,7 @@ LogIn.propTypes = {
   onRegisterSubmit: PropTypes.func,
 };
 
-class CredentialInput extends React.Component {
+export class CredentialInput extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

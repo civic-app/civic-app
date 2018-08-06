@@ -1,27 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import colors from '../styles/colors';
 import SocialButton from '../auth/SocialButton';
 import firebase, { auth, provider } from '../firebase/initialize';
 import Expo from 'expo';
-import CredentialInput from '../welcome/LogIn';
+import { CredentialInput } from '../welcome/LogIn';
+import { register } from '../auth/redux'
 //import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
-
-const LogIn = props => (
-    <View style={styles.container}>
-        <Text>Welcome! You are not logged in</Text>
-        <Button title="Sign In" onPress={() => undefined} />
-        <CredentialInput onSubmit={props.onLogInSubmit} />
-        <Button title="Register" onPress={() => undefined} />
-        <CredentialInput onSubmit={props.onRegisterSubmit} />
-    </View>
-);
-
-LogIn.propTypes = {
-    onLogInSubmit: PropTypes.func,
-    onRegisterSubmit: PropTypes.func,
-};
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -97,7 +84,7 @@ class CredentialInputScreen extends React.Component {
           <View style={styles.container}>
               <View style={styles.inputContainer}>
                   <Text style={styles.titleText}>Sign Up for Civic</Text>
-                  <CredentialInput />
+                  <CredentialInput onSubmit={this.props.register}/>
                   <Text style={styles.text}>or</Text>
                   <SocialButton
                       type="google"
@@ -120,6 +107,7 @@ class CredentialInputScreen extends React.Component {
 CredentialInputScreen.propTypes = {
   onSubmit: PropTypes.func,
   changeFormType: PropTypes.func,
+  register: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -184,4 +172,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CredentialInputScreen;
+export default connect(
+  null,
+  { register },
+)(CredentialInputScreen);
