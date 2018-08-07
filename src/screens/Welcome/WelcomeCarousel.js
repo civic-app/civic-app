@@ -4,7 +4,7 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import WelcomeCarouselItem from './WelcomeCarouselItem';
 import { CandidatesImage, GetInvolvedImage, StayInformedImage } from './WelcomeImages';
-import colors from '../styles/colors';
+import colors from '../../styles/colors';
 
 class WelcomeCarousel extends React.Component {
   images = [

@@ -5,7 +5,7 @@ export const CandidatesImage = props => (
   <Image
     {...props}
     style={styles.candidates}
-    source={require('../assets/images/welcome-candidates-icon.png')}
+    source={require('../../assets/images/welcome-candidates-icon.png')}
   />
 );
 
@@ -13,7 +13,7 @@ export const StayInformedImage = props => (
   <Image
     {...props}
     style={styles.stayInformed}
-    source={require('../assets/images/welcome-stay-informed-icon.png')}
+    source={require('../../assets/images/welcome-stay-informed-icon.png')}
   />
 );
 
@@ -21,7 +21,7 @@ export const GetInvolvedImage = props => (
   <Image
     {...props}
     style={styles.getInvolved}
-    source={require('../assets/images/welcome-get-involed-icon.png')}
+    source={require('../../assets/images/welcome-get-involed-icon.png')}
   />
 );
 

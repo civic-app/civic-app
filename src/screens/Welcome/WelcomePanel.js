@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
-import colors from '../styles/colors';
-import { formTypes } from '../auth/redux';
-import SocialButton from '../auth/SocialButton';
+import colors from '../../styles/colors';
+import { formTypes } from '../../auth/redux';
+import SocialButton from '../../auth/SocialButton';
 
 class WelcomePanel extends React.Component {
   static propTypes = {

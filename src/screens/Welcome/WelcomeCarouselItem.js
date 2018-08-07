@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View } from 'react-native';
-import colors from '../styles/colors';
+import colors from '../../styles/colors';
 
 const WelcomeCarouselItem = props => {
   return (
