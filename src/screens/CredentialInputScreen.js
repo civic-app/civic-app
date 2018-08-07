@@ -38,16 +38,6 @@ class CredentialInputScreen extends React.Component {
       });
   }
 
-  logout = () => {
-      auth.signOut()
-          .then(() => {
-              this.setState({
-                  user: null
-              });
-              this.props.onLogOut();
-          });
-  }
-
   gotToSurvey() {
     this.props.navigation.navigate('Survey');
   }
