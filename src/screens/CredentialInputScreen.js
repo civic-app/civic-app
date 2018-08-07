@@ -7,7 +7,7 @@ import SocialButton from '../auth/SocialButton';
 import firebase, { auth, provider } from '../firebase/initialize';
 import Expo from 'expo';
 import { CredentialInput } from '../welcome/LogIn';
-import { register } from '../auth/redux'
+import { getIsLoggedIn, register, loginSuccess, logOutSuccess } from '../auth/redux'
 //import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
 
 class CredentialInputScreen extends React.Component {
@@ -33,6 +33,7 @@ class CredentialInputScreen extends React.Component {
       auth.onAuthStateChanged((user) => {
           if (user) {
               this.setState({ user });
+              this.props.onLogIn(user);
           }
       });
   }
@@ -43,7 +44,12 @@ class CredentialInputScreen extends React.Component {
               this.setState({
                   user: null
               });
+              this.props.onLogOut();
           });
+  }
+
+  gotToSurvey() {
+    this.props.navigation.navigate('Survey');
   }
 
   async signInWithGoogleAsync() {
@@ -55,6 +61,7 @@ class CredentialInputScreen extends React.Component {
           });
 
           if (result.type === 'success') {
+              this.props.onLogIn(result);
               return result.accessToken;
           } else {
               return { cancelled: true };
@@ -72,6 +79,7 @@ class CredentialInputScreen extends React.Component {
           // Get the user's name using Facebook's Graph API
           const response = await fetch(
               `https://graph.facebook.com/me?access_token=${token}`);
+          this.props.onLogIn(response.json());
           Alert.alert(
               'Logged in!',
               `Hi ${(await response.json()).name}!`,
@@ -80,6 +88,9 @@ class CredentialInputScreen extends React.Component {
   }
 
   render() {
+    if (this.props.isLoggedIn) {
+      this.gotToSurvey();
+    }
       return (
           <View style={styles.container}>
               <View style={styles.inputContainer}>
@@ -105,9 +116,16 @@ class CredentialInputScreen extends React.Component {
 }
 
 CredentialInputScreen.propTypes = {
+  isLoggedIn: PropTypes.bool,
   onSubmit: PropTypes.func,
   changeFormType: PropTypes.func,
   register: PropTypes.func,
+  onLogIn: PropTypes.func,
+  onLogOut: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+    push: PropTypes.func,
+  }),
 };
 
 const styles = StyleSheet.create({
@@ -173,6 +191,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  null,
-  { register },
+  (state) => ({ isLoggedIn: getIsLoggedIn(state) }),
+  { register, onLogIn: loginSuccess, onLogOut: logOutSuccess },
 )(CredentialInputScreen);
