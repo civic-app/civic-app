@@ -52,7 +52,7 @@ class CredentialInputScreen extends React.Component {
     this.props.navigation.navigate('Survey');
   }
 
-  async signInWithGoogleAsync() {
+  async signUpWithGoogleAsync() {
       try {
           const result = await Expo.Google.logInAsync({
               androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
@@ -71,19 +71,18 @@ class CredentialInputScreen extends React.Component {
       }
   }
 
-  async signInWithFacebookAsync() {
+  async signUpWithFacebookAsync() {
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
           permissions: ['public_profile'],
       });
       if (type === 'success') {
-          // Get the user's name using Facebook's Graph API
-          const response = await fetch(
-              `https://graph.facebook.com/me?access_token=${token}`);
-          this.props.onLogIn(response.json());
-          Alert.alert(
-              'Logged in!',
-              `Hi ${(await response.json()).name}!`,
-          );
+          // Build Firebase credential with the Facebook access token.
+          const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+          // Sign in with credential from the Facebook user.
+          firebase.auth().signInWithCredential(credential).catch((error) => {
+              // Handle Errors here.
+          });
       }
   }
 
@@ -101,11 +100,11 @@ class CredentialInputScreen extends React.Component {
                       type="google"
                       title="Sign up with Google"
                       style={styles.social}
-                      onPress={this.signInWithGoogleAsync}
-                      onLongPress={this.signInWithGoogleAsync} />
+                      onPress={this.signUpWithGoogleAsync}
+                      onLongPress={this.signUpWithGoogleAsync} />
                   <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-                      onPress={this.signInWithFacebookAsync}
-                      onLongPress={this.signInWithFacebookAsync} />
+                      onPress={this.signUpWithFacebookAsync}
+                      onLongPress={this.signUpWithFacebookAsync} />
                   <Text onPress={this.props.changeFormType} style={styles.text}>
                       Have an account? Sign In
           </Text>
