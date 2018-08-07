@@ -16,7 +16,8 @@ class CredentialInputScreen extends React.Component {
   }
 
   handleSubmit() {
-    this.props.onSubmit(this.state.email, this.state.password);
+    //this.props.onSubmit(this.state.email, this.state.password);
+    this.props.navigation.navigate('Survey');
   }
 
   checkPassword() {
@@ -77,8 +78,12 @@ class CredentialInputScreen extends React.Component {
 }
 
 CredentialInputScreen.propTypes = {
-  onSubmit: PropTypes.func,
+  //onSubmit: PropTypes.func,
   changeFormType: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+    push: PropTypes.func,
+  }),
 };
 
 const styles = StyleSheet.create({
