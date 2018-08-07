@@ -1,4 +1,4 @@
-import { createSnapshot } from '../../util/tests';
+import { createSnapshot } from '../../../util/tests';
 import WelcomeCarousel from '../WelcomeCarousel';
 
 describe('WelcomeCarousel', () => {

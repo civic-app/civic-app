@@ -1,9 +1,5 @@
-import { createSnapshot } from '../../util/tests';
-import {
-  CandidatesImage,
-  GetInvolvedImage,
-  StayInformedImage,
-} from '../WelcomeImages';
+import { createSnapshot } from '../../../util/tests';
+import { CandidatesImage, GetInvolvedImage, StayInformedImage } from '../WelcomeImages';
 
 describe('WelcomeImages', () => {
   it('CandidatesImage renders correctly', () => {

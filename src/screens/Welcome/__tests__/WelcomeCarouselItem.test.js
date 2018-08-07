@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { createSnapshot } from '../../util/tests';
+import { createSnapshot } from '../../../util/tests';
 import WelcomeCarouselItem from '../WelcomeCarouselItem';
 
 describe('WelcomeCarouselItem', () => {
