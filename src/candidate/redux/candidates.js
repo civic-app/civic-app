@@ -16,21 +16,9 @@ export const loadCandidatesSuccess = candidate => ({
   payload: candidate,
 });
 
-export const toggleFavorite = (candidateId, isFavorite) => ({
-  type: CandidateActionType.ToggleFavorite,
-  payload: { isFavorite },
-});
-
-export const toggleFavoriteSuccess = (candidateId, isFavorite) => ({
-  type: CandidateActionType.ToggleFavoriteSuccess,
-  payload: { isFavorite },
-});
-
 export const CandidateActionType = {
   RequestSuccess: 'civicApp/candidates/requestSuccess',
   Request: 'civicApp/candidates/request',
-  ToggleFavorite: 'civicApp/candidate/toggleFavorite',
-  ToggleFavoriteSuccess: 'civicApp/candidate/toggleFavoriteSuccess',
 };
 
 // Reducer

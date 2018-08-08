@@ -3,6 +3,11 @@ export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
 
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
 
+export const getLoggedInUserId = state => (
+  // TODO: remove id after adding login to app
+  (getLoggedInUser(state) && getLoggedInUser(state).id) || 'Ra6l4NfjcLcc8XdP4gX1aWdhRRd2'
+);
+
 // Action Creators
 export const logIn = (email, password) => ({
   type: AuthActionType.LoginRequest,

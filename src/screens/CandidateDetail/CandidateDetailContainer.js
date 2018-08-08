@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toggleFavorite } from '../../candidate/redux/candidates';
 import { getCandidateSummary } from './viewSelectors';
 import CandidateDetail from './CandidateDetail';
+import { toggleFavorite } from '../../favorites/redux';
 
 const Container = connect(
   (state, ownProps) => ({
@@ -11,8 +11,8 @@ const Container = connect(
   { toggleFavorite },
 )(CandidateDetail);
 
-CandidateDetail.PropTypes = {
+Container.PropTypes = {
   candidateId: PropTypes.string,
-}
+};
 
 export default Container;
