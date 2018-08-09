@@ -16,29 +16,21 @@ const toAuthSelectorState = reducerState => ({
 
 describe('auth reducer', () => {
   it('should set user on login success', () => {
-    expect(authReducer(toLoggedOutState(), loginSuccess(toUser()))).toEqual(
-      toLoggedInState(),
-    );
+    expect(authReducer(toLoggedOutState(), loginSuccess(toUser()))).toEqual(toLoggedInState());
   });
 
   it('should clear user on log out success', () => {
-    expect(authReducer(toLoggedInState(), logOutSuccess())).toEqual(
-      toLoggedOutState(),
-    );
+    expect(authReducer(toLoggedInState(), logOutSuccess())).toEqual(toLoggedOutState());
   });
 });
 
 describe('selectors', () => {
   it('when user is logged in, getLoggedInUser should return user', () => {
-    expect(getLoggedInUser(toAuthSelectorState(toLoggedInState()))).toEqual(
-      toUser(),
-    );
+    expect(getLoggedInUser(toAuthSelectorState(toLoggedInState()))).toEqual(toUser());
   });
 
   it('when user is not logged in, getLoggedInUser should return undefined', () => {
-    expect(getLoggedInUser(toAuthSelectorState(toLoggedOutState()))).toEqual(
-      undefined,
-    );
+    expect(getLoggedInUser(toAuthSelectorState(toLoggedOutState()))).toEqual(undefined);
   });
 
   it('when user is logged in, getIsLoggedIn should return true', () => {
@@ -46,8 +38,6 @@ describe('selectors', () => {
   });
 
   it('when user is not logged in, getIsLoggedIn should return false', () => {
-    expect(getIsLoggedIn(toAuthSelectorState(toLoggedOutState()))).toEqual(
-      false,
-    );
+    expect(getIsLoggedIn(toAuthSelectorState(toLoggedOutState()))).toEqual(false);
   });
 });
