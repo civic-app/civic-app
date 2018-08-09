@@ -37,9 +37,6 @@
       "district": "10",
       "responseIds": [
         "Ra6l4NfjcLfewafeX1aWdhRRd2"
-      ],
-      "favorites": [
-        "c88d3aa0-6ea8-11e8-b566-0800200c9a66"
       ]
     }
   },
@@ -54,6 +51,14 @@
     "desfewaefwefawegwagaw": {
       "id": "desfewaefwefawegwagaw",
       "name": "California Governor"
+    }
+  },
+  "favorites": {
+    "Ra6l4NfjcLcc8XdP4gX1aWdhRRd2": {
+      "candidates": {
+        "c88d3aa0-6ea8-11e8-b566-0800200c9a66": true
+      },
+      "events": {}
     }
   }
 }

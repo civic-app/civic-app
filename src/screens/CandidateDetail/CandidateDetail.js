@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';
+import Colors from '../../styles/colors';
+import { Category } from '../../favorites/models';
 
 const CandidateDetail = props => (
   <View style={styles.container}>
     {props.summary
-      ? <CandidateSummary
+      ? <CandidatePreview
         {...props.summary}
-        onToggleFavorite={props.toggleFavorite}
+        onToggleFavorite={() => props.toggleFavorite(props.candidateId, Category.Candidates)}
       />
       : <Text>Loading...</Text>
     }
@@ -19,21 +21,24 @@ CandidateDetail.propTypes = {
   summary: PropTypes.object,
   toggleFavorite: PropTypes.func,
   positions: PropTypes.array,
+  candidateId: PropTypes.string,
 };
 
-const CandidateSummary = props => (
-  <View>
+const CandidatePreview = props => (
+  <View style={styles.previewContainer}>
+    <View style={styles.container}>
+      <Avatar xlarge rounded source={{ uri: props.imageURI }} />
+      <Text>{props.name}</Text>
+      <Text>{props.partyPreference}</Text>
+    </View>
     <Favorite
       isFavorite={props.isFavorite}
       onToggleFavorite={props.onToggleFavorite}
     />
-    <Avatar xlarge rounded source={{ uri: props.imageURI }} />
-    <Text>{props.name}</Text>
-    <Text>{props.partyPreference}</Text>
   </View>
 );
 
-CandidateSummary.propTypes = {
+CandidatePreview.propTypes = {
   name: PropTypes.string,
   imageURI: PropTypes.string,
   isFavorite: PropTypes.bool,
@@ -44,9 +49,10 @@ CandidateSummary.propTypes = {
 const Favorite = props => (
   <View styles={styles.favorite}>
     <Icon
-      name={props.isFavorite ? 'star' : 'star-outlined'}
-      onPress={props.onToggleFavorite}
+      name={props.isFavorite ? 'star' : 'star-border'}
+      onPress={() => props.onToggleFavorite()}
       iconStyle={styles.favorite}
+      size={40}
     />
   </View>
 );
@@ -57,18 +63,21 @@ Favorite.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  previewContainer: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
     marginBottom: 10,
     padding: 20,
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
   favorite: {
-    position: 'absolute',
-    right: '1%',
-    top: '1%',
+    color: Colors.orange,
   },
 });
 
