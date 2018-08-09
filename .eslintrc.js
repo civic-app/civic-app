@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
+    'max-len': ['error', { code: 100, ignoreComments: true }],
     quotes: ['error', 'single'],
     'react-native/no-unused-styles': 2,
     'react-native/split-platform-components': 2,

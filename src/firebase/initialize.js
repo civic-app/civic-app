@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY || 'AIzaSyB5hM6R8k3FzXuaIk_Hy3SGf0Owty2x6B4',
@@ -7,18 +7,18 @@ const config = {
   projectId: process.env.REACT_APP_PROJECT_ID || 'civic-app-cb9a8',
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET || 'civic-app-cb9a8.appspot.com',
   messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID || '664717193548',
-}
+};
 
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
-export const database = firebase.database()
-export const auth = firebase.auth()
-export const storage = firebase.storage()
+export const database = firebase.database();
+export const auth = firebase.auth();
+export const storage = firebase.storage();
 
-export const getByPath = (tablePath) => (
-  database.ref(tablePath).once('value').then(snapshot => snapshot.val())
-);
+export const getByPath = tablePath =>
+  database
+    .ref(tablePath)
+    .once('value')
+    .then(snapshot => snapshot.val());
 
-export const setByPath = (tablePath, newVal) => (
-  database.ref(tablePath).set(newVal)
-);
+export const setByPath = (tablePath, newVal) => database.ref(tablePath).set(newVal);
