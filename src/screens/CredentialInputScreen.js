@@ -8,7 +8,7 @@ import firebase, { auth, provider } from '../firebase/initialize';
 import Expo from 'expo';
 import { CredentialInput } from '../welcome/LogIn';
 import { getIsLoggedIn, register, loginSuccess, logOutSuccess } from '../auth/redux'
-//import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
+import { signInWithFacebookAsync as fbSignIn, signInWithGoogleAsync as googleSignIn } from '../auth/socialauth';
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -38,43 +38,29 @@ class CredentialInputScreen extends React.Component {
       });
   }
 
-  gotToSurvey() {
-    this.props.navigation.navigate('Survey');
-  }
-
-  async signUpWithGoogleAsync() {
-      try {
-          const result = await Expo.Google.logInAsync({
-              androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
-              iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
-              scopes: ['profile', 'email'],
-          });
-
-          if (result.type === 'success') {
-              this.props.onLogIn(result);
-              return result.accessToken;
-          } else {
-              return { cancelled: true };
-          }
-      } catch (e) {
-          return { error: true };
+  async signInWithGoogleAsync() {
+      const resp = await googleSignIn()
+      if (resp !== 'fail') {
+          Alert.alert(
+              'Logged in via Google!',
+          );
+          this.props.navigate('Home')
+      }
+      else {
+          Alert.alert('something went wrong!')
       }
   }
 
-  async signUpWithFacebookAsync() {
-    console.log('signing in to fb')
-      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-          permissions: ['public_profile'],
-      });
-      console.log('type', type);
-      if (type === 'success') {
-          // Build Firebase credential with the Facebook access token.
-          const credential = firebase.auth.FacebookAuthProvider.credential(token);
-          console.log('cred', credential);
-          // Sign in with credential from the Facebook user.
-          firebase.auth().signInWithCredential(credential).catch((error) => {
-              // Handle Errors here.
-          });
+  async signInWithFacebookAsync() {
+      const resp = await fbSignIn()
+      if (resp !== 'fail') {
+          Alert.alert(
+              'Logged in via Facebook!',
+          );
+          this.props.navigate('Home')
+      }
+      else {
+          Alert.alert('something went wrong!')
       }
   }
 
@@ -92,11 +78,11 @@ class CredentialInputScreen extends React.Component {
                       type="google"
                       title="Sign up with Google"
                       style={styles.social}
-                      onPress={this.signUpWithGoogleAsync}
-                      onLongPress={this.signUpWithGoogleAsync} />
+                      onPress={this.signInWithGoogleAsync.bind(this)}
+                      onLongPress={this.signInWithGoogleAsync.bind(this)} />
                   <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-                      onPress={this.signUpWithFacebookAsync.bind(this)}
-                      onLongPress={this.signUpWithFacebookAsync.bind(this)} />
+                      onPress={this.signInWithFacebookAsync.bind(this)}
+                      onLongPress={this.signInWithFacebookAsync.bind(this)} />
                   <Text onPress={this.props.changeFormType} style={styles.text}>
                       Have an account? Sign In
           </Text>

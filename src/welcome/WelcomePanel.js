@@ -6,7 +6,7 @@ import colors from '../styles/colors';
 import { formTypes } from '../auth/redux';
 import SocialButton from '../auth/SocialButton';
 import Expo from 'expo';
-import { signInWithFacebookAsync as fbSignIn } from '../auth/socialauth'
+import { signInWithFacebookAsync as fbSignIn, signInWithGoogleAsync as googleSignIn } from '../auth/socialauth';
 
 class WelcomePanel extends React.Component {
   static propTypes = {
@@ -41,21 +41,15 @@ class WelcomePanel extends React.Component {
   );
 
   async signInWithGoogleAsync() {
-      try {
-          const result = await Expo.Google.logInAsync({
-              androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
-              iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
-              scopes: ['profile', 'email'],
-          });
-
-          if (result.type === 'success') {
-              return result.accessToken;
-              this.props.navigate('Home');
-          } else {
-              return { cancelled: true };
-          }
-      } catch (e) {
-          return { error: true };
+      const resp = await googleSignIn()
+      if (resp !== 'fail') {
+          Alert.alert(
+              'Logged in Google!',
+          );
+          this.props.navigate('Home')
+      }
+      else {
+          Alert.alert('something went wrong!')
       }
   }
 
@@ -63,8 +57,7 @@ class WelcomePanel extends React.Component {
       const resp = await fbSignIn()
       if (resp !== 'fail') {
         Alert.alert(
-          'Logged in!',
-          `Hi ${resp.name}!`,
+          'Logged in via FB!',
         );
         this.props.navigate('Home')
       }
@@ -99,8 +92,8 @@ class WelcomePanel extends React.Component {
           type="google"
           title={`Sign ${config.preposition} with Google`}
           style={styles.social}
-          onPress={this.signInWithGoogleAsync}
-          onLongPress={this.signInWithGoogleAsync}
+          onPress={this.signInWithGoogleAsync.bind(this)}
+          onLongPress={this.signInWithGoogleAsync.bind(this)}
         />
         <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
           onPress={this.signInWithFacebookAsync.bind(this)}
