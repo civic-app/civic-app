@@ -1,4 +1,4 @@
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View, Alert } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
@@ -6,7 +6,7 @@ import colors from '../styles/colors';
 import { formTypes } from '../auth/redux';
 import SocialButton from '../auth/SocialButton';
 import Expo from 'expo';
-//import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
+import { signInWithFacebookAsync as fbSignIn } from '../auth/socialauth'
 
 class WelcomePanel extends React.Component {
   static propTypes = {
@@ -60,18 +60,16 @@ class WelcomePanel extends React.Component {
   }
 
   async signInWithFacebookAsync() {
-      const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-          permissions: ['public_profile'],
-      });
-      if (type === 'success') {
-          // Get the user's name using Facebook's Graph API
-          const response = await fetch(
-              `https://graph.facebook.com/me?access_token=${token}`);
-          Alert.alert(
-              'Logged in!',
-              `Hi ${(await response.json()).name}!`,
-          );
-          this.props.navigate('Home');
+      const resp = await fbSignIn()
+      if (resp !== 'fail') {
+        Alert.alert(
+          'Logged in!',
+          `Hi ${resp.name}!`,
+        );
+        this.props.navigate('Home')
+      }
+      else {
+        Alert.alert('something went wrong!')
       }
   }
 
@@ -105,8 +103,8 @@ class WelcomePanel extends React.Component {
           onLongPress={this.signInWithGoogleAsync}
         />
         <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-          onPress={this.signInWithFacebookAsync}
-          onLongPress={this.signInWithFacebookAsync}/>
+          onPress={this.signInWithFacebookAsync.bind(this)}
+          onLongPress={this.signInWithFacebookAsync.bind(this)}/>
         <Text style={styles.text}>or</Text>
         <SocialButton
           type="email"

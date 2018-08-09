@@ -62,13 +62,15 @@ class CredentialInputScreen extends React.Component {
   }
 
   async signUpWithFacebookAsync() {
+    console.log('signing in to fb')
       const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
           permissions: ['public_profile'],
       });
+      console.log('type', type);
       if (type === 'success') {
           // Build Firebase credential with the Facebook access token.
           const credential = firebase.auth.FacebookAuthProvider.credential(token);
-
+          console.log('cred', credential);
           // Sign in with credential from the Facebook user.
           firebase.auth().signInWithCredential(credential).catch((error) => {
               // Handle Errors here.
@@ -93,8 +95,8 @@ class CredentialInputScreen extends React.Component {
                       onPress={this.signUpWithGoogleAsync}
                       onLongPress={this.signUpWithGoogleAsync} />
                   <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-                      onPress={this.signUpWithFacebookAsync}
-                      onLongPress={this.signUpWithFacebookAsync} />
+                      onPress={this.signUpWithFacebookAsync.bind(this)}
+                      onLongPress={this.signUpWithFacebookAsync.bind(this)} />
                   <Text onPress={this.props.changeFormType} style={styles.text}>
                       Have an account? Sign In
           </Text>
