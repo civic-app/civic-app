@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import styles from './styles';
-import Screen from '../screens/Elections/ScreenContainer';
+import CandidatePreview from '../screens/CandidateDetail/CandidatePreviewContainer';
 // import Screen from '../favorites/FavoritesContainer'
 
 class FavoritesScreen extends React.Component {
@@ -17,7 +17,7 @@ class FavoritesScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>This is the Favorites Screen</Text>
-        <Screen goToCandidateDetail={this.goToCandidateDetail} />
+        <CandidatePreview goToCandidateDetail={this.goToCandidateDetail} />
       </View>
     );
   }
@@ -25,7 +25,12 @@ class FavoritesScreen extends React.Component {
 
 const propTypes = {
   navigation: PropTypes.objectOf({
-    id: PropTypes.func,
+    goToCandidateDetail: PropTypes.func,
+    id: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    candidates: PropTypes.array,
+    navigate: PropTypes.func,
+    push: PropTypes.func,
   }),
 };
 
