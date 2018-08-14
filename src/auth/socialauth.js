@@ -10,15 +10,10 @@ export async function signInWithGoogleAsync() {
         });
 
         if (result.type === 'success') {
-            const credential = result.accessToken;
-
+            const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
             console.log('cred', credential);
-            // Sign in with credential from Google
-            auth.signInAndRetrieveDataWithCredential(credential).catch((error) => {
-                console.log(error);
-                // Handle Errors here.
-            });
-        } else {
+            return auth.signInAndRetrieveDataWithCredential(credential);
+        }else {
             return { cancelled: true };
         }
     } catch (e) {
