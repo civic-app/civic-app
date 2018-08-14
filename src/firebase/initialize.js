@@ -9,10 +9,10 @@ const config = {
     messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID || '506898842953',
 };
 
-firebase.initializeApp(config);
+const app = firebase.initializeApp(config);
 
 export const provider = new firebase.auth.GoogleAuthProvider();
-export const auth = firebase.auth();
+export const auth = firebase.auth(app)
 export default firebase;
 
 //export const database = firebase.database();

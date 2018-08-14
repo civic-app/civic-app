@@ -10,7 +10,14 @@ export async function signInWithGoogleAsync() {
         });
 
         if (result.type === 'success') {
-            return result.accessToken;
+            const credential = result.accessToken;
+
+            console.log('cred', credential);
+            // Sign in with credential from Google
+            auth.signInAndRetrieveDataWithCredential(credential).catch((error) => {
+                console.log(error);
+                // Handle Errors here.
+            });
         } else {
             return { cancelled: true };
         }
@@ -22,7 +29,7 @@ export async function signInWithGoogleAsync() {
 export async function signInWithFacebookAsync() {
     console.log('signing in to fb')
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-        permissions: ['public_profile'],
+        permissions: ['email', 'public_profile'],
     });
     console.log('type', type);
     if (type === 'success') {
@@ -30,7 +37,8 @@ export async function signInWithFacebookAsync() {
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
         console.log('cred', credential);
         // Sign in with credential from the Facebook user.
-        firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
+        auth.signInAndRetrieveDataWithCredential(credential).catch((error) => {
+            console.log(error);
             // Handle Errors here.
         });
     }

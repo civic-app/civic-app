@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\auth",
+    "\\src\\navigation",
     "\\src\\screens",
     "\\src\\welcome"
   ],
-  "SelectedNode": "\\src\\welcome\\LogIn.js",
+  "SelectedNode": "\\src\\auth\\socialauth.js",
   "PreviewInSolutionExplorer": false
 }
