@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, lifecycle } from 'recompose'
 import CandidatePreview from './CandidatePreview'
-//import CandidateDetail from './CandidateDetail'
 import { getCandidates, loadCandidates } from '../../candidate/redux/candidates'
 import { loadFavorites } from '../../favorites/redux';
 
