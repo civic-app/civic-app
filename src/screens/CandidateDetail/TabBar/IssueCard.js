@@ -62,9 +62,11 @@ class IssueCard extends Component {
             </View>
           </View>
         </TouchableHighlight>
-        <Text style={styles.issueBody}>
-          {body}
-        </Text>
+        {isExpanded &&
+          <Text style={styles.issueBody}>
+            {body}
+          </Text>
+        }
       </Wrapper>
     )
   }
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
   },
   issueCard: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   issueText: {
     fontSize: 16
