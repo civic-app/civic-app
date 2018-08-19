@@ -12,6 +12,7 @@
 .env.test.local
 .env.production.local
 .graphcoolrc
+.DS_Store
 
 # logs
 npm-debug.log*
