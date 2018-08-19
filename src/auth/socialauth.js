@@ -1,6 +1,7 @@
 import Expo from 'expo';
+import firebase, { auth, provider } from '../firebase/initialize';
 
-   export async function signInWithGoogleAsync() {
+export async function signInWithGoogleAsync() {
     try {
         const result = await Expo.Google.logInAsync({
             androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
@@ -9,26 +10,31 @@ import Expo from 'expo';
         });
 
         if (result.type === 'success') {
-            return result.accessToken;
-        } else {
+            const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
+            console.log('cred', credential);
+            return auth.signInAndRetrieveDataWithCredential(credential);
+        }else {
             return { cancelled: true };
         }
     } catch (e) {
         return { error: true };
     }
-  }
+}
 
-  export async function signInWithFacebookAsync(){
-     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
-        permissions: ['public_profile'],
+export async function signInWithFacebookAsync() {
+    console.log('signing in to fb')
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
+        permissions: ['email', 'public_profile'],
     });
+    console.log('type', type);
     if (type === 'success') {
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-            `https://graph.facebook.com/me?access_token=${token}`);
-        Alert.alert(
-            'Logged in!',
-            `Hi ${(await response.json()).name}!`,
-        );
+        // Build Firebase credential with the Facebook access token.
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+        console.log('cred', credential);
+        // Sign in with credential from the Facebook user.
+        auth.signInAndRetrieveDataWithCredential(credential).catch((error) => {
+            console.log(error);
+            // Handle Errors here.
+        });
     }
-  }
+}

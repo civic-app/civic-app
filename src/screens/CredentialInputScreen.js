@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import colors from '../styles/colors';
 import SocialButton from '../auth/SocialButton';
-import { auth } from '../firebase/initialize';
-import { signInWithGoogleAsync, signInWithFacebookAsync } from '../auth/socialauth'
+import firebase, { auth, provider } from '../firebase/initialize';
+import Expo from 'expo';
+import { CredentialInput } from '../welcome/LogIn';
+import { getIsLoggedIn, register, loginSuccess, logOutSuccess } from '../auth/redux';
+import {
+  signInWithFacebookAsync as fbSignIn,
+  signInWithGoogleAsync as googleSignIn,
+} from '../auth/socialauth';
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -13,134 +20,71 @@ class CredentialInputScreen extends React.Component {
       email: '',
       password: '',
       duplicatePassword: '',
-      user: null
+      user: null,
     };
   }
 
   handleSubmit = () => {
     this.props.onSubmit(this.state.email, this.state.password);
-  }
+  };
 
   checkPassword() {
     return this.state.password === this.state.duplicatePassword;
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        this.props.onLogIn(user);
       }
     });
   }
 
-  logout = () => {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      });
+  async signInWithGoogleAsync() {
+    const resp = await googleSignIn();
+    if (resp !== 'fail') {
+      Alert.alert('Logged in via Google!');
+      this.props.navigate('Home');
+    } else {
+      Alert.alert('something went wrong!');
+    }
   }
 
-  expandedView = formType => {
-    const config = (type => {
-      switch (type) {
-        case formTypes.INITIAL:
-          return {};
-        case formTypes.LOGIN:
-          return {
-            preposition: 'in',
-            title: 'into',
-            switchText: 'Don\'t have an account yet? Register',
-            otherFormType: formTypes.SIGN_UP,
-          };
-        case formTypes.SIGN_UP:
-          return {
-            preposition: 'up',
-            title: 'up for',
-            switchText: 'Have an account? Sign in',
-            otherFormType: formTypes.LOGIN,
-          };
-      }
-    })(formType);
-
-    screenState = () => {
-      if (this.formType == formTypes.LOGIN) {
-        return null;
-      } else {
-        return (
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            value={this.state.duplicatePassword}
-            onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-            onEndEditing={this.checkPassword}
-            returnKeyType="done"
-            secureTextEntry={true}
-            placeholder="Re-type password"
-          />
-        );
-      }
+  async signInWithFacebookAsync() {
+    const resp = await fbSignIn();
+    if (resp !== 'fail') {
+      Alert.alert('Logged in via Facebook!');
+      this.props.navigate('Home');
+    } else {
+      Alert.alert('something went wrong!');
     }
   }
 
   render() {
+    if (this.props.isLoggedIn) {
+      this.gotToSurvey();
+    }
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <Text style={styles.titleText}>{`Sign ${config.title} Civic`}</Text>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoFocus={true}
-            clearButtonMode="while-editing"
-            keyboardType="email-address"
-            style={styles.textInput}
-            onChangeText={email => this.setState({ email })}
-            value={this.state.email}
-            placeholder="E-mail address"
-          />
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
-            secureTextEntry={true}
-            placeholder="Password"
-          />
-          return (
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              clearButtonMode="while-editing"
-              style={styles.textInput}
-              value={this.state.duplicatePassword}
-              onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-              onEndEditing={this.checkPassword}
-              returnKeyType="done"
-              secureTextEntry={true}
-              placeholder="Re-type password"
-            />
-            {this.screenState()}
-          </View>
-          <Text onPress={this.handleSubmit} style={styles.submitButton}>
-            SUBMIT
-          </Text>
+          <Text style={styles.titleText}>Sign Up for Civic</Text>
+          <CredentialInput onSubmit={this.props.register} />
           <Text style={styles.text}>or</Text>
           <SocialButton
             type="google"
-            title={`Sign ${config.preposition} with Google`}
+            title="Sign up with Google"
             style={styles.social}
-            onPress={this.signInWithGoogleAsync}
-            onLongPress={this.signInWithGoogleAsync} />
-          <SocialButton type="facebook" title="Continue with Facebook" style={styles.social}
-            onPress={this.signInWithFacebookAsync}
-            onLongPress={this.signInWithFacebookAsync}/>
+            onPress={this.signInWithGoogleAsync.bind(this)}
+            onLongPress={this.signInWithGoogleAsync.bind(this)}
+          />
+          <SocialButton
+            type="facebook"
+            title="Continue with Facebook"
+            style={styles.social}
+            onPress={this.signInWithFacebookAsync.bind(this)}
+            onLongPress={this.signInWithFacebookAsync.bind(this)}
+          />
           <Text onPress={this.props.changeFormType} style={styles.text}>
             Have an account? Sign In
           </Text>
@@ -151,8 +95,16 @@ class CredentialInputScreen extends React.Component {
 }
 
 CredentialInputScreen.propTypes = {
+  isLoggedIn: PropTypes.bool,
   onSubmit: PropTypes.func,
   changeFormType: PropTypes.func,
+  register: PropTypes.func,
+  onLogIn: PropTypes.func,
+  onLogOut: PropTypes.func,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+    push: PropTypes.func,
+  }),
 };
 
 const styles = StyleSheet.create({
@@ -217,4 +169,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CredentialInputScreen;
+export default connect(
+  state => ({ isLoggedIn: getIsLoggedIn(state) }),
+  { register, onLogIn: loginSuccess, onLogOut: logOutSuccess },
+)(CredentialInputScreen);
