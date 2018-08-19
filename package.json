@@ -27,7 +27,7 @@
       "./testConfig/jestConfig.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!react-navigation|react-native|react-native-pose|react-pose-core)"
+      "node_modules/(?!react-navigation|react-native|react-native-pose|react-pose-core|expo|@expo/vector-icons/)"
     ]
   },
   "dependencies": {
