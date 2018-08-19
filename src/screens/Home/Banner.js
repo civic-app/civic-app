@@ -4,6 +4,15 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 
+export const mapAlertLevelToColor = level => {
+  switch (level) {
+    case 'high':
+      return colors.red;
+    case 'medium':
+      return colors.darkBlue;
+  }
+};
+
 const Banner = props => {
   return (
     <View style={[styles.container, props.style, { backgroundColor: props.color }]}>
