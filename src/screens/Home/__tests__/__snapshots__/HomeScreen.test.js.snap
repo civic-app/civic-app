@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders correctly 1`] = `
+<ScrollView
+  contentContainerStyle={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "paddingBottom": 8,
+      "paddingLeft": 8,
+      "paddingRight": 8,
+    }
+  }
+>
+  <Banner
+    color="#eb5757"
+    icon="megaphone"
+    style={
+      Object {
+        "marginTop": 8,
+      }
+    }
+    subtitle="Click here to get started"
+    title="Not Registered to Vote?"
+  />
+  <Banner
+    color="#126390"
+    icon="megaphone"
+    style={
+      Object {
+        "marginTop": 8,
+      }
+    }
+    subtitle="Click here to find out more"
+    title="Something is going on in your city!"
+  />
+</ScrollView>
+`;

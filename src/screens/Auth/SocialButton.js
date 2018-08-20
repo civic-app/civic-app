@@ -1,38 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import colors from '../styles/colors';
-
-const GoogleIcon = props => (
-  <View style={styles.iconContainer}>
-    <Image
-      {...props}
-      source={require('../assets/images/google-icon.png')}
-      style={styles.googleIcon}
-    />
-  </View>
-);
-
-const FacebookIcon = props => (
-  <View style={styles.iconContainer}>
-    <Image
-      {...props}
-      source={require('../assets/images/facebook-icon.png')}
-      style={styles.facebookIcon}
-    />
-  </View>
-);
-
-const EmailIcon = props => (
-  <View style={styles.iconContainer}>
-    <Image
-      {...props}
-      source={require('../assets/images/email-icon.png')}
-      style={styles.emailIcon}
-    />
-  </View>
-);
+import GoogleIcon from './GoogleIcon';
+import colors from '../../styles/colors';
 
 const SocialButton = props => {
   const config = (type => {
@@ -40,17 +11,18 @@ const SocialButton = props => {
       case 'email':
         return {
           textColor: colors.black,
-          icon: EmailIcon,
+          icon: { name: 'email', type: 'material-community', color: colors.black, size: 35 },
         };
       case 'facebook':
         return {
           textColor: colors.white,
-          icon: FacebookIcon,
+          icon: { name: 'facebook-box', type: 'material-community', size: 35 },
         };
       case 'google':
         return {
           textColor: colors.black,
-          icon: GoogleIcon,
+          icon: {},
+          iconComponent: GoogleIcon,
         };
     }
   })(props.type.toLowerCase());
@@ -62,8 +34,8 @@ const SocialButton = props => {
       color={config.textColor}
       containerViewStyle={props.style}
       fontSize={18}
-      icon={{ name: config.icon }}
-      iconComponent={config.icon}
+      icon={config.icon}
+      iconComponent={config.iconComponent}
       title={props.title}
       onPress={props.onPress}
       outline={true}
@@ -88,32 +60,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderColor: colors.lightGray2,
   },
-  emailIcon: {
-    height: 24,
-    width: 36,
-  },
   // eslint-disable-next-line
   facebook: {
     backgroundColor: colors.facebookBlue,
     borderColor: colors.facebookBlue,
   },
-  facebookIcon: {
-    height: 35,
-    width: 35,
-  },
   // eslint-disable-next-line
   google: {
     backgroundColor: colors.white,
     borderColor: colors.lightGray2,
-  },
-  googleIcon: {
-    height: 32,
-    width: 32,
-  },
-  iconContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   textStyle: {
     flex: 3,

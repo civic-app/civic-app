@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import colors from '../../styles/colors';
 import { formTypes } from '../../auth/redux';
-import SocialButton from '../../auth/SocialButton';
+import SocialButton from '../Auth/SocialButton';
 
 class WelcomePanel extends React.Component {
   static propTypes = {
@@ -62,11 +62,7 @@ class WelcomePanel extends React.Component {
 
     return (
       <View style={styles.expandedViewContainer}>
-        <SocialButton
-          type="google"
-          title={`Sign ${config.preposition} with Google`}
-          style={styles.social}
-        />
+        <SocialButton type="google" title={`Sign ${config.preposition} with Google`} style={styles.social} />
         <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
         <Text style={styles.text}>or</Text>
         <SocialButton
@@ -75,10 +71,7 @@ class WelcomePanel extends React.Component {
           style={styles.social}
           onPress={this.goToCredentials}
         />
-        <Text
-          style={[styles.text, styles.switchText]}
-          onPress={() => this.props.switchFormType(config.otherFormType)}
-        >
+        <Text style={[styles.text, styles.switchText]} onPress={() => this.props.switchFormType(config.otherFormType)}>
           {config.switchText}
         </Text>
       </View>
@@ -92,9 +85,7 @@ class WelcomePanel extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.formType === formTypes.INITIAL
-          ? this.defaultView
-          : this.expandedView(this.props.formType)}
+        {this.props.formType === formTypes.INITIAL ? this.defaultView : this.expandedView(this.props.formType)}
       </View>
     );
   }

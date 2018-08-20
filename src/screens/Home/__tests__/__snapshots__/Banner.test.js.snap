@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner renders correctly 1`] = `
+<Component
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "borderRadius": 2,
+        "justifyContent": "center",
+        "minHeight": 100,
+        "padding": 16,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 3,
+      },
+      undefined,
+      Object {
+        "backgroundColor": undefined,
+      },
+    ]
+  }
+>
+  <TouchableHighlight
+    activeOpacity={0.85}
+    delayPressOut={100}
+    onPress={undefined}
+    underlayColor="black"
+  >
+    <Component>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#ffffff",
+            "fontSize": 24,
+            "fontWeight": "500",
+          }
+        }
+      >
+        Register to vote!
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#ffffff",
+            "fontSize": 18,
+            "marginTop": 4,
+          }
+        }
+      >
+        Do it!
+      </Text>
+      <Icon
+        allowFontScaling={false}
+        color="#ffffff"
+        name={undefined}
+        size={60}
+        style={
+          Object {
+            "bottom": 0,
+            "opacity": 0.5,
+            "position": "absolute",
+            "right": 20,
+          }
+        }
+      />
+    </Component>
+  </TouchableHighlight>
+</Component>
+`;
