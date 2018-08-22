@@ -1,24 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 import Colors from '../../../styles/colors';
 
 // Components
 import SocialLinks from '../SocialLinks';
-
-const candidateData = {
-  platformList: [
-    { id: 'key1', content:'Colonize Space'},
-    { id: 'key2', content:'Healthcare for All'},
-    { id: 'key3', content:'Kick Names and Take Ass'}
-  ],
-  bioContent: 'Lorem ipsum dolor amet woke artisan ennui umami. Street art fixie salvia cray +1 pug chartreuse typewriter art party asymmetrical. Craft beer ramps tousled chillwave. Marfa ennui chicharrones etsy keytar sustainable tote bag synth salvia la croix listicle raclette locavore next level humblebrag. Hoodie kitsch selvage, DIY salvia single-origin coffee thundercats irony hammock meh shaman.',
-  socials: {
-    facebook: '',
-    phone: '',
-    email: '',
-    twitter: ''
-  }
-}
 
 const Biography = ({bioContent}) =>
   /**
@@ -30,6 +16,10 @@ const Biography = ({bioContent}) =>
     <Text>{bioContent}</Text>
     <Text style={styles.readMoreText}>Read more</Text>
   </View>
+
+Biography.propTypes = {
+  bioContent: PropTypes.string,
+};
 
 const Platform = ({platformList}) =>
   /**
@@ -46,12 +36,22 @@ const Platform = ({platformList}) =>
     <Text style={styles.readMoreText}>Read more</Text>
   </View>
 
+Platform.propTypes = {
+  platformList: PropTypes.array,
+};
+
 const AboutScreen = props =>
   <View style={styles.container}>
-    <Biography {...candidateData}/>
-    <Platform {...candidateData}/>
-    <SocialLinks {...candidateData.socials} size={28} color={Colors.lightBlue}/>
+    <Biography bioContent={props.bioContent} />
+    <Platform platformList={props.platformList} />
+    <SocialLinks {...props.socials} size={28} color={Colors.lightBlue}/>
   </View>
+
+AboutScreen.propTypes = {
+  bioContent: PropTypes.string,
+  platformList: PropTypes.array,
+  socials: PropTypes.object,
+};
 
 const styles = StyleSheet.create({
   container: {
