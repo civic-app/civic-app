@@ -27,7 +27,11 @@ Container.PropTypes = {
 
 export default Container;
 
-const toListCandidateMapperPlaceholder = candidate => ({ name: candidate.name, id: candidate.id, image: candidate.image })
-
-//const toFavoriteMapperPlaceholder = candidate => ({name: candidate.name, id: candidate.id, isFavorite })
+const toListCandidateMapper = candidate => ({
+  name: candidate.name, 
+  id: candidate.id,
+  image: candidate.image,
+  favorite: candidate,
+  electionIds:candidate.electionIds 
+})
 
