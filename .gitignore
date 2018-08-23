@@ -4,7 +4,7 @@
 .expo/
 
 # dependencies
-/node_modules
+node_modules/
 
 # misc
 .env.local
@@ -12,6 +12,7 @@
 .env.test.local
 .env.production.local
 .graphcoolrc
+.DS_Store
 
 # logs
 npm-debug.log*
@@ -22,4 +23,4 @@ yarn-error.log*
 .idea/
 .project/
 .vscode/
-/.vs/slnx.sqlite
+.vs/

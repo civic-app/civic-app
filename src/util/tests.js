@@ -11,6 +11,10 @@ export const createSnapshot = (Component, props) => {
 
 export const createConnectedSnapshot = (Component, props) => {
   const renderer = new ShallowRenderer();
-  renderer.render(<Provider store={store}><Component {...props} /></Provider>);
+  renderer.render(
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>,
+  );
   return renderer.getRenderOutput();
 };

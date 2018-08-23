@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, View } from 'react-native';
-import styles from './styles';
+import { View } from 'react-native';
+import styles from '../styles';
+import Screen from './ScreenContainer';
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
@@ -9,15 +10,12 @@ class ElectionsScreen extends React.Component {
   };
   static propTypes = propTypes;
 
-  goToCandidateDetail = () => this.props.navigation.navigate('CandidateDetail');
+  goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title="View Candidate Detail"
-          onPress={this.goToCandidateDetail}
-        />
+        <Screen goToCandidateDetail={this.goToCandidateDetail} />
       </View>
     );
   }

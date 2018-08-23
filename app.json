@@ -5,6 +5,7 @@
     "description":
       "The #1 source of information about local & national elections, candidates, and ballot measures.",
     "sdkVersion": "27.0.0",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "orientation": "portrait"
   }
 }
