@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation';
 
-import CredentialInputScreen from '../screens/Auth/CredentialInputScreen';
+import CredentialInputScreen from '../screens/Auth/CredentialInputScreenContainer';
 import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
 
 const AuthStack = createStackNavigator(

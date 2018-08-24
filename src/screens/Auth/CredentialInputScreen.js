@@ -1,91 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
-import colors from '../../styles/colors';
+import { StyleSheet, View, Text } from 'react-native';
+import EmailInput from './EmailInput';
+import PasswordInput from './PasswordInput';
 import SocialButton from './SocialButton';
+import colors from '../../styles/colors';
+import { formTypes } from '../../auth/redux';
 
-class CredentialInputScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      email: '',
-      password: '',
-      duplicatePassword: '',
-    };
-  }
+const CredentialInputScreen = props => {
+  const options = (formType => {
+    switch (formType) {
+      case formTypes.LOGIN:
+        return {
+          titleText: 'Sign in',
+          changeFormText: 'Don\'t have an account yet? Register',
+          otherFormType: formTypes.SIGN_UP,
+        };
+      case formTypes.SIGN_UP:
+        return {
+          titleText: 'Sign Up for Civic',
+          changeFormText: 'Have an account? Sign in',
+          otherFormType: formTypes.LOGIN,
+        };
+      default:
+        return {};
+    }
+  })(props.formType);
 
-  handleSubmit() {
-    // TODO: use actual login function
-    // this.props.onSubmit(this.state.email, this.state.password);
-    this.props.navigation.navigate('Survey');
-  }
-
-  checkPassword() {
-    return this.state.password === this.state.duplicatePassword;
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.titleText}>Sign Up for Civic</Text>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoFocus={true}
-            clearButtonMode="while-editing"
-            keyboardType="email-address"
-            style={styles.textInput}
-            onChangeText={email => this.setState({ email })}
-            value={this.state.email}
-            placeholder="E-mail address"
-          />
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
-            secureTextEntry={true}
-            placeholder="Password"
-          />
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            style={styles.textInput}
-            value={this.state.duplicatePassword}
-            onChangeText={duplicatePassword => this.setState({ duplicatePassword })}
-            onEndEditing={this.checkPassword}
-            returnKeyType="done"
-            secureTextEntry={true}
-            placeholder="Re-type password"
-          />
-          <Text onPress={this.handleSubmit} style={styles.submitButton}>
-            SUBMIT
-          </Text>
-          <Text style={styles.text}>or</Text>
-          <SocialButton type="google" title="Sign up with Google" style={styles.social} />
-          <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
-          <Text onPress={this.props.changeFormType} style={styles.text}>
-            Have an account? Sign In
-          </Text>
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.titleText}>{options.titleText}</Text>
+        <EmailInput />
+        <PasswordInput />
+        {props.formType === formTypes.SIGN_UP && <PasswordInput placeholder="Re-type password" />}
+        <Text onPress={this.handleSubmit} style={styles.submitButton}>
+          SUBMIT
+        </Text>
+        <Text style={styles.text}>or</Text>
+        <SocialButton type="google" title="Sign up with Google" style={styles.social} />
+        <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
+        <Text onPress={() => props.changeFormType(options.otherFormType)} style={styles.text}>
+          {options.changeFormText}
+        </Text>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
 CredentialInputScreen.propTypes = {
   // TODO: use actual submit login function
   // onSubmit: PropTypes.func,
   changeFormType: PropTypes.func,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func,
-    push: PropTypes.func,
-  }),
+  formType: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -127,14 +94,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     fontSize: 18,
     color: colors.darkBlue,
-  },
-  textInput: {
-    color: colors.black,
-    fontSize: 18,
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.lightGray2,
   },
   titleText: {
     textAlign: 'left',

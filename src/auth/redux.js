@@ -58,12 +58,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case AuthActionType.LoginSuccess:
       return {
+        ...state,
         user: action.payload,
       };
     case AuthActionType.LogOutSuccess:
-      return {
-        user: undefined,
-      };
+      return initialState;
     case AuthActionType.SwitchFormType:
       return {
         ...state,
