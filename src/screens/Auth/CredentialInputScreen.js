@@ -5,7 +5,7 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import SocialButton from './SocialButton';
 import colors from '../../styles/colors';
-import { formTypes } from '../../auth/redux';
+import { formTypes } from '../../auth/redux/formReducer';
 
 const CredentialInputScreen = props => {
   const options = (formType => {
@@ -31,9 +31,15 @@ const CredentialInputScreen = props => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.titleText}>{options.titleText}</Text>
-        <EmailInput />
-        <PasswordInput />
-        {props.formType === formTypes.SIGN_UP && <PasswordInput placeholder="Re-type password" />}
+        <EmailInput value={props.email} onChangeText={props.updateEmail} />
+        <PasswordInput value={props.password} onChangeText={props.updatePassword} />
+        {props.formType === formTypes.SIGN_UP && (
+          <PasswordInput
+            value={props.duplicatePassword}
+            onChangeText={props.updateDuplicatePassword}
+            placeholder="Re-type password"
+          />
+        )}
         <Text onPress={this.handleSubmit} style={styles.submitButton}>
           SUBMIT
         </Text>
@@ -51,8 +57,15 @@ const CredentialInputScreen = props => {
 CredentialInputScreen.propTypes = {
   // TODO: use actual submit login function
   // onSubmit: PropTypes.func,
-  changeFormType: PropTypes.func,
-  formType: PropTypes.string,
+  formType: PropTypes.string.isRequired,
+  changeFormType: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  updateEmail: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  updatePassword: PropTypes.func.isRequired,
+  duplicatePassword: PropTypes.string,
+  updateDuplicatePassword: PropTypes.func,
+  errorMessage: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

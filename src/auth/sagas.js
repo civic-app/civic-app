@@ -1,12 +1,12 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { subscribeToAuthStateChanges, logIn, logOut, register } from './api';
-import { AuthActionType, logOutSuccess, loginSuccess } from './redux';
+import { AuthUserActionType, logOutSuccess, loginSuccess } from './redux/userReducer';
 
 const authSaga = function*() {
   yield call(subscribeToAuthStateChanges, loginSuccess, logOutSuccess); // doesn't need a yield but makes testing easier
-  yield takeEvery(AuthActionType.LoginRequest, loginSaga);
-  yield takeEvery(AuthActionType.LogOutRequest, logOutSaga);
-  yield takeEvery(AuthActionType.RegisterRequest, registerSaga);
+  yield takeEvery(AuthUserActionType.LoginRequest, loginSaga);
+  yield takeEvery(AuthUserActionType.LogOutRequest, logOutSaga);
+  yield takeEvery(AuthUserActionType.RegisterRequest, registerSaga);
 };
 
 export const loginSaga = function*(action) {

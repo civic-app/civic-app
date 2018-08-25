@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import colors from '../../styles/colors';
-import { formTypes } from '../../auth/redux';
+import { formTypes } from '../../auth/redux/formReducer';
 import SocialButton from '../Auth/SocialButton';
 
 class WelcomePanel extends React.Component {

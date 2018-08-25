@@ -5,16 +5,14 @@ import { Image, StyleSheet, View } from 'react-native';
 import colors from '../../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
-import { getFormType, switchFormType as formTypeAction } from '../../auth/redux';
+import { switchFormType as formTypeAction } from '../../auth/redux/formReducer';
+import { getFormType } from '../../auth/redux/selectors';
 import { getIsSmallScreen } from '../../UI/redux';
 
 const WelcomeScreen = props => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.civicLogo}
-        source={require('../../assets/images/civic-logo-white.png')}
-      />
+      <Image style={styles.civicLogo} source={require('../../assets/images/civic-logo-white.png')} />
       <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
       <WelcomePanel
         formType={props.formType}
