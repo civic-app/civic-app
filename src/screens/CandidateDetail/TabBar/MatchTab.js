@@ -1,28 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements'
+import PropTypes from 'prop-types';
 import Colors from '../../../styles/colors';
 import IssueCard from './IssueCard';
 
-const issueMatchData = [
-  {
-    id: '1',
-    type:'healthcare',
-    body:'Obama supports single-payer universal healthcare for all Californians.',
-    agreesWithUser: true
-  },
-  {
-    id: '2',
-    type:'environmental',
-    body:'Obama does not support solar power.',
-    agreesWithUser: false
-  },
-];
-
-
-const MatchCard = () =>
+const MatchCard = props =>
   <View style={styles.matchCard}>
-    <Text style={styles.matchCardText}>You're a <Text style={styles.matchCardPercentText}>98%</Text> match!</Text>
+    <Text style={styles.matchCardText}>
+      You're a <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text> match!
+    </Text>
     <Button
       raised
       rightIcon={{name: 'launch', size:25}}
@@ -35,18 +22,27 @@ const MatchCard = () =>
     />
   </View>
 
-const MatchTab = () => {
+MatchCard.propTypes = {
+  matchPercent: PropTypes.number,
+};
+
+const MatchTab = props => {
   return (
     <View style={styles.container}>
-      <MatchCard />
+      <MatchCard matchPercent={props.matchPercent} />
       {
-        issueMatchData.map(({id, ...rest}) =>
+        props.issueMatchData.map(({id, ...rest}) =>
           <IssueCard key={id} {...rest} />
         )
       }
     </View>
   );
-}
+};
+
+MatchTab.propTypes = {
+  matchPercent: PropTypes.number,
+  issueMatchData: PropTypes.array,
+};
 
 const styles = StyleSheet.create({
   container:{

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import AboutTab from './AboutTab';
 import MatchTab from './MatchTab';
 import NewsTab from './NewsTab';
@@ -14,11 +15,11 @@ class TabBar extends Component {
   renderSelectedView = () => {
     switch(this.state.selectedTab){
       case 'Match':
-        return <MatchTab/>;
+        return <MatchTab {...this.props.matchTab} />;
       case 'About':
-        return <AboutTab/>;
+        return <AboutTab {...this.props.aboutTab} />;
       case 'News':
-        return <NewsTab/>;
+        return <NewsTab {...this.props.newsTab} />;
       default:
         return null;
     }
@@ -57,6 +58,12 @@ class TabBar extends Component {
     )
   }
 }
+
+TabBar.propTypes = {
+  matchTab: PropTypes.shape(MatchTab.proptypes),
+  aboutTab: PropTypes.shape(AboutTab.proptypes),
+  newsTab: PropTypes.shape(NewsTab.proptypes),
+};
 
 const styles = StyleSheet.create({
   container: {

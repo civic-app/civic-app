@@ -17,28 +17,16 @@ const CandidateDetail = props => (
   </View>
 );
 
-CandidateDetail.propTypes = {
-  summary: PropTypes.object,
-  toggleFavorite: PropTypes.func,
-  positions: PropTypes.array,
-  candidateId: PropTypes.string,
-  partyPreference: PropTypes.string,
-  matchPercent: PropTypes.number
-};
-
 const CandidatePreview = props => {
-  const matchPercent = 98;
-  const partyPreference = 'Democrat';
-  const positions = ['President of the United States'];
   return(
     <View style={styles.previewContainer}>
       <View style={styles.container}>
         <Avatar xlarge rounded source={{ uri: props.imageURI }} />
         <Text style={styles.nameText}>{props.name}</Text>
-        <Text style={styles.positionsText}>Running for {positions[0]}</Text>
+        <Text style={styles.positionsText}>Running for {props.positions[0]}</Text>
         <Text>
-          <Text style={styles.matchText}>{matchPercent}% </Text>
-          match | {partyPreference}
+          <Text style={styles.matchText}>{props.matchPercent}% </Text>
+          match | {props.partyPreference}
         </Text>
       </View>
       <Favorite
@@ -53,10 +41,20 @@ CandidatePreview.propTypes = {
   name: PropTypes.string,
   imageURI: PropTypes.string,
   isFavorite: PropTypes.bool,
+  matchPercent: PropTypes.number,
   partyPreference: PropTypes.string,
+  positions: PropTypes.array,
   onToggleFavorite: PropTypes.func,
 };
 
+CandidateDetail.propTypes = {
+  summary: PropTypes.shape(CandidatePreview.proptypes),
+  toggleFavorite: PropTypes.func,
+  positions: PropTypes.array,
+  candidateId: PropTypes.string,
+  partyPreference: PropTypes.string,
+  matchPercent: PropTypes.number
+};
 const Favorite = props => (
   <View style={styles.favoriteContainer}>
     <Icon

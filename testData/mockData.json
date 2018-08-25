@@ -6,7 +6,31 @@
       "image": "https://drive.google.com/uc?id=1CmDUgYHA7cvZPnZfZY6pmUeh0EPnUvvw",
       "about": "Obama is no longer the president and that is sad",
       "electionIds": [
-        "desfewaefwefawegwagaw"
+        "President"
+      ],
+      "partyPreference": "Democrat"
+    },
+    "c88d3aa0-6ea8-11e8-b566-080020dsea66": {
+      "id": "c88d3aa0-6ea8-11e8-b566-080020dsea66",
+      "name": "John Cox",
+      "status": "Challenger",
+      "campaignSite": "https://johncoxforgovernor.com/",
+      "image": "https://drive.google.com/uc?id=1CmDUgYHA7cvZPnZfZY6pmUeh0EPnUvvw",
+      "about": "bla bla bla",
+      "electionIds": [
+        "California Governor"
+      ],
+      "partyPreference": "Republican"
+    },
+    "c88dfeawgrfwea8-11e8-b566-080020dsea66": {
+      "id": "c88dfeawgrfwea8-11e8-b566-080020dsea66",
+      "name": "Gavin Newsom",
+      "status": "Challenger",
+      "campaignSite": "https://www.gavinnewsom.com/",
+      "image": "https://drive.google.com/uc?id=1CmDUgYHA7cvZPnZfZY6pmUeh0EPnUvvw",
+      "about": "bla bla bla",
+      "electionIds": [
+        "California Governor"
       ],
       "partyPreference": "Democrat"
     }
@@ -28,6 +52,20 @@
       "candidateId": "c88d3aa0-6ea8-11e8-b566-0800200c9a66",
       "questionResponse": 5,
       "explanation": "Obama is awesome and thereby likes awesome things"
+    },
+    "e86e16gragsgse6445463456-0800200c9a66": {
+      "id": "e86e16gragsgse6445463456-0800200c9a66",
+      "questionId": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+      "candidateId": "c88dfeawgrfwea8-11e8-b566-080020dsea66",
+      "questionResponse": -5,
+      "explanation": "This candidate does not like awesome"
+    },
+    "e86e1650-6easfeaw5346-0800200c9a66": {
+      "id": "e86e1650-6easfeaw5346-0800200c9a66",
+      "questionId": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+      "candidateId": "c88d3aa0-6ea8-11e8-b566-080020dsea66",
+      "questionResponse": 5,
+      "explanation": "this candidate likes awesome things"
     }
   },
   "users": {
