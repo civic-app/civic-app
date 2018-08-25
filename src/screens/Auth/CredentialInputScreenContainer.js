@@ -6,15 +6,25 @@ import {
   getPasswordInput,
   getDuplicatePasswordInput,
   getFormErrorMessage,
+  getFormIsValid,
+  getShouldShowErrors,
 } from '../../auth/redux/selectors';
-import { switchFormType, updateEmail, updatePassword, updateDuplicatePassword } from '../../auth/redux/formReducer';
+import {
+  switchFormType,
+  updateEmail,
+  updatePassword,
+  updateDuplicatePassword,
+  showErrors,
+} from '../../auth/redux/formReducer';
 
 const mapStateToProps = state => ({
   formType: getFormType(state),
   email: getEmailInput(state),
   password: getPasswordInput(state),
   duplicatePassword: getDuplicatePasswordInput(state),
+  formIsValid: getFormIsValid(state),
   errorMessage: getFormErrorMessage(state),
+  showErrors: getShouldShowErrors(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
   updateEmail: email => dispatch(updateEmail(email)),
   updatePassword: password => dispatch(updatePassword(password)),
   updateDuplicatePassword: dupPassword => dispatch(updateDuplicatePassword(dupPassword)),
+  updateErrorVisibility: shouldShow => dispatch(showErrors(shouldShow)),
 });
 
 const Container = connect(

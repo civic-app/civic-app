@@ -27,6 +27,14 @@ const CredentialInputScreen = props => {
     }
   })(props.formType);
 
+  const handleSubmit = () => {
+    if (props.formIsValid) {
+      props.onSubmit();
+    } else {
+      props.updateErrorVisibility(true);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -40,7 +48,8 @@ const CredentialInputScreen = props => {
             placeholder="Re-type password"
           />
         )}
-        <Text onPress={this.handleSubmit} style={styles.submitButton}>
+        {props.showErrors && <Text style={styles.errorMessage}>{props.errorMessage}</Text>}
+        <Text onPress={handleSubmit} style={styles.submitButton}>
           SUBMIT
         </Text>
         <Text style={styles.text}>or</Text>
@@ -55,17 +64,19 @@ const CredentialInputScreen = props => {
 };
 
 CredentialInputScreen.propTypes = {
-  // TODO: use actual submit login function
-  // onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   formType: PropTypes.string.isRequired,
   changeFormType: PropTypes.func.isRequired,
+  formIsValid: PropTypes.bool.isRequired,
   email: PropTypes.string.isRequired,
   updateEmail: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   updatePassword: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  updateErrorVisibility: PropTypes.func.isRequired,
+  showErrors: PropTypes.bool.isRequired,
   duplicatePassword: PropTypes.string,
   updateDuplicatePassword: PropTypes.func,
-  errorMessage: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -119,6 +130,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingTop: 10,
     paddingBottom: 20,
+  },
+  errorMessage: {
+    color: colors.red,
+    fontSize: 14,
+    textAlign: 'center',
+    paddingTop: 4,
+    paddingBottom: 4,
   },
 });
 
