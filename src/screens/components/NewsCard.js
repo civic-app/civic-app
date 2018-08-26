@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements'
-import Colors from '../../../styles/colors';
-import Mixins from '../../../styles/mixins';
+import Colors from '../../styles/colors';
+import Mixins from '../../styles/mixins';
 import PropTypes from 'prop-types';
+import DateTime from './DateTime';
 
 const NewsCard = ({img, title, createdAt}) => {
   return(
@@ -14,15 +15,7 @@ const NewsCard = ({img, title, createdAt}) => {
       />
       <View style={styles.newsBody}>
         <Text style={styles.newsBodyText}>{title}</Text>
-        <View style={styles.dateTag}>
-          <Icon
-            size={14}
-            name="clock"
-            type="material-community"
-            iconStyle={styles.icon}
-          />
-          <Text>{createdAt}</Text>
-        </View>
+        <DateTime time={createdAt}/>
       </View>
     </View>
   )
@@ -30,7 +23,7 @@ const NewsCard = ({img, title, createdAt}) => {
 
 NewsCard.propTypes = {
   title: PropTypes.string,
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.instanceOf(Date),
   img: PropTypes.number, // change to url eventually
 };
 
@@ -38,7 +31,7 @@ const styles = StyleSheet.create({
   newsCard: {
     flex: 1,
     flexDirection: 'row',
-    margin: 10,
+    margin: 8,
     borderRadius: 2,
     ...Mixins.shadow
   },
@@ -54,13 +47,6 @@ const styles = StyleSheet.create({
   newsBodyText: {
     fontSize: 16,
     lineHeight: 22
-  },
-  dateTag: {
-    flexDirection: 'row',
-    marginTop: 5
-  },
-  icon: {
-    marginRight: 5,
   }
 })
 

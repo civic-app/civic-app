@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.darkBlue,
     borderRadius: 2,
-    height:62
+    height:70
   },
   matchCardText: {
     textAlign: 'center',
@@ -68,10 +68,10 @@ const styles = StyleSheet.create({
   },
   shareButton: {
     backgroundColor: Colors.lightBlue,
-    height: '60%'
   },
   buttonView: {
     width: '33%',
+    height: '60%',
   },
   buttonText: {
     color: Colors.white

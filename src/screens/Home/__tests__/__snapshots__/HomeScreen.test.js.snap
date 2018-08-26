@@ -4,11 +4,7 @@ exports[`HomeScreen renders correctly 1`] = `
 <ScrollView
   contentContainerStyle={
     Object {
-      "alignItems": "center",
-      "flex": 1,
-      "paddingBottom": 8,
-      "paddingLeft": 8,
-      "paddingRight": 8,
+      "paddingTop": 0,
     }
   }
 >
@@ -34,5 +30,127 @@ exports[`HomeScreen renders correctly 1`] = `
     subtitle="Click here to find out more"
     title="Something is going on in your city!"
   />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#9B9B9B",
+        "fontSize": 14,
+        "margin": 18,
+      }
+    }
+  >
+    DAILY TASKS
+  </Text>
+  <DailyTasks
+    data={
+      Array [
+        Object {
+          "content": "Do you think the U.S. should be more lenient on immigration?",
+          "heading": "Narrow your matches",
+          "id": "task1",
+          "region": "California",
+          "userResponse": "",
+        },
+        Object {
+          "content": "Should there be limits on donations to political campaigns?",
+          "heading": "Narrow your matches",
+          "id": "task2",
+          "region": "California",
+          "userResponse": "",
+        },
+      ]
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#9B9B9B",
+        "fontSize": 14,
+        "margin": 18,
+      }
+    }
+  >
+    UPCOMING ACTIVISM
+  </Text>
+  <UpcomingActivism
+    data={
+      Array [
+        Object {
+          "eventDate": 2018-12-18T12:00:00.000Z,
+          "id": "activism1",
+          "imgUrl": "",
+          "title": "Women's March 2018",
+        },
+        Object {
+          "eventDate": 2018-12-19T12:00:00.000Z,
+          "id": "activism2",
+          "imgUrl": "",
+          "title": "Some Other March 2018",
+        },
+      ]
+    }
+  />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#9B9B9B",
+        "fontSize": 14,
+        "margin": 18,
+      }
+    }
+  >
+    IN THE NEWS
+  </Text>
+  <NewsCard
+    createdAt={2018-08-18T12:00:00.000Z}
+    img={1}
+    title="Does Gavin Newsom represent a shift in California Democratic Party?"
+  />
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+        "margin": 50,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#555",
+          "fontSize": 16,
+        }
+      }
+    >
+      You're all caught up for today.
+    </Text>
+    <Icon
+      color="#DADADA"
+      containerStyle={
+        Object {
+          "margin": 20,
+        }
+      }
+      name="megaphone"
+      raised={false}
+      reverse={false}
+      reverseColor="white"
+      size={50}
+      type="entypo"
+      underlayColor="white"
+    />
+  </Component>
 </ScrollView>
 `;

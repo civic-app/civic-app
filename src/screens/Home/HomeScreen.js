@@ -1,20 +1,13 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import Banner, { mapAlertLevelToColor } from './Banner';
-
-// eventually this will be in state
-const alerts = [
-  {
-    title: 'Not Registered to Vote?',
-    subtitle: 'Click here to get started',
-    level: 'high',
-  },
-  {
-    title: 'Something is going on in your city!',
-    subtitle: 'Click here to find out more',
-    level: 'medium',
-  },
-];
+import Colors from '../../styles/colors';
+import DailyTasks from './DailyTasks';
+import UpcomingActivism from './UpcomingActivism';
+import NewsCard from '../components/NewsCard';
+// Mock Data
+import { newsItems, alerts, dailyTasks, upcomingActivism } from './mockData';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -23,7 +16,9 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+      >
         {alerts.map((alert, index) => (
           <Banner
             key={index}
@@ -34,6 +29,32 @@ class HomeScreen extends React.Component {
             subtitle={alert.subtitle}
           />
         ))}
+
+        {/* Daily Tasks */}
+        <Text style={styles.sectionHeader}>DAILY TASKS</Text>
+        <DailyTasks data={dailyTasks}/>
+
+        {/* Upcoming Activism */}
+        <Text style={styles.sectionHeader}>UPCOMING ACTIVISM</Text>
+        <UpcomingActivism data={upcomingActivism}/>
+
+        {/* In The News */}
+        <Text style={styles.sectionHeader}>IN THE NEWS</Text>
+        {newsItems.map(({id, ...rest})=>(
+          <NewsCard key={id} {...rest}/>
+        ))}
+
+        {/* All Caught Up Feed Footer */}
+        <View style={styles.footerView}>
+          <Text style={styles.footerText}>You're all caught up for today.</Text>
+          <Icon
+            name="megaphone"
+            type="entypo"
+            size={50}
+            color="#DADADA"
+            containerStyle={styles.footerIcon}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -41,15 +62,27 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingBottom: 8,
+    paddingTop: 0,
   },
   banner: {
     marginTop: 8,
   },
+  sectionHeader: {
+    fontSize: 14,
+    margin: 18,
+    color: Colors.gray
+  },
+  footerView:{
+    alignItems: 'center',
+    margin: 50,
+  },
+  footerText: {
+    color: "#555",
+    fontSize: 16
+  },
+  footerIcon: {
+    margin:20
+  }
 });
 
 export default HomeScreen;
