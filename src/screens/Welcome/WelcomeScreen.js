@@ -5,32 +5,32 @@ import { Image, StyleSheet, View } from 'react-native';
 import colors from '../../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
-import { switchFormType as formTypeAction } from '../../auth/redux/formReducer';
+import { switchFormType } from '../../auth/redux/formReducer';
 import { getFormType } from '../../auth/redux/selectors';
 import { getIsSmallScreen } from '../../UI/redux';
 
-const WelcomeScreen = props => {
-  return (
-    <View style={styles.container}>
-      <Image style={styles.civicLogo} source={require('../../assets/images/civic-logo-white.png')} />
-      <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
-      <WelcomePanel
-        formType={props.formType}
-        switchFormType={props.switchFormType}
-        navigate={props.navigation.navigate}
-      />
-    </View>
-  );
-};
+const civicLogoIcon = require('../../assets/images/civic-logo-white.png');
+
+const WelcomeScreen = props => (
+  <View style={styles.container}>
+    <Image style={styles.civicLogo} source={civicLogoIcon} />
+    <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
+    <WelcomePanel
+      formType={props.formType}
+      switchFormType={props.changeFormType}
+      navigate={props.navigation.navigate}
+    />
+  </View>
+);
 
 WelcomeScreen.propTypes = {
-  formType: PropTypes.string,
-  isSmallScreen: PropTypes.bool,
-  switchFormType: PropTypes.func,
+  formType: PropTypes.string.isRequired,
+  isSmallScreen: PropTypes.bool.isRequired,
+  changeFormType: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
     push: PropTypes.func,
-  }),
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  switchFormType: type => dispatch(formTypeAction(type)),
+  changeFormType: type => dispatch(switchFormType(type)),
 });
 
 export default connect(

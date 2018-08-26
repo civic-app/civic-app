@@ -5,12 +5,14 @@ import { Button } from 'react-native-elements';
 import colors from '../../styles/colors';
 import { formTypes } from '../../auth/redux/formReducer';
 import SocialButton from '../Auth/SocialButton';
+import FacebookAuthButton from '../Auth/FacebookAuthButton';
+import GoogleAuthButton from '../Auth/GoogleAuthButton';
 
 class WelcomePanel extends React.Component {
   static propTypes = {
-    switchFormType: PropTypes.func,
-    formType: PropTypes.string,
-    navigate: PropTypes.func,
+    switchFormType: PropTypes.func.isRequired,
+    formType: PropTypes.string.isRequired,
+    navigate: PropTypes.func.isRequired,
   };
 
   sharedButtonProps = {
@@ -38,15 +40,15 @@ class WelcomePanel extends React.Component {
     </View>
   );
 
-  expandedView = formType => {
-    const config = (type => {
+  expandedView = (formType) => {
+    const config = ((type) => {
       switch (type) {
         case formTypes.INITIAL:
           return {};
         case formTypes.LOGIN:
           return {
             preposition: 'in',
-            switchText: 'Don\'t have an account yet? Register',
+            switchText: "Don't have an account yet? Register",
             otherFormType: formTypes.SIGN_UP,
           };
         case formTypes.SIGN_UP:
@@ -62,11 +64,10 @@ class WelcomePanel extends React.Component {
 
     return (
       <View style={styles.expandedViewContainer}>
-        <SocialButton type="google" title={`Sign ${config.preposition} with Google`} style={styles.social} />
-        <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
+        <GoogleAuthButton title={`Sign ${config.preposition} with Google`} style={styles.social} />
+        <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
         <Text style={styles.text}>or</Text>
         <SocialButton
-          type="email"
           title={`Sign ${config.preposition} with email`}
           style={styles.social}
           onPress={this.goToCredentials}
@@ -91,7 +92,7 @@ class WelcomePanel extends React.Component {
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     position: 'absolute',

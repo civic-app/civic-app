@@ -2,8 +2,10 @@ export const USER_NAMESPACE = 'user';
 
 // Actions
 export const AuthUserActionType = {
-  LoginRequest: 'civicApp/auth/loginRequest',
-  LoginSuccess: 'civicApp/auth/loginSuccess',
+  EmailLoginRequest: 'civicApp/auth/emailLoginRequest',
+  FacebookLoginRequest: 'civicApp/auth/facebookLoginRequest',
+  GoogleLoginRequest: 'civicApp/auth/googleLoginRequest',
+  LoginSuccess: 'civicApp/auth/emailLoginSuccess',
   LogOutRequest: 'civicApp/auth/logOutRequest',
   LogOutSuccess: 'civicApp/auth/logOutSuccess',
   RegisterRequest: 'civicApp/auth/registerRequest',
@@ -12,9 +14,16 @@ export const AuthUserActionType = {
 };
 
 // Action Creators
-export const logIn = (email, password) => ({
-  type: AuthUserActionType.LoginRequest,
-  payload: { email, password },
+export const emailLogin = () => ({
+  type: AuthUserActionType.EmailLoginRequest,
+});
+
+export const facebookLogin = () => ({
+  type: AuthUserActionType.FacebookLoginRequest,
+});
+
+export const googleLogin = () => ({
+  type: AuthUserActionType.GoogleLoginRequest,
 });
 
 export const loginSuccess = user => ({
@@ -40,11 +49,20 @@ export const authFailure = error => ({
   payload: error,
 });
 
+const initialState = {
+  user: undefined,
+  loading: false,
+  error: { code: '', message: '' },
+};
+
 // TODO: errors and maybe loading
 const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case AuthUserActionType.LoginRequest:
+    case AuthUserActionType.EmailLoginRequest:
+    case AuthUserActionType.FacebookLoginRequest:
+    case AuthUserActionType.GoogleLoginRequest:
     case AuthUserActionType.RegisterRequest:
+    case AuthUserActionType.LogOutRequest:
       return {
         ...state,
         loading: true,
@@ -67,12 +85,6 @@ const userReducer = (state = initialState, action = {}) => {
     default:
       return state;
   }
-};
-
-const initialState = {
-  user: undefined,
-  loading: false,
-  error: '',
 };
 
 export default userReducer;

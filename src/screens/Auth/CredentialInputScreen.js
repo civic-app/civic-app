@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
-import SocialButton from './SocialButton';
+import FacebookAuthButton from './FacebookAuthButton';
+import GoogleAuthButton from './GoogleAuthButton';
 import colors from '../../styles/colors';
 import { formTypes } from '../../auth/redux/formReducer';
 
-const CredentialInputScreen = props => {
-  const options = (formType => {
+const CredentialInputScreen = (props) => {
+  const options = ((formType) => {
     switch (formType) {
       case formTypes.LOGIN:
         return {
           titleText: 'Sign in',
-          changeFormText: 'Don\'t have an account yet? Register',
+          changeFormText: "Don't have an account yet? Register",
           otherFormType: formTypes.SIGN_UP,
+          googleButtonText: 'Sign in with Google',
         };
       case formTypes.SIGN_UP:
         return {
           titleText: 'Sign Up for Civic',
           changeFormText: 'Have an account? Sign in',
           otherFormType: formTypes.LOGIN,
+          googleButtonText: 'Sign up with Google',
         };
       default:
         return {};
@@ -53,8 +56,8 @@ const CredentialInputScreen = props => {
           SUBMIT
         </Text>
         <Text style={styles.text}>or</Text>
-        <SocialButton type="google" title="Sign up with Google" style={styles.social} />
-        <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
+        <GoogleAuthButton title={options.googleButtonText} style={styles.social} />
+        <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
         <Text onPress={() => props.changeFormType(options.otherFormType)} style={styles.text}>
           {options.changeFormText}
         </Text>
@@ -64,7 +67,7 @@ const CredentialInputScreen = props => {
 };
 
 CredentialInputScreen.propTypes = {
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
   formType: PropTypes.string.isRequired,
   changeFormType: PropTypes.func.isRequired,
   formIsValid: PropTypes.bool.isRequired,
@@ -77,6 +80,11 @@ CredentialInputScreen.propTypes = {
   showErrors: PropTypes.bool.isRequired,
   duplicatePassword: PropTypes.string,
   updateDuplicatePassword: PropTypes.func,
+};
+
+CredentialInputScreen.defaultProps = {
+  duplicatePassword: '',
+  updateDuplicatePassword: () => undefined,
 };
 
 const styles = StyleSheet.create({
@@ -133,7 +141,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: colors.red,
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     paddingTop: 4,
     paddingBottom: 4,
