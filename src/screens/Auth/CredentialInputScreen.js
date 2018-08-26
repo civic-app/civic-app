@@ -31,10 +31,12 @@ const CredentialInputScreen = (props) => {
   })(props.formType);
 
   const handleSubmit = () => {
-    if (props.formIsValid) {
-      props.onSubmit();
-    } else {
-      props.updateErrorVisibility(true);
+    if (!props.isLoading) {
+      if (props.formIsValid) {
+        props.onSubmit();
+      } else {
+        props.updateErrorVisibility(true);
+      }
     }
   };
 
@@ -75,6 +77,7 @@ CredentialInputScreen.propTypes = {
   updateEmail: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   updatePassword: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
   updateErrorVisibility: PropTypes.func.isRequired,
   showErrors: PropTypes.bool.isRequired,

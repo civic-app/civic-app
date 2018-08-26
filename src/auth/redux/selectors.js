@@ -7,6 +7,7 @@ import { parseErrorResponse } from '../api';
 export const getLoggedInUser = state => state[AUTH_NAMESPACE][USER_NAMESPACE].user;
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
 export const getAuthError = state => state[AUTH_NAMESPACE][USER_NAMESPACE].error;
+export const getIsLoading = state => state[AUTH_NAMESPACE][USER_NAMESPACE].loading;
 
 /*
  * Parses error codes returned from Firebase

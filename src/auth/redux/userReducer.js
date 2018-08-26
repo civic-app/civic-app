@@ -14,17 +14,11 @@ export const AuthUserActionType = {
 };
 
 // Action Creators
-export const emailLogin = () => ({
-  type: AuthUserActionType.EmailLoginRequest,
-});
+export const emailLogin = () => ({ type: AuthUserActionType.EmailLoginRequest });
 
-export const facebookLogin = () => ({
-  type: AuthUserActionType.FacebookLoginRequest,
-});
+export const facebookLogin = () => ({ type: AuthUserActionType.FacebookLoginRequest });
 
-export const googleLogin = () => ({
-  type: AuthUserActionType.GoogleLoginRequest,
-});
+export const googleLogin = () => ({ type: AuthUserActionType.GoogleLoginRequest });
 
 export const loginSuccess = user => ({
   type: AuthUserActionType.LoginSuccess,
@@ -36,13 +30,9 @@ export const register = (email, password) => ({
   payload: { email, password },
 });
 
-export const logOut = () => ({
-  type: AuthUserActionType.LogOutRequest,
-});
+export const logOut = () => ({ type: AuthUserActionType.LogOutRequest });
 
-export const logOutSuccess = () => ({
-  type: AuthUserActionType.LogOutSuccess,
-});
+export const logOutSuccess = () => ({ type: AuthUserActionType.LogOutSuccess });
 
 export const authFailure = error => ({
   type: AuthUserActionType.AuthFailure,
@@ -79,6 +69,7 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         error: action.payload,
+        loading: false,
       };
     case AuthUserActionType.LogOutSuccess:
       return initialState;

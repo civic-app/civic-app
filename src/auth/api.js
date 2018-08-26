@@ -1,15 +1,9 @@
 import { auth } from '../firebase/initialize';
 import parseFirebaseErrorCode from '../firebase';
 
-export const register = ({ email, password }) => auth.createUserWithEmailAndPassword(email, password).catch((error) => {
-  // TODO: Handle Errors here.
-    console.error('Error registering:', error.message); // eslint-disable-line
-});
+export const registerWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 
-export const logIn = ({ email, password }) => auth.signInWithEmailAndPassword(email, password).catch((error) => {
-  // TODO: Handle Errors here.
-    console.error('Error signing in:', error.message); // eslint-disable-line
-});
+export const logInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
 
 export const logOut = callback => auth
   .signOut()
@@ -18,6 +12,7 @@ export const logOut = callback => auth
   })
   .catch((error) => {
     if (callback) callback(false, null, error);
+    throw error;
   });
 
 export const subscribeToAuthStateChanges = (onLogIn, onLogOut) => {
