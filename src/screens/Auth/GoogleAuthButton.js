@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { googleLogin } from '../../auth/redux/userReducer';
+import { getIsLoading } from '../../auth/redux/selectors';
 import GoogleIcon from './GoogleIcon';
 import SocialButton from './SocialButton';
 import colors from '../../styles/colors';
@@ -25,9 +26,7 @@ GoogleAuthButton.propTypes = {
   style: SocialButton.propTypes.style,
 };
 
-GoogleAuthButton.defaultProps = {
-  style: {},
-};
+GoogleAuthButton.defaultProps = { style: {} };
 
 const styles = StyleSheet.create({
   button: {
@@ -36,11 +35,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = {
-  onPress: googleLogin,
-};
+const mapStateToProps = state => ({ isLoading: getIsLoading(state) });
+
+const mapDispatchToProps = { onPress: googleLogin };
+
+// Prevent monkey clicking the button by disabling the onPress
+// method if there's already an in-flight request
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  onPress: () => !stateProps.isLoading && dispatchProps.onPress(),
+  ...ownProps,
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
+  mergeProps,
 )(GoogleAuthButton);
