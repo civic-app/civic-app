@@ -73,7 +73,7 @@ const getNewsTabProps = (state, candidateId) => ({
       id: 1,
       title: 'Does Gavin Newsom represent a shift in California Democratic Party?',
       img: testImage,
-      createdAt: '3 hrs ago', // change to datetime
+      createdAt: new Date(2018,7, 18, 12)
     }
   ]
 });

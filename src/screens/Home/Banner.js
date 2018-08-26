@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { Icon } from 'react-native-elements';
 import colors from '../../styles/colors';
 
 export const mapAlertLevelToColor = level => {
@@ -20,7 +20,7 @@ const Banner = props => {
         <View>
           <Text style={styles.title}>{props.title}</Text>
           <Text style={styles.subtitle}>{props.subtitle}</Text>
-          <Entypo name={props.icon} color={colors.white} size={60} style={styles.icon} />
+          <Icon type="entypo" name={props.icon} color={colors.white} size={60} containerStyle={styles.icon} />
         </View>
       </TouchableHighlight>
     </View>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    margin: 8,
   },
   icon: {
     opacity: 0.5,
