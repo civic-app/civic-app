@@ -8,7 +8,6 @@ import {
   getFormErrorMessage,
   getFormIsValid,
   getShouldShowErrors,
-  getIsLoading,
 } from '../../auth/redux/selectors';
 import {
   switchFormType,
@@ -18,6 +17,7 @@ import {
   showErrors,
 } from '../../auth/redux/formReducer';
 import { emailLogin } from '../../auth/redux/userReducer';
+import { getIsLoading } from '../../UI/redux';
 
 const mapStateToProps = state => ({
   formType: getFormType(state),

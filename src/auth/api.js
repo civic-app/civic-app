@@ -1,5 +1,5 @@
 import { auth } from '../firebase/initialize';
-import parseFirebaseErrorCode from '../firebase';
+import { parseFirebaseErrorCode } from '../firebase';
 
 export const registerWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 

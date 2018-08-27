@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { googleLogin } from '../../auth/redux/userReducer';
-import { getIsLoading } from '../../auth/redux/selectors';
+import { getIsLoading } from '../../UI/redux';
 import GoogleIcon from './GoogleIcon';
 import SocialButton from './SocialButton';
 import colors from '../../styles/colors';

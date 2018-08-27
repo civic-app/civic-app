@@ -40,36 +40,20 @@ export const authFailure = error => ({
 });
 
 const initialState = {
-  user: undefined,
-  loading: false,
-  error: { code: '', message: '' },
+  user: {
+    id: '',
+    email: '',
+  },
 };
 
 // TODO: errors and maybe loading
 const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case AuthUserActionType.EmailLoginRequest:
-    case AuthUserActionType.FacebookLoginRequest:
-    case AuthUserActionType.GoogleLoginRequest:
-    case AuthUserActionType.RegisterRequest:
-    case AuthUserActionType.LogOutRequest:
-      return {
-        ...state,
-        loading: true,
-        error: '',
-      };
     case AuthUserActionType.LoginSuccess:
     case AuthUserActionType.RegisterSuccess:
       return {
         ...state,
-        user: action.payload,
-        loading: false,
-      };
-    case AuthUserActionType.AuthFailure:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
+        user: { id: action.payload.uid, email: action.payload.email },
       };
     case AuthUserActionType.LogOutSuccess:
       return initialState;

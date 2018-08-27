@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import SocialButton from './SocialButton';
 import colors from '../../styles/colors';
 import { facebookLogin } from '../../auth/redux/userReducer';
-import { getIsLoading } from '../../auth/redux/selectors';
+import { getIsLoading } from '../../UI/redux';
 
 const FacebookAuthButton = (props) => {
   const textColor = colors.white;
