@@ -8,7 +8,7 @@ import { Avatar,Icon } from 'react-native-elements';
 const FavoritesScreen = props => (
   <View style={styles.container}>
     <FlatList
-      data={props.candidates}
+      data={props.data}
       keyExtractor={(item)=>item.id}
       renderItem={({item})=> (
         <View style={styles.candidateContainer} >
@@ -58,13 +58,14 @@ const FavoritesScreen = props => (
 );
 
 FavoritesScreen.propTypes = {
-  candidates: PropTypes.array,
+  data: PropTypes.array,
   favorites: PropTypes.bool,
   name: PropTypes.string,
   electionIds: PropTypes.string,
   imageURI: PropTypes.string,
   goToCandidateDetail: PropTypes.func,
 };
+
 
 const styles = StyleSheet.create({
   container: {

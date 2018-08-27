@@ -9,13 +9,11 @@ class FavoritesScreen extends React.Component {
     title: 'My Favorites',
   };
   static propTypes = propTypes;
-
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
-
   render() {
     return (
       <View style={styles.container}>
-        <CandidatePreview goToCandidateDetail={this.goToCandidateDetail} />
+        <CandidatePreview goToCandidateDetail={this.goToCandidateDetail}/>
       </View>
     );
   }
