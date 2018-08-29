@@ -3,26 +3,23 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import colors from '../styles/colors';
-import { connect } from 'react-redux'
-import { userRegistered } from '../auth/redux'
-import { getUserRegistered } from '../auth/selectors'
 
-class VoterRegistrationScreen extends React.Component {
+class VoterRegistrationSuccessScreen extends React.Component {
     static propTypes = propTypes;
-    goToApp = () => this.props.navigation.navigate('App');
+    goToElections = () => this.props.navigation.navigate('Elections');
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.textHeader}>Let's get you registered to vote!</Text>
-                <Text style={styles.textSubheader}>Registering takes 3 minutes.</Text>
-                <Image style={styles.voterLogo} source={require('../assets/images/VoterBox.png')} />
+            <View style={styles.container}>                
+                <Text style={styles.textHeader}>Congrats! You're registered to vote.</Text>
+                <Text style={styles.textSubheader}>We'll remind you when it's time to cast your ballot.</Text>
+                <Image style={styles.checkLogo} source={require('../assets/images/Check.png')} />
                 <Button {...this.sharedButtonProps}
                     buttonStyle={{
                         marginTop: 45,
                     }}
                     backgroundColor={colors.red}
-                    title="Register To Vote" onPress={this.goToApp} />
+                    title="Back to My Elections" onPress={this.goToElections} />
             </View>
         );
     }
@@ -35,11 +32,6 @@ const propTypes = {
     }),
 };
 
-VoterRegistrationScreen.propTypes = {
-    isRegistered: PropTypes.bool,
-    isUserRegistered: PropTypes.func,
-};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -48,9 +40,9 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
     },
-    voterLogo: {
-        height: 158,
-        width: 145,
+    checkLogo: {
+        height: 116,
+        width: 116,
     },
     buttonContainer: {
         flex: 1,
@@ -83,7 +75,4 @@ sharedButtonProps = {
     fontSize: 18,
 };
 
-export default connect(
-    (state) => ({ isRegistered: getUserRegistered(state) }),
-    { isUserRegistered: userRegistered },
-)(VoterRegistrationScreen);
+export default VoterRegistrationSuccessScreen;

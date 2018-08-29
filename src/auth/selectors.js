@@ -7,6 +7,7 @@ export const getLoggedInUserId = state => getLoggedInUser(state) && getLoggedInU
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
 export const getAuthError = state => state[AUTH_NAMESPACE].error;
 export const getIsLoading = state => state[AUTH_NAMESPACE].loading;
+export const getUserRegistered = state => state[AUTH_NAMESPACE].isRegisteredToVote;
 
 /*
  * Parses error codes returned from Firebase

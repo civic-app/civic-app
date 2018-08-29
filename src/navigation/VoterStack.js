@@ -1,16 +1,18 @@
 import { createStackNavigator } from 'react-navigation';
 
 import VoterRegistrationScreen from '../screens/VoterRegistrationScreen';
+import VoterRegistrationSuccessScreen from '../screens/VoterRegistrationSuccessScreen';
 
 import styles from './styles';
 
 const VoterStack = createStackNavigator(
     {
-        VoterRegistration: VoterRegistrationScreen,
+        VoterReg: VoterRegistrationScreen,
+        VoterRegSuc: VoterRegistrationSuccessScreen,
     },
     {
         navigationOptions: {
-            title: 'Voter Registration',
+            title: 'Register To Vote',
             headerStyle: styles.header,
             headerTitleStyle: styles.title,
         },

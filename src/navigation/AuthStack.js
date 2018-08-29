@@ -8,7 +8,6 @@ const AuthStack = createStackNavigator(
   {
     Credentials: CredentialInputScreen,
     Welcome: WelcomeScreen,
-    VoterReg: VoterRegistrationScreen,
   },
   {
     initialRouteName: 'Welcome',
