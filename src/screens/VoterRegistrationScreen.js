@@ -9,7 +9,7 @@ import { getUserRegistered } from '../auth/selectors'
 
 class VoterRegistrationScreen extends React.Component {
     static propTypes = propTypes;
-    goToApp = () => this.props.navigation.navigate('App');
+    goToTurboVote = () => this.props.navigation.navigate('TurboVote');
 
     render() {
         return (
@@ -22,7 +22,7 @@ class VoterRegistrationScreen extends React.Component {
                         marginTop: 45,
                     }}
                     backgroundColor={colors.red}
-                    title="Register To Vote" onPress={this.goToApp} />
+                    title="Register To Vote" onPress={this.goToTurboVote} />
             </View>
         );
     }
