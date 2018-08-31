@@ -9,7 +9,7 @@ import TabItem from './TabItem';
 class TabBar extends Component {
   state = {
     selectedTab: 'Match',
-  }
+  };
 
   // Replace with Redux Action
   renderSelectedView = () => {
@@ -45,11 +45,12 @@ class TabBar extends Component {
             selectedTab={selectedTab}
             handlePress={handlePress}
           />
-          <TabItem
-            name='News'
-            selectedTab={selectedTab}
-            handlePress={handlePress}
-          />
+          {/* TODO: Implement news backend */}
+          {/*<TabItem*/}
+            {/*name='News'*/}
+            {/*selectedTab={selectedTab}*/}
+            {/*handlePress={handlePress}*/}
+          {/*/>*/}
         </View>
         <View styles={styles.viewArea}>
           {renderSelectedView()}
