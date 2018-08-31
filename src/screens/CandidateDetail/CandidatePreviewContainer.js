@@ -6,10 +6,13 @@ import { getCandidates, loadCandidates } from '../../candidate/redux/candidates'
 import { loadFavorites, getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 
-export const getFavoriteCandidateData  = (state) => {
-  const candidates = getCandidates(state,toListCandidateMapper);
-  return candidates.map(candidate => {getIsFavorite(state,candidate.id,Category.Candidates)});
-};
+export const getFavoriteCandidateData  = (state) => (
+  getCandidates(state,toListCandidateMapper)
+    .map(candidate => ({
+      ...candidate,
+      isFavorite: getIsFavorite(state,candidate.id,Category.Candidates),
+    }))
+);
 
 const Container = compose(
   connect(
