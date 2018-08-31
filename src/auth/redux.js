@@ -1,7 +1,19 @@
+export const formTypes = {
+  INITIAL: 'initial',
+  LOGIN: 'login',
+  SIGN_UP: 'signUp',
+};
+
 // Selectors
 export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
 
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
+
+export const getFormType = state => state[AUTH_NAMESPACE].formType;
+
+export const getLoggedInUserId = state =>
+  // TODO: remove id after adding login to app
+  (getLoggedInUser(state) && getLoggedInUser(state).id) || 'Ra6l4NfjcLcc8XdP4gX1aWdhRRd2';
 
 // Action Creators
 export const logIn = (email, password) => ({
@@ -27,6 +39,11 @@ export const logOutSuccess = () => ({
   type: AuthActionType.LogOutSuccess,
 });
 
+export const switchFormType = formType => ({
+  type: AuthActionType.SwitchFormType,
+  payload: formType,
+});
+
 export const AuthActionType = {
   LoginRequest: 'civicApp/auth/loginRequest',
   LoginSuccess: 'civicApp/auth/loginSuccess',
@@ -34,6 +51,7 @@ export const AuthActionType = {
   LogOutSuccess: 'civicApp/auth/logOutSuccess',
   RegisterRequest: 'civicApp/auth/registerRequest',
   RegisterSuccess: 'civicApp/auth/registerSuccess',
+  SwitchFormType: 'civicApp/auth/switchFormType',
 };
 
 // Reducer
@@ -50,6 +68,11 @@ const reducer = (state = initialState, action) => {
       return {
         user: undefined,
       };
+    case AuthActionType.SwitchFormType:
+      return {
+        ...state,
+        formType: action.payload,
+      };
     default:
       return state;
   }
@@ -57,6 +80,7 @@ const reducer = (state = initialState, action) => {
 
 const initialState = {
   user: undefined,
+  formType: formTypes.INITIAL,
 };
 
 export default reducer;

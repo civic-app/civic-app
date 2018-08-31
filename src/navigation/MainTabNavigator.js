@@ -1,10 +1,10 @@
+import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
-
 import HomeStack from './HomeStack';
 import ElectionsStack from './ElectionsStack';
 import FavoritesStack from './FavoritesStack';
 import ActivismStack from './ActivismStack';
-
+import TabBarIcon from './TabBarIcon';
 import colors from '../styles/colors';
 
 /*
@@ -20,8 +20,17 @@ const MainTabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: props => <TabBarIcon navigation={navigation} {...props} />,
+    }),
     tabBarOptions: {
       activeTintColor: colors.orange,
+      labelStyle: {
+        fontSize: 14,
+      },
+      style: {
+        paddingTop: 5,
+      },
     },
   },
 );

@@ -1,12 +1,15 @@
 import { createStackNavigator } from 'react-navigation';
 
-import LoginScreen from '../screens/LoginScreen';
+import CredentialInputScreen from '../screens/Auth/CredentialInputScreen';
+import WelcomeScreen from '../screens/Welcome/WelcomeScreen';
 
 const AuthStack = createStackNavigator(
   {
-    Login: LoginScreen,
+    Credentials: CredentialInputScreen,
+    Welcome: WelcomeScreen,
   },
   {
+    initialRouteName: 'Welcome',
     navigationOptions: {
       header: null,
     },

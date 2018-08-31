@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleIcon renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "marginRight": 12,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 32,
+        "width": 32,
+      }
+    }
+  />
+</Component>
+`;

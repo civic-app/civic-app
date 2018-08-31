@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeImages CandidatesImage renders correctly 1`] = `
+<Image
+  source={1}
+  style={
+    Object {
+      "height": 138,
+      "width": 138,
+    }
+  }
+/>
+`;
+
+exports[`WelcomeImages GetInvolvedImage renders correctly 1`] = `
+<Image
+  source={1}
+  style={
+    Object {
+      "height": 144,
+      "width": 180,
+    }
+  }
+/>
+`;
+
+exports[`WelcomeImages StayInformedImage renders correctly 1`] = `
+<Image
+  source={1}
+  style={
+    Object {
+      "height": 148,
+      "width": 110,
+    }
+  }
+/>
+`;

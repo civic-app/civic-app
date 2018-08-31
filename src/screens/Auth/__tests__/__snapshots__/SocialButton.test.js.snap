@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SocialButton email renders correctly 1`] = `
+<Button
+  borderRadius={3}
+  buttonStyle={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+      },
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#e0e0e0",
+      },
+    ]
+  }
+  color="#000000"
+  containerViewStyle={undefined}
+  fontSize={18}
+  icon={
+    Object {
+      "color": "#000000",
+      "name": "email",
+      "size": 35,
+      "type": "material-community",
+    }
+  }
+  iconComponent={undefined}
+  onPress={undefined}
+  outline={true}
+  textStyle={
+    Object {
+      "flex": 3,
+    }
+  }
+  title="Sign In with Email"
+/>
+`;
+
+exports[`SocialButton facebook renders correctly 1`] = `
+<Button
+  borderRadius={3}
+  buttonStyle={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+      },
+      Object {
+        "backgroundColor": "#3c5a9a",
+        "borderColor": "#3c5a9a",
+      },
+    ]
+  }
+  color="#ffffff"
+  containerViewStyle={undefined}
+  fontSize={18}
+  icon={
+    Object {
+      "name": "facebook-box",
+      "size": 35,
+      "type": "material-community",
+    }
+  }
+  iconComponent={undefined}
+  onPress={undefined}
+  outline={true}
+  textStyle={
+    Object {
+      "flex": 3,
+    }
+  }
+  title="Continue with Facebook"
+/>
+`;
+
+exports[`SocialButton google renders correctly 1`] = `
+<Button
+  borderRadius={3}
+  buttonStyle={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+      },
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#e0e0e0",
+      },
+    ]
+  }
+  color="#000000"
+  containerViewStyle={undefined}
+  fontSize={18}
+  icon={Object {}}
+  iconComponent={[Function]}
+  onPress={undefined}
+  outline={true}
+  textStyle={
+    Object {
+      "flex": 3,
+    }
+  }
+  title="Sign In with Google"
+/>
+`;
