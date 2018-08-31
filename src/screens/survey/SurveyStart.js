@@ -1,8 +1,8 @@
 import React from 'react';
-import {createStackNavigator} from 'react-navigation';
+import {createStackNavigator,createDrawerNavigator, NavigationActions, createMaterialTopTabNavigator,BackHandler} from 'react-navigation';
 import { Text, View, Button, StyleSheet, TouchableWithoutFeedback, Image} from 'react-native';
 
-class Survey_start extends React.Component {
+class SurveyStart extends React.Component {
 
   constructor(props){
     super(props);
@@ -11,8 +11,9 @@ class Survey_start extends React.Component {
   }
 
   render() {
+
     return (
-      <View style={styles.survey_block}>
+      <View style={styles.survey_block} elevation={5}>
 
         <View style={styles.block1}>
           <Text style={[styles.font_style, styles.title] }>We'll ask a few questions {"\n"}to get to know the issues {"\n"}you care about.</Text>
@@ -30,7 +31,7 @@ class Survey_start extends React.Component {
 
         <View >
           <TouchableWithoutFeedback
-            onPressIn = {() => {this.props.navigation.navigate('Question1')}} >
+            onPressIn = {() => {this.props.navigation.navigate('Question1', {index: 1});}} >
           <View style={styles.get_started_button}><Text style={styles.get_started_text}>GET STARTED</Text></View>
           </TouchableWithoutFeedback>
         </View>
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     borderColor: 'white',
     borderRadius: 20,
-    position: 'absolute',
     //Shadow stuff
     shadowColor: '#E5E5E5',
     shadowOffset: {
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     marginBottom:41.54,
     backgroundColor: 'white'
   },
-
   // Style for general font
   font_style: {
     fontFamily: 'Roboto',
@@ -117,4 +116,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Survey_start;
+export default SurveyStart;

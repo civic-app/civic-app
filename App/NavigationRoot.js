@@ -17,7 +17,7 @@ const NavigationRoot = createSwitchNavigator(
     Survey: SurveyStack,
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'Survey',
   },
 );
 

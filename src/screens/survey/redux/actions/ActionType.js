@@ -1,0 +1,2 @@
+export const LOAD_RESPONSE = 'LOAD_RESPONSE'
+export const CHECK_RESPONSE = 'CHECK_RESPONSE'
