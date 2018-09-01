@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import styles from './styles';
-import CandidatePreview from '../screens/CandidateDetail/CandidatePreviewContainer';
+import FavoritesPreview from '../screens/Favorites/FavoritesPreviewContainer';
 
 class FavoritesScreen extends React.Component {
   static navigationOptions = {
@@ -13,7 +13,7 @@ class FavoritesScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <CandidatePreview goToCandidateDetail={this.goToCandidateDetail}/>
+        <FavoritesPreview goToCandidateDetail={this.goToCandidateDetail}/>
       </View>
     );
   }
