@@ -1,7 +1,12 @@
 import { call, takeEvery, put } from 'redux-saga/effects';
-import authSaga, { loginSaga, logOutSaga, registerSaga } from './sagas';
-import { logIn as APILogIn, logOut as APILogOut, register as APIRegister, subscribeToAuthStateChanges } from './api';
-import { AuthUserActionType, logOutSuccess, loginSuccess, logIn, logOut, register } from './redux/userReducer';
+import authSaga, { emailLoginSaga, logOutSaga, registerSaga } from './sagas';
+import {
+  logInWithEmailAndPassword as APILogIn,
+  logOut as APILogOut,
+  registerWithEmailAndPassword as APIRegister,
+  subscribeToAuthStateChanges,
+} from './api';
+import { AuthActionType, logOutSuccess, loginSuccess, emailLogin, logOut, register } from './redux';
 import { toFakeUser } from './doubles';
 
 describe('authSaga', () => {
@@ -17,20 +22,20 @@ describe('authSaga', () => {
 
   it('should take every logIn action and trigger loginSaga', () => {
     gen.next();
-    expect(gen.next().value).toEqual(takeEvery(AuthUserActionType.LoginRequest, loginSaga));
+    expect(gen.next().value).toEqual(takeEvery(AuthActionType.LoginRequest, loginSaga));
   });
 
   it('should take every logOut action and trigger logOutSaga', () => {
     gen.next();
     gen.next();
-    expect(gen.next().value).toEqual(takeEvery(AuthUserActionType.LogOutRequest, logOutSaga));
+    expect(gen.next().value).toEqual(takeEvery(AuthActionType.LogOutRequest, logOutSaga));
   });
 
   it('should take every register action and trigger registerSaga', () => {
     gen.next();
     gen.next();
     gen.next();
-    expect(gen.next().value).toEqual(takeEvery(AuthUserActionType.RegisterRequest, registerSaga));
+    expect(gen.next().value).toEqual(takeEvery(AuthActionType.RegisterRequest, registerSaga));
   });
 });
 

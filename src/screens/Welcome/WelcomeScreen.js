@@ -5,8 +5,8 @@ import { Image, StyleSheet, View } from 'react-native';
 import colors from '../../styles/colors';
 import WelcomeCarousel from './WelcomeCarousel';
 import WelcomePanel from './WelcomePanel';
-import { switchFormType } from '../../auth/redux/formReducer';
-import { getFormType } from '../../auth/redux/selectors';
+import { switchFormType } from '../../auth/redux';
+import { getFormType } from '../../auth/selectors';
 import { getIsSmallScreen } from '../../UI/redux';
 
 const civicLogoIcon = require('../../assets/images/civic-logo-white.png');

@@ -8,15 +8,15 @@ import {
   getFormErrorMessage,
   getFormIsValid,
   getShouldShowErrors,
-} from '../../auth/redux/selectors';
+} from '../../auth/selectors';
 import {
+  emailLogin,
   switchFormType,
   updateEmail,
   updatePassword,
   updateDuplicatePassword,
   showErrors,
-} from '../../auth/redux/formReducer';
-import { emailLogin } from '../../auth/redux/userReducer';
+} from '../../auth/redux';
 import { getIsLoading } from '../../UI/redux';
 
 const mapStateToProps = state => ({

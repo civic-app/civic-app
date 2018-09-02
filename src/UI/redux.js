@@ -1,4 +1,4 @@
-import { AuthUserActionType } from '../auth/redux/userReducer';
+import { AuthActionType } from '../auth/redux';
 import { parseErrorResponse } from '../auth/api';
 // selectors
 export const getIsSmallScreen = state => state[UI_NAMESPACE].isSmallScreen;
@@ -31,24 +31,24 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case AuthUserActionType.EmailLoginRequest:
-    case AuthUserActionType.FacebookLoginRequest:
-    case AuthUserActionType.GoogleLoginRequest:
-    case AuthUserActionType.RegisterRequest:
-    case AuthUserActionType.LogOutRequest:
+    case AuthActionType.EmailLoginRequest:
+    case AuthActionType.FacebookLoginRequest:
+    case AuthActionType.GoogleLoginRequest:
+    case AuthActionType.RegisterRequest:
+    case AuthActionType.LogOutRequest:
       return {
         ...state,
         loading: true,
         error: initialState.error,
       };
-    case AuthUserActionType.LoginSuccess:
-    case AuthUserActionType.RegisterSuccess:
-    case AuthUserActionType.LogOutSuccess:
+    case AuthActionType.LoginSuccess:
+    case AuthActionType.RegisterSuccess:
+    case AuthActionType.LogOutSuccess:
       return {
         ...state,
         loading: false,
       };
-    case AuthUserActionType.AuthFailure:
+    case AuthActionType.AuthFailure:
       return {
         ...state,
         error: action.payload,

@@ -6,7 +6,7 @@ import PasswordInput from './PasswordInput';
 import FacebookAuthButton from './FacebookAuthButton';
 import GoogleAuthButton from './GoogleAuthButton';
 import colors from '../../styles/colors';
-import { formTypes } from '../../auth/redux/formReducer';
+import { formTypes } from '../../auth/redux';
 
 const CredentialInputScreen = (props) => {
   const options = ((formType) => {

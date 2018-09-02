@@ -1,14 +1,14 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { subscribeToAuthStateChanges, logInWithEmailAndPassword, logOut, registerWithEmailAndPassword } from './api';
 import {
-  AuthUserActionType,
+  AuthActionType,
   logOut as logOutAction,
   logOutSuccess,
   loginSuccess,
   authFailure,
-} from './redux/userReducer';
+} from './redux';
 import { signInWithFacebookAsync, signInWithGoogleAsync } from './socialauth';
-import { getEmailInput, getPasswordInput } from './redux/selectors';
+import { getEmailInput, getPasswordInput } from './selectors';
 
 /*
  * Generic wrapper for a login flow that can make an api call,
@@ -54,11 +54,11 @@ function* logOutSaga() {
  */
 function* authSaga() {
   yield call(subscribeToAuthStateChanges, loginSuccess, logOutSuccess); // doesn't need a yield but makes testing easier
-  yield takeLatest(AuthUserActionType.EmailLoginRequest, emailLoginSaga);
-  yield takeLatest(AuthUserActionType.FacebookLoginRequest, facebookLoginSaga);
-  yield takeLatest(AuthUserActionType.GoogleLoginRequest, googleLoginSaga);
-  yield takeLatest(AuthUserActionType.RegisterRequest, registerSaga);
-  yield takeLatest(AuthUserActionType.LogOutRequest, logOutSaga);
+  yield takeLatest(AuthActionType.EmailLoginRequest, emailLoginSaga);
+  yield takeLatest(AuthActionType.FacebookLoginRequest, facebookLoginSaga);
+  yield takeLatest(AuthActionType.GoogleLoginRequest, googleLoginSaga);
+  yield takeLatest(AuthActionType.RegisterRequest, registerSaga);
+  yield takeLatest(AuthActionType.LogOutRequest, logOutSaga);
 }
 
 export default authSaga;

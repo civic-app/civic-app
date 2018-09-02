@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { googleLogin } from '../../auth/redux/userReducer';
+import { googleLogin } from '../../auth/redux';
 import { getIsLoading } from '../../UI/redux';
 import GoogleIcon from './GoogleIcon';
 import SocialButton from './SocialButton';

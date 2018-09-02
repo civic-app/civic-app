@@ -1,7 +1,6 @@
-import authReducer, { AUTH_NAMESPACE } from '../redux';
-import { loginSuccess, logOutSuccess } from './userReducer';
+import authReducer, { AUTH_NAMESPACE, loginSuccess, logOutSuccess } from './redux';
 import { getLoggedInUser, getIsLoggedIn } from './selectors';
-import { toFakeUser } from '../doubles';
+import { toFakeUser } from './doubles';
 
 const toUser = () => toFakeUser();
 const toLoggedOutState = () => ({ user: undefined });

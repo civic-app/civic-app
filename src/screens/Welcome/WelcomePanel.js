@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import colors from '../../styles/colors';
-import { formTypes } from '../../auth/redux/formReducer';
+import { formTypes } from '../../auth/redux';
 import SocialButton from '../Auth/SocialButton';
 import FacebookAuthButton from '../Auth/FacebookAuthButton';
 import GoogleAuthButton from '../Auth/GoogleAuthButton';

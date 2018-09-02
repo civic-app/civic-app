@@ -1,6 +1,6 @@
 import { createSnapshot } from '../../../util/tests';
 import WelcomePanel from '../WelcomePanel';
-import { formTypes } from '../../../auth/redux/formReducer';
+import { formTypes } from '../../../auth/redux';
 
 describe('WelcomePanel', () => {
   it('renders correctly in initial view', () => {

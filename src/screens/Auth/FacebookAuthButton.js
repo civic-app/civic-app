@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SocialButton from './SocialButton';
 import colors from '../../styles/colors';
-import { facebookLogin } from '../../auth/redux/userReducer';
+import { facebookLogin } from '../../auth/redux';
 import { getIsLoading } from '../../UI/redux';
 
 const FacebookAuthButton = (props) => {

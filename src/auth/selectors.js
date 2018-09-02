@@ -1,14 +1,12 @@
-import { AUTH_NAMESPACE } from '.';
-import { USER_NAMESPACE } from './userReducer';
-import { FORM_NAMESPACE, formTypes } from './formReducer';
+import { AUTH_NAMESPACE, formTypes } from './redux';
 import { parseErrorResponse } from '../api';
 
 // User
-export const getLoggedInUser = state => state[AUTH_NAMESPACE][USER_NAMESPACE].user;
-export const getLoggedInUserId = state => state[AUTH_NAMESPACE][USER_NAMESPACE].user.id;
+export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
+export const getLoggedInUserId = state => state[AUTH_NAMESPACE].user.id;
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
-export const getAuthError = state => state[AUTH_NAMESPACE][USER_NAMESPACE].error;
-export const getIsLoading = state => state[AUTH_NAMESPACE][USER_NAMESPACE].loading;
+export const getAuthError = state => state[AUTH_NAMESPACE].error;
+export const getIsLoading = state => state[AUTH_NAMESPACE].loading;
 
 /*
  * Parses error codes returned from Firebase
@@ -19,11 +17,11 @@ export const getAuthErrorMessage = state => {
 };
 
 // Form
-export const getFormType = state => state[AUTH_NAMESPACE][FORM_NAMESPACE].formType;
-export const getEmailInput = state => state[AUTH_NAMESPACE][FORM_NAMESPACE].email;
-export const getPasswordInput = state => state[AUTH_NAMESPACE][FORM_NAMESPACE].password;
-export const getDuplicatePasswordInput = state => state[AUTH_NAMESPACE][FORM_NAMESPACE].duplicatePassword;
-export const getShouldShowErrors = state => state[AUTH_NAMESPACE][FORM_NAMESPACE].showErrors;
+export const getFormType = state => state[AUTH_NAMESPACE].formType;
+export const getEmailInput = state => state[AUTH_NAMESPACE].email;
+export const getPasswordInput = state => state[AUTH_NAMESPACE].password;
+export const getDuplicatePasswordInput = state => state[AUTH_NAMESPACE].duplicatePassword;
+export const getShouldShowErrors = state => state[AUTH_NAMESPACE].showErrors;
 
 export const getEmailIsValid = state => {
   const emailInput = getEmailInput(state);
