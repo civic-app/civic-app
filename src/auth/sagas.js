@@ -19,14 +19,15 @@ const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) => func
   try {
     let email;
     let password;
+    let user;
     if (requiresEmailAndPassword) {
       // grab email and password values from state
-      email = select(getEmailInput);
-      password = select(getPasswordInput);
+      email = yield select(getEmailInput);
+      password = yield select(getPasswordInput);
+      user = yield call(asyncLoginFunction, email, password);
+    } else {
+      user = yield call(asyncLoginFunction);
     }
-    // if requiresEmailAndPassword is false, email and password will be undefined
-    // and the passed function is essentially called with no parameters
-    const user = yield call(asyncLoginFunction, email, password);
     yield put(loginSuccess(user));
   } catch (err) {
     yield put(logOutAction());
