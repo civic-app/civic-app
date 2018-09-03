@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import colors from '../styles/colors';
-import { connect } from 'react-redux'
-import { userRegistered } from '../auth/redux'
-import { getUserRegistered } from '../auth/selectors'
 
 class VoterRegistrationScreen extends React.Component {
     static propTypes = propTypes;
@@ -33,11 +30,6 @@ const propTypes = {
         navigate: PropTypes.func,
         push: PropTypes.func,
     }),
-};
-
-VoterRegistrationScreen.propTypes = {
-    isRegistered: PropTypes.bool,
-    isUserRegistered: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -83,7 +75,4 @@ sharedButtonProps = {
     fontSize: 18,
 };
 
-export default connect(
-    (state) => ({ isRegistered: getUserRegistered(state) }),
-    { isUserRegistered: userRegistered },
-)(VoterRegistrationScreen);
+export default VoterRegistrationScreen;

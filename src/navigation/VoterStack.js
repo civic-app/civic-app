@@ -13,6 +13,7 @@ const VoterStack = createStackNavigator(
         TurboVote: TurboVoteScreen,
     },
     {
+        initialRouteName: 'VoterReg',
         navigationOptions: {
             title: 'Register To Vote',
             headerStyle: styles.header,
