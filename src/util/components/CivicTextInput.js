@@ -8,7 +8,11 @@ class CivicTextInput extends React.Component {
     // TODO: list all other TextInput props
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
-    style: PropTypes.any,
+  };
+
+  static defaultProps = {
+    onBlur: undefined,
+    onFocus: undefined,
   };
 
   constructor(props) {
@@ -33,7 +37,7 @@ class CivicTextInput extends React.Component {
   render() {
     return (
       <TextInput
-        style={[styles.textInput, { borderBottomColor: this.state.borderBottomColor }, this.props.style]}
+        style={[styles.textInput, { borderBottomColor: this.state.borderBottomColor }]}
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         {...this.props}

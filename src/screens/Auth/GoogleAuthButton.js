@@ -42,8 +42,8 @@ const mapDispatchToProps = { onPress: googleLogin };
 // Prevent monkey clicking the button by disabling the onPress
 // method if there's already an in-flight request
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  onPress: () => !stateProps.isLoading && dispatchProps.onPress(),
   ...ownProps,
+  onPress: () => !stateProps.isLoading && dispatchProps.onPress(),
 });
 
 export default connect(

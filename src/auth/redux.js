@@ -8,13 +8,12 @@ export const formTypes = {
 // Actions
 export const AuthActionType = {
   EmailLoginRequest: 'civicApp/auth/emailLoginRequest',
+  RegisterRequest: 'civicApp/auth/registerRequest',
   FacebookLoginRequest: 'civicApp/auth/facebookLoginRequest',
   GoogleLoginRequest: 'civicApp/auth/googleLoginRequest',
   LoginSuccess: 'civicApp/auth/emailLoginSuccess',
   LogOutRequest: 'civicApp/auth/logOutRequest',
   LogOutSuccess: 'civicApp/auth/logOutSuccess',
-  RegisterRequest: 'civicApp/auth/registerRequest',
-  RegisterSuccess: 'civicApp/auth/registerSuccess',
   AuthFailure: 'civicApp/auth/failure',
   SwitchFormType: 'civicApp/auth/switchFormType',
   UpdateEmail: 'civicApp/auth/updateEmail',
@@ -26,6 +25,8 @@ export const AuthActionType = {
 // Action Creators
 export const emailLogin = () => ({ type: AuthActionType.EmailLoginRequest });
 
+export const register = () => ({ type: AuthActionType.RegisterRequest });
+
 export const facebookLogin = () => ({ type: AuthActionType.FacebookLoginRequest });
 
 export const googleLogin = () => ({ type: AuthActionType.GoogleLoginRequest });
@@ -33,11 +34,6 @@ export const googleLogin = () => ({ type: AuthActionType.GoogleLoginRequest });
 export const loginSuccess = user => ({
   type: AuthActionType.LoginSuccess,
   payload: user,
-});
-
-export const register = (email, password) => ({
-  type: AuthActionType.RegisterRequest,
-  payload: { email, password },
 });
 
 export const logOut = () => ({ type: AuthActionType.LogOutRequest });
@@ -89,11 +85,12 @@ export const showErrors = shouldShow => ({
   payload: shouldShow,
 });
 
-const initialState = {
-  user: {
-    id: '',
-    email: '',
-  },
+/*
+ * When a user is logged in, we will store:
+ * id, email, ...
+ */
+export const initialState = {
+  user: null,
   formType: formTypes.INITIAL,
   email: '',
   password: '',
@@ -133,13 +130,15 @@ const authReducer = (state = initialState, action = {}) => {
         showErrors: action.payload,
       };
     case AuthActionType.LoginSuccess:
-    case AuthActionType.RegisterSuccess:
       return {
         ...state,
         user: { id: action.payload.uid, email: action.payload.email },
       };
     case AuthActionType.LogOutSuccess:
-      return initialState;
+      return {
+        ...state,
+        user: null,
+      };
     default:
       return state;
   }

@@ -1,10 +1,10 @@
 import { call, takeLatest, put, select } from 'redux-saga/effects';
-import authSaga, { emailLoginSaga, facebookLoginSaga, googleLoginSaga, logOutSaga, registerSaga } from './sagas';
-import { logInWithEmailAndPassword, logOut, registerWithEmailAndPassword, subscribeToAuthStateChanges } from './api';
-import { AuthActionType, authFailure, logOut as logOutAction, logOutSuccess, loginSuccess } from './redux';
-import { getEmailInput, getPasswordInput } from './selectors';
-import { signInWithFacebookAsync, signInWithGoogleAsync } from './socialauth';
-import { toFakeUser } from './doubles';
+import authSaga, { emailLoginSaga, facebookLoginSaga, googleLoginSaga, logOutSaga, registerSaga } from '../sagas';
+import { logInWithEmailAndPassword, logOut, registerWithEmailAndPassword, subscribeToAuthStateChanges } from '../api';
+import { AuthActionType, authFailure, logOut as logOutAction, logOutSuccess, loginSuccess } from '../redux';
+import { getEmailInput, getPasswordInput } from '../selectors';
+import { signInWithFacebookAsync, signInWithGoogleAsync } from '../socialauth';
+import { toFakeUser } from '../doubles';
 
 let gen;
 

@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WelcomeCarousel does not render pagination in small screen 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "maxHeight": 500,
+    }
+  }
+>
+  <Carousel
+    activeAnimationOptions={null}
+    activeAnimationType="timing"
+    activeSlideAlignment="center"
+    activeSlideOffset={20}
+    apparitionDelay={0}
+    autoplay={true}
+    autoplayDelay={300}
+    autoplayInterval={5000}
+    callbackOffsetMargin={5}
+    containerCustomStyle={Object {}}
+    contentContainerCustomStyle={Object {}}
+    data={
+      Array [
+        Object {
+          "image": <CandidatesImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          "title": "Learn About Candidates",
+        },
+        Object {
+          "image": <StayInformedImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          "title": "Stay Informed",
+        },
+        Object {
+          "image": <GetInvolvedImage />,
+          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          "title": "Get Involved",
+        },
+      ]
+    }
+    enableMomentum={false}
+    enableSnap={true}
+    firstItem={0}
+    hasParallaxImages={false}
+    inactiveSlideOpacity={0.7}
+    inactiveSlideScale={0.9}
+    inactiveSlideShift={0}
+    itemWidth={750}
+    layout="default"
+    lockScrollTimeoutDuration={1000}
+    lockScrollWhileSnapping={true}
+    loop={true}
+    loopClonesPerSide={3}
+    onSnapToItem={[Function]}
+    renderItem={[Function]}
+    shouldOptimizeUpdates={true}
+    slideStyle={Object {}}
+    sliderWidth={750}
+    swipeThreshold={20}
+    useScrollView={true}
+    vertical={false}
+  />
+</Component>
+`;
+
 exports[`WelcomeCarousel renders correctly 1`] = `
 <Component
   style={

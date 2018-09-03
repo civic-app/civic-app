@@ -3,11 +3,11 @@ import { parseErrorResponse } from '../auth/api';
 // selectors
 export const getIsSmallScreen = state => state[UI_NAMESPACE].isSmallScreen;
 export const getNetworkError = state => state[UI_NAMESPACE].error;
-export const getIsLoading = state => state[UI_NAMESPACE].isLoading;
+export const getIsLoading = state => state[UI_NAMESPACE].loading;
 /*
  * Parses error codes returned from Firebase
  */
-export const getErrorMessage = state => {
+export const getApiErrorMessage = state => {
   const error = getNetworkError(state);
   return parseErrorResponse(error);
 };
@@ -25,7 +25,7 @@ export const UI_NAMESPACE = 'ui';
 
 export const initialState = {
   isSmallScreen: false,
-  isLoading: false,
+  loading: false,
   error: { code: '', message: '' },
 };
 
@@ -42,7 +42,6 @@ const reducer = (state = initialState, action = {}) => {
         error: initialState.error,
       };
     case AuthActionType.LoginSuccess:
-    case AuthActionType.RegisterSuccess:
     case AuthActionType.LogOutSuccess:
       return {
         ...state,

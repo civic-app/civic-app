@@ -11,6 +11,7 @@ exports[`HomeScreen renders correctly 1`] = `
   <Banner
     color="#eb5757"
     icon="megaphone"
+    onPress={undefined}
     style={
       Object {
         "marginTop": 8,
@@ -22,6 +23,7 @@ exports[`HomeScreen renders correctly 1`] = `
   <Banner
     color="#126390"
     icon="megaphone"
+    onPress={undefined}
     style={
       Object {
         "marginTop": 8,
@@ -82,13 +84,13 @@ exports[`HomeScreen renders correctly 1`] = `
     data={
       Array [
         Object {
-          "eventDate": 2018-12-18T12:00:00.000Z,
+          "eventDate": 2018-12-18T17:00:00.000Z,
           "id": "activism1",
           "imgUrl": "",
           "title": "Women's March 2018",
         },
         Object {
-          "eventDate": 2018-12-19T12:00:00.000Z,
+          "eventDate": 2018-12-19T17:00:00.000Z,
           "id": "activism2",
           "imgUrl": "",
           "title": "Some Other March 2018",
@@ -111,7 +113,7 @@ exports[`HomeScreen renders correctly 1`] = `
     IN THE NEWS
   </Text>
   <NewsCard
-    createdAt={2018-08-18T12:00:00.000Z}
+    createdAt={2018-08-18T16:00:00.000Z}
     img={1}
     title="Does Gavin Newsom represent a shift in California Democratic Party?"
   />
