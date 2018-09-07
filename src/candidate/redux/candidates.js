@@ -1,6 +1,7 @@
 // Selectors
 
 export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
+
 export const getCandidates = (state, viewMapper) => (
   Object.keys(state[CANDIDATE_NAMESPACE]).map(id => viewMapper(getCandidate(state, id)))
 );
