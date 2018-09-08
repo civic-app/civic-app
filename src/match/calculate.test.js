@@ -1,4 +1,4 @@
-import { calculateGapForSingle, calculateMatch } from './selectors';
+import { calculateGapForSingle, calculateMatch } from './calculate';
 
 describe('calculateMatch', () => {
   it ('calculates match', () => {
