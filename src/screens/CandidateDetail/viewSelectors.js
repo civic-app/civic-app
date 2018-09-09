@@ -64,7 +64,7 @@ const getAboutTabProps = (state, candidateId) => {
 
 // platform is stored in text, with bullets separated by newlines
 const toPlatformList = platformText =>
-  platformText.split(/[\r\n]+/).map((bullet, idx) => ({ key: idx, content: bullet }));
+  platformText.split(/[\r\n]+/).map((bullet, idx) => ({ id: idx, content: bullet }));
 
 const testImage = require('../../assets/images/gavin.png');
 
