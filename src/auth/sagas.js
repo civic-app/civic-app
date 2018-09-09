@@ -35,12 +35,12 @@ const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) => func
   }
 };
 
-const facebookLoginSaga = generateLoginSaga(signInWithFacebookAsync, false);
-const googleLoginSaga = generateLoginSaga(signInWithGoogleAsync, false);
-const emailLoginSaga = generateLoginSaga(logInWithEmailAndPassword, true);
-const registerSaga = generateLoginSaga(registerWithEmailAndPassword, true);
+export const facebookLoginSaga = generateLoginSaga(signInWithFacebookAsync, false);
+export const googleLoginSaga = generateLoginSaga(signInWithGoogleAsync, false);
+export const emailLoginSaga = generateLoginSaga(logInWithEmailAndPassword, true);
+export const registerSaga = generateLoginSaga(registerWithEmailAndPassword, true);
 
-function* logOutSaga() {
+export function* logOutSaga() {
   try {
     yield call(logOut);
     yield put(logOutSuccess());

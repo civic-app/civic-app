@@ -1,5 +1,5 @@
 import { AUTH_NAMESPACE, formTypes } from './redux';
-import { parseErrorResponse } from '../api';
+import { parseErrorResponse } from './api';
 
 // User
 export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;

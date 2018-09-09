@@ -8,12 +8,10 @@
  * high level description of firebase errors. Each section of the firebase api
  * provides description of the specific errors you can expect.
  */
-const parseFirebaseErrorCode = (error) => {
+export const parseFirebaseErrorCode = error => {
   const { code, message } = error;
   switch (code) {
     default:
       return message;
   }
 };
-
-export default parseFirebaseErrorCode;
