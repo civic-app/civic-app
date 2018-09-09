@@ -1,6 +1,7 @@
 import { getCandidate } from '../../candidate/redux/candidates';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
+import { getMatchPercent } from '../../match/selectors';
 
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -24,9 +25,6 @@ export const getTabBarProps = (state, candidateId) => ({
   aboutTab: getAboutTabProps(state, candidateId),
   newsTab: getNewsTabProps(state, candidateId),
 });
-
-// TODO
-const getMatchPercent = () => 98;
 
 const getMatchTabProps = (state, candidateId) => {
   const issueMatchData = [
