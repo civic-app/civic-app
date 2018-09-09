@@ -24,10 +24,7 @@ const CandidatePreview = props => {
       <View style={styles.container}>
         <Avatar xlarge rounded source={{ uri: props.imageURI }} />
         <Text style={styles.nameText}>{props.name}</Text>
-        <Text style={styles.positionsText}>
-          Running for
-          {props.positions[0]}
-        </Text>
+        <Text style={styles.positionsText}>Running for {props.positions[0]}</Text>
         <Text>
           <Text style={styles.matchText}>{props.matchPercent}% </Text>
           match | {props.partyPreference}
@@ -63,6 +60,14 @@ CandidatePreview.propTypes = {
   onToggleFavorite: PropTypes.func,
 };
 
+CandidateDetail.propTypes = {
+  summary: PropTypes.shape(CandidatePreview.proptypes),
+  toggleFavorite: PropTypes.func,
+  positions: PropTypes.array,
+  candidateId: PropTypes.string,
+  partyPreference: PropTypes.string,
+  matchPercent: PropTypes.number,
+};
 const Favorite = props => (
   <View style={styles.favoriteContainer}>
     <Icon

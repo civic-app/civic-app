@@ -3,12 +3,11 @@ import { StyleSheet, FlatList, View, Text, Image } from 'react-native';
 import DateTime from '../components/DateTime';
 import Mixins from '../../styles/mixins';
 import Colors from '../../styles/colors';
-
 const img = require('../../assets/images/womens-march.png');
 
 const UpcomingActivism = ({ data }) => (
   <FlatList
-    horizontal
+    horizontal={true}
     data={data}
     keyExtractor={item => item.id}
     renderItem={({ item }) => (

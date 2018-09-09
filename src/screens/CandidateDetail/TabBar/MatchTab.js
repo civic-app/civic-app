@@ -5,26 +5,23 @@ import PropTypes from 'prop-types';
 import Colors from '../../../styles/colors';
 import IssueCard from './IssueCard';
 
-const MatchCard = props => {
-  return (
-    <View style={styles.matchCard}>
-      <Text style={styles.matchCardText}>
-        {'You\'re a '}
-        <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text> match!
-      </Text>
-      <Button
-        raised
-        rightIcon={{ name: 'launch', size: 25 }}
-        borderRadius={5}
-        title="Share"
-        buttonStyle={styles.shareButton}
-        containerViewStyle={styles.buttonView}
-        textStyle={styles.buttonText}
-        fontWeight="bold"
-      />
-    </View>
-  );
-};
+const MatchCard = props => (
+  <View style={styles.matchCard}>
+    <Text style={styles.matchCardText}>
+      You're a <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text> match!
+    </Text>
+    <Button
+      raised
+      rightIcon={{ name: 'launch', size: 25 }}
+      borderRadius={5}
+      title="Share"
+      buttonStyle={styles.shareButton}
+      containerViewStyle={styles.buttonView}
+      textStyle={styles.buttonText}
+      fontWeight="bold"
+    />
+  </View>
+);
 
 MatchCard.propTypes = {
   matchPercent: PropTypes.number,
