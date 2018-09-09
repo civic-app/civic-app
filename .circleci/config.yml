@@ -6,13 +6,24 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:8.11.3
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Expo CLI
+          command: npm install -g exp
+
+      - run:
+          name: Build Android
+          command: exp build:android
+
+  test:
+    docker:
+      - image: circleci/node:8.11.3
 
     working_directory: ~/repo
 
@@ -22,21 +33,32 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
-      - run: yarn install
+      - run:
+          name: Install missing dependencies
+          command: yarn install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run linter -- sorry not sorry
-      - run: yarn lint
+      - run:
+          name: Run linter
+          command: yarn lint
 
-      # run tests!
-      - run: yarn test
+      - run:
+          name: Run unit tests
+          command: yarn test
 
-
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build:
+        requires:
+          - test
