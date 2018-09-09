@@ -48,21 +48,23 @@ const getMatchTabProps = (state, candidateId) => {
   };
 };
 
-const getAboutTabProps = (state, candidateId) => ({
-  platformList: [
-    { id: 'key1', content: 'Colonize Space' },
-    { id: 'key2', content: 'Healthcare for All' },
-    { id: 'key3', content: 'Kick Names and Take Ass' },
-  ],
-  bioContent:
-    'Lorem ipsum dolor amet woke artisan ennui umami. Street art fixie salvia cray +1 pug chartreuse typewriter art party asymmetrical. Craft beer ramps tousled chillwave. Marfa ennui chicharrones etsy keytar sustainable tote bag synth salvia la croix listicle raclette locavore next level humblebrag. Hoodie kitsch selvage, DIY salvia single-origin coffee thundercats irony hammock meh shaman.',
-  socials: {
-    facebook: '',
-    phone: '',
-    email: '',
-    twitter: '',
-  },
-});
+const getAboutTabProps = (state, candidateId) => {
+  const candidate = getCandidate(state, candidateId);
+  return candidate && {
+    platformList: toPlatformList(candidate.platform),
+    bioContent: candidate.bio,
+    socials: {
+      facebook: candidate.facebook,
+      phone: candidate.phone,
+      email: candidate.email,
+      twitter: candidate.twitter,
+    }
+  };
+};
+
+// platform is stored in text, with bullets separated by newlines
+const toPlatformList = platformText =>
+  platformText.split(/[\r\n]+/).map((bullet, idx) => ({ key: idx, content: bullet }));
 
 const testImage = require('../../assets/images/gavin.png');
 

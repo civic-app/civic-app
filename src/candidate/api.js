@@ -15,11 +15,12 @@ const toCandidatesWithDefaultValues = (candidates) => {
     (transformed, candidateId) => ({
       ...transformed,
       ...candidateId !== 'placeholder'
+
         ? {
           [candidateId] : {
             ...addDefaults(placeholderValues, candidates[candidateId]),
             name: candidates[candidateId].firstName + ' ' + candidates[candidateId].lastName,
-            electionIds: candidates[candidateId].electionIds.split(',')
+            electionIds: candidates[candidateId].electionIds.split(','),
           }
         }
         : {}
