@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import styles from '../styles';
 import Screen from './ScreenContainer';
 
 class ElectionsScreen extends React.Component {
@@ -13,11 +11,7 @@ class ElectionsScreen extends React.Component {
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Screen goToCandidateDetail={this.goToCandidateDetail} />
-      </View>
-    );
+    return <Screen goToCandidateDetail={this.goToCandidateDetail} {...this.props} />;
   }
 }
 

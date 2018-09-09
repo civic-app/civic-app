@@ -21,6 +21,7 @@ import {
   showErrors,
 } from '../../auth/redux';
 import { getApiErrorMessage, getIsLoading } from '../../UI/redux';
+import WithAuthentication from '../../util/components/WithAuthentication';
 
 const mapStateToProps = state => ({
   isLoggedIn: getIsLoggedIn(state),
@@ -60,10 +61,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   errorMessage: stateProps.apiErrorMessage || stateProps.errorMessage,
 });
 
+const ScreenWithAuthentication = WithAuthentication('login')(CredentialInputScreen);
+
 const Container = connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps,
-)(CredentialInputScreen);
+)(ScreenWithAuthentication);
 
 export default Container;

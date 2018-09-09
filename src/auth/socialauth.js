@@ -1,5 +1,5 @@
 import Expo from 'expo';
-import { auth } from '../firebase/initialize';
+import { auth, facebookAuthProvider, googleAuthProvider } from '../firebase/initialize';
 
 export async function signInWithGoogleAsync() {
   const result = await Expo.Google.logInAsync({
@@ -10,7 +10,7 @@ export async function signInWithGoogleAsync() {
 
   if (result.type === 'success') {
     // Build Firebase credential with the Google access token.
-    const credential = auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
+    const credential = googleAuthProvider.credential(result.idToken, result.accessToken);
     // Sign in with credential from the Google user.
     return auth.signInAndRetrieveDataWithCredential(credential);
   }
@@ -25,7 +25,7 @@ export async function signInWithFacebookAsync() {
   });
   if (type === 'success') {
     // Build Firebase credential with the Facebook access token.
-    const credential = auth.FacebookAuthProvider.credential(token);
+    const credential = facebookAuthProvider.credential(token);
     // Sign in with credential from the Facebook user.
     return auth.signInAndRetrieveDataWithCredential(credential);
   }

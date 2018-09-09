@@ -9,7 +9,7 @@ describe('WelcomeScreen', () => {
       navigation: { navigate: jest.fn() },
       isSmallScreen: false,
     };
-    const snapshot = createSnapshot(WelcomeScreen.WrappedComponent, props);
+    const snapshot = createSnapshot(WelcomeScreen, props);
     expect(snapshot).toMatchSnapshot();
   });
 });
