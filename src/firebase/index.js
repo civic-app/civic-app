@@ -1,3 +1,4 @@
+import { database } from './initialize';
 /*
  * Every error from the firebase api has a standard code and message.
  * Use this method to show an appropriate error message to the user,
@@ -15,3 +16,11 @@ export const parseFirebaseErrorCode = error => {
       return message;
   }
 };
+
+export const getByPath = tablePath =>
+  database
+    .ref(tablePath)
+    .once('value')
+    .then(snapshot => snapshot.val());
+
+export const setByPath = (tablePath, newVal) => database.ref(tablePath).set(newVal);

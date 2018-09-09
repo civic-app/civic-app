@@ -1,5 +1,3 @@
-import { getByPath } from '../firebase/initialize';
+import { getByPath } from '../firebase';
 
-export const fetchCandidates = () => (
-  getByPath('candidates')
-);
+export const fetchCandidates = () => getByPath('candidates');
