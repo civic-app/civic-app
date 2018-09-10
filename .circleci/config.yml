@@ -15,7 +15,7 @@ jobs:
 
       - run:
           name: Install Expo CLI
-          command: npm install -g exp
+          command: sudo npm install -g exp
 
       - run:
           name: Build Android
