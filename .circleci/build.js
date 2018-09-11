@@ -27,9 +27,7 @@ runCommand(exec('sudo npm install -g exp'))
   })
   .then(() => {
     console.log('Logging into Expo');
-    return runCommand(
-      exec(`exp login --non-interactive -u ${process.env.EXPO_EMAIL_ADDRESS} -p ${process.env.EXPO_PASSWORD}`),
-    );
+    return runCommand(exec('exp login --non-interactive -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD'));
   })
   .then(() => {
     console.log('Building app for Android');
