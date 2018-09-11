@@ -22,9 +22,20 @@ console.log('Installing Expo CLI');
 
 runCommand(exec('sudo npm install -g exp'))
   .then(() => {
+    console.log('Starting clean session. Logging out of Expo');
+    return runCommand(exec('exp logout'));
+  })
+  .then(() => {
+    console.log('Logging into Expo');
+    return runCommand(
+      exec(`exp login --non-interactive -u ${process.env.EXPO_EMAIL_ADDRESS} -p ${process.env.EXPO_PASSWORD}`),
+    );
+  })
+  .then(() => {
     console.log('Building app for Android');
     return runCommand(exec('exp --non-interactive build:android'));
   })
   .then(() => {
-    console.log('Build successfull!');
+    console.log('Build successful!');
+    process.exit(0);
   });
