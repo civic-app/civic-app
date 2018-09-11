@@ -24,13 +24,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       # Run commands
-      - run:
-          name: Install Expo CLI
-          command: sudo npm install -g exp
-
-      - run:
-          name: Build Android
-          command: exp build:android
+      - run: node ./build.js
 
   bundle_dependencies:
     docker:
