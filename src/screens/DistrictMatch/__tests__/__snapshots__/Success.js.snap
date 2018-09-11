@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`District Match - Success Screen renders correctly 1`] = `
+<UNDEFINED>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Your District Is: 
+    WA-03
+  </Text>
+  <Button
+    onPress={[Function]}
+    title="Go to Elections"
+  />
+</UNDEFINED>
+`;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import colors from '../../styles/colors';
 import SocialButton from './SocialButton';
+import ButtonSubmit from '../components/ButtonSubmit';
 
 class CredentialInputScreen extends React.Component {
   constructor(props) {
@@ -63,9 +64,7 @@ class CredentialInputScreen extends React.Component {
             secureTextEntry={true}
             placeholder="Re-type password"
           />
-          <Text onPress={this.handleSubmit} style={styles.submitButton}>
-            SUBMIT
-          </Text>
+          <ButtonSubmit onPress={this.handleSubmit} />
           <Text style={styles.text}>or</Text>
           <SocialButton type="google" title="Sign up with Google" style={styles.social} />
           <SocialButton type="facebook" title="Continue with Facebook" style={styles.social} />
@@ -96,6 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
     paddingBottom: 10,
+    alignItems: 'center'
   },
   inputContainer: {
     backgroundColor: colors.white,
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
+    width: '100%'
   },
   social: {
     marginBottom: 8,
@@ -121,12 +122,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     maxWidth: 322,
-  },
-  submitButton: {
-    textAlign: 'right',
-    paddingTop: 20,
-    fontSize: 18,
-    color: colors.darkBlue,
   },
   textInput: {
     color: colors.black,
