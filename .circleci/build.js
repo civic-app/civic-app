@@ -27,6 +27,7 @@ runCommand(exec('sudo npm install -g exp'))
   })
   .then(() => {
     console.log('Logging into Expo');
+    // bug with expo login command see: https://github.com/expo/expo/issues/1855
     return runCommand(exec('exp login --non-interactive -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD'));
   })
   .then(() => {
