@@ -20,16 +20,18 @@ const runCommand = promiseResult =>
 
 console.log('Installing Expo CLI');
 
-runCommand(exec('sudo npm install -g exp')).then(() => {
-  console.log('Logging into Expo');
-  return runCommand(exec(`exp login -u ${process.env.EXPO_EMAIL_ADDRESS} -p ${process.env.EXPO_PASSWORD}`));
-});
-/*
+runCommand(exec('sudo npm install -g exp'))
+  .then(() => {
+    console.log('Logging into Expo');
+    return runCommand(
+      exec(`exp login --non-interactive -u ${process.env.EXPO_EMAIL_ADDRESS} -p ${process.env.EXPO_PASSWORD}`),
+    );
+  })
   .then(() => {
     console.log('Building app for Android');
-    return runCommand(exec('exp build:android'));
+    return runCommand(exec('exp --non-interactive build:android'));
   })
   .then(() => {
     console.log('Build successfull. Logging out of Expo');
-    return runCommand(exec('exp logout'));
-  });*/
+    return runCommand(exec('exp --non-interactive logout'));
+  });
