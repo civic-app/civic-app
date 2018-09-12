@@ -5,19 +5,14 @@ import styles from '../styles';
 
 const ElectionsScreen = props => (
   <View style={styles.container}>
-    {props.candidates.map(candidate => (
-      <Button
-        key={candidate.id}
-        title={`View Candidate Detail for ${candidate.name}`}
-        onPress={props.goToCandidateDetail(candidate.id)}
-      />
-    ))}
+    {console.log('hello',props)}
   </View>
 );
 
 ElectionsScreen.propTypes = {
   goToCandidateDetail: PropTypes.func,
-  candidates: PropTypes.array
+  candidate: PropTypes.array,
+  data:PropTypes.array,
 };
 
 export default ElectionsScreen

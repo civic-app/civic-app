@@ -1,22 +1,22 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { compose, lifecycle } from 'recompose'
 import Screen from './Screen'
-import { getCandidates, loadCandidates } from '../../candidate/redux/candidates'
-import { loadFavorites } from '../../favorites/redux';
+import { getCandidates, loadCandidates, getCandidate } from '../../candidate/redux/candidates'
+import { loadFavorites, getIsFavorite,toggleFavorite, FAVORITES_NAMESPACE } from '../../favorites/redux';
+import { Category } from '../../favorites/models';
 
-const Container = compose(
-  connect(
-    state => ({ candidates: getCandidates(state, toListCandidateMapperPlaceholder)}),
-    { loadCandidates, loadFavorites }
-  ),
-  lifecycle({
-    componentDidMount() {
-      this.props.loadCandidates();
-      this.props.loadFavorites();
-    }
-  })
-)(Screen);
+export const getFavoriteCandidateData  = (state) => {
+  const candidates = getCandidates(state,toListCandidateMapperPlaceholder);
+  return candidates
+}
 
-export default Container
 
-const toListCandidateMapperPlaceholder = candidate => ({ name: candidate.name, id: candidate.id })
+const toListCandidateMapperPlaceholder = candidate => ({
+  name: candidate.name, 
+  id: candidate.id,
+  image: candidate.image,
+  electionIds:candidate.electionIds,
+  partyPreference: candidate.partyPreference,
+
+})
