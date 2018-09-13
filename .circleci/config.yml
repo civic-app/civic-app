@@ -24,7 +24,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       # Run commands
-      - run: node .circleci/build.js
+      - run: bash .circleci/build.sh
 
   bundle_dependencies:
     docker:
