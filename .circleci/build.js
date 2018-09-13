@@ -20,7 +20,7 @@ const runCommand = promiseResult =>
 
 console.log('Installing Expo CLI');
 
-runCommand(exec('sudo npm install -g exp'))
+runCommand(exec('sudo npm install -g exp@^55.0.4'))
   .then(() => {
     console.log('Starting clean session. Logging out of Expo');
     return runCommand(exec('exp logout'));
