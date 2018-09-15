@@ -3,6 +3,7 @@ import { createSwitchNavigator } from 'react-navigation';
 import AuthStack from '../src/navigation/AuthStack';
 import MainTabNavigator from '../src/navigation/MainTabNavigator';
 import SurveyStack from '../src/navigation/SurveyStack';
+import DistrictMatchStack from '../src/navigation/DistrictMatchStack';
 
 /*
  * Combines unrelated flows into one single app. For example,
@@ -15,6 +16,7 @@ const NavigationRoot = createSwitchNavigator(
     App: MainTabNavigator,
     Auth: AuthStack,
     Survey: SurveyStack,
+    DistrictMatch: DistrictMatchStack
   },
   {
     initialRouteName: 'Auth',

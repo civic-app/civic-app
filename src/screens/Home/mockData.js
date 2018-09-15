@@ -1,3 +1,5 @@
+import parse from 'date-fns/parse';
+
 const testImage = require('../../assets/images/gavin.png');
 // eventually this will be in state
 export const alerts = [
@@ -35,13 +37,13 @@ export const upcomingActivism = [
     id: 'activism1',
     title: 'Women\'s March 2018',
     imgUrl: '',
-    eventDate: new Date(2018, 11, 18, 12),
+    eventDate: parse('2018-12-18T12:00:00.000Z'),
   },
   {
     id: 'activism2',
     title: 'Some Other March 2018',
     imgUrl: '',
-    eventDate: new Date(2018, 11, 19, 12),
+    eventDate: parse('2018-12-19T12:00:00.000Z'),
   },
 ];
 
@@ -50,6 +52,6 @@ export const newsItems = [
     id: 1,
     title: 'Does Gavin Newsom represent a shift in California Democratic Party?',
     img: testImage,
-    createdAt: new Date(2018, 7, 18, 12),
+    createdAt: parse('2018-08-18T12:00:00.000Z'),
   },
 ];

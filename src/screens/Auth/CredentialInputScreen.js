@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
     paddingBottom: 10,
+    alignItems: 'center'
   },
   inputContainer: {
     backgroundColor: colors.white,
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
+    width: '100%'
   },
   social: {
     marginBottom: 8,

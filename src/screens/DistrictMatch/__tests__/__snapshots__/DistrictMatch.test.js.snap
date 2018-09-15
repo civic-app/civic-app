@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DistrictMatch renders correctly 1`] = `
+<Component
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderRadius": 15,
+      "elevation": 1,
+      "flexDirection": "column",
+      "margin": 25,
+      "shadowColor": "black",
+      "shadowOffset": Object {
+        "height": 2,
+        "width": 0,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 3,
+      "width": "90%",
+    }
+  }
+>
+  <ZipCode
+    address=""
+    city=""
+    district=""
+    error=""
+    handleChange={[Function]}
+    isLoading={false}
+    navigate={undefined}
+    styles={
+      Object {
+        "bodyText": Object {
+          "fontSize": 18,
+          "paddingTop": 20,
+          "textAlign": "center",
+          "width": 230,
+        },
+        "container": Object {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderRadius": 15,
+          "elevation": 1,
+          "flexDirection": "column",
+          "margin": 25,
+          "shadowColor": "black",
+          "shadowOffset": Object {
+            "height": 2,
+            "width": 0,
+          },
+          "shadowOpacity": 0.2,
+          "shadowRadius": 3,
+          "width": "90%",
+        },
+        "errorText": Object {
+          "color": "#ff5722",
+        },
+        "header": Object {
+          "fontSize": 28,
+          "paddingTop": 20,
+        },
+        "image": Object {
+          "marginBottom": 20,
+          "marginTop": 25,
+        },
+        "inputContainer": Object {
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "padding": 20,
+          "width": "90%",
+        },
+        "textInput": Object {
+          "color": "#000000",
+          "fontSize": 18,
+          "paddingBottom": 10,
+          "paddingTop": 10,
+        },
+      }
+    }
+    submit={[Function]}
+    view="ENTER_ZIPCODE"
+    zipcode=""
+  />
+</Component>
+`;
