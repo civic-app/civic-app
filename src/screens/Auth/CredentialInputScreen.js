@@ -8,7 +8,7 @@ import GoogleAuthButton from './GoogleAuthButton';
 import colors from '../../styles/colors';
 import { formTypes } from '../../auth/redux';
 
-const CredentialInputScreen = (props) => {
+const CredentialInputScreen = props => {
   let options = {};
   switch (props.formType) {
     case formTypes.LOGIN:
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
     paddingBottom: 10,
-    alignItems: 'center'
   },
   inputContainer: {
     backgroundColor: colors.white,
@@ -118,7 +117,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
-    width: '100%'
   },
   social: {
     marginBottom: 8,
