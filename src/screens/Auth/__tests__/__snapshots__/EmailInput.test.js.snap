@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailInput renders correctly 1`] = `
+<CivicTextInput
+  autoCapitalize="none"
+  autoCorrect={false}
+  autoFocus={true}
+  clearButtonMode="while-editing"
+  keyboardType="email-address"
+  onBlur={undefined}
+  onChangeText={[MockFunction]}
+  onFocus={undefined}
+  placeholder="E-mail address"
+  value="civic@civic.com"
+/>
+`;
+
+exports[`EmailInput renders placeholder text when there is no value 1`] = `
+<CivicTextInput
+  autoCapitalize="none"
+  autoCorrect={false}
+  autoFocus={true}
+  clearButtonMode="while-editing"
+  keyboardType="email-address"
+  onBlur={undefined}
+  onChangeText={[MockFunction]}
+  onFocus={undefined}
+  placeholder="E-mail address"
+  value=""
+/>
+`;

@@ -1,24 +1,20 @@
 import firebase from 'firebase';
 
 const config = {
-  apiKey: process.env.REACT_APP_API_KEY || 'AIzaSyB5hM6R8k3FzXuaIk_Hy3SGf0Owty2x6B4',
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN || 'civic-app-cb9a8.firebaseapp.com',
-  databaseURL: process.env.REACT_APP_DATABASE_URL || 'https://civic-app-cb9a8.firebaseio.com',
-  projectId: process.env.REACT_APP_PROJECT_ID || 'civic-app-cb9a8',
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET || 'civic-app-cb9a8.appspot.com',
-  messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID || '664717193548',
+  apiKey: process.env.REACT_APP_API_KEY || 'AIzaSyCZKRQR4Q1x5mFWD1kD8vTo0uiXYWgWqNo',
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN || 'civic-app-ac266.firebaseapp.com',
+  databaseURL: process.env.REACT_APP_DATABASE_URL || 'https://civic-app-ac266.firebaseio.com',
+  projectId: process.env.REACT_APP_PROJECT_ID || 'civic-app-ac266',
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET || 'civic-app-ac266.appspot.com',
+  messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID || '506898842953',
 };
 
-firebase.initializeApp(config);
+const app = firebase.initializeApp(config);
 
-export const database = firebase.database();
-export const auth = firebase.auth();
-export const storage = firebase.storage();
+export const auth = firebase.auth(app);
+export const database = firebase.database(app);
 
-export const getByPath = tablePath =>
-  database
-    .ref(tablePath)
-    .once('value')
-    .then(snapshot => snapshot.val());
+export const googleAuthProvider = firebase.auth.GoogleAuthProvider;
+export const facebookAuthProvider = firebase.auth.FacebookAuthProvider;
 
-export const setByPath = (tablePath, newVal) => database.ref(tablePath).set(newVal);
+export default firebase;

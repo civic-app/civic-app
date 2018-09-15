@@ -21,7 +21,7 @@ exports[`Banner renders correctly 1`] = `
       },
       undefined,
       Object {
-        "backgroundColor": undefined,
+        "backgroundColor": "#eb5757",
       },
     ]
   }
@@ -71,7 +71,7 @@ exports[`Banner renders correctly 1`] = `
             "right": 20,
           }
         }
-        name={undefined}
+        name="megaphone"
         raised={false}
         reverse={false}
         reverseColor="white"

@@ -5,10 +5,11 @@ describe('WelcomeScreen', () => {
   it('renders correctly', () => {
     const props = {
       formType: 'foo',
-      switchFormType: jest.fn(),
-      navigation: {},
+      changeFormType: jest.fn(),
+      navigation: { navigate: jest.fn() },
+      isSmallScreen: false,
     };
-    const snapshot = createSnapshot(WelcomeScreen.WrappedComponent, props);
+    const snapshot = createSnapshot(WelcomeScreen, props);
     expect(snapshot).toMatchSnapshot();
   });
 });
