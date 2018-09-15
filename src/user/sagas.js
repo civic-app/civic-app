@@ -7,8 +7,8 @@ export const loadUserDataSaga = function*() {
   try {
     const userId = yield select(getLoggedInUserId);
     if (userId) {
-      const { responses, favorites, ...user } = yield call(fetchUser, userId);
-      yield put(userFetchSuccess(responses, favorites, user))
+      const userResponse = yield call(fetchUser, userId);
+      yield put(userFetchSuccess(userResponse))
     } else {
       yield call(logOutSaga)
     }
@@ -18,7 +18,7 @@ export const loadUserDataSaga = function*() {
   }
 };
 
-export const userFetchSuccess = (responses, favorites, user) => ({
+export const userFetchSuccess = ({ responses, favorites, user }) => ({
   type: UserActionType.RequestSuccess,
   payload: { responses, favorites, user },
 });
