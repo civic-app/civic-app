@@ -4,6 +4,6 @@ echo 'Starting clean session. Logging out of Expo'
 exp logout
 echo 'Logging into Expo'
 exp login --non-interactive -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
-echo 'Building app for Android'
-exp build:android --non-interactive
-echo 'Build successful!'
+echo 'Building and publishing to Expo'
+exp publish --non-interactive
+echo 'Build and publish successful!'
