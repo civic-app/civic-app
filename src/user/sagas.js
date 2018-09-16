@@ -1,5 +1,5 @@
 import { call, select, put, takeEvery } from 'redux-saga/effects';
-import { getLoggedInUserId } from '../auth/redux';
+import { getLoggedInUserId } from '../auth/selectors';
 import { logOutSaga } from '../auth/sagas';
 import { fetchUser } from './api';
 

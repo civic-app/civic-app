@@ -78,7 +78,7 @@ describe('emailLoginSaga', () => {
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next(user).value).toEqual(put(loginSuccess(user)));
+    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -110,7 +110,7 @@ describe('facebookLoginSaga', () => {
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next(user).value).toEqual(put(loginSuccess(user)));
+    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -138,7 +138,7 @@ describe('googleLoginSaga', () => {
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next(user).value).toEqual(put(loginSuccess(user)));
+    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -181,7 +181,7 @@ describe('registerSaga', () => {
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next(user).value).toEqual(put(loginSuccess(user)));
+    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
