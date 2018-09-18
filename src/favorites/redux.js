@@ -1,7 +1,7 @@
 import { Category } from './models';
+import { UserActionType } from '../user/sagas';
 
 // Selectors
-
 export const getUserFavorites = (state) => ({
   [Category.Candidates]: Array.from(getFavoritesForCategory(state, Category.Candidates)),
   [Category.Events]: Array.from(getFavoritesForCategory(state, Category.Events)),
@@ -18,10 +18,6 @@ const getFavoritesForCategory = (state, category) => (
 export const FAVORITES_NAMESPACE = 'favorites';
 
 // Action Creators
-export const loadFavorites = () => ({
-  type: FavoritesActionType.Request,
-});
-
 export const favoritesRequestSuccess = favorites => ({
   type: FavoritesActionType.RequestSuccess,
   payload: favorites,
@@ -47,8 +43,6 @@ const removeFavorite = (id, category) => ({
 });
 
 export const FavoritesActionType = {
-  Request: 'civicApp/favorites/request',
-  RequestSuccess: 'civicApp/favorites/requestSuccess',
   Toggle: 'civicApp/favorites/toggle',
   Add: 'civicApp/favorites/add',
   Remove: 'civicApp/favorites/remove',
@@ -59,10 +53,10 @@ export const FavoritesActionType = {
 const reducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case FavoritesActionType.RequestSuccess:
+    case UserActionType.RequestSuccess:
       return {
-        [Category.Candidates]: new Set(action.payload[Category.Candidates]),
-        [Category.Events]: new Set(action.payload[Category.Events]),
+        [Category.Candidates]: new Set(action.payload.favorites[Category.Candidates]),
+        [Category.Events]: new Set(action.payload.favorites[Category.Events]),
       };
     case FavoritesActionType.Add:
       return {

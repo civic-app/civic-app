@@ -1,0 +1,29 @@
+{
+  "id": "Ra6l4NfjcLcc8XdP4gX1aWdhRRd2",
+  "address": "125 W 125th st, New York, NY, 10001",
+  "district": "10",
+  "responses": {
+    "8bb9a280-6ea8-11e8-b566-0800200c9a66": {
+      "questionId": "8bb9a280-6ea8-11e8-b566-0800200c9a66",
+        "questionResponse": 2
+    },
+    "33f3204d0e5d4a69b614b97eb18b9b9c": {
+      "questionId": "33f3204d0e5d4a69b614b97eb18b9b9c",
+        "questionResponse": 2
+    },
+    "e54d81349a0e40eb900d9eb7744a9480": {
+      "questionId": "e54d81349a0e40eb900d9eb7744a9480",
+        "questionResponse": 2
+    },
+    "3a0715f1b6224fad8f1dcecea3b228b7": {
+      "questionId": "3a0715f1b6224fad8f1dcecea3b228b7",
+        "questionResponse": 2
+    }
+  },
+    "favorites": {
+    "candidates": {
+      "c88d3aa0-6ea8-11e8-b566-0800200c9a66": true
+    },
+    "events": {}
+  }
+}

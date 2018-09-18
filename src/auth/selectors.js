@@ -3,7 +3,7 @@ import { parseErrorResponse } from './api';
 
 // User
 export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
-export const getLoggedInUserId = state => getLoggedInUser(state) && state[AUTH_NAMESPACE].user.id;
+export const getLoggedInUserId = state => getLoggedInUser(state) && getLoggedInUser(state).id;
 export const getIsLoggedIn = state => !!getLoggedInUser(state);
 export const getAuthError = state => state[AUTH_NAMESPACE].error;
 export const getIsLoading = state => state[AUTH_NAMESPACE].loading;
