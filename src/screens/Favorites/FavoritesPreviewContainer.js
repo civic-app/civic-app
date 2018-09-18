@@ -1,19 +1,13 @@
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { compose, lifecycle } from 'recompose';
 import FavoritesPreview from './FavoritesPreview';
 import WithAuthentication from '../../util/components/WithAuthentication';
-import { getCandidates, loadCandidates, getCandidate } from '../../candidate/redux/candidates';
-import { loadFavorites, getIsFavorite, toggleFavorite } from '../../favorites/redux';
+import { getCandidates, loadCandidates } from '../../candidate/redux/candidates'
+import { loadFavorites } from '../../favorites/redux';
 import { getIsLoggedIn } from '../../auth/selectors';
-import { Category } from '../../favorites/models';
 
-export const getFavoriteCandidateData = state => {
-  const candidates = getCandidates(state, toListCandidateMapper);
-  var isFavorite = candidates.map(candidate => {
-    getIsFavorite(state, candidate.id, Category.Candidates);
-  });
-  return candidates;
+export const getFavoriteCandidateData  = state => {
+  return getCandidates(state,toListCandidateMapper);
 };
 
 const ScreenWithAuthentication = WithAuthentication('logout')(FavoritesPreview);
