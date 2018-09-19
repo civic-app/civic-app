@@ -14,7 +14,7 @@ const Biography = ({bioContent}) =>
   <View style={styles.textContainer}>
     <Text style={styles.heading}>Biography</Text>
     <Text>{bioContent}</Text>
-    <Text style={styles.readMoreText}>Read more</Text>
+    {/*<Text style={styles.readMoreText}>Read more</Text>*/}
   </View>
 
 Biography.propTypes = {
@@ -33,7 +33,7 @@ const Platform = ({platformList}) =>
       renderItem={({item})=><Text key={item.id}>• {item.content}</Text>}
       keyExtractor={(item)=>item.id}
     />
-    <Text style={styles.readMoreText}>Read more</Text>
+    {/*<Text style={styles.readMoreText}>Read more</Text>*/}
   </View>
 
 Platform.propTypes = {

@@ -1,6 +1,10 @@
 import { getCandidate } from '../../candidate/redux/candidates';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
+import { getMatchPercent } from '../../match/selectors';
+import { getSurveyQuestions, getUserPositions } from '../../match/redux';
+import { getPositionsForCandidate } from '../../candidate/redux/positions';
+import { getPositionResponse, isAgreement, isUserNeutral } from '../../match/calculate';
 
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -25,24 +29,26 @@ export const getTabBarProps = (state, candidateId) => ({
   newsTab: getNewsTabProps(state, candidateId),
 });
 
-// TODO
-const getMatchPercent = () => 98;
-
 const getMatchTabProps = (state, candidateId) => {
-  const issueMatchData = [
-    {
-      id: '1',
-      type: 'healthcare',
-      body: 'Obama supports single-payer universal healthcare for all Californians.',
-      agreesWithUser: true,
-    },
-    {
-      id: '2',
-      type: 'environmental',
-      body: 'Obama does not support solar power.',
-      agreesWithUser: false,
-    },
-  ];
+  const userPositions = getUserPositions(state);
+  const candidatePositions = getPositionsForCandidate(state, candidateId);
+  const surveyQuestions = getSurveyQuestions(state);
+
+  const issueMatchData = (candidatePositions && userPositions && surveyQuestions) ?
+    Object.keys(userPositions).map(
+      questionId => {
+        const userResponse = getPositionResponse(questionId, userPositions);
+        const candidateResponse = getPositionResponse(questionId, candidatePositions);
+        // TODO: how to handle neutral user
+        const agreesWithUser = isAgreement(userResponse, candidateResponse) || isUserNeutral(userResponse);
+        return {
+          id: questionId,
+          type: surveyQuestions[questionId] && surveyQuestions[questionId].type || 'other',
+          body: candidatePositions[questionId].explanation,
+          agreesWithUser: agreesWithUser
+        }
+      }
+    ) : [];
 
   return {
     matchPercent: getMatchPercent(state, candidateId),
@@ -50,21 +56,23 @@ const getMatchTabProps = (state, candidateId) => {
   };
 };
 
-const getAboutTabProps = (state, candidateId) => ({
-  platformList: [
-    { id: 'key1', content: 'Colonize Space' },
-    { id: 'key2', content: 'Healthcare for All' },
-    { id: 'key3', content: 'Kick Names and Take Ass' },
-  ],
-  bioContent:
-    'Lorem ipsum dolor amet woke artisan ennui umami. Street art fixie salvia cray +1 pug chartreuse typewriter art party asymmetrical. Craft beer ramps tousled chillwave. Marfa ennui chicharrones etsy keytar sustainable tote bag synth salvia la croix listicle raclette locavore next level humblebrag. Hoodie kitsch selvage, DIY salvia single-origin coffee thundercats irony hammock meh shaman.',
-  socials: {
-    facebook: '',
-    phone: '',
-    email: '',
-    twitter: '',
-  },
-});
+const getAboutTabProps = (state, candidateId) => {
+  const candidate = getCandidate(state, candidateId);
+  return candidate && {
+    platformList: toPlatformList(candidate.platform),
+    bioContent: candidate.bio,
+    socials: {
+      facebook: candidate.facebook,
+      phone: candidate.phone,
+      email: candidate.email,
+      twitter: candidate.twitter,
+    }
+  };
+};
+
+// platform is stored in text, with bullets separated by newlines
+const toPlatformList = platformText =>
+  platformText.split(/[\r\n]+/).map((bullet, idx) => ({ id: idx, content: bullet }));
 
 const testImage = require('../../assets/images/gavin.png');
 

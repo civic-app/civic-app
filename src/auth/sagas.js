@@ -28,7 +28,7 @@ const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) => func
     } else {
       user = yield call(asyncLoginFunction);
     }
-    yield put(loginSuccess(user));
+    yield put(loginSuccess(user.user));
   } catch (err) {
     yield put(logOutAction());
     yield put(authFailure(err));
