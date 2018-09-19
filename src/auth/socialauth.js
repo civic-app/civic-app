@@ -3,8 +3,8 @@ import { auth, facebookAuthProvider, googleAuthProvider } from '../firebase/init
 
 export async function signInWithGoogleAsync() {
   const result = await Expo.Google.logInAsync({
-    androidClientId: '506898842953-a5djvc12er7cbmv78ajfjidokjmlropn.apps.googleusercontent.com',
-    iosClientId: '506898842953-8nise7b8pq8ifdp9qpjta6d5no0l5u93.apps.googleusercontent.com',
+    androidClientId: process.env.REACT_NATIVE_GOOGLE_ANDROID_CLIENT_ID,
+    iosClientId: process.env.REACT_NATIVE_GOOGLE_IOS_CLIENT_ID,
     scopes: ['profile', 'email'],
   });
 
@@ -20,7 +20,7 @@ export async function signInWithGoogleAsync() {
 }
 
 export async function signInWithFacebookAsync() {
-  const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('206331633410454', {
+  const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(process.env.REACT_NATIVE_FACEBOOK_APP_ID, {
     permissions: ['email', 'public_profile'],
   });
   if (type === 'success') {
