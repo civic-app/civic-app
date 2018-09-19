@@ -2,6 +2,9 @@ import { getCandidate } from '../../candidate/redux/candidates';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 import { getMatchPercent } from '../../match/selectors';
+import { getSurveyQuestions, getUserPositions } from '../../match/redux';
+import { getPositionsForCandidate } from '../../candidate/redux/positions';
+import { getPositionResponse, isAgreement, isUserNeutral } from '../../match/calculate';
 
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -27,20 +30,25 @@ export const getTabBarProps = (state, candidateId) => ({
 });
 
 const getMatchTabProps = (state, candidateId) => {
-  const issueMatchData = [
-    {
-      id: '1',
-      type: 'healthcare',
-      body: 'Obama supports single-payer universal healthcare for all Californians.',
-      agreesWithUser: true,
-    },
-    {
-      id: '2',
-      type: 'environmental',
-      body: 'Obama does not support solar power.',
-      agreesWithUser: false,
-    },
-  ];
+  const userPositions = getUserPositions(state);
+  const candidatePositions = getPositionsForCandidate(state, candidateId);
+  const surveyQuestions = getSurveyQuestions(state);
+
+  const issueMatchData = (candidatePositions && userPositions && surveyQuestions) ?
+    Object.keys(userPositions).map(
+      questionId => {
+        const userResponse = getPositionResponse(questionId, userPositions);
+        const candidateResponse = getPositionResponse(questionId, candidatePositions);
+        // TODO: how to handle neutral user
+        const agreesWithUser = isAgreement(userResponse, candidateResponse) || isUserNeutral(userResponse);
+        return {
+          id: questionId,
+          type: surveyQuestions[questionId] && surveyQuestions[questionId].type || 'other',
+          body: candidatePositions[questionId].explanation,
+          agreesWithUser: agreesWithUser
+        }
+      }
+    ) : [];
 
   return {
     matchPercent: getMatchPercent(state, candidateId),

@@ -1,4 +1,4 @@
-import { getByPath } from '../firebase/initialize';
+import { getByPath } from '../firebase';
 import { toFavorites } from '../favorites/api';
 
 export const fetchUser = (id) => (

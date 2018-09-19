@@ -1,12 +1,15 @@
 import { getDataFromGoogleSpreadsheet } from '../googleDriveApi/getData';
 
-const candidateDriveUrl = (
-  'https://spreadsheets.google.com/feeds/list/1Enwx8oPTcGyhv_re0kk_F2QiK5V80Lg4OftBbmrotkQ/od6/public/values?alt=json'
-);
+const candidateDriveId = '1Enwx8oPTcGyhv_re0kk_F2QiK5V80Lg4OftBbmrotkQ';
+const candidatePositionsDriveId = '1f_k2Jz_3eCy4p95fwZAd81hd3q8DbPXpIpiJApu5st4';
 
 export const fetchCandidates = () => (
-  getDataFromGoogleSpreadsheet(candidateDriveUrl)
+  getDataFromGoogleSpreadsheet(candidateDriveId)
     .then(toCandidatesWithDefaultValues)
+);
+
+export const fetchCandidatePositions = () => (
+  getDataFromGoogleSpreadsheet(candidatePositionsDriveId, toCandidatePositions)
 );
 
 const toCandidatesWithDefaultValues = (candidates) => {
@@ -15,7 +18,6 @@ const toCandidatesWithDefaultValues = (candidates) => {
     (transformed, candidateId) => ({
       ...transformed,
       ...candidateId !== 'placeholder'
-
         ? {
           [candidateId] : {
             ...addDefaults(placeholderValues, candidates[candidateId]),
@@ -37,4 +39,23 @@ const addDefaults = (defaults, candidate) => (
     }),
     {},
   )
+);
+
+const toCandidatePositions = (apiPositions, transformKeysFromGoogle) => (
+  apiPositions.reduce(
+    (transformed, apiPosition) => {
+      const posWithString = transformKeysFromGoogle(apiPosition);
+      const position = {
+        ...posWithString,
+        response: parseInt(posWithString.response, 10)
+      };
+      return {
+        ...transformed,
+        [position.candidateId]: {
+          ...(transformed[position.candidateId] || {}),
+          [position.questionId] : position,
+        },
+      };
+    },
+    {})
 );

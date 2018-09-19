@@ -15,6 +15,7 @@ export const loadUserDataSaga = function*() {
 
   } catch (err) {
     // TODO: handle error
+
   }
 };
 

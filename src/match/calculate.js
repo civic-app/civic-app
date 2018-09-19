@@ -1,6 +1,10 @@
 export const calculateMatch = (userPositions, candidatePositions) => {
   const [gap, maxGap] = calculatePositionsGap(userPositions, candidatePositions);
-  return +(Math.round(((1 - gap/maxGap) * 100) + 'e+2')  + 'e-2');
+  return (
+    maxGap > 0 // 0 max gap means candidate and user have no questions on which they both expressed an opinion
+      ? +(Math.round(((1 - gap/maxGap) * 100) + 'e+2')  + 'e-2')
+      : 0 // TODO: maybe add a real placeholder when candidate data is all in place
+  );
 };
 
 const calculatePositionsGap = (userPositions, candidatePositions) => (
@@ -8,14 +12,16 @@ const calculatePositionsGap = (userPositions, candidatePositions) => (
     ([totalSoFar, maxSoFar], id) => {
       const userScore = getPositionResponse(id, userPositions);
       const candidateScore = getPositionResponse(id, candidatePositions);
-      const [gap, max] = calculateGapForSingle(userScore, candidateScore);
+      const [gap, max] = hasUserAndCandidateScores(userScore, candidateScore)
+        ? calculateGapForSingle(userScore, candidateScore)
+        : [0, 0];
       return [gap + totalSoFar, max + maxSoFar];
     },
     [0, 0])
 );
 
 export const calculateGapForSingle = (user, candidate) => {
-  if (user === 0) {
+  if (isUserNeutral(user)) {
     return [0, 0];
   } else if (isAgreement(user, candidate)) {
     return [0, 4];
@@ -26,11 +32,16 @@ export const calculateGapForSingle = (user, candidate) => {
   }
 };
 
-const isAgreement = (user, candidate) => (
+export const isAgreement = (user, candidate) => (
   (candidate > 0 && user > 0)
   || (candidate < 0 && user < 0)
 );
 
-const getPositionResponse = (id, positions) => (
-  positions[id].response
+export const isUserNeutral = user => user === 0;
+
+export const getPositionResponse = (id, positions) => (
+  positions && positions[id] && positions[id].response
 );
+
+const hasUserAndCandidateScores = (userScore, candidateScore) =>
+  (typeof userScore === 'number') && (typeof candidateScore === 'number');

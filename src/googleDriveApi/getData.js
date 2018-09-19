@@ -1,19 +1,23 @@
-export const getDataFromGoogleSpreadsheet = (spreadsheetUrl, transformFn = transformEntries) => (
-  fetchFromUrl(spreadsheetUrl)
-    .then(response => transformFn(getRows(response)))
+export const getDataFromGoogleSpreadsheet = (
+  spreadsheetId,
+  transformFn = reduceEntriesById,
+  transformKeys = fromGoogleKeys,
+) => (
+  fetchFromUrl(`https://spreadsheets.google.com/feeds/list/${spreadsheetId}/od6/public/values?alt=json`)
+    .then(response => transformFn(getRows(response), transformKeys))
 );
 
-const transformEntries = (entries) => (
+const reduceEntriesById = (entries, transformKeys) => (
   entries.reduce(
     (transformed, origEntry) => ({
       ...transformed,
-      [getValue(origEntry, 'gsx$id')]: toEntryWithDesiredKeys(origEntry),
+      [getValue(origEntry, 'gsx$id')]: transformKeys(origEntry),
     }),
     {},
   )
 );
 
-const toEntryWithDesiredKeys = (entry) => (
+const fromGoogleKeys = (entry) => (
   Object.keys(entry).reduce(
     (transformed, key) => {
       if (key.startsWith('gsx$')) {
