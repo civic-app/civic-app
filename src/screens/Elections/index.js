@@ -33,36 +33,38 @@ const propTypes = {
   }),
 };
 
+const new_set = new Set()
 const ScreenView = props => (
   <View style={styles.container}>
-    <View style={styles.candidateContainer}>
-      <View style={styles.informationContainer}>
-        <Text style={styles.positionText}>California Governor {'\n'} </Text>
-        <Text style={styles.electionText}>November 6, 2018</Text>
+    {props.data.map(candidate => (
+      new_set.add(candidate.electionIds[0])
+    ))}
+    {[...new_set].map((val1) => (
+      <View key={val1} style={styles.candidateContainer}>
+        <View style={styles.informationContainer}>
+          <Text style={styles.positionText}>{val1} </Text>
+          <Text style={styles.electionText}>November 6, 2018</Text>
+        </View>
+        <ScrollView horizontal={true}>
+          {props.data.map(candidate => (
+            (val1 === candidate.electionIds.toString()) 
+              ?  
+              <View key={candidate.id} style={styles.secondContainer}>
+                <View style={styles.pictureBody}>
+                  <View style={styles.newsCard}>
+                    <Image style={styles.candidatePicture}
+                      source={{ uri: candidate.image}} 
+                    />
+                  </View> 
+
+                </View>   
+              </View>  
+
+              : null
+          ))}
+        </ScrollView>
       </View>
-      <ScrollView horizontal={true}>
-        {props.data.map(candidate => (
-          <View key={candidate.id} style={styles.container}>
-            <View style={styles.pictureBody}>
-              <TouchableOpacity onPress={props.goToCandidateDetail(candidate.id)}> 
-                <Image style={styles.candidatePicture}
-                  source={{ uri: candidate.image}} 
-                />
-                <FavoriteScreen candidateId={candidate.id}/>
-              </TouchableOpacity>
-            </View>   
-            <View style={styles.contentContainer}>
-              <View style={styles.contentBody}>
-                <Text style={styles.matchCardText}>
-                  <Text style={styles.nameText}>{candidate.name}{'\n'}</Text>
-                  <Text style={styles.matchCardPercentText}>89%</Text> match
-                </Text>
-              </View>
-            </View>   
-          </View>
-        )) }
-      </ScrollView>
-    </View>
+    ))}
   </View>
 );
 
@@ -76,7 +78,7 @@ const ScreenContainer = props => (
     {props.isFavorite ? 
       <View style={styles.favoriteBody}>
         <Icon
-          name={props.isFavorite ? 'star' : null }
+          name={'star'}
           iconStyle={styles.favorite}
           size={15}
         />
@@ -118,10 +120,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent:'flex-start',
-    alignItems: 'stretch',
     flexGrow: 1,
+    justifyContent:'space-between',
+    alignItems: 'stretch',
     paddingBottom: 15,
+    backgroundColor: Colors.lightGray2
+  },
+  secondContainer: {
+    height: 300,
+    paddingBottom: 300,
+    backgroundColor: Colors.white
   },
   informationContainer: {
     padding:20,
@@ -145,7 +153,7 @@ const styles = StyleSheet.create({
     color:Colors.white,
   },
   favoriteBody: {
-    flexDirection: 'row',
+    flexDirection:'row',
     position: 'absolute',
     left: 10,
     top: 120,
@@ -170,7 +178,7 @@ const styles = StyleSheet.create({
   }, 
   candidateContainer: {
     alignItems: 'flex-start',
-    flexDirection: 'column',
+    // flexDirection: 'column',
     marginTop: 15,
     flex: 1,
     backgroundColor: Colors.white,
@@ -185,6 +193,7 @@ const styles = StyleSheet.create({
     height:150,
     width:'100%',
   },
+
   pictureBody: {
     marginLeft: 15,
     height: 150,
