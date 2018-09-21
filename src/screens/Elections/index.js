@@ -8,7 +8,7 @@ import { compose, lifecycle } from 'recompose'
 import { Icon } from 'react-native-elements';
 import { loadCandidates } from '../../candidate/redux/candidates'
 import { loadFavorites } from '../../favorites/redux';
-import { getFavoriteCandidateData, getFavorite }  from './ScreenContainer';
+import { getFavoriteCandidateData, getFavorite, matchPercent }  from './ScreenContainer';
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
@@ -66,7 +66,7 @@ const ElectionView = props => (
                       <View style={styles.contentBody}>
                         <Text style={styles.matchCardText}>
                           <Text style={styles.nameText}>{candidate.name}{'\n\n'}</Text>
-                          <Text style={styles.matchCardPercentText}>89%</Text> match
+                          <MatchNumber candidateId={candidate.id}/> match
                         </Text>
                       </View>
                     </View>   
@@ -109,6 +109,14 @@ FavoriteContainer.propTypes = {
   isFavorite: PropTypes.bool,
 };
 
+const Match = props => (
+  <Text style={styles.matchCardPercentText}>{props.match}{'%'}</Text>
+);
+
+Match.propTypes = {
+  match: PropTypes.number,
+};
+
 const Elections = compose(
   connect(
     (state) => ({
@@ -129,6 +137,12 @@ const FavoriteScreen = connect(
     isFavorite: getFavorite(state, ownProps.candidateId),
   }),
 )(FavoriteContainer);
+
+const MatchNumber = connect(
+  (state, ownProps) => ({
+    match: matchPercent(state, ownProps.candidateId),
+  }),
+)(Match);
 
 const styles = StyleSheet.create({
   container: {
