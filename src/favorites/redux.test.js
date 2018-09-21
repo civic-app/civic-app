@@ -1,5 +1,6 @@
 import { Category } from './models';
 import reducer, { favoritesRequestSuccess, addOrRemoveFavorite } from './redux';
+import { userFetchSuccess } from '../user/sagas';
 
 
 describe('favorites reducer', () => {
@@ -7,8 +8,10 @@ describe('favorites reducer', () => {
     const canidateIds = ['foo', 'bar'];
     const eventIds = ['foobar', 'baz'];
     const payload = {
-      [Category.Candidates]: canidateIds,
-      [Category.Events]: eventIds,
+      favorites: {
+        [Category.Candidates]: canidateIds,
+        [Category.Events]: eventIds,
+      }
     };
     const initialState = {
       [Category.Candidates]: new Set(),
@@ -18,7 +21,7 @@ describe('favorites reducer', () => {
       [Category.Candidates]: new Set(canidateIds),
       [Category.Events]: new Set(eventIds),
     };
-    expect(reducer(initialState, favoritesRequestSuccess(payload))).toEqual(expectedState);
+    expect(reducer(initialState, userFetchSuccess(payload))).toEqual(expectedState);
   });
 
   it('updates state when adding a favorite', () => {

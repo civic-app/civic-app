@@ -1,22 +1,26 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import Screen from './Screen';
 import { getCandidates, loadCandidates } from '../../candidate/redux/candidates';
+import { loadUser } from '../../user/sagas'
 import { getIsLoggedIn } from '../../auth/selectors';
-import { loadFavorites } from '../../favorites/redux';
 import WithAuthentication from '../../util/components/WithAuthentication';
+import Screen from './Screen';
 
 const ScreenWithAuthentication = WithAuthentication('logout')(Screen);
 
 const Container = compose(
   connect(
-    state => ({ candidates: getCandidates(state, toListCandidateMapperPlaceholder), isLoggedIn: getIsLoggedIn(state) }),
-    { loadCandidates, loadFavorites },
+    state => ({
+      candidates: getCandidates(state, toListCandidateMapperPlaceholder),
+      isLoggedIn: getIsLoggedIn(state),
+    }),
+    { loadCandidates, loadUser },
   ),
   lifecycle({
     componentDidMount() {
       this.props.loadCandidates();
-      this.props.loadFavorites();
+      // TODO: only load user if match data has not been loaded yet
+      this.props.loadUser();
     },
   }),
 )(ScreenWithAuthentication);

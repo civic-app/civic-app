@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import CandidateDetail from './CandidateDetail';
+import { compose, lifecycle } from 'recompose'
 import { toggleFavorite } from '../../favorites/redux';
+import { loadSurvey} from '../../match/redux';
+import CandidateDetail from './CandidateDetail';
 import TabBar from './TabBar';
 import { getCandidateSummary, getTabBarProps } from './viewSelectors';
 
@@ -45,14 +47,19 @@ ScreenView.propTypes = {
   tabBar: PropTypes.shape(TabBar.propTypes),
 };
 
-const ScreenContainer = connect(
-  (state, ownProps) => ({
-    summary: getCandidateSummary(state, ownProps.candidateId),
-    tabBar: getTabBarProps(state, ownProps.candidateId),
+const ScreenContainer = compose(
+  connect(
+    (state, ownProps) => ({
+      summary: getCandidateSummary(state, ownProps.candidateId),
+      tabBar: getTabBarProps(state, ownProps.candidateId),
+    }),
+    { toggleFavorite, loadSurvey },
+  ),
+  lifecycle({
+    componentDidMount() {
+      this.props.loadSurvey();
+    }
   }),
-  { toggleFavorite },
 )(ScreenView);
 
 export default CandidatesScreen
-
-

@@ -1,25 +1,18 @@
 // Selectors
+import { CandidateActionType } from './candidates';
+
 export const getPositionsForCandidate = (state, candidateId) =>
   state[POSITIONS_NAMESPACE][candidateId];
 
-// Action Creators
-export const positionsRequestSuccess = positions => ({
-  type: PositionsActionType.RequestSuccess,
-  payload: positions,
-});
+export const POSITIONS_NAMESPACE = 'candidatePositions';
 
-export const PositionsActionType = {
-  RequestSuccess: 'civicApp/positions/requestSuccess',
-};
-
-export const POSITIONS_NAMESPACE = 'positions';
-
+// Reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case PositionsActionType.RequestSuccess:
+    case CandidateActionType.RequestSuccess:
       return {
         ...state,
-        [action.payload.candidateId]: action.payload,
+        ...action.payload.positions,
       };
     default:
       return state;

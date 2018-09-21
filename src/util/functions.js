@@ -1,5 +1,5 @@
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict';
-const CIVIC_API_KEY = 'AIzaSyDJeJLI-mFC5zx1zXCptCNnvk4e3iPbQF8';
+const CIVIC_API_KEY = process.env.REACT_NATIVE_API_KEY;
 
 export const distanceInWordsFromNow = date => {
   return distanceInWordsStrict(date, Date.now());

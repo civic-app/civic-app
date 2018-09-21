@@ -21,7 +21,7 @@ const NewsInfo = (props) => {
       {newsData.map(data =>
         <View key={data.id} style={styles.newsBody}>
           <Text style={styles.newsBodyText}>
-          <Text> {data.body}</Text>
+            <Text> {data.body}</Text>
           </Text>
           <View style={styles.dateTag}>
             <Icon
@@ -33,7 +33,7 @@ const NewsInfo = (props) => {
             <Text>3 hr ago</Text>
           </View>
         </View>
-       ) }
+      ) }
     </View>);
 };
 
@@ -51,20 +51,20 @@ const FavoritesScreen = props => (
         <View style={styles.candidateContainer} >
           <Text style={styles.nameText} >{item.name}</Text>
           <Text style={styles.positionsText}>
-            Running for {item.electionIds} 
+            Running for {item.electionIds}
           </Text>
           <ScrollView horizontal={true}>
             <View style={styles.container} >
               <View style={styles.newsCard}>
-                <TouchableOpacity onPress={props.goToCandidateDetail(item.id)}> 
+                <TouchableOpacity onPress={props.goToCandidateDetail(item.id)}>
                   <Avatar xlarge round={false} source={{ uri: item.image}}/>
                 </TouchableOpacity>
                 <NewsInfo/>
-              </View> 
+              </View>
             </View>
           </ScrollView>
         </View>
-      )} 
+      )}
     />
   </View>
 );
@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
     flex:1,
     padding: 10,
     height: 150,
-    width: 200, 
+    width: 200,
     backgroundColor: Colors.white
   },
   newsBodyText:{
     fontSize: 16,
-    lineHeight: 22, 
+    lineHeight: 22,
   },
   dateTag:{
     flexDirection: 'row',
