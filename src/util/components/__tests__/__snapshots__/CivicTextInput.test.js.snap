@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CivicTextInput renders correctly 1`] = `
+<TextInput
+  allowFontScaling={true}
+  onBlur={undefined}
+  onFocus={undefined}
+  style={
+    Array [
+      Object {
+        "borderBottomWidth": 2,
+        "color": "#000000",
+        "fontSize": 18,
+        "paddingBottom": 10,
+        "paddingTop": 10,
+      },
+      Object {
+        "borderBottomColor": "#e0e0e0",
+      },
+    ]
+  }
+/>
+`;

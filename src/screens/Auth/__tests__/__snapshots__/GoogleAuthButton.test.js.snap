@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleAuthButton renders correctly 1`] = `
+<SocialButton
+  buttonStyle={
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#e0e0e0",
+    }
+  }
+  icon={Object {}}
+  iconComponent={[Function]}
+  onPress={[MockFunction]}
+  style={Object {}}
+  textColor="#000000"
+  title="sign in with google"
+/>
+`;

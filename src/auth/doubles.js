@@ -1,4 +1,5 @@
 export const toFakeUser = (mixins = {}) => ({
   ...mixins,
-  id: 'foo',
+  uid: 'foo',
+  email: 'foo@bar.com',
 });

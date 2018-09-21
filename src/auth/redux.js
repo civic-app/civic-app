@@ -1,86 +1,147 @@
+export const AUTH_NAMESPACE = 'auth';
 export const formTypes = {
   INITIAL: 'initial',
   LOGIN: 'login',
   SIGN_UP: 'signUp',
 };
 
-// Selectors
-export const getLoggedInUser = state => state[AUTH_NAMESPACE].user;
-
-export const getIsLoggedIn = state => !!getLoggedInUser(state);
-
-export const getFormType = state => state[AUTH_NAMESPACE].formType;
-
-export const getLoggedInUserId = state =>
-  // TODO: remove id after adding login to app
-  (getLoggedInUser(state) && getLoggedInUser(state).id) || 'Ra6l4NfjcLcc8XdP4gX1aWdhRRd2';
+// Actions
+export const AuthActionType = {
+  EmailLoginRequest: 'civicApp/auth/emailLoginRequest',
+  RegisterRequest: 'civicApp/auth/registerRequest',
+  FacebookLoginRequest: 'civicApp/auth/facebookLoginRequest',
+  GoogleLoginRequest: 'civicApp/auth/googleLoginRequest',
+  LoginSuccess: 'civicApp/auth/emailLoginSuccess',
+  LogOutRequest: 'civicApp/auth/logOutRequest',
+  LogOutSuccess: 'civicApp/auth/logOutSuccess',
+  AuthFailure: 'civicApp/auth/failure',
+  SwitchFormType: 'civicApp/auth/switchFormType',
+  UpdateEmail: 'civicApp/auth/updateEmail',
+  UpdatePassword: 'civicApp/auth/updatePassword',
+  UpdateDuplicatePassword: 'civicApp/auth/updateDuplicatePassword',
+  ShowErrors: 'civicApp/auth/showErrors',
+};
 
 // Action Creators
-export const logIn = (email, password) => ({
-  type: AuthActionType.LoginRequest,
-  payload: { email, password },
-});
+export const emailLogin = () => ({ type: AuthActionType.EmailLoginRequest });
+
+export const register = () => ({ type: AuthActionType.RegisterRequest });
+
+export const facebookLogin = () => ({ type: AuthActionType.FacebookLoginRequest });
+
+export const googleLogin = () => ({ type: AuthActionType.GoogleLoginRequest });
 
 export const loginSuccess = user => ({
   type: AuthActionType.LoginSuccess,
   payload: user,
 });
 
-export const register = (email, password) => ({
-  type: AuthActionType.RegisterRequest,
-  payload: { email, password },
+export const logOut = () => ({ type: AuthActionType.LogOutRequest });
+
+export const logOutSuccess = () => ({ type: AuthActionType.LogOutSuccess });
+
+export const authFailure = error => ({
+  type: AuthActionType.AuthFailure,
+  payload: error,
 });
 
-export const logOut = () => ({
-  type: AuthActionType.LogOutRequest,
-});
-
-export const logOutSuccess = () => ({
-  type: AuthActionType.LogOutSuccess,
-});
-
+/*
+ * @param formType: member of formTypes object;
+ */
 export const switchFormType = formType => ({
   type: AuthActionType.SwitchFormType,
   payload: formType,
 });
 
-export const AuthActionType = {
-  LoginRequest: 'civicApp/auth/loginRequest',
-  LoginSuccess: 'civicApp/auth/loginSuccess',
-  LogOutRequest: 'civicApp/auth/logOutRequest',
-  LogOutSuccess: 'civicApp/auth/logOutSuccess',
-  RegisterRequest: 'civicApp/auth/registerRequest',
-  RegisterSuccess: 'civicApp/auth/registerSuccess',
-  SwitchFormType: 'civicApp/auth/switchFormType',
+/*
+ * @param email: string;
+ */
+export const updateEmail = email => ({
+  type: AuthActionType.UpdateEmail,
+  payload: email,
+});
+
+/*
+ * @param password: string;
+ */
+export const updatePassword = password => ({
+  type: AuthActionType.UpdatePassword,
+  payload: password,
+});
+
+/*
+ * @param password: string;
+ */
+export const updateDuplicatePassword = password => ({
+  type: AuthActionType.UpdateDuplicatePassword,
+  payload: password,
+});
+
+/*
+ * @param shouldShow: boolean;
+ */
+export const showErrors = shouldShow => ({
+  type: AuthActionType.ShowErrors,
+  payload: shouldShow,
+});
+
+/*
+ * When a user is logged in, we will store:
+ * id, email, ...
+ */
+export const initialState = {
+  user: null,
+  formType: formTypes.INITIAL,
+  email: '',
+  password: '',
+  duplicatePassword: '',
+  showErrors: false,
 };
 
-// Reducer
-export const AUTH_NAMESPACE = 'auth';
-
-// TODO: errors and maybe loading
-const reducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case AuthActionType.LoginSuccess:
-      return {
-        user: action.payload,
-      };
-    case AuthActionType.LogOutSuccess:
-      return {
-        user: undefined,
-      };
     case AuthActionType.SwitchFormType:
       return {
         ...state,
         formType: action.payload,
+        showErrors: false,
+      };
+    case AuthActionType.UpdateEmail:
+      return {
+        ...state,
+        email: action.payload,
+        showErrors: false,
+      };
+    case AuthActionType.UpdatePassword:
+      return {
+        ...state,
+        password: action.payload,
+        showErrors: false,
+      };
+    case AuthActionType.UpdateDuplicatePassword:
+      return {
+        ...state,
+        duplicatePassword: action.payload,
+        showErrors: false,
+      };
+    case AuthActionType.ShowErrors:
+      return {
+        ...state,
+        showErrors: action.payload,
+      };
+    case AuthActionType.LoginSuccess:
+      return {
+        ...state,
+        user: { id: action.payload.uid, email: action.payload.email },
+      };
+    case AuthActionType.LogOutSuccess:
+      return {
+        ...state,
+        user: null,
       };
     default:
       return state;
   }
 };
 
-const initialState = {
-  user: undefined,
-  formType: formTypes.INITIAL,
-};
-
-export default reducer;
+export default authReducer;

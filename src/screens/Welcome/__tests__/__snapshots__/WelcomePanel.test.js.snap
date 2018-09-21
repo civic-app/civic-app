@@ -97,7 +97,7 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       }
     }
   >
-    <SocialButton
+    <Connect(GoogleAuthButton)
       style={
         Object {
           "marginBottom": 8,
@@ -106,9 +106,8 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
         }
       }
       title="Sign in with Google"
-      type="google"
     />
-    <SocialButton
+    <Connect(FacebookAuthButton)
       style={
         Object {
           "marginBottom": 8,
@@ -117,7 +116,6 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
         }
       }
       title="Continue with Facebook"
-      type="facebook"
     />
     <Text
       accessible={true}
@@ -135,6 +133,16 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       or
     </Text>
     <SocialButton
+      buttonStyle={Object {}}
+      icon={
+        Object {
+          "color": "#000000",
+          "name": "email",
+          "size": 35,
+          "type": "material-community",
+        }
+      }
+      iconComponent={null}
       onPress={[Function]}
       style={
         Object {
@@ -143,8 +151,8 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
           "width": "100%",
         }
       }
+      textColor="#000000"
       title="Sign in with email"
-      type="email"
     />
     <Text
       accessible={true}
@@ -195,7 +203,7 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       }
     }
   >
-    <SocialButton
+    <Connect(GoogleAuthButton)
       style={
         Object {
           "marginBottom": 8,
@@ -204,9 +212,8 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
         }
       }
       title="Sign up with Google"
-      type="google"
     />
-    <SocialButton
+    <Connect(FacebookAuthButton)
       style={
         Object {
           "marginBottom": 8,
@@ -215,7 +222,6 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
         }
       }
       title="Continue with Facebook"
-      type="facebook"
     />
     <Text
       accessible={true}
@@ -233,6 +239,16 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       or
     </Text>
     <SocialButton
+      buttonStyle={Object {}}
+      icon={
+        Object {
+          "color": "#000000",
+          "name": "email",
+          "size": 35,
+          "type": "material-community",
+        }
+      }
+      iconComponent={null}
       onPress={[Function]}
       style={
         Object {
@@ -241,8 +257,8 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
           "width": "100%",
         }
       }
+      textColor="#000000"
       title="Sign up with email"
-      type="email"
     />
     <Text
       accessible={true}

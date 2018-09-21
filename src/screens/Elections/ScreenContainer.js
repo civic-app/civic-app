@@ -1,12 +1,14 @@
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { compose, lifecycle } from 'recompose'
-import Screen from './Screen'
 import { getCandidates } from '../../candidate/redux/candidates'
+import { getIsFavorite } from '../../favorites/redux';
+import { Category } from '../../favorites/models';
 
 export const getFavoriteCandidateData  = (state) => {
   const candidates = getCandidates(state,toListCandidateMapperPlaceholder);
   return candidates
+}
+export const getFavorite = (state,candidateId) => {
+  const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
+  return isFavorite
 }
 
 const toListCandidateMapperPlaceholder = candidate => ({
@@ -14,6 +16,4 @@ const toListCandidateMapperPlaceholder = candidate => ({
   id: candidate.id,
   image: candidate.image,
   electionIds:candidate.electionIds,
-  partyPreference: candidate.partyPreference,
-
 })
