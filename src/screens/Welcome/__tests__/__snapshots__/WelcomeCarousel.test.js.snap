@@ -26,18 +26,15 @@ exports[`WelcomeCarousel does not render pagination in small screen 1`] = `
       Array [
         Object {
           "image": <CandidatesImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Learn About Candidates",
+          "title": "Learn where candidates stand on the issues",
         },
         Object {
           "image": <StayInformedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Stay Informed",
+          "title": "Stay informed about news that matters to you",
         },
         Object {
           "image": <GetInvolvedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Get Involved",
+          "title": "Make an impact for causes you care about",
         },
       ]
     }
@@ -92,18 +89,15 @@ exports[`WelcomeCarousel renders correctly 1`] = `
       Array [
         Object {
           "image": <CandidatesImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Learn About Candidates",
+          "title": "Learn where candidates stand on the issues",
         },
         Object {
           "image": <StayInformedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Stay Informed",
+          "title": "Stay informed about news that matters to you",
         },
         Object {
           "image": <GetInvolvedImage />,
-          "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-          "title": "Get Involved",
+          "title": "Make an impact for causes you care about",
         },
       ]
     }

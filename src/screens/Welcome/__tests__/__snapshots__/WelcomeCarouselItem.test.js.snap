@@ -38,6 +38,8 @@ exports[`WelcomeCarouselItem does not render subtitle on small screen 1`] = `
       Object {
         "color": "#ffffff",
         "fontSize": 20,
+        "marginLeft": 24,
+        "marginRight": 24,
         "marginTop": 24,
         "textAlign": "center",
       }
@@ -86,29 +88,14 @@ exports[`WelcomeCarouselItem renders correctly 1`] = `
       Object {
         "color": "#ffffff",
         "fontSize": 20,
+        "marginLeft": 24,
+        "marginRight": 24,
         "marginTop": 24,
         "textAlign": "center",
       }
     }
   >
     Welcome Carousel
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "color": "#ffffff",
-        "fontSize": 16,
-        "lineHeight": 24,
-        "paddingLeft": 20,
-        "paddingRight": 20,
-        "textAlign": "center",
-      }
-    }
-  >
-    Some more text
   </Text>
 </Component>
 `;

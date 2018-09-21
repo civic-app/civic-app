@@ -8,18 +8,22 @@ const WelcomeCarouselItem = props => {
     <View style={styles.container}>
       <View style={styles.badge}>{props.image}</View>
       <Text style={styles.title}>{props.title}</Text>
-      {!props.isSmallScreen && <Text style={styles.subtitle}>{props.subtitle}</Text>}
     </View>
   );
 };
 
 WelcomeCarouselItem.propTypes = {
-  image: PropTypes.object,
+  image: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
   isSmallScreen: PropTypes.bool,
-  subtitle: PropTypes.string,
-  title: PropTypes.string,
 };
 
+WelcomeCarouselItem.defaultProps = {
+  isSmallScreen: false,
+};
+
+// TODO: style this component differently for larger screens
+// the current styles look best on a smaller screen
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -40,19 +44,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
   },
-  subtitle: {
-    color: colors.white,
-    fontSize: 16,
-    lineHeight: 24,
-    paddingLeft: 20,
-    paddingRight: 20,
-    textAlign: 'center',
-  },
   title: {
     color: colors.white,
     fontSize: 20,
     textAlign: 'center',
     marginTop: 24,
+    marginLeft: 24,
+    marginRight: 24,
   },
 });
 
