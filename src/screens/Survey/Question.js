@@ -15,13 +15,12 @@ class Question extends React.Component {
     this.changeUserResponseField = this.changeUserResponseField.bind(this);
   }
 
-   handleBackPress = () => {
-     return true;
-   }
-
+  handleBackPress = () => {
+    return true;
+  }
 
   changeUserResponseField(field,value,callback){
-    if(callback === null){
+    if (callback === null) {
       this.setState({...this.state, response: {...this.state.response, [field]: value}});
     } else {
       this.setState({...this.state, response: {...this.state.response, [field]: value}}, callback);
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
   question_image: {
   },
   font_style: {
-    fontFamily: 'Roboto',
     fontSize: 18,
     textAlign: 'justify'
   },

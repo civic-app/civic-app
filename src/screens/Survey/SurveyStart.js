@@ -8,23 +8,27 @@ function SurveyStart(props) {
     <View style={styles.survey_block} elevation={5}>
 
       <View style={styles.block1}>
-        <Text style={[styles.font_style, styles.title] }>We'll ask a few questions {"\n"}to get to know the issues {"\n"}you care about.</Text>
+        <Text style={[styles.font_style, styles.title] }>
+          We'll ask a few questions {"\n"}to get to know the issues {"\n"}you care about.
+        </Text>
       </View>
       <View style={styles.block2}>
-        <Text style={[styles.font_style]}>This will take 3 minutes and will {"\n"}help us find candidates and organizations that represent you.</Text>
+        <Text style={[styles.font_style]}>
+          This will take 3 minutes and will {"\n"}help us find candidates and organizations that represent you.
+        </Text>
       </View>
 
       <View style= {styles.image_block}>
         <Image
-            style={styles.image}
-            source={require('./lib/noun_1696115_cc.png')}
-          />
+          style={styles.image}
+          source={require('./lib/noun_1696115_cc.png')}
+        />
       </View>
 
       <View >
         <TouchableWithoutFeedback
           onPressIn = {() => {props.navigation.dispatch(StackActions.push({routeName:'Question', params: {}}));}} >
-        <View style={styles.get_started_button}><Text style={styles.get_started_text}>GET STARTED</Text></View>
+          <View style={styles.get_started_button}><Text style={styles.get_started_text}>GET STARTED</Text></View>
         </TouchableWithoutFeedback>
       </View>
 
@@ -80,7 +84,6 @@ const styles = StyleSheet.create({
   },
   // Style for general font
   font_style: {
-    fontFamily: 'Roboto',
     fontSize: 18,
     textAlign: 'justify'
   },
