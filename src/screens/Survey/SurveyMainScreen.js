@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button} from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import SurveyStart from './SurveyStart';
 import Question from './redux/containers/Container_Question';
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
   },
 
   appbar_text: {
-    fontFamily: 'Roboto',
     fontStyle: 'normal',
     fontSize: 20,
     lineHeight: 23,
