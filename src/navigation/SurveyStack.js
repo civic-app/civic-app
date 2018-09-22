@@ -1,11 +1,14 @@
 import { createStackNavigator } from 'react-navigation';
-import SurveyMainScreen from '../screens/Survey';
+import React from 'react';
+import SurveyMainScreen from '../screens/Survey/redux/containers/Container_SurveyMainScreen';
 
 import styles from './styles';
 
 const SurveyStack = createStackNavigator(
   {
-    Main: SurveyMainScreen,
+    Main: {
+      screen: SurveyMainScreen
+    },
   },
   {
     navigationOptions: {

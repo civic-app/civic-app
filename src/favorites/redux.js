@@ -54,10 +54,10 @@ const reducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case UserActionType.RequestSuccess:
-      return {
+      return action.payload.favorites ? {
         [Category.Candidates]: new Set(action.payload.favorites[Category.Candidates]),
         [Category.Events]: new Set(action.payload.favorites[Category.Events]),
-      };
+      } : state;
     case FavoritesActionType.Add:
       return {
         ...state,
