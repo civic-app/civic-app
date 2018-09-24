@@ -5,7 +5,6 @@ export default async function(){
   try {
     const result = await fetch(url);
     const resultJson = await result.json();
-    console.log(resultJson);
     if(!resultJson.error){
       if(!resultJson.offices){
         if(this.state.view==='ADDRESS_NEEDED'){
