@@ -32,35 +32,36 @@ const propTypes = {
 };
 
 const distinctPositions = new Set()
-const ElectionsView = props => (
-  <View style={styles.container}>
-    {props.candidates.map(candidate => (
-      distinctPositions.add(candidate.electionIds.toString())
-    ))}
-    <FlatList
-      data={[...distinctPositions]}
-      keyExtractor={(item)=>item}
-      renderItem={({item})=> (
-        <View key={item} style={styles.candidateContainer}>
-          <View style={styles.informationContainer}>
-            <Text style={styles.positionText}>{item} </Text>
-            <Text style={styles.electionText}>November 6, 2018</Text>
+const ElectionsView = props => {
+  props.candidates.forEach(candidate => {
+    distinctPositions.add(candidate.electionIds.toString())
+  })
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={[...distinctPositions]}
+        keyExtractor={(item)=>item}
+        renderItem={({item})=> (
+          <View key={item} style={styles.candidateContainer}>
+            <View style={styles.informationContainer}>
+              <Text style={styles.positionText}>{item} </Text>
+              <Text style={styles.electionText}>November 6, 2018</Text>
+            </View>
+            <ScrollView horizontal={true}>
+              {props.candidates.map(candidate => (
+                (item === candidate.electionIds.toString())
+                  ?
+                  <View key={candidate.id}>
+                    <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail} />
+                  </View>
+                  :
+                  null
+              ))}
+            </ScrollView>
           </View>
-          <ScrollView horizontal={true}>
-            {props.candidates.map(candidate => (
-              (item === candidate.electionIds.toString())
-                ?
-                <View key={candidate.id}>
-                  <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail} />
-                </View>
-                :
-                null
-            ))}
-          </ScrollView>
-        </View>
-      )}/>
-  </View>
-);
+        )}/>
+    </View>)
+};
 
 ElectionsView.propTypes = {
   goToCandidateDetail: PropTypes.func,
