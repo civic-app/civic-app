@@ -51,7 +51,7 @@ exports[`DistrictMatch renders correctly 1`] = `
             "width": 0,
           },
           "shadowOpacity": 0.2,
-          "shadowRadius": 3
+          "shadowRadius": 3,
         },
         "errorText": Object {
           "color": "#ff5722",
