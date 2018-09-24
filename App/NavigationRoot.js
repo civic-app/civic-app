@@ -14,7 +14,7 @@ import DistrictMatchStack from '../src/navigation/DistrictMatchStack';
 const NavigationRoot = createSwitchNavigator(
   {
     App: MainTabNavigator,
-    Auth: AuthStack,
+    Auth: DistrictMatchStack,
     Survey: SurveyStack,
     DistrictMatch: DistrictMatchStack
   },

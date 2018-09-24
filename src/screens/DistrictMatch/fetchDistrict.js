@@ -5,6 +5,7 @@ export default async function(){
   try {
     const result = await fetch(url);
     const resultJson = await result.json();
+    console.log(resultJson);
     if(!resultJson.error){
       if(!resultJson.offices){
         if(this.state.view==='ADDRESS_NEEDED'){
@@ -32,7 +33,9 @@ export default async function(){
         this.setState({isLoading: false});
       })
     }else{
-      this.setState({isLoading: false, error:`Hmm that doesn't look right! Please check for any errors.`});
+      this.setState({view: 'ADDRESS_NEEDED'}, () => {
+        this.setState({isLoading: false});
+      });
     }
   }
 }

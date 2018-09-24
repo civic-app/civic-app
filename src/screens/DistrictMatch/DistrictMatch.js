@@ -101,7 +101,7 @@ export const styles = StyleSheet.create({
     margin: 25,
     flexDirection: 'column',
     alignItems: 'center',
-    width: '90%',
+    minWidth: '90%',
     ...Mixins.shadow
   },
   header: {
