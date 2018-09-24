@@ -15,7 +15,7 @@ import {Image, StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList } 
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Electionz',
+    title: 'Elections',
   };
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
   static propTypes = propTypes;

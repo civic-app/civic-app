@@ -13,7 +13,6 @@ export const getCandidateData = (state, candidateId) => {
       name: candidate.name,
       image: candidate.image,
       electionIds: candidate.electionIds,
-      partyPreference: candidate.partyPreference,
       isFavorite,
       matchPercent,
     }
