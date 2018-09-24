@@ -1,23 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, View } from 'react-native';
-import styles from '../styles';
+import { getCandidate } from '../../candidate/redux/candidates'
+import { getMatchPercent } from '../../match/selectors';
+import { getIsFavorite } from '../../favorites/redux';
+import { Category } from '../../favorites/models';
 
-const ElectionsScreen = props => (
-  <View style={styles.container}>
-    {props.candidates.map(candidate => (
-      <Button
-        key={candidate.id}
-        title={`View Candidate Detail for ${candidate.name}`}
-        onPress={props.goToCandidateDetail(candidate.id)}
-      />
-    ))}
-  </View>
-);
-
-ElectionsScreen.propTypes = {
-  goToCandidateDetail: PropTypes.func,
-  candidates: PropTypes.array
+export const getCandidateData = (state, candidateId) => {
+  const candidate = getCandidate(state, candidateId);
+  const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
+  const matchPercent = getMatchPercent(state, candidateId);
+  return (
+    candidate && {
+      id: candidate.id,
+      name: candidate.name,
+      image: candidate.image,
+      electionIds: candidate.electionIds,
+      partyPreference: candidate.partyPreference,
+      isFavorite,
+      matchPercent,
+    }
+  );
 };
-
-export default ElectionsScreen
