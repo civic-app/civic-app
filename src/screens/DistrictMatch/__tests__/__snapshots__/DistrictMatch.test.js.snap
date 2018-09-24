@@ -10,14 +10,14 @@ exports[`DistrictMatch renders correctly 1`] = `
       "elevation": 1,
       "flexDirection": "column",
       "margin": 25,
+      "minWidth": "90%",
       "shadowColor": "black",
       "shadowOffset": Object {
         "height": 2,
         "width": 0,
       },
       "shadowOpacity": 0.2,
-      "shadowRadius": 3,
-      "width": "90%",
+      "shadowRadius": 3
     }
   }
 >
@@ -44,14 +44,14 @@ exports[`DistrictMatch renders correctly 1`] = `
           "elevation": 1,
           "flexDirection": "column",
           "margin": 25,
+          "minWidth": "90%",
           "shadowColor": "black",
           "shadowOffset": Object {
             "height": 2,
             "width": 0,
           },
           "shadowOpacity": 0.2,
-          "shadowRadius": 3,
-          "width": "90%",
+          "shadowRadius": 3
         },
         "errorText": Object {
           "color": "#ff5722",
