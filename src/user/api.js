@@ -8,5 +8,5 @@ export const fetchUser = (id) => (
 
 const toUser = (apiUser) => ({
   ...apiUser,
-  favorites: toFavorites(apiUser.favorites),
+  favorites: apiUser.favorites && toFavorites(apiUser.favorites),
 });

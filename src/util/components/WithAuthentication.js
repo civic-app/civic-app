@@ -39,7 +39,7 @@ const WithAuthentication = authAction => WrappedComponent => {
 
     handleLogin = () => {
       if (this.props.isLoggedIn) {
-        this.props.navigation.navigate('App');
+        this.props.navigation.navigate('Survey');
         // TODO: navigate to Survey if user hasn't taken it yet
       }
     };
