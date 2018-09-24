@@ -4,9 +4,11 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^8.2.5",
+    "babel-plugin-inline-dotenv": "^1.1.2",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-native": "^3.2.1",
+    "exp": "^57.1.4",
     "firebase-mock": "^2.2.4",
     "jest-expo": "~27.0.0",
     "react-native-scripts": "1.14.0",

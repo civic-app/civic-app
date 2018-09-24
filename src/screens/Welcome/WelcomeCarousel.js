@@ -10,18 +10,15 @@ class WelcomeCarousel extends React.Component {
   images = [
     {
       image: <CandidatesImage />,
-      title: 'Learn About Candidates',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      title: 'Learn where candidates stand on the issues',
     },
     {
       image: <StayInformedImage />,
-      title: 'Stay Informed',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      title: 'Stay informed about news that matters to you',
     },
     {
       image: <GetInvolvedImage />,
-      title: 'Get Involved',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+      title: 'Make an impact for causes you care about',
     },
   ];
 
@@ -35,13 +32,7 @@ class WelcomeCarousel extends React.Component {
   }
 
   renderItem = ({ item, index }) => (
-    <WelcomeCarouselItem
-      key={index}
-      image={item.image}
-      isSmallScreen={this.props.isSmallScreen}
-      title={item.title}
-      subtitle={item.subtitle}
-    />
+    <WelcomeCarouselItem key={index} image={item.image} isSmallScreen={this.props.isSmallScreen} title={item.title} />
   );
 
   render() {

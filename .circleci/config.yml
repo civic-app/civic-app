@@ -3,40 +3,125 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-jobs:
-  build:
+
+references:
+
+  # Setup
+  repo_root: &repo_root
+    ~/repo
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *repo_root
+#
+  yarn_cache_key: &yarn_cache_key
+    v1-dependencies-{{ checksum "yarn.lock" }}
+
+  build_config: &build_config
     docker:
-      # specify the version you desire here
       - image: circleci/node:8.11.3
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+    working_directory: *repo_root
 
-    working_directory: ~/repo
+  # Filters
+  filters: &only_dev
+    branches:
+      only: develop
 
+  filters: &only_alpha
+    branches:
+      only: alpha
+
+  filters: &ignore_release_branches
+    branches:
+      ignore:
+        - develop
+        - master
+        - alpha
+
+jobs:
+
+  create_workspace:
+    <<: *build_config
     steps:
       - checkout
-
-      # Download and cache dependencies
+      # load in source code checked out in checkout step
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
+            - *yarn_cache_key
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: yarn
       - save_cache:
+          key: *yarn_cache_key
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: *repo_root
+          paths:
+            - .
 
-      # run linter -- sorry not sorry
-      - run: yarn lint
+  test_unit:
+    <<: *build_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Unit Test
+          command: yarn test
 
-      # run tests!
-      - run: yarn test
+  # TODO: consider moving the publish commands to a script so that we can parameterize it
+  deploy_expo_dev:
+    <<: *build_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Login to Expo
+          command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
+      - run:
+          name: 'Publish'
+          command: yarn exp publish --max-workers 1
 
+  deploy_expo_alpha:
+    <<: *build_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Login to Expo
+          command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
+      - run:
+          name: 'Publish'
+          command: exp publish --max-workers 1 --release-channel alpha
 
+workflows:
+
+  version: 2
+
+  pull_request:
+    jobs:
+      - create_workspace:
+          filters: *ignore_release_branches
+      - test_unit:
+          requires:
+            - create_workspace
+  merge_dev:
+    jobs:
+      - create_workspace:
+          filters: *only_dev
+      - test_unit:
+          requires:
+            - create_workspace
+      - deploy_expo_dev:
+          requires:
+            - test_unit
+
+  release_alpha:
+    jobs:
+      - create_workspace:
+          filters: *only_alpha
+      - deploy_expo_alpha:
+          requires:
+            - create_workspace

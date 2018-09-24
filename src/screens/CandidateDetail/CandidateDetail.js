@@ -10,7 +10,7 @@ const CandidateDetail = props => (
     {props.summary ? (
       <CandidatePreview
         {...props.summary}
-        onToggleFavorite={() => props.toggleFavorite(props.candidateId, Category.Candidates)}
+        onToggleFavorite={() => props.toggleFavorite(props.summary.id, Category.Candidates)}
       />
     ) : (
       <Text>Loading...</Text>
@@ -30,6 +30,10 @@ const CandidatePreview = props => {
           match | {props.partyPreference}
         </Text>
       </View>
+      <Favorite
+        isFavorite={props.isFavorite}
+        onToggleFavorite={props.onToggleFavorite}
+      />
     </View>
   );
 };

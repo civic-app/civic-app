@@ -1,7 +1,7 @@
 import { call, select, put } from 'redux-saga/effects';
 import { getLoggedInUserId } from '../auth/selectors';
-import { favoritesRequestSuccess, getIsFavorite, addOrRemoveFavorite } from './redux';
-import { fetchFavorites, updateFavorite } from './api';
+import { getIsFavorite, addOrRemoveFavorite } from './redux';
+import { updateFavorite } from './api';
 
 export const toggleFavoriteSaga = function*(action) {
   try {
@@ -12,15 +12,5 @@ export const toggleFavoriteSaga = function*(action) {
   } catch (err) {
     // TODO: display error message about failure
     yield put(addOrRemoveFavorite(action.payload.id, action.payload.category));
-  }
-};
-
-export const loadFavoritesSaga = function*() {
-  try {
-    const userId = yield select(getLoggedInUserId);
-    const favorites = yield call(fetchFavorites, userId);
-    yield put(favoritesRequestSuccess(favorites));
-  } catch (err) {
-    // TODO: handle error
   }
 };

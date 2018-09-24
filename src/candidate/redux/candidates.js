@@ -3,7 +3,11 @@
 export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
 
 export const getCandidates = (state, viewMapper) => (
-  Object.keys(state[CANDIDATE_NAMESPACE]).map(id => viewMapper(getCandidate(state, id)))
+  getFilteredCandidates(state, viewMapper, Object.keys(state[CANDIDATE_NAMESPACE]))
+);
+
+export const getFilteredCandidates = (state, viewMapper, candidateIds) => (
+  candidateIds.map(id => viewMapper(getCandidate(state, id)))
 );
 
 // Action Creators
@@ -12,9 +16,9 @@ export const loadCandidates = () => ({
   type: CandidateActionType.Request,
 });
 
-export const loadCandidatesSuccess = candidate => ({
+export const loadCandidatesSuccess = candidateData => ({
   type: CandidateActionType.RequestSuccess,
-  payload: candidate,
+  payload: candidateData,
 });
 
 export const CandidateActionType = {
@@ -31,7 +35,7 @@ const reducer = (state = initialState, action) => {
     case CandidateActionType.RequestSuccess:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.candidates,
       };
     default:
       return state;

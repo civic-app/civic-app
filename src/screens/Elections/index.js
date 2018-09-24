@@ -2,26 +2,25 @@ import React from 'react';
 import Colors from '../../styles/colors';
 import Mixins from '../../styles/mixins';
 import PropTypes from 'prop-types';
-import {Image, StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose'
+import { compose, lifecycle } from 'recompose';
 import { Icon } from 'react-native-elements';
-import { loadCandidates } from '../../candidate/redux/candidates'
-import { loadFavorites } from '../../favorites/redux';
-import { getFavoriteCandidateData, getFavorite, matchPercent }  from './ScreenContainer';
+import { loadUser } from '../../user/sagas'
+import { getIsLoggedIn } from '../../auth/selectors';
+import { getCandidateData } from './Screen.js'
+import WithAuthentication from '../../util/components/WithAuthentication';
+import { getCandidates, loadCandidates } from '../../candidate/redux/candidates';
+import {Image, StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList } from 'react-native';
+
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Elections',
+    title: 'Electionz',
   };
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
   static propTypes = propTypes;
   render() {
-    return (
-      <View style={styles.container}>
-        <Elections goToCandidateDetail={this.goToCandidateDetail}/>
-      </View>
-    );
+    return <Container goToCandidateDetail={this.goToCandidateDetail} {...this.props} />;
   }
 }
 
@@ -32,15 +31,14 @@ const propTypes = {
   }),
 };
 
-const new_set = new Set()
-const ElectionView = props => (
+const distinctPositions = new Set()
+const ElectionsView = props => (
   <View style={styles.container}>
-    {/*removing duplicates by using set*/}
-    {props.data.map(candidate => (
-      new_set.add(candidate.electionIds[0])
+    {props.candidates.map(candidate => (
+      distinctPositions.add(candidate.electionIds.toString())
     ))}
     <FlatList
-      data={[...new_set]}
+      data={[...distinctPositions]}
       keyExtractor={(item)=>item}
       renderItem={({item})=> (
         <View key={item} style={styles.candidateContainer}>
@@ -49,100 +47,112 @@ const ElectionView = props => (
             <Text style={styles.electionText}>November 6, 2018</Text>
           </View>
           <ScrollView horizontal={true}>
-            {props.data.map(candidate => (
-              (item === candidate.electionIds.toString()) 
-                ?  
-                <View key={candidate.id} style={styles.container}>
-                  <View style={styles.newsCard}>
-                    <View style={styles.pictureBody}>
-                      <TouchableOpacity onPress={props.goToCandidateDetail(candidate.id)}> 
-                        <Image style={styles.candidatePicture}
-                          source={{ uri: candidate.image}} 
-                        />
-                        <FavoriteScreen candidateId={candidate.id}/>
-                      </TouchableOpacity>
-                    </View> 
-                    <View style={styles.contentContainer}>
-                      <View style={styles.contentBody}>
-                        <Text style={styles.matchCardText}>
-                          <Text style={styles.nameText}>{candidate.name}{'\n\n'}</Text>
-                          <MatchNumber candidateId={candidate.id}/> match
-                        </Text>
-                      </View>
-                    </View>   
-                  </View> 
+            {props.candidates.map(candidate => (
+              (item === candidate.electionIds.toString())
+                ?
+                <View key={candidate.id}>
+                  <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail} />
                 </View>
                 :
                 null
             ))}
           </ScrollView>
         </View>
-      )}
-    />
+      )}/>
   </View>
 );
 
-ElectionView.propTypes = {
+ElectionsView.propTypes = {
   goToCandidateDetail: PropTypes.func,
-  data: PropTypes.array,
+  candidates: PropTypes.array,
+};
+
+const DataContainer = (props) => (
+  <View style={styles.container}>
+    <View key={props.data.id} style={styles.container}>
+      <View style={styles.newsCard}>
+        <View style={styles.pictureBody}>
+          <TouchableOpacity onPress={props.goToCandidateDetail(props.data.id)}> 
+            <Image style={styles.candidatePicture}
+              source={{ uri: props.data.image}} 
+            />
+            <FavoriteContainer isFavorite={props.data.isFavorite}/>
+          </TouchableOpacity>
+        </View> 
+        <View style={styles.contentContainer}>
+          <View style={styles.contentBody}>
+            <Text style={styles.matchCardText}>
+              <Text style={styles.nameText}>{props.data.name}{'\n\n'}</Text>  
+              {props.data.matchPercent != undefined
+                ?
+                <Text style={styles.matchCardPercentText}>{props.data.matchPercent}{'%'}</Text>
+                :
+                <Text>{'No'}</Text>
+              }{' match'}
+            </Text>
+          </View>
+        </View>   
+      </View> 
+    </View>
+  </View>
+);
+DataContainer.propTypes = {
+  data: PropTypes.object,
+  id: PropTypes.string,
+  goToCandidateDetail: PropTypes.func,
   name: PropTypes.string,
   electionIds: PropTypes.string,
-  imageURI: PropTypes.string,
+  image: PropTypes.string,
+  matchPercent: PropTypes.number,
 };
 
 const FavoriteContainer = props => (
   <View style={styles.container}>
-    {props.isFavorite ? 
+    {props.isFavorite ?
       <View style={styles.favoriteBody}>
         <Icon
           name={'star'}
           iconStyle={styles.favorite}
           size={15}
         />
-        <Text style={styles.favoriteText}> Favorite </Text>
+        <Text style={styles.favoriteText}>{'Favorite'}</Text>
       </View> 
       :
-      null }
+      null
+    }
   </View>
 );
 FavoriteContainer.propTypes = {
   isFavorite: PropTypes.bool,
 };
 
-const Match = props => (
-  <Text style={styles.matchCardPercentText}>{props.match}{'%'}</Text>
-);
+const Data = connect(
+  (state, ownProps) => ({
+    data: getCandidateData(state, ownProps.candidateId),
+  }),
+)(DataContainer);
 
-Match.propTypes = {
-  match: PropTypes.number,
-};
+const ScreenWithAuthentication = WithAuthentication('logout')(ElectionsView);
 
-const Elections = compose(
+const Container = compose(
   connect(
-    (state) => ({
-      data: getFavoriteCandidateData(state),
+    state => ({
+      candidates: getCandidates(state, toListCandidateMapperPlaceholder),
+      isLoggedIn: getIsLoggedIn(state),
     }),
-    {loadCandidates,loadFavorites}
-  ),  
+    { loadCandidates, loadUser },
+  ),
   lifecycle({
     componentDidMount() {
       this.props.loadCandidates();
-      this.props.loadFavorites();
-    }
-  })
-)(ElectionView);
-
-const FavoriteScreen = connect(
-  (state, ownProps) => ({
-    isFavorite: getFavorite(state, ownProps.candidateId),
+      // TODO: only load user if match data has not been loaded yet
+      this.props.loadUser();
+    },
   }),
-)(FavoriteContainer);
+)(ScreenWithAuthentication);
 
-const MatchNumber = connect(
-  (state, ownProps) => ({
-    match: matchPercent(state, ownProps.candidateId),
-  }),
-)(Match);
+const toListCandidateMapperPlaceholder = candidate => ({id: candidate.id, electionIds:candidate.electionIds,
+});
 
 const styles = StyleSheet.create({
   container: {
