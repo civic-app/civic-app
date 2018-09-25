@@ -38,7 +38,7 @@ class Question extends React.Component {
     if(this.props.index === this.props.totalNumQuestions){
       // Go to next section
       this.props.writeResponsesToDatabase();
-      this.props.navigation.navigate('App')
+      this.props.navigation.navigate('DistrictMatch');
     }
   }
 

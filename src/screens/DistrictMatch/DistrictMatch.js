@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 
 // Views
-import {ZipCode, Address, Success, Failure} from './screens';
+import {ZipCode, Address, Failure} from './screens';
 // API Method & Controller
 import fetchDistrict from './fetchDistrict';
 // styles
@@ -27,7 +27,7 @@ class DistrictMatch extends Component {
     // loading state
     isLoading: false,
     // view to load via switch statement in renderScreen method
-    // options are ENTER_ZIPCODE, ADDRESS_NEEDED, DISTRICT_FOUND, and DISTRICT_NOT_FOUND
+    // options are ENTER_ZIPCODE, ADDRESS_NEEDED, and DISTRICT_NOT_FOUND
     view:'ENTER_ZIPCODE',
     // district response parsed from Google Civic API to be sent to elections screen
     district: '',
@@ -62,8 +62,6 @@ class DistrictMatch extends Component {
         return <ZipCode styles={styles} {...this.state} {...methods} />;
       case 'ADDRESS_NEEDED':
         return <Address styles={styles} {...this.state} {...methods} />;
-      case 'DISTRICT_FOUND':
-        return <Success district={this.state.district} {...methods} />;
       case 'DISTRICT_NOT_FOUND':
         return <Failure {...methods}/>;
       // this.state.view should not be null
