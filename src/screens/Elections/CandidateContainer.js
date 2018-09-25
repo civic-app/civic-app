@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
 import Mixins from '../../styles/mixins';
-import { Icon } from 'react-native-elements';
 import {Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import Fave from './FavoriteContainer'
 
 const DataContainer = props => {
   return (
@@ -15,7 +15,7 @@ const DataContainer = props => {
               <Image style={styles.candidatePicture}
                 source={{ uri: props.data.image}} 
               />
-              <FavoriteContainer isFavorite={props.data.isFavorite}/>
+              <Fave isFavorite={props.data.isFavorite}/>
             </TouchableOpacity>
           </View> 
           <View style={styles.contentContainer}>
@@ -46,27 +46,7 @@ DataContainer.propTypes = {
   image: PropTypes.string,
   matchPercent: PropTypes.number,
 };
-  
-const FavoriteContainer = props => (
-  <View style={styles.container}>
-    {props.isFavorite ?
-      <View style={styles.favoriteBody}>
-        <Icon
-          name={'star'}
-          iconStyle={styles.favorite}
-          size={15}
-        />
-        <Text style={styles.favoriteText}>{'Favorite'}</Text>
-      </View> 
-      :
-      null
-    }
-  </View>
-);
-FavoriteContainer.propTypes = {
-  isFavorite: PropTypes.bool,
-};
-  
+    
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -92,26 +72,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 2,
     ...Mixins.shadow
-  }, 
-  favoriteBody: {
-    flexDirection:'row',
-    position: 'absolute',
-    left: 10,
-    top: 120,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 5,
-    paddingTop: 5,
-    borderRadius: 15,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   nameText: {
     fontSize: 18,
-  },
-  favoriteText: {
-    textAlign: 'center',
-    fontSize: 12,
-    color:Colors.white,
   },
   matchCardText: {
     textAlign: 'left',
@@ -131,9 +94,6 @@ const styles = StyleSheet.create({
     bottom:0,
     height:150,
     width:'100%',
-  },
-  favorite: {
-    color: Colors.yellow,
   },
 })
   

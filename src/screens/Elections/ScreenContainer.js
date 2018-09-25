@@ -6,8 +6,8 @@ import {StyleSheet, ScrollView, View, Text, FlatList } from 'react-native';
 import { getCandidateData } from './viewSelectors'
 import Candidate from './CandidateContainer'
 
-const distinctPositions = new Set();
 const ElectionsScreen = props => {
+  const distinctPositions = new Set();
   return (
     <View style={styles.container}>
       {props.candidates.map(candidate => (
