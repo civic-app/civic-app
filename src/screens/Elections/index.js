@@ -4,7 +4,7 @@ import Elections from './viewSelectors'
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Electionz',
+    title: 'Elections',
   };
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
   static propTypes = propTypes;
