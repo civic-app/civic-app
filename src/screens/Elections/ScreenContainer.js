@@ -27,7 +27,7 @@ const ElectionsScreen = props => {
                 (item === candidate.electionIds.toString())
                   ?
                   <View key={candidate.id}>
-                    <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail}/>
+                    {/* <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail}/> */}
                   </View>
                   :
                   null
