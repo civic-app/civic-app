@@ -11,12 +11,16 @@ const DataContainer = props => {
       <View key={props.data.id} style={styles.container}>
         <View style={styles.newsCard}>
           <View style={styles.pictureBody}>
-            <TouchableOpacity onPress={props.goToCandidateDetail(props.data.id)}> 
-              <Image style={styles.candidatePicture}
+            <Image style={styles.candidatePicture}
+              source={{ uri: props.data.image}} 
+            />
+            <Fave isFavorite={props.data.isFavorite}/>
+            {/* <TouchableOpacity style={{position:'absolute',}}
+              onPress={() => props.goToCandidateDetail(props.data.id)}> 
+              <Image 
                 source={{ uri: props.data.image}} 
-              />
-              <Fave isFavorite={props.data.isFavorite}/>
-            </TouchableOpacity>
+              /> 
+              </TouchableOpacity>*/}
           </View> 
           <View style={styles.contentContainer}>
             <View style={styles.contentBody}>
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
   },
   pictureBody: {
     marginLeft: 15,
+    marginRight: 15,
     height: 150,
     width: 200, 
     backgroundColor: Colors.white,
