@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 // import HomeStack from './HomeStack';
 import ElectionsStack from './ElectionsStack';
 import FavoritesStack from './FavoritesStack';
-// import ActivismStack from './ActivismStack';
+import ActivismStack from './ActivismStack';
 import TabBarIcon from './TabBarIcon';
 import colors from '../styles/colors';
 
@@ -17,7 +17,7 @@ const MainTabNavigator = createBottomTabNavigator(
     // Home: HomeStack,
     Elections: ElectionsStack,
     Favorites: FavoritesStack,
-    // Activism: ActivismStack,
+    Activism: ActivismStack,
   },
   {
     // initialRouteName: 'Home',
