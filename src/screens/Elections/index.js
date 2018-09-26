@@ -30,16 +30,20 @@ const propTypes = {
     push: PropTypes.func,
   }),
 };
-
-const distinctPositions = new Set()
-const ElectionsView = props => {
-  props.candidates.forEach(candidate => {
-    distinctPositions.add(candidate.electionIds.toString())
+var unique = (arrA) => {
+  return arrA.filter((elem, pos, arr) => {
+    return arr.indexOf(elem) == pos
   })
+}
+const distinctPositionz = new Array()
+const ElectionsView = props => {
   return (
     <View style={styles.container}>
+      {props.candidates.map(candidate => {
+        distinctPositionz.push(candidate.electionIds[0])
+      })} 
       <FlatList
-        data={[...distinctPositions]}
+        data={unique(distinctPositionz)}
         keyExtractor={(item)=>item}
         renderItem={({item})=> (
           <View key={item} style={styles.candidateContainer}>
@@ -52,15 +56,16 @@ const ElectionsView = props => {
                 (item === candidate.electionIds.toString())
                   ?
                   <View key={candidate.id}>
-                    <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail} />
+                    <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail}/>
                   </View>
                   :
                   null
               ))}
             </ScrollView>
           </View>
-        )}/>
-    </View>)
+        )}/>      
+    </View>
+  )
 };
 
 ElectionsView.propTypes = {
@@ -97,6 +102,7 @@ const DataContainer = (props) => (
     </View>
   </View>
 );
+
 DataContainer.propTypes = {
   data: PropTypes.object,
   id: PropTypes.string,
