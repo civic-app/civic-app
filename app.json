@@ -1,11 +1,28 @@
 {
   "expo": {
     "name": "Civic App",
-    "slug": "civic-app",
-    "description":
-      "The #1 source of information about local & national elections, candidates, and ballot measures.",
-    "sdkVersion": "27.0.0",
     "version": "0.1.0",
-    "orientation": "portrait"
+    "slug": "civic-app",
+    "sdkVersion": "27.0.0",
+    "ios": {
+      "bundleIdentifier": "com.civic.civicapp"
+    },
+    "android": {
+      "package": "com.civic.civicapp"
+    },
+    "orientation": "portrait",
+    "primaryColor": "#2D9CDB",
+    "privacy": "unlisted",
+    "facebookAppId": "206331633410454",
+    "facebookDisplayName": "Civic App",
+    "facebookScheme": "fb206331633410454",
+    "assetBundlePatterns": ["src/assets/images"],
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#0A4363"
+    },
+    "splash": {
+      "backgroundColor": "#2D9CDB"
+    }
   }
 }

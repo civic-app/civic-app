@@ -17,6 +17,13 @@ const WithAuthentication = authAction => WrappedComponent => {
     static propTypes = {
       isLoggedIn: PropTypes.bool.isRequired,
       navigation: PropTypes.shape({ navigate: PropTypes.func }).isRequired,
+      hasTakenSurvey: PropTypes.bool,
+      hasDistrict: PropTypes.bool,
+    };
+
+    static defaultProps = {
+      hasTakenSurvey: false,
+      hasDistrict: false,
     };
 
     componentDidMount() {
@@ -39,8 +46,13 @@ const WithAuthentication = authAction => WrappedComponent => {
 
     handleLogin = () => {
       if (this.props.isLoggedIn) {
-        this.props.navigation.navigate('Survey');
-        // TODO: navigate to Survey if user hasn't taken it yet
+        if (!this.props.hasTakenSurvey) {
+          this.props.navigation.navigate('Survey');
+        } else if (!this.props.hasDistrict) {
+          this.props.navigation.navigate('DistrictMatch');
+        } else {
+          this.props.navigation.navigate('App');
+        }
       }
     };
 

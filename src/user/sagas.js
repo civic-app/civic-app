@@ -2,36 +2,22 @@ import { call, select, put, takeEvery } from 'redux-saga/effects';
 import { getLoggedInUserId } from '../auth/selectors';
 import { logOutSaga } from '../auth/sagas';
 import { fetchUser } from './api';
+import { UserActionType, userFetchSuccess } from './redux';
 
-export const loadUserDataSaga = function*() {
+export const loadUserDataSaga = function*(passedInUserId) {
   try {
-    const userId = yield select(getLoggedInUserId);
+    let userId = yield select(getLoggedInUserId);
+    // use passed in value as default if no id in state
+    userId = userId || passedInUserId;
     if (userId) {
       const userResponse = yield call(fetchUser, userId);
-      yield put(userFetchSuccess(userResponse))
+      yield put(userFetchSuccess(userResponse));
     } else {
-      yield call(logOutSaga)
+      yield call(logOutSaga);
     }
-
   } catch (err) {
     // TODO: handle error
-
   }
-};
-
-export const userFetchSuccess = ({ responses, favorites, user }) => ({
-  type: UserActionType.RequestSuccess,
-  payload: { responses, favorites, user },
-});
-
-export const loadUser = (force = false) => ({
-  type: UserActionType.Request,
-  payload: force
-});
-
-export const UserActionType = {
-  Request: 'civicApp/user/REQUEST',
-  RequestSuccess: 'civicApp/user/REQUEST_SUCCESS',
 };
 
 export default function*() {

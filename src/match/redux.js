@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { UserActionType } from '../user/sagas';
+import { UserActionType } from '../user/redux';
 
 // Selectors
 export const MATCH_NAMESPACE = 'match';

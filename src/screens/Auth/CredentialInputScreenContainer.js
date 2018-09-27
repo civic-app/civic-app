@@ -21,10 +21,14 @@ import {
   showErrors,
 } from '../../auth/redux';
 import { getApiErrorMessage, getIsLoading } from '../../UI/redux';
+import { getUserHasTakenSurvey } from '../../match/selectors';
+import { getUserHasDistrict } from '../../user/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 
 const mapStateToProps = state => ({
   isLoggedIn: getIsLoggedIn(state),
+  hasTakenSurvey: getUserHasTakenSurvey(state),
+  hasDistrict: getUserHasDistrict(state),
   formType: getFormType(state),
   email: getEmailInput(state),
   password: getPasswordInput(state),
