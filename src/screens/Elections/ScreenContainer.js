@@ -2,19 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
 import { connect } from 'react-redux';
-import {StyleSheet, ScrollView, View, Text, FlatList } from 'react-native';
+import {StyleSheet, ScrollView, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { getCandidateData } from './viewSelectors'
 import Candidate from './CandidateContainer'
 
+var unique = (arrA) => {
+  return arrA.filter((elem, pos, arr) => {
+    return arr.indexOf(elem) == pos
+  })
+}
+const distinctPositions = new Array()
 const ElectionsScreen = props => {
-  const distinctPositions = new Set();
   return (
     <View style={styles.container}>
-      {props.candidates.map(candidate => (
-        distinctPositions.add(candidate.electionIds.toString())
-      ))}
+      {props.candidates.map(candidate => {
+        distinctPositions.push(candidate.electionIds[0])
+      })} 
       <FlatList
-        data={[...distinctPositions]}
+        data={unique(distinctPositions)}
         keyExtractor={(item)=>item}
         renderItem={({item})=> (
           <View key={item} style={styles.candidateContainer}>
@@ -27,7 +32,9 @@ const ElectionsScreen = props => {
                 (item === candidate.electionIds.toString())
                   ?
                   <View key={candidate.id}>
-                    {/* <Data candidateId={candidate.id} goToCandidateDetail={props.goToCandidateDetail}/> */}
+                    <TouchableOpacity onPress={() => props.goToCandidateDetail(candidate.id)}> 
+                      <Data candidateId={candidate.id}/>
+                    </TouchableOpacity>
                   </View>
                   :
                   null

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Colors from '../../styles/colors';
 import Mixins from '../../styles/mixins';
-import {Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {Image, StyleSheet, View, Text } from 'react-native';
 import Fave from './FavoriteContainer'
 
 const DataContainer = props => {
@@ -11,12 +11,10 @@ const DataContainer = props => {
       <View key={props.data.id} style={styles.container}>
         <View style={styles.newsCard}>
           <View style={styles.pictureBody}>
-            <TouchableOpacity onPress={props.goToCandidateDetail(props.data.id)}> 
-              <Image style={styles.candidatePicture}
-                source={{ uri: props.data.image}} 
-              />
-              <Fave isFavorite={props.data.isFavorite}/>
-            </TouchableOpacity>
+            <Image style={styles.candidatePicture}
+              source={{ uri: props.data.image}} 
+            />
+            <Fave isFavorite={props.data.isFavorite}/>
           </View> 
           <View style={styles.contentContainer}>
             <View style={styles.contentBody}>
