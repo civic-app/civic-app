@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { getPositionsForCandidate } from '../candidate/redux/positions';
 import { getUserPositions } from './redux';
 import { calculateMatch } from './calculate';
@@ -8,3 +9,5 @@ export const getMatchPercent = (state, candidateId) => {
   return userPositions && candidatePositions &&
     calculateMatch(userPositions, candidatePositions);
 };
+
+export const getUserHasTakenSurvey = state => !isEmpty(getUserPositions(state));

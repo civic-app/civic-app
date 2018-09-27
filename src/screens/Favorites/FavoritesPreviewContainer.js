@@ -3,7 +3,7 @@ import { compose, lifecycle } from 'recompose';
 import FavoritesPreview from './FavoritesPreview';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import { getFilteredCandidates, loadCandidates } from '../../candidate/redux/candidates'
-import { loadUser } from '../../user/sagas'
+import { loadUser } from '../../user/redux'
 import { getIsLoggedIn } from '../../auth/selectors';
 import { getUserFavorites } from '../../favorites/redux';
 import { Category } from '../../favorites/models';

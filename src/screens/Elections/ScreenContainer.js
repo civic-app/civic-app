@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import { getCandidates, loadCandidates } from '../../candidate/redux/candidates';
-import { loadUser } from '../../user/sagas'
+import { loadUser } from '../../user/redux'
 import { getIsLoggedIn } from '../../auth/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import Screen from './Screen';

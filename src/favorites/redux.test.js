@@ -1,6 +1,6 @@
 import { Category } from './models';
 import reducer, { favoritesRequestSuccess, addOrRemoveFavorite } from './redux';
-import { userFetchSuccess } from '../user/sagas';
+import { userFetchSuccess } from '../user/redux';
 
 
 describe('favorites reducer', () => {
