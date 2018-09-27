@@ -32,6 +32,8 @@ const MainTabNavigator = createBottomTabNavigator(
       },
       style: {
         paddingTop: 5,
+        paddingBottom: 5,
+        height: 60,
       },
     },
   },
