@@ -9,6 +9,19 @@ import { getIsLoggedIn } from '../../auth/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import Elections from './ScreenContainer';
 
+const getUserElections = () => ['Governor','US Senate', 'California District 39',
+  'California District 10', 'California District 25', 'California District 13']
+
+export const getElectionsViewProps = (state) => {
+  const candidates = getCandidates(state, toListCandidateMapperPlaceholder);
+  const userElections = getUserElections()
+  const elections = userElections.map(electionIds => ({
+    electionIds, 
+    candidates: candidates.filter(candidate => candidate.electionIds[0] === electionIds)
+  }))
+  return {elections}
+}
+
 export const getCandidateData = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
   const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
@@ -32,6 +45,7 @@ const Container = compose(
     state => ({
       candidates: getCandidates(state, toListCandidateMapperPlaceholder),
       isLoggedIn: getIsLoggedIn(state),
+      elections: getElectionsViewProps(state)
     }),
     { loadCandidates, loadUser },
   ),

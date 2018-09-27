@@ -8,29 +8,31 @@ import Fave from './FavoriteContainer'
 const DataContainer = props => {
   return (
     <View style={styles.container}>
-      <View key={props.data.id} style={styles.container}>
-        <View style={styles.newsCard}>
-          <View style={styles.pictureBody}>
-            <Image style={styles.candidatePicture}
-              source={{ uri: props.data.image}} 
-            />
-            <Fave isFavorite={props.data.isFavorite}/>
+      {props.data == undefined ? null : 
+        <View key={props.data.id} style={styles.container}>
+          <View style={styles.newsCard}>
+            <View style={styles.pictureBody}>
+              <Image style={styles.candidatePicture}
+                source={{ uri: props.data.image}} 
+              />
+              <Fave isFavorite={props.data.isFavorite}/>
+            </View> 
+            <View style={styles.contentContainer}>
+              <View style={styles.contentBody}>
+                <Text style={styles.matchCardText}>
+                  <Text style={styles.nameText}>{props.data.name}{'\n\n'}</Text>  
+                  {props.data.matchPercent != undefined
+                    ?
+                    <Text style={styles.matchCardPercentText}>{props.data.matchPercent}{'%'}</Text>
+                    :
+                    <Text>{'No'}</Text>
+                  }{' match'}
+                </Text>
+              </View>
+            </View>   
           </View> 
-          <View style={styles.contentContainer}>
-            <View style={styles.contentBody}>
-              <Text style={styles.matchCardText}>
-                <Text style={styles.nameText}>{props.data.name}{'\n\n'}</Text>  
-                {props.data.matchPercent != undefined
-                  ?
-                  <Text style={styles.matchCardPercentText}>{props.data.matchPercent}{'%'}</Text>
-                  :
-                  <Text>{'No'}</Text>
-                }{' match'}
-              </Text>
-            </View>
-          </View>   
-        </View> 
-      </View>
+        </View>
+      }
     </View>
   );
 }
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
   },
   pictureBody: {
     marginLeft: 15,
+    marginRight: 15,
     height: 150,
     width: 200, 
     backgroundColor: Colors.white,
