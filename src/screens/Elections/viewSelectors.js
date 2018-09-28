@@ -4,7 +4,7 @@ import { getMatchPercent } from '../../match/selectors';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 import { getCandidate, getCandidates, loadCandidates } from '../../candidate/redux/candidates';
-import { loadUser } from '../../user/sagas'
+import { loadUser } from '../../user/redux'
 import { getIsLoggedIn } from '../../auth/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import Elections from './ScreenContainer';
