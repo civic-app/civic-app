@@ -9,17 +9,18 @@ import { getIsLoggedIn } from '../../auth/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import Elections from './ScreenContainer';
 
-const getUserElections = () => ['Governor','US Senate', 'California District 39',
-  'California District 10', 'California District 25', 'California District 13']
-
 export const getElectionsViewProps = (state) => {
-  const candidates = getCandidates(state, toListCandidateMapperPlaceholder);
-  const userElections = getUserElections()
-  const elections = userElections.map(electionIds => ({
+  const candidates = getCandidates(state, toListCandidateMapperPlaceholder).filter(
+    candidate => candidate.id != 'placeholder');
+  const electionIds = candidates.map(candidate => candidate.electionIds[0])
+  const distinctElectionIds = electionIds.filter((elem, pos, arr) => {
+    return arr.indexOf(elem) == pos
+  })
+  const electionCandidates = distinctElectionIds.map(electionIds => ({
     electionIds, 
     candidates: candidates.filter(candidate => candidate.electionIds[0] === electionIds)
   }))
-  return {elections}
+  return {electionCandidates}
 }
 
 export const getCandidateData = (state, candidateId) => {
@@ -43,9 +44,8 @@ const ScreenWithAuthentication = WithAuthentication('logout')(Elections);
 const Container = compose(
   connect(
     state => ({
-      candidates: getCandidates(state, toListCandidateMapperPlaceholder),
       isLoggedIn: getIsLoggedIn(state),
-      elections: getElectionsViewProps(state)
+      electionCandidates: getElectionsViewProps(state),
     }),
     { loadCandidates, loadUser },
   ),

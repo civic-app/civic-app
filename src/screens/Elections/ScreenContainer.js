@@ -10,7 +10,7 @@ const ElectionsScreen = props => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={props.elections.elections}
+        data={props.electionCandidates.electionCandidates}
         keyExtractor={(item)=>item.electionIds}
         renderItem={({item})=> (
           <View key={item} style={styles.candidateContainer}>
@@ -36,10 +36,8 @@ const ElectionsScreen = props => {
 
 ElectionsScreen.propTypes = {
   goToCandidateDetail: PropTypes.func,
-  candidates: PropTypes.array,
-  elections: PropTypes.object
+  electionCandidates: PropTypes.object,
 };
-
 
 export const Candidate = connect(
   (state, ownProps) => ({
