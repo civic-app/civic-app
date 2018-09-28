@@ -1,7 +1,7 @@
 // Uncomment to Get Rid of Annoying Yellow Box Dialogs in Android Studio. They are caused by a bug related to Firebase timers.
 
 // console.ignoredYellowBox = [
-//   'Setting a timer'
+// 'Setting a timer'
 // ];
 
 import React from 'react';
