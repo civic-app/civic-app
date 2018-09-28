@@ -5,6 +5,7 @@ import { AuthActionType, authFailure, logOut as logOutAction, logOutSuccess, log
 import { getEmailInput, getPasswordInput } from '../selectors';
 import { signInWithFacebookAsync, signInWithGoogleAsync } from '../socialauth';
 import { toFakeUser } from '../doubles';
+import { loadUserDataSaga } from '../../user/sagas';
 
 let gen;
 
@@ -73,12 +74,21 @@ describe('emailLoginSaga', () => {
     expect(gen.next(password).value).toEqual(call(logInWithEmailAndPassword, email, password));
   });
 
+  it('should call the loadUserData saga with the returned user', () => {
+    const user = toFakeUser();
+    Array.from({ length: 3 }).forEach(() => {
+      gen.next();
+    });
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+  });
+
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
+    gen.next({ user });
+    expect(gen.next().value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -107,10 +117,17 @@ describe('facebookLoginSaga', () => {
     expect(gen.next().value).toEqual(call(signInWithFacebookAsync));
   });
 
+  it('should call the loadUserData saga with the returned user', () => {
+    const user = toFakeUser();
+    gen.next();
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+  });
+
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
+    gen.next({ user });
+    expect(gen.next().value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -135,10 +152,17 @@ describe('googleLoginSaga', () => {
     expect(gen.next().value).toEqual(call(signInWithGoogleAsync));
   });
 
+  it('should call loadUserData saga with the returned user', () => {
+    const user = toFakeUser();
+    gen.next();
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+  });
+
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
+    gen.next({ user });
+    expect(gen.next().value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {
@@ -176,12 +200,21 @@ describe('registerSaga', () => {
     expect(gen.next(password).value).toEqual(call(registerWithEmailAndPassword, email, password));
   });
 
+  it('should call loadUserData saga with the returned user', () => {
+    const user = toFakeUser();
+    Array.from({ length: 3 }).forEach(() => {
+      gen.next();
+    });
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+  });
+
   it('should call loginSuccess with the returned user', () => {
     const user = toFakeUser();
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next({ user }).value).toEqual(put(loginSuccess(user)));
+    gen.next({ user });
+    expect(gen.next().value).toEqual(put(loginSuccess(user)));
   });
 
   it('dispatches the logout action when the api call errors', () => {

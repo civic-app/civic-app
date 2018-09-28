@@ -19,9 +19,10 @@ export default async function(){
       }else{
         const officeName = resultJson.offices[0].name.split(' ');
         const district = officeName[officeName.length-1];
-        this.setState({district, view:'DISTRICT_FOUND'}, () => {
-          this.setState({isLoading: false});
-        });
+        /**
+         * Do something with the district here then navigate to main App...
+         */
+        this.props.navigate('App');
       }
     }else{
       throw resultJson.error;
@@ -32,7 +33,9 @@ export default async function(){
         this.setState({isLoading: false});
       })
     }else{
-      this.setState({isLoading: false, error:`Hmm that doesn't look right! Please check for any errors.`});
+      this.setState({view: 'ADDRESS_NEEDED'}, () => {
+        this.setState({isLoading: false});
+      });
     }
   }
 }

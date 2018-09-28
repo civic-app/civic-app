@@ -1,39 +1,38 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { subscribeToAuthStateChanges, logInWithEmailAndPassword, logOut, registerWithEmailAndPassword } from './api';
-import {
-  AuthActionType,
-  logOut as logOutAction,
-  logOutSuccess,
-  loginSuccess,
-  authFailure,
-} from './redux';
+import { AuthActionType, logOut as logOutAction, logOutSuccess, loginSuccess, authFailure } from './redux';
 import { signInWithFacebookAsync, signInWithGoogleAsync } from './socialauth';
 import { getEmailInput, getPasswordInput } from './selectors';
+import { loadUserDataSaga } from '../user/sagas';
 
 /*
  * Generic wrapper for a login flow that can make an api call,
  * save the user in state on success, or save an error in state
  * on failure.
  */
-const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) => function* () {
-  try {
-    let email;
-    let password;
-    let user;
-    if (requiresEmailAndPassword) {
-      // grab email and password values from state
-      email = yield select(getEmailInput);
-      password = yield select(getPasswordInput);
-      user = yield call(asyncLoginFunction, email, password);
-    } else {
-      user = yield call(asyncLoginFunction);
+const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) =>
+  function*() {
+    try {
+      let email;
+      let password;
+      let userResponse;
+      if (requiresEmailAndPassword) {
+        // grab email and password values from state
+        email = yield select(getEmailInput);
+        password = yield select(getPasswordInput);
+        userResponse = yield call(asyncLoginFunction, email, password);
+      } else {
+        userResponse = yield call(asyncLoginFunction);
+      }
+      // load user data from firebase before updating auth state
+      // so that components after login are properly hydrated
+      yield call(loadUserDataSaga, userResponse.user.uid);
+      yield put(loginSuccess(userResponse.user));
+    } catch (err) {
+      yield put(logOutAction());
+      yield put(authFailure(err));
     }
-    yield put(loginSuccess(user.user));
-  } catch (err) {
-    yield put(logOutAction());
-    yield put(authFailure(err));
-  }
-};
+  };
 
 export const facebookLoginSaga = generateLoginSaga(signInWithFacebookAsync, false);
 export const googleLoginSaga = generateLoginSaga(signInWithGoogleAsync, false);

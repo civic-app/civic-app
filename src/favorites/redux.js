@@ -1,5 +1,5 @@
 import { Category } from './models';
-import { UserActionType } from '../user/sagas';
+import { UserActionType } from '../user/redux';
 
 // Selectors
 export const getUserFavorites = (state) => ({

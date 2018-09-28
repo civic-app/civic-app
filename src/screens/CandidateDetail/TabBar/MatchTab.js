@@ -1,24 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, StyleSheet, Share } from 'react-native';
 import PropTypes from 'prop-types';
 import Colors from '../../../styles/colors';
 import IssueCard from './IssueCard';
+import ShareButton from '../../components/ShareButton';
 
 const MatchCard = props => (
   <View style={styles.matchCard}>
     <Text style={styles.matchCardText}>
-      You're a <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text> match!
+      You're a  <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text>  match!
     </Text>
-    <Button
-      raised
-      rightIcon={{ name: 'launch', size: 25 }}
-      borderRadius={5}
-      title="Share"
-      buttonStyle={styles.shareButton}
-      containerViewStyle={styles.buttonView}
-      textStyle={styles.buttonText}
-      fontWeight="bold"
+    <ShareButton
+      title={"Share"}
+      buttonStyle={styles.buttonStyle}
+      onPress={()=>{
+        const url = "https://www.getcivicapp.com/";
+        Share.share({
+          message: `I'm a ${props.matchPercent} with ${'candidate name placeholder'}! Register to vote and find your election matches with Civic in 5 minutes.`,
+          url: url,
+          title: "Civic App"
+        },
+        {
+          dialogTitle: "Civic App"
+        })
+      }}
     />
   </View>
 );
@@ -51,30 +56,29 @@ const styles = StyleSheet.create({
     margin: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: Colors.darkBlue,
     borderRadius: 2,
-    height: 70,
+    padding: 15,
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+  buttonStyle: {
+    backgroundColor: Colors.lightBlue,
+    height: 35,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   matchCardText: {
     textAlign: 'center',
     fontSize: 16,
     color: Colors.white,
     flex: 2,
+    marginBottom: 5
   },
-  matchCardPercentText: {
-    fontSize: 24,
-  },
-  shareButton: {
-    backgroundColor: Colors.lightBlue,
-  },
-  buttonView: {
-    width: '33%',
-    height: '60%',
-  },
-  buttonText: {
-    color: Colors.white,
-  },
+  matchCardPercentText:{
+    fontSize: 24
+  }
 });
 
 export default MatchTab;

@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation';
-import ActivismScreen from '../screens/ActivismScreen';
+import ActivismScreen from '../screens/Activism';
 
 import styles from './styles';
 
