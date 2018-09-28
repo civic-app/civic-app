@@ -1,17 +1,25 @@
 import React, {Component} from 'react';
-import { View, Button } from 'react-native';
+import { KeyboardAvoidingView, Button, StyleSheet } from 'react-native';
 import DistrictMatch from './DistrictMatch';
-
-import styles from '../styles';
 
 class DistrictMatchScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.keyboardAvoidView} behavior="position">
         <DistrictMatch navigate={this.props.navigation.navigate}/>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  keyboardAvoidView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  }
+})
 
 export default DistrictMatchScreen;
