@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { getUserRegistered, userRegistered } from '../auth/redux';
 import colors from '../styles/colors';
 
 class VoterRegistrationSuccessScreen extends React.Component {
@@ -75,4 +77,12 @@ sharedButtonProps = {
     fontSize: 18,
 };
 
-export default VoterRegistrationSuccessScreen;
+VoterRegistrationSuccessScreen.propTypes = {
+    isRegistered: PropTypes.bool,
+    isUserRegistered: PropTypes.func,
+};
+
+export default connect(
+    (state) => ({ isRegistered: getUserRegistered(state) }),
+    { isUserRegistered: userRegistered },
+)(VoterRegistrationSuccessScreen);
