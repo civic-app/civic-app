@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Screen from './ScreenContainer';
+import Elections from './viewSelectors'
 
 class ElectionsScreen extends React.Component {
   static navigationOptions = {
     title: 'Elections',
   };
-  static propTypes = propTypes;
-
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
-
+  static propTypes = propTypes;
   render() {
-    return <Screen goToCandidateDetail={this.goToCandidateDetail} {...this.props} />;
-  }
-}
+    return (
+      <Elections goToCandidateDetail={this.goToCandidateDetail} {...this.props} />
+    );
+  }}
 
 const propTypes = {
   navigation: PropTypes.objectOf({
