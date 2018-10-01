@@ -4,6 +4,7 @@ import AuthStack from '../src/navigation/AuthStack';
 import MainTabNavigator from '../src/navigation/MainTabNavigator';
 import SurveyStack from '../src/navigation/SurveyStack';
 import DistrictMatchStack from '../src/navigation/DistrictMatchStack';
+import VoterStack from '../src/navigation/VoterStack';
 
 /*
  * Combines unrelated flows into one single app. For example,
@@ -16,7 +17,8 @@ const NavigationRoot = createSwitchNavigator(
     App: MainTabNavigator,
     Auth: AuthStack,
     Survey: SurveyStack,
-    DistrictMatch: DistrictMatchStack
+    DistrictMatch: DistrictMatchStack,
+    Voter: VoterStack,
   },
   {
     //Default Stack is Auth
