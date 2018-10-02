@@ -1,7 +1,7 @@
-import { call, select, put, takeEvery } from 'redux-saga/effects';
+import { call, select, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { getLoggedInUserId } from '../auth/selectors';
 import { logOutSaga } from '../auth/sagas';
-import { fetchUser } from './api';
+import { fetchUser, putDistrict } from './api';
 import { UserActionType, userFetchSuccess } from './redux';
 
 export const loadUserDataSaga = function*(passedInUserId) {
@@ -20,6 +20,16 @@ export const loadUserDataSaga = function*(passedInUserId) {
   }
 };
 
+export const saveUserDistrictSaga = function*(action) {
+  try {
+    const userId = yield select(getLoggedInUserId);
+    yield call(putDistrict, userId, action.payload);
+  } catch (error) {
+    // TODO: handle errors
+  }
+};
+
 export default function*() {
   yield takeEvery(UserActionType.Request, loadUserDataSaga);
+  yield takeLatest(UserActionType.SaveDistrict, saveUserDistrictSaga);
 }

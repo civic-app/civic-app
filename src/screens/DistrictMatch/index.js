@@ -1,16 +1,21 @@
-import React, {Component} from 'react';
-import { KeyboardAvoidingView, Button, StyleSheet } from 'react-native';
-import DistrictMatch from './DistrictMatch';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
+import DistrictMatch from './DistrictMatchContainer';
 
-class DistrictMatchScreen extends Component {
-  render() {
-    return (
-      <KeyboardAvoidingView style={styles.keyboardAvoidView} behavior="position">
-        <DistrictMatch navigate={this.props.navigation.navigate}/>
-      </KeyboardAvoidingView>
-    );
-  }
-}
+const DistrictMatchScreen = (props) => {
+  return (
+    <KeyboardAvoidingView style={styles.keyboardAvoidView} behavior="position">
+      <DistrictMatch navigate={props.navigation.navigate}/>
+    </KeyboardAvoidingView>
+  );
+};
+
+DistrictMatchScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
   keyboardAvoidView: {

@@ -5,6 +5,7 @@ import ElectionsStack from './ElectionsStack';
 import FavoritesStack from './FavoritesStack';
 import ActivismStack from './ActivismStack';
 import TabBarIcon from './TabBarIcon';
+import TabBarLabel from './TabBarLabel';
 import colors from '../styles/colors';
 
 /*
@@ -24,12 +25,11 @@ const MainTabNavigator = createBottomTabNavigator(
     initialRouteName: 'Elections',
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: props => <TabBarIcon navigation={navigation} {...props} />,
+      tabBarLabel: props => <TabBarLabel title={navigation.state.routeName} {...props} />,
     }),
     tabBarOptions: {
       activeTintColor: colors.orange,
-      labelStyle: {
-        fontSize: 14,
-      },
+      inactiveTintColor: colors.grayInactive,
       style: {
         paddingTop: 5,
         paddingBottom: 5,

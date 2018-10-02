@@ -71,7 +71,7 @@ class DistrictMatch extends Component {
   }
 
   render(){
-    const { zipcode, address, city, isLoading, view, district, error } = this.state;
+    const { isLoading } = this.state;
     if(isLoading){
       return (
         <View>
@@ -89,7 +89,8 @@ class DistrictMatch extends Component {
 
 // navigate function passed from index.js
 DistrictMatch.propTypes = {
-  navigate: PropTypes.func
+  navigate: PropTypes.func.isRequired,
+  saveDistrict: PropTypes.func.isRequired,
 }
 
 export const styles = StyleSheet.create({

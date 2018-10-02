@@ -3,6 +3,7 @@ export default {
   darkBlue: '#126390',
   facebookBlue: '#3c5a9a',
   gray: '#9B9B9B',
+  grayInactive: '#d1d3d4',
   green: '#49C019',
   darkGray: '#999',
   lightBlue: '#2d9cdb',
