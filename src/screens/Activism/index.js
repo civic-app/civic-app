@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, View, Text, StyleSheet, Button } from 'react-native';
+import { Share, ScrollView, View, Text, StyleSheet, Button } from 'react-native';
 import PropTypes from 'prop-types';
 import SquareButton from './SquareButton';
 import { Icon } from 'react-native-elements';

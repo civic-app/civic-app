@@ -9,7 +9,6 @@ import CandidateDetail from './CandidateDetail';
 import TabBar from './TabBar';
 import { getCandidateSummary, getTabBarProps } from './viewSelectors';
 
-
 class CandidatesScreen extends React.Component {
   static navigationOptions = {
     title: 'Candidates',

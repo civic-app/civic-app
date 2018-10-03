@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: Colors.lightBlue,
-    height: 35,
+    height: 50,
     paddingLeft: 20,
     paddingRight: 20,
   },

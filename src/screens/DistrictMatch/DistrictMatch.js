@@ -81,6 +81,7 @@ class DistrictMatch extends Component {
     }
     return (
       <View style={styles.container}>
+      {console.log(this.props)}
         {this.renderScreen()}
       </View>
     )

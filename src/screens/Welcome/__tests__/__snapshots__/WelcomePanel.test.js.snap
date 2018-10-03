@@ -105,7 +105,7 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
           "width": "100%",
         }
       }
-      title="Sign in with Google"
+      title="Continue with Google"
     />
     <Connect(FacebookAuthButton)
       style={
@@ -211,7 +211,7 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
           "width": "100%",
         }
       }
-      title="Sign up with Google"
+      title="Continue with Google"
     />
     <Connect(FacebookAuthButton)
       style={

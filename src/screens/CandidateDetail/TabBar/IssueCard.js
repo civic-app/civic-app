@@ -2,21 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableHighlight, Animated} from 'react-native';
 import { Icon } from 'react-native-elements'
 import Colors from '../../../styles/colors';
-import posed from 'react-native-pose';
 import PropTypes from 'prop-types';
 import Mixins from '../../../styles/mixins';
-
-const fast = ({ value, toValue, useNativeDriver }) =>
-  Animated.timing(value, {
-    toValue,
-    useNativeDriver,
-    duration: 100,
-  });
-
-const Wrapper = posed.View({
-  closed: { height: 50, transition: () => false },
-  open: { height: '110%', transition: fast }
-});
 
 class IssueCard extends Component {
   state = {
@@ -32,59 +19,69 @@ class IssueCard extends Component {
     const { isExpanded } = this.state;
     const { type, body, agreesWithUser } = this.props;
     return(
-      <Wrapper
-        style={styles.container}
-        pose={isExpanded ? 'open' : 'closed'}
-      >
+      <View styles={styles.container}>
         <TouchableHighlight
           onPress={ toggleExpand }
           underlayColor={'rgba(0,0,0,0.1)'}
         >
           <View style={styles.issueCard}>
-            <Icon
-              name={agreesWithUser ? 'check' : 'close'}
-              type="material-community"
-              size={30}
-              color={agreesWithUser ? Colors.green : Colors.red }
-              containerStyle={styles.issueMatchIcon}
-            />
-            <Text style={styles.issueText}>
-              {agreesWithUser ? 'Agree' : 'Disagree'} on {type} Issues</Text>
-            <View
-              style={styles.issueExpandButton}
-            >
+            <View style={styles.issueCardTop}>
               <Icon
-                name="chevron-down"
+                name={agreesWithUser ? 'check' : 'close'}
                 type="material-community"
                 size={30}
-                color="#CDCDCD"
+                color={agreesWithUser ? Colors.green : Colors.red }
+                containerStyle={styles.issueMatchIcon}
               />
+              <Text style={styles.issueText}>
+                {agreesWithUser ? 'Agree' : 'Disagree'} on {type} issues</Text>
+              <View
+                style={styles.issueExpandButton}
+              >
+                <Icon
+                  name="chevron-down"
+                  type="material-community"
+                  size={30}
+                  color="#CDCDCD"
+                />
+              </View>
+            </View>
+            <View
+              style={{backgroundColor:Colors.white}}
+            >
+            {isExpanded &&
+              <Text style={styles.issueBody}>
+                {body}
+              </Text>            
+            }
             </View>
           </View>
         </TouchableHighlight>
-        {isExpanded &&
-          <Text style={styles.issueBody}>
-            {body}
-          </Text>
-        }
-      </Wrapper>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin:10,
+    flex: 1,
     borderRadius: 2,
+    backgroundColor: Colors.white
+  },
+  issueCard: {
+    margin:5,
+    marginLeft: 10,
+    marginRight: 10,
     backgroundColor: Colors.white,
     ...Mixins.shadow
   },
-  issueCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  issueCardTop: {
+    flexDirection:'row',
+    alignItems: 'center'
   },
   issueText: {
-    fontSize: 16
+    fontSize: 16,
+    backgroundColor: Colors.white
   },
   issueMatchIcon: {
     padding: 10
@@ -96,7 +93,9 @@ const styles = StyleSheet.create({
   issueBody: {
     fontSize: 16,
     paddingLeft: 50,
-    color: 'rgba(0, 0, 0, 0.5438)'
+    paddingRight: 20,
+    color: 'rgba(0, 0, 0, 0.5438)',
+    paddingBottom: 20
   }
 });
 

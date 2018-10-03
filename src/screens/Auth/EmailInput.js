@@ -7,7 +7,7 @@ const EmailInput = props => {
     <CivicTextInput
       autoCapitalize="none"
       autoCorrect={false}
-      autoFocus={true}
+      autoFocus={false}
       clearButtonMode="while-editing"
       keyboardType="email-address"
       onChangeText={props.onChangeText}

@@ -64,7 +64,7 @@ class WelcomePanel extends React.Component {
 
     return (
       <View style={styles.expandedViewContainer}>
-        <GoogleAuthButton title={`Sign ${config.preposition} with Google`} style={styles.social} />
+        <GoogleAuthButton title="Continue with Google" style={styles.social} />
         <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
         <Text style={styles.text}>or</Text>
         <SocialButton

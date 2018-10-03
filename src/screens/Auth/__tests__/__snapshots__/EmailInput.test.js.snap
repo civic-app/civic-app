@@ -4,7 +4,7 @@ exports[`EmailInput renders correctly 1`] = `
 <CivicTextInput
   autoCapitalize="none"
   autoCorrect={false}
-  autoFocus={true}
+  autoFocus={false}
   clearButtonMode="while-editing"
   keyboardType="email-address"
   onBlur={undefined}
@@ -19,7 +19,7 @@ exports[`EmailInput renders placeholder text when there is no value 1`] = `
 <CivicTextInput
   autoCapitalize="none"
   autoCorrect={false}
-  autoFocus={true}
+  autoFocus={false}
   clearButtonMode="while-editing"
   keyboardType="email-address"
   onBlur={undefined}

@@ -16,15 +16,15 @@ const CredentialInputScreen = props => {
         titleText: 'Sign in',
         changeFormText: 'Don\'t have an account yet? Register',
         otherFormType: formTypes.SIGN_UP,
-        googleButtonText: 'Sign in with Google',
+        googleButtonText: 'Continue with Google',
       };
       break;
     case formTypes.SIGN_UP:
       options = {
-        titleText: 'Sign Up for Civic',
+        titleText: 'Sign up for Civic',
         changeFormText: 'Have an account? Sign in',
         otherFormType: formTypes.LOGIN,
-        googleButtonText: 'Sign up with Google',
+        googleButtonText: 'Continue with Google',
       };
       break;
     default:
@@ -58,9 +58,10 @@ const CredentialInputScreen = props => {
         <Text onPress={handleSubmit} style={styles.submitButton}>
           SUBMIT
         </Text>
-        <Text style={styles.text}>or</Text>
-        <GoogleAuthButton title={options.googleButtonText} style={styles.social} />
-        <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
+        <View style={{marginTop: 20}}>
+          <GoogleAuthButton title={options.googleButtonText} style={styles.social} />
+          <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
+        </View>
         <Text onPress={() => props.changeFormType(options.otherFormType)} style={styles.text}>
           {options.changeFormText}
         </Text>
@@ -97,26 +98,23 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: colors.lightBlue,
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10
   },
   inputContainer: {
+    flex:1,
     backgroundColor: colors.white,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
+    borderRadius: 25,
     flexDirection: 'column',
     justifyContent: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    maxHeight: 530,
-    maxWidth: 369,
+    maxHeight: 480,
+    maxWidth: 360,
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
+    width: '100%'
   },
   social: {
     marginBottom: 8,
@@ -124,7 +122,6 @@ const styles = StyleSheet.create({
     marginRight: 0,
     alignSelf: 'center',
     width: '100%',
-    maxWidth: 322,
   },
   submitButton: {
     textAlign: 'right',
