@@ -11,7 +11,6 @@ const ShareButton = props => (
     borderRadius={5}
     title={props.title}
     buttonStyle={props.buttonStyle}
-    containerViewStyle={props.containerViewStyle}
     textStyle={styles.buttonText}
     onPress={props.onPress}
   />
@@ -25,7 +24,7 @@ ShareButton.propTypes = {
 const styles = StyleSheet.create({
   buttonText: {
     color: Colors.white,
-    fontSize: 14
+    fontSize: 18,
   }
 });
 

@@ -32,16 +32,17 @@ class ActivismScreen extends React.Component {
           <Text style={styles.subHeading}>Research shows that personal messages increase voter turnout</Text>
           <Icon
             name="megaphone"
-            size={100}
+            size={90}
             type="entypo"
             color={Colors.darkBlue}
           />
-          <ShareButton
-            title="Invite Friends with Civic"
-            buttonStyle={styles.buttonStyle}
-            containerViewStyle={styles.containerViewStyle}
-            onPress={handlePress}
-          />
+          <View style={styles.containerViewStyle}>
+            <ShareButton
+              title="Invite Friends with Civic"
+              buttonStyle={styles.buttonStyle}
+              onPress={handlePress}
+            />
+          </View>
         </View>
       </View>
     );
@@ -55,21 +56,21 @@ ActivismScreen.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 20,
     alignItems: 'center'
   },
   card: {
     flex:1,
     backgroundColor: Colors.white,
-    borderRadius: 25,
+    borderRadius: 20,
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginLeft: 10,
     marginRight: 10,
-    maxHeight: 507,
+    maxHeight: 480,
     maxWidth: 369,
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 20,
+    paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20,
     width: '100%',
@@ -85,19 +86,19 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     margin: 20,
-    marginTop: 0,
-    marginBottom: 20
+    marginTop: 10,
+    marginBottom: 0
   },
   subHeading: {
     fontSize: 18,
     margin: 20,
     marginTop: 0,
-    marginBottom: 5
+    marginBottom: 0
   },
   containerViewStyle: {
-    margin: 10,
-    marginTop: 0,
-    marginBottom: 0,
+    margin: 30,
+    marginTop: 10,
+    marginBottom: 10
   },
   buttonStyle: {
     justifyContent: 'space-around',
