@@ -9,7 +9,7 @@ import { getFavoritesForCategory } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 var _ = require('lodash');
 
-export const getUserFavorites = (state) => {
+export const getFavoriteCandidateData   = (state) => {
   const favoriteCandidateIds = getFavoritesForCategory(state,[Category.Candidates])
   return _.flatMap(favoriteCandidateIds._map._mapData, (candidate) => {
     return getFilteredCandidates(state, toListCandidateMapper, _.uniq(candidate))
@@ -21,7 +21,7 @@ const ScreenWithAuthentication = WithAuthentication('logout')(FavoritesPreview);
 const Container = compose(
   connect(
     (state) => ({
-      data: getUserFavorites(state),
+      data: getFavoriteCandidateData(state),
       isLoggedIn: getIsLoggedIn(state),
     }),
     { loadCandidates, loadUser },
