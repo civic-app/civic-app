@@ -42,32 +42,33 @@ NewsInfo.propTypes = {
   body: PropTypes.string,
 };
 
-const FavoritesScreen = props => (
-  <View style={styles.container}>
-    <FlatList
-      data={props.data}
-      keyExtractor={(item)=>item.id}
-      renderItem={({item})=> (
-        <View style={styles.candidateContainer} >
-          <Text style={styles.nameText} >{item.name}</Text>
-          <Text style={styles.positionsText}>
+const FavoritesScreen = props => {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={props.data}
+        keyExtractor={(item)=>item.id}
+        renderItem={({item})=> (
+          <View style={styles.candidateContainer} >
+            <Text style={styles.nameText} >{item.name}</Text>
+            <Text style={styles.positionsText}>
             Running for {item.electionIds}
-          </Text>
-          <ScrollView horizontal={true}>
-            <View style={styles.container} >
-              <View style={styles.newsCard}>
-                <TouchableOpacity onPress={props.goToCandidateDetail(item.id)}>
-                  <Avatar xlarge round={false} source={{ uri: item.image}}/>
-                </TouchableOpacity>
-                <NewsInfo/>
+            </Text>
+            <ScrollView horizontal={true}>
+              <View style={styles.container} >
+                <View style={styles.newsCard}>
+                  <TouchableOpacity onPress={props.goToCandidateDetail(item.id)}>
+                    <Avatar xlarge round={false} source={{ uri: item.image}}/>
+                  </TouchableOpacity>
+                  <NewsInfo/>
+                </View>
               </View>
-            </View>
-          </ScrollView>
-        </View>
-      )}
-    />
-  </View>
-);
+            </ScrollView>
+          </View>
+        )}
+      />
+    </View>
+  )};
 
 FavoritesScreen.propTypes = {
   data: PropTypes.array,

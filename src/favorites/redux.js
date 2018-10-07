@@ -11,7 +11,7 @@ export const getIsFavorite = (state, id, category) => (
   getFavoritesForCategory(state, category).has(id)
 );
 
-const getFavoritesForCategory = (state, category) => (
+export const getFavoritesForCategory = (state, category) => (
   state[FAVORITES_NAMESPACE][category]
 );
 

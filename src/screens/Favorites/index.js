@@ -1,5 +1,5 @@
 import React from 'react';
-import Favorites from './FavoritesPreviewContainer';
+import Favorites from './viewSelectors';
 
 class FavoritesScreen extends React.Component {
   static navigationOptions = { title: 'My Favorites' };
