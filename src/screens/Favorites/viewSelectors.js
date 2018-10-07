@@ -7,13 +7,18 @@ import { loadUser } from '../../user/redux'
 import { getIsLoggedIn } from '../../auth/selectors';
 import { getFavoritesForCategory } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
-var _ = require('lodash');
+import {Platform} from 'react-native';
+import flatMap from 'lodash/flatMap'
+import uniq from 'lodash/uniq';
 
 export const getFavoriteCandidateData   = (state) => {
   const favoriteCandidateIds = getFavoritesForCategory(state,[Category.Candidates])
-  return _.flatMap(favoriteCandidateIds._map._mapData, (candidate) => {
-    return getFilteredCandidates(state, toListCandidateMapper, _.uniq(candidate))
-  })
+  return Platform.OS !== 'android' ? 
+    getFilteredCandidates(state, toListCandidateMapper, favoriteCandidateIds) 
+    : 
+    flatMap(favoriteCandidateIds._map._mapData, (candidate) => {
+      return getFilteredCandidates(state, toListCandidateMapper, uniq(candidate))
+    })
 }
 
 const ScreenWithAuthentication = WithAuthentication('logout')(FavoritesPreview);
