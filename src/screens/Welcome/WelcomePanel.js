@@ -22,6 +22,7 @@ class WelcomePanel extends React.Component {
         borderRadius={3}
         color={colors.white}
         containerViewStyle={styles.buttonContainer}
+        fontSize={16}
         title="Register"
         onPress={() => this.props.switchFormType(formTypes.SIGN_UP)}
       />
@@ -30,6 +31,7 @@ class WelcomePanel extends React.Component {
         borderRadius={3}
         color={colors.black}
         containerViewStyle={styles.buttonContainer}
+        fontSize={16}
         title="Sign In"
         onPress={() => this.props.switchFormType(formTypes.LOGIN)}
       />
@@ -128,13 +130,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   social: {
-    marginBottom: 8,
+    marginBottom: 5,
     width: '100%',
     maxWidth: 322,
   },
   text: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     paddingTop: 10,
     paddingBottom: 18,
   },

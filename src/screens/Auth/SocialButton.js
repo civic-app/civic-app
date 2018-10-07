@@ -10,7 +10,7 @@ const SocialButton = props => (
     buttonStyle={[styles.button, props.buttonStyle]}
     color={props.textColor}
     containerViewStyle={props.style}
-    fontSize={18}
+    fontSize={16}
     icon={props.icon}
     iconComponent={props.iconComponent}
     title={props.title}
@@ -41,7 +41,7 @@ SocialButton.defaultProps = {
     name: 'email',
     type: 'material-community',
     color: colors.black,
-    size: 35,
+    size: 32,
   },
   iconComponent: null,
   style: {},
