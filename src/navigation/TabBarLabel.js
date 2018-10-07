@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: colors.darkGray,
+    textAlign: 'center',
   },
 });
 
