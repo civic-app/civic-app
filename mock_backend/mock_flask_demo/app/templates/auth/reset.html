@@ -1,0 +1,20 @@
+{% extends 'auth/_base.html' %}
+
+{% block body %}
+
+<h1>{{ submit_text }}</h1>
+
+<form id="resetForm" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <label>Email</label>
+    <input name="email" type="email">
+
+    <input type="submit" id="register" class="btn btn-success"
+           value="{{ submit_text }}"/>
+    {% if error %}
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Incorrect!</strong> {{ error }}
+    </div>
+    {% endif %}
+</form>
+{% endblock %}

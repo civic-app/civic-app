@@ -1,0 +1,17 @@
+{% extends 'auth/_base.html' %}
+
+{% block head %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+    <form>
+        <label>Email</label>
+        <input name="email" type="email">
+        <label>Password</label>
+        <input name="password" type="password">
+
+        Don't have an account? <a href="{{ url_for(" auth.register") }}">Sign up</a>
+
+    </form>
+{% endblock %}

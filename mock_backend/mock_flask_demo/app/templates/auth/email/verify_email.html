@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification Email</title>
+</head>
+<body>
+{% raw %}
+Hello {{ username }},
+{% endraw %}
+<br/><br/>
+Welcome to {{ cookiecutter.project_name }}<br/>
+To complete your email verification please , just click following link<br/>
+<br/><br/>
+{% raw %}
+<a href="{{ url }}">Click here to Confirm Registration :)</a>
+{% endraw %}
+<br/><br/>
+If you did not sign up for this {{ cookiecutter.project_name }}, Please ignore this email
+Thank you,
+</body>
+</html>
