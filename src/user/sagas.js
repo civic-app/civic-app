@@ -1,10 +1,10 @@
 import { call, select, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { getLoggedInUserId } from '../auth/selectors';
 import { logOutSaga } from '../auth/sagas';
-import { fetchUser, putDistrict } from './api';
+import { fetchUser, putDistrict, putUserRegistered } from './api';
 import { UserActionType, userFetchSuccess } from './redux';
 
-export const loadUserDataSaga = function*(passedInUserId) {
+export const loadUserDataSaga = function*(_action, passedInUserId) {
   try {
     let userId = yield select(getLoggedInUserId);
     // use passed in value as default if no id in state
@@ -29,7 +29,17 @@ export const saveUserDistrictSaga = function*(action) {
   }
 };
 
+export const saveIsUserRegisteredSaga = function*(action) {
+  try {
+    const userId = yield select(getLoggedInUserId);
+    yield call(putUserRegistered, userId, action.payload);
+  } catch (error) {
+    // TODO: handle errors
+  }
+};
+
 export default function*() {
   yield takeEvery(UserActionType.Request, loadUserDataSaga);
   yield takeLatest(UserActionType.SaveDistrict, saveUserDistrictSaga);
+  yield takeLatest(UserActionType.SaveUserRegistered, saveIsUserRegisteredSaga);
 }
