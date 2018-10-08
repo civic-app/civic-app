@@ -15,12 +15,12 @@ exports[`SocialButton renders correctly 1`] = `
   }
   color="#000000"
   containerViewStyle={Object {}}
-  fontSize={18}
+  fontSize={16}
   icon={
     Object {
       "color": "#000000",
       "name": "email",
-      "size": 35,
+      "size": 32,
       "type": "material-community",
     }
   }

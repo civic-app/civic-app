@@ -11,11 +11,12 @@ const GoogleIcon = () => (
 
 const styles = StyleSheet.create({
   googleIcon: {
-    height: 32,
-    width: 32,
+    height: 28,
+    width: 28,
   },
   iconContainer: {
-    marginRight: 12,
+    marginLeft: 2,
+    marginRight: 14,
   },
 });
 

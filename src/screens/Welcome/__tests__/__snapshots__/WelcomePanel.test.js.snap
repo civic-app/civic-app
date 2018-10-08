@@ -9,6 +9,8 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
       "borderTopRightRadius": 25,
       "bottom": 0,
       "flexDirection": "row",
+      "paddingLeft": 10,
+      "paddingRight": 10,
       "position": "absolute",
     }
   }
@@ -30,8 +32,11 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
       containerViewStyle={
         Object {
           "borderRadius": 3,
+          "elevation": 2,
           "flex": 1,
           "marginBottom": 20,
+          "marginLeft": 10,
+          "marginRight": 10,
           "marginTop": 20,
           "shadowColor": "#000000",
           "shadowOffset": Object {
@@ -42,7 +47,7 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
           "shadowRadius": 3,
         }
       }
-      fontSize={18}
+      fontSize={16}
       onPress={[Function]}
       title="Register"
     />
@@ -53,8 +58,11 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
       containerViewStyle={
         Object {
           "borderRadius": 3,
+          "elevation": 2,
           "flex": 1,
           "marginBottom": 20,
+          "marginLeft": 10,
+          "marginRight": 10,
           "marginTop": 20,
           "shadowColor": "#000000",
           "shadowOffset": Object {
@@ -65,7 +73,7 @@ exports[`WelcomePanel renders correctly in initial view 1`] = `
           "shadowRadius": 3,
         }
       }
-      fontSize={18}
+      fontSize={16}
       onPress={[Function]}
       title="Sign In"
     />
@@ -82,6 +90,8 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       "borderTopRightRadius": 25,
       "bottom": 0,
       "flexDirection": "row",
+      "paddingLeft": 10,
+      "paddingRight": 10,
       "position": "absolute",
     }
   }
@@ -100,7 +110,7 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
     <Connect(GoogleAuthButton)
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
@@ -110,35 +120,20 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
     <Connect(FacebookAuthButton)
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
       }
       title="Continue with Facebook"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "fontSize": 18,
-          "paddingBottom": 18,
-          "paddingTop": 10,
-          "textAlign": "center",
-        }
-      }
-    >
-      or
-    </Text>
     <SocialButton
       buttonStyle={Object {}}
       icon={
         Object {
           "color": "#000000",
           "name": "email",
-          "size": 35,
+          "size": 32,
           "type": "material-community",
         }
       }
@@ -146,7 +141,7 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
@@ -162,7 +157,7 @@ exports[`WelcomePanel renders correctly in login view 1`] = `
       style={
         Array [
           Object {
-            "fontSize": 18,
+            "fontSize": 16,
             "paddingBottom": 18,
             "paddingTop": 10,
             "textAlign": "center",
@@ -188,6 +183,8 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       "borderTopRightRadius": 25,
       "bottom": 0,
       "flexDirection": "row",
+      "paddingLeft": 10,
+      "paddingRight": 10,
       "position": "absolute",
     }
   }
@@ -206,7 +203,7 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
     <Connect(GoogleAuthButton)
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
@@ -216,35 +213,20 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
     <Connect(FacebookAuthButton)
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
       }
       title="Continue with Facebook"
     />
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Object {
-          "fontSize": 18,
-          "paddingBottom": 18,
-          "paddingTop": 10,
-          "textAlign": "center",
-        }
-      }
-    >
-      or
-    </Text>
     <SocialButton
       buttonStyle={Object {}}
       icon={
         Object {
           "color": "#000000",
           "name": "email",
-          "size": 35,
+          "size": 32,
           "type": "material-community",
         }
       }
@@ -252,7 +234,7 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "marginBottom": 8,
+          "marginBottom": 5,
           "maxWidth": 322,
           "width": "100%",
         }
@@ -268,7 +250,7 @@ exports[`WelcomePanel renders correctly in sign up view 1`] = `
       style={
         Array [
           Object {
-            "fontSize": 18,
+            "fontSize": 16,
             "paddingBottom": 18,
             "paddingTop": 10,
             "textAlign": "center",

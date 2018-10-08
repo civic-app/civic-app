@@ -10,8 +10,12 @@ const civicLogoIcon = require('../../assets/images/civic-logo-white.png');
 const WelcomeScreen = props => {
   return (
     <View style={styles.container}>
-      <Image style={styles.civicLogo} source={civicLogoIcon} />
-      <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
+      <View></View>
+      <View style={styles.mastheadContainer}>
+        <Image style={styles.civicLogo} source={civicLogoIcon} />
+        <WelcomeCarousel isSmallScreen={props.isSmallScreen} />
+      </View>
+      <View></View>
       <WelcomePanel
         formType={props.formType}
         switchFormType={props.changeFormType}
@@ -32,16 +36,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: colors.lightBlue,
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
   },
+  mastheadContainer: {
+    alignItems: 'center',
+  },
   civicLogo: {
     height: 65,
     width: 178,
-    marginTop: 30,
+    marginBottom: 10,
   },
 });
 
