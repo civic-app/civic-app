@@ -8,10 +8,17 @@ export const getCandidates = (state, viewMapper) =>
 
 export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
   const district = getUserDistrict(state);
+  // parse num out of district once so we can later match by passing the number
+  // to matchDistrictToElections
+  const parsedNum = (typeof district === 'string') ? district.match(/([0-9])+/g) : null;
+  const districtNum = (parsedNum && parsedNum.length > 0) && parsedNum[0] || null;  
+
   // reduce all candidates to just the list of matches
   return candidateIds.reduce((filteredCandidates, id) => {
     const candidate = getCandidate(state, id);
-    if (candidate && matchDistrictToElections(district, candidate.electionIds)) {
+    // It seems each candidate only has one electionId is there some reason
+    // they are being stored in an array maybe better to pass the zero index here?
+    if (candidate && matchDistrictToElections(districtNum, candidate.electionIds[0])) {
       // only add candidate to the view model if they match the user's district
       filteredCandidates.push(viewMapper(candidate));
     }
@@ -19,21 +26,28 @@ export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
   }, []);
 };
 
-const matchDistrictToElections = (district, elections) => {
-  // try to extract a number from the electionId
-  const districtNumberRegex = /([0-9])+/g;
-  return elections.reduce((isMatch, election) => {
-    // matches is null if no match is found
-    // else it is an array containing each match found
-    // assuming each electionId contains one number, we only look at the first
-    const matches = election.match(districtNumberRegex);
-    // we have a match if:
-    // 1. We had a match to a previous electionId for this candidate
-    // 2. District is null, undefined, or 0
-    // 3. The electionId is a national election
-    // 4. The electionId is a district that matches the user's district
-    return isMatch || !district || matches === null || matches[0] === district;
-  }, false);
+/**
+ * matchDistrictToElections()
+ * @param {string} districtNum - the parsed number of a user district
+ * @param {string} election - the zero index of electionIds array
+ * @return {boolean} - returns true if election string has no numbers (i.e. 
+ * is a state-wide race) or matches on districtNum
+ * @example matchDistrictToElections("11", "Senator")
+ * // returns true
+ * @example matchDistrictToElections("11", "California District 11")
+ * // returns true
+ * @example matchDistrictToElections("11", "California District 10")
+ * // returns false
+ */ 
+
+const matchDistrictToElections = (districtNum, election) => {
+  // return false if election is null / undefined
+  if(!election) return false;
+  // return true if districtNum is null
+  if(!districtNum) return true;
+  const numberToMatch = new RegExp(districtNum);
+  const hasNumber = new RegExp(/([0-9])+/);
+  return numberToMatch.test(election) || !hasNumber.test(election);
 };
 
 // Action Creators
