@@ -20,7 +20,6 @@ export const AuthActionType = {
   UpdatePassword: 'civicApp/auth/updatePassword',
   UpdateDuplicatePassword: 'civicApp/auth/updateDuplicatePassword',
   ShowErrors: 'civicApp/auth/showErrors',
-  UserRegistered: 'civicApp/auth/userRegistered',
 };
 
 // Action Creators
@@ -67,10 +66,6 @@ export const updateEmail = email => ({
   type: AuthActionType.UpdateEmail,
   payload: email,
 });
-export const userRegistered = (isRegisteredToVote) => ({
-  type: AuthActionType.UserRegistered,
-  payload: { isRegisteredToVote },
-});
 
 /*
  * @param password: string;
@@ -107,7 +102,6 @@ export const initialState = {
   password: '',
   duplicatePassword: '',
   showErrors: false,
-  isRegisteredToVote: false,
 };
 
 const authReducer = (state = initialState, action = {}) => {
@@ -145,16 +139,17 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         user: { id: action.payload.uid, email: action.payload.email },
+        email: '',
+        password: '',
+        duplicatePassword: '',
       };
     case AuthActionType.LogOutSuccess:
       return {
         ...state,
         user: null,
-      };
-    case AuthActionType.UserRegistered:
-      return {
-        ...state,
-        isRegisteredToVote: action.payload,
+        email: '',
+        password: '',
+        duplicatePassword: '',
       };
     default:
       return state;

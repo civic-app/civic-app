@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Banner, { mapAlertLevelToColor } from './Banner';
+import Banner, { mapBannerTypeToColor } from './Banner';
 import Colors from '../../styles/colors';
 import DailyTasks from './DailyTasks';
 import UpcomingActivism from './UpcomingActivism';
@@ -16,13 +16,11 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView
-        contentContainerStyle={styles.container}
-      >
+      <ScrollView contentContainerStyle={styles.container}>
         {alerts.map((alert, index) => (
           <Banner
             key={index}
-            color={mapAlertLevelToColor(alert.level)}
+            color={mapBannerTypeToColor(alert.type)}
             icon="megaphone"
             style={styles.banner}
             title={alert.title}
@@ -32,28 +30,22 @@ class HomeScreen extends React.Component {
 
         {/* Daily Tasks */}
         <Text style={styles.sectionHeader}>DAILY TASKS</Text>
-        <DailyTasks data={dailyTasks}/>
+        <DailyTasks data={dailyTasks} />
 
         {/* Upcoming Activism */}
         <Text style={styles.sectionHeader}>UPCOMING ACTIVISM</Text>
-        <UpcomingActivism data={upcomingActivism}/>
+        <UpcomingActivism data={upcomingActivism} />
 
         {/* In The News */}
         <Text style={styles.sectionHeader}>IN THE NEWS</Text>
-        {newsItems.map(({id, ...rest})=>(
-          <NewsCard key={id} {...rest}/>
+        {newsItems.map(({ id, ...rest }) => (
+          <NewsCard key={id} {...rest} />
         ))}
 
         {/* All Caught Up Feed Footer */}
         <View style={styles.footerView}>
           <Text style={styles.footerText}>You're all caught up for today.</Text>
-          <Icon
-            name="megaphone"
-            type="entypo"
-            size={50}
-            color="#DADADA"
-            containerStyle={styles.footerIcon}
-          />
+          <Icon name="megaphone" type="entypo" size={50} color="#DADADA" containerStyle={styles.footerIcon} />
         </View>
       </ScrollView>
     );
@@ -70,19 +62,19 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontSize: 14,
     margin: 18,
-    color: Colors.gray
+    color: Colors.gray,
   },
-  footerView:{
+  footerView: {
     alignItems: 'center',
     margin: 50,
   },
   footerText: {
-    color: "#555",
-    fontSize: 16
+    color: '#555',
+    fontSize: 16,
   },
   footerIcon: {
-    margin:20
-  }
+    margin: 20,
+  },
 });
 
 export default HomeScreen;

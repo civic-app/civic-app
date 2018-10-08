@@ -4,18 +4,19 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import colors from '../../styles/colors';
 
-export const mapAlertLevelToColor = level => {
-  switch (level) {
-    case 'high':
+export const mapBannerTypeToColor = bannerType => {
+  switch (bannerType) {
+    case 'alert':
       return colors.red;
-    case 'medium':
+    case 'info':
       return colors.darkBlue;
+    // event? what other types do we need
   }
 };
 
 const Banner = props => {
   return (
-    <View style={[styles.container, props.style, { backgroundColor: props.color }]}>
+    <View style={[styles.container, props.style, { backgroundColor: mapBannerTypeToColor(props.type) }]}>
       <TouchableHighlight onPress={props.onPress}>
         <View>
           <Text style={styles.title}>{props.title}</Text>
@@ -28,7 +29,7 @@ const Banner = props => {
 };
 
 Banner.propTypes = {
-  color: PropTypes.string,
+  type: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string,
   style: PropTypes.any,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
     position: 'absolute',
     right: 20,
-    bottom: 0,
+    bottom: -20,
   },
   title: {
     color: colors.white,

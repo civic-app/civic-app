@@ -79,7 +79,7 @@ describe('emailLoginSaga', () => {
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, null, user.uid));
   });
 
   it('should call loginSuccess with the returned user', () => {
@@ -120,7 +120,7 @@ describe('facebookLoginSaga', () => {
   it('should call the loadUserData saga with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, null, user.uid));
   });
 
   it('should call loginSuccess with the returned user', () => {
@@ -155,7 +155,7 @@ describe('googleLoginSaga', () => {
   it('should call loadUserData saga with the returned user', () => {
     const user = toFakeUser();
     gen.next();
-    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, null, user.uid));
   });
 
   it('should call loginSuccess with the returned user', () => {
@@ -205,7 +205,7 @@ describe('registerSaga', () => {
     Array.from({ length: 3 }).forEach(() => {
       gen.next();
     });
-    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, user.uid));
+    expect(gen.next({ user }).value).toEqual(call(loadUserDataSaga, null, user.uid));
   });
 
   it('should call loginSuccess with the returned user', () => {

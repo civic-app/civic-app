@@ -26,7 +26,7 @@ const generateLoginSaga = (asyncLoginFunction, requiresEmailAndPassword) =>
       }
       // load user data from firebase before updating auth state
       // so that components after login are properly hydrated
-      yield call(loadUserDataSaga, userResponse.user.uid);
+      yield call(loadUserDataSaga, null, userResponse.user.uid);
       yield put(loginSuccess(userResponse.user));
     } catch (err) {
       yield put(logOutAction());
