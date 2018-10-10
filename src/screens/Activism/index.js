@@ -96,9 +96,11 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   containerViewStyle: {
-    margin: 30,
+    width:' 100%',
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonStyle: {
     justifyContent: 'space-around',
