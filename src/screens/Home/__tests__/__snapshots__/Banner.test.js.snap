@@ -65,7 +65,7 @@ exports[`Banner renders correctly 1`] = `
         color="#ffffff"
         containerStyle={
           Object {
-            "bottom": 0,
+            "bottom": -20,
             "opacity": 0.5,
             "position": "absolute",
             "right": 20,

@@ -15,25 +15,23 @@ class WelcomePanel extends React.Component {
     navigate: PropTypes.func.isRequired,
   };
 
-  sharedButtonProps = {
-    borderRadius: 3,
-    containerViewStyle: styles.buttonContainer,
-    fontSize: 18,
-  };
-
   defaultView = (
     <View style={styles.defaultViewContainer}>
       <Button
-        {...this.sharedButtonProps}
-        color={colors.white}
         backgroundColor={colors.red}
+        borderRadius={3}
+        color={colors.white}
+        containerViewStyle={styles.buttonContainer}
+        fontSize={16}
         title="Register"
         onPress={() => this.props.switchFormType(formTypes.SIGN_UP)}
       />
       <Button
-        {...this.sharedButtonProps}
-        color={colors.black}
         backgroundColor={colors.offWhite}
+        borderRadius={3}
+        color={colors.black}
+        containerViewStyle={styles.buttonContainer}
+        fontSize={16}
         title="Sign In"
         onPress={() => this.props.switchFormType(formTypes.LOGIN)}
       />
@@ -66,7 +64,6 @@ class WelcomePanel extends React.Component {
       <View style={styles.expandedViewContainer}>
         <GoogleAuthButton title="Continue with Google" style={styles.social} />
         <FacebookAuthButton title="Continue with Facebook" style={styles.social} />
-        <Text style={styles.text}>or</Text>
         <SocialButton
           title={`Sign ${config.preposition} with email`}
           style={styles.social}
@@ -100,12 +97,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   buttonContainer: {
     flex: 1,
+    elevation: 2,
+    borderRadius: 3,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 20,
     marginBottom: 20,
-    borderRadius: 3,
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
@@ -128,13 +130,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   social: {
-    marginBottom: 8,
+    marginBottom: 5,
     width: '100%',
     maxWidth: 322,
   },
   text: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     paddingTop: 10,
     paddingBottom: 18,
   },

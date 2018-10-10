@@ -53,14 +53,14 @@ class WelcomeCarousel extends React.Component {
           lockScrollWhileSnapping={true}
         />
         {!this.props.isSmallScreen && (
-          <Pagination
-            activeDotIndex={this.state.currentIndex}
-            dotsLength={this.images.length}
-            dotColor={colors.white}
-            inactiveDotColor={colors.lightBlue}
-            inactiveDotScale={1}
-            dotStyle={styles.dot}
-          />
+        <Pagination
+          activeDotIndex={this.state.currentIndex}
+          dotsLength={this.images.length}
+          dotColor={colors.white}
+          inactiveDotColor={colors.lightBlue}
+          inactiveDotScale={1}
+          dotStyle={styles.dot}
+        />
         )}
       </View>
     );

@@ -5,21 +5,23 @@ import VoterRegistrationSuccessScreen from '../screens/VoterRegistrationSuccessS
 import TurboVoteScreen from '../screens/TurboVoteScreen';
 
 import styles from './styles';
+import colors from '../styles/colors';
 
 const VoterStack = createStackNavigator(
-    {
-        VoterReg: VoterRegistrationScreen,
-        VoterRegSuc: VoterRegistrationSuccessScreen,
-        TurboVote: TurboVoteScreen,
+  {
+    VoterReg: VoterRegistrationScreen,
+    VoterRegSuc: VoterRegistrationSuccessScreen,
+    TurboVote: TurboVoteScreen,
+  },
+  {
+    initialRouteName: 'VoterReg',
+    navigationOptions: {
+      title: 'Register To Vote',
+      headerStyle: styles.header,
+      headerTitleStyle: styles.title,
+      headerTintColor: colors.white,
     },
-    {
-        initialRouteName: 'VoterReg',
-        navigationOptions: {
-            title: 'Register To Vote',
-            headerStyle: styles.header,
-            headerTitleStyle: styles.title,
-        },
-    },
+  },
 );
 
 export default VoterStack;

@@ -4,24 +4,27 @@ import { getMatchPercent } from '../../match/selectors';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 import { getCandidate, getCandidates, loadCandidates } from '../../candidate/redux/candidates';
-import { loadUser } from '../../user/redux'
+import { loadUser } from '../../user/redux';
 import { getIsLoggedIn } from '../../auth/selectors';
+import { saveUserRegistered } from '../../user/redux';
+import { getUserRegistered } from '../../user/selectors';
 import WithAuthentication from '../../util/components/WithAuthentication';
 import Elections from './ScreenContainer';
 
-export const getElectionsViewProps = (state) => {
+export const getElectionsViewProps = state => {
   const candidates = getCandidates(state, toListCandidateMapperPlaceholder).filter(
-    candidate => candidate.id != 'placeholder');
-  const electionIds = candidates.map(candidate => candidate.electionIds[0])
+    candidate => candidate.id != 'placeholder',
+  );
+  const electionIds = candidates.map(candidate => candidate.electionIds[0]);
   const distinctElectionIds = electionIds.filter((elem, pos, arr) => {
-    return arr.indexOf(elem) == pos
-  })
+    return arr.indexOf(elem) == pos;
+  });
   const electionCandidates = distinctElectionIds.map(electionIds => ({
-    electionIds, 
-    candidates: candidates.filter(candidate => candidate.electionIds[0] === electionIds)
-  }))
-  return {electionCandidates}
-}
+    electionIds,
+    candidates: candidates.filter(candidate => candidate.electionIds[0] === electionIds),
+  }));
+  return { electionCandidates };
+};
 
 export const getCandidateData = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -46,8 +49,9 @@ const Container = compose(
     state => ({
       isLoggedIn: getIsLoggedIn(state),
       electionCandidates: getElectionsViewProps(state),
+      isUserRegistered: getUserRegistered(state),
     }),
-    { loadCandidates, loadUser },
+    { loadCandidates, loadUser, saveUserRegistered },
   ),
   lifecycle({
     componentDidMount() {
@@ -60,4 +64,4 @@ const Container = compose(
 
 export default Container;
 
-const toListCandidateMapperPlaceholder = candidate => ({id: candidate.id, electionIds:candidate.electionIds,});
+const toListCandidateMapperPlaceholder = candidate => ({ id: candidate.id, electionIds: candidate.electionIds });

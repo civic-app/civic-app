@@ -7,26 +7,36 @@ exports[`WelcomeScreen renders correctly 1`] = `
       "alignItems": "center",
       "backgroundColor": "#2d9cdb",
       "flex": 1,
-      "justifyContent": "center",
+      "justifyContent": "space-between",
       "paddingLeft": 10,
       "paddingRight": 10,
       "paddingTop": 10,
     }
   }
 >
-  <Image
-    source={1}
+  <Component />
+  <Component
     style={
       Object {
-        "height": 65,
-        "marginTop": 30,
-        "width": 178,
+        "alignItems": "center",
       }
     }
-  />
-  <WelcomeCarousel
-    isSmallScreen={false}
-  />
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 65,
+          "marginBottom": 10,
+          "width": 178,
+        }
+      }
+    />
+    <WelcomeCarousel
+      isSmallScreen={false}
+    />
+  </Component>
+  <Component />
   <WelcomePanel
     formType="foo"
     navigate={[MockFunction]}

@@ -9,3 +9,6 @@ const toUser = apiUser => ({
 });
 
 export const putDistrict = (userId, district) => setByPath(`users/${userId}/district`, district);
+
+export const putUserRegistered = (userId, isRegisteredToVote) =>
+  setByPath(`users/${userId}/isRegisteredToVote`, isRegisteredToVote);

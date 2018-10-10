@@ -6,12 +6,12 @@ export const alerts = [
   {
     title: 'Not Registered to Vote?',
     subtitle: 'Click here to get started',
-    level: 'high',
+    type: 'alert',
   },
   {
     title: 'Something is going on in your city!',
     subtitle: 'Click here to find out more',
-    level: 'medium',
+    type: 'info',
   },
 ];
 
