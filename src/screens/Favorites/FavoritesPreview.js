@@ -8,7 +8,7 @@ import { Avatar,Icon } from 'react-native-elements';
 const newsData = [
   {
     id:1,
-    body:'Does Clavin Newsom represent a shift in California Democratic Party?'
+    body:'Does Calvin Newsom represent a shift in California Democratic Party?'
   },{
     id:2,
     body:'California Governor’s Race Forces Candidates to Face the Past?'
@@ -60,7 +60,6 @@ const FavoritesScreen = props => {
                   <TouchableOpacity onPress={props.goToCandidateDetail(item.id)}>
                     <Avatar xlarge round={false} source={{ uri: item.image}}/>
                   </TouchableOpacity>
-                  <NewsInfo/>
                 </View>
               </View>
             </ScrollView>
@@ -85,11 +84,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexGrow: 1,
     justifyContent:'space-between',
-    alignItems: 'flex-start',
+    alignItems: 'stretch',
     paddingBottom: 15
   },
   candidateContainer: {
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginTop:15,
     flex: 1,
     backgroundColor:Colors.white,
