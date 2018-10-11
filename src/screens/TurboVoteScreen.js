@@ -9,7 +9,7 @@ class TurboVoteScreen extends React.Component {
   goToSuccessScreen = () => this.props.navigation.navigate('VoterRegSuc');
 
   sharedButtonProps = {
-    borderRadius: 5,
+    borderRadius: 3,
     containerViewStyle: styles.buttonContainer,
     fontSize: 18,
   };
@@ -25,7 +25,6 @@ class TurboVoteScreen extends React.Component {
         />
         <Button
           {...this.sharedButtonProps}
-          buttonStyle={styles.buttonStyle}
           backgroundColor={colors.red}
           title="Done with Registration"
           onPress={this.goToSuccessScreen}
@@ -45,15 +44,16 @@ const propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 20,
   },
   webView: {
     flex: 1,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderRadius: 5,
+    elevation: 2,
+    borderRadius: 3,
+    minWidth: 200,
+    marginTop: 20,
+    marginBottom: 20,
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
@@ -61,10 +61,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 3,
-  },
-  buttonStyle: {
-    marginTop: 20,
-    marginBottom: 20,
   },
 });
 
