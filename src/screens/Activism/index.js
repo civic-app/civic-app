@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
   },
   containerViewStyle: {
     margin: 10,
+    marginLeft: 0,
+    marginRight: 0
   },
   buttonStyle: {
     justifyContent: 'space-around',
