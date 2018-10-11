@@ -5,24 +5,27 @@ exports[`Banner renders correctly 1`] = `
   style={
     Array [
       Object {
+        "backgroundColor": "#eb5757",
+      },
+      Object {
         "alignSelf": "stretch",
-        "borderRadius": 2,
+        "borderRadius": 3,
+        "elevation": 2,
+        "flex": 1,
         "justifyContent": "center",
-        "margin": 8,
-        "minHeight": 100,
-        "padding": 16,
+        "margin": 10,
+        "marginBottom": 10,
+        "padding": 10,
+        "paddingBottom": 20,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 1,
-          "width": 0,
+          "height": 2,
+          "width": 2,
         },
         "shadowOpacity": 0.2,
         "shadowRadius": 3,
       },
       undefined,
-      Object {
-        "backgroundColor": "#eb5757",
-      },
     ]
   }
 >
@@ -61,25 +64,25 @@ exports[`Banner renders correctly 1`] = `
       >
         Do it!
       </Text>
-      <Icon
-        color="#ffffff"
-        containerStyle={
-          Object {
-            "bottom": -20,
-            "opacity": 0.5,
-            "position": "absolute",
-            "right": 20,
-          }
-        }
-        name="megaphone"
-        raised={false}
-        reverse={false}
-        reverseColor="white"
-        size={60}
-        type="entypo"
-        underlayColor="white"
-      />
     </Component>
   </TouchableHighlight>
+  <Icon
+    color="#ffffff"
+    containerStyle={
+      Object {
+        "bottom": -10,
+        "opacity": 0.5,
+        "position": "absolute",
+        "right": 20,
+      }
+    }
+    name="megaphone"
+    raised={false}
+    reverse={false}
+    reverseColor="white"
+    size={60}
+    type="entypo"
+    underlayColor="white"
+  />
 </Component>
 `;

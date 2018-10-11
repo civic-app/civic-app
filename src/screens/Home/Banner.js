@@ -16,14 +16,18 @@ export const mapBannerTypeToColor = bannerType => {
 
 const Banner = props => {
   return (
-    <View style={[styles.container, props.style, { backgroundColor: mapBannerTypeToColor(props.type) }]}>
+    <View style={[
+      { backgroundColor: mapBannerTypeToColor(props.type)},
+      styles.container,
+      props.style,
+    ]}>
       <TouchableHighlight onPress={props.onPress}>
         <View>
           <Text style={styles.title}>{props.title}</Text>
           <Text style={styles.subtitle}>{props.subtitle}</Text>
-          <Icon type="entypo" name={props.icon} color={colors.white} size={60} containerStyle={styles.icon} />
         </View>
       </TouchableHighlight>
+      <Icon type="entypo" name={props.icon} color={colors.white} size={60} containerStyle={styles.icon} />
     </View>
   );
 };
@@ -39,25 +43,27 @@ Banner.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignSelf: 'stretch',
-    minHeight: 100,
-    padding: 16,
-    borderRadius: 2,
+    padding: 10,
+    paddingBottom: 20,
+    borderRadius: 3,
+    elevation: 2,
     shadowColor: colors.black,
     shadowOffset: {
-      width: 0,
-      height: 1,
+      width: 2, height: 2
     },
-    shadowOpacity: 0.2,
     shadowRadius: 3,
-    margin: 8,
+    shadowOpacity: 0.2,
+    margin: 10,
+    marginBottom: 10,
   },
   icon: {
     opacity: 0.5,
     position: 'absolute',
     right: 20,
-    bottom: -20,
+    bottom: -10,
   },
   title: {
     color: colors.white,

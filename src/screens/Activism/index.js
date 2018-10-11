@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     maxHeight: 480,
-    maxWidth: 369,
+    maxWidth: 330,
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 20,
@@ -83,22 +83,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2
   },
   heading: {
-    fontSize: 30,
+    fontSize: 28,
     textAlign: 'center',
-    margin: 20,
-    marginTop: 10,
+    margin: 10,
     marginBottom: 0
   },
   subHeading: {
     fontSize: 18,
-    margin: 20,
+    margin: 10,
     marginTop: 0,
     marginBottom: 0
   },
   containerViewStyle: {
-    margin: 30,
-    marginTop: 10,
-    marginBottom: 10
+    margin: 10,
+    marginLeft: 0,
+    marginRight: 0
   },
   buttonStyle: {
     justifyContent: 'space-around',

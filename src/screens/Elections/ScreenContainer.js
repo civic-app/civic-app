@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
   },
   candidateContainer: {
     alignItems: 'flex-start',
-    marginTop: 15,
     flex: 1,
     paddingBottom: 15,
     backgroundColor: Colors.white,
