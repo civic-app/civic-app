@@ -9,9 +9,14 @@ class ElectionsScreen extends React.Component {
   static propTypes = propTypes;
   goToCandidateDetail = (id) => () => this.props.navigation.navigate('CandidateDetail', { id });
   goToVoterRegistration = () => this.props.navigation.navigate('VoterReg');
+  goToSurvey = () => this.props.navigation.navigate('Survey');
   render() {
     return (
-      <Elections goToCandidateDetail={this.goToCandidateDetail} goToVoterRegistration={this.goToVoterRegistration} {...this.props} />
+      <Elections
+        goToCandidateDetail={this.goToCandidateDetail} goToVoterRegistration={this.goToVoterRegistration}
+        goToSurvey={this.goToSurvey}
+        {...this.props}
+      />
     );
   }}
 
