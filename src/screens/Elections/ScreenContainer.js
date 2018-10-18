@@ -7,6 +7,7 @@ import { getCandidateData } from './viewSelectors';
 import DataContainer from './CandidateContainer';
 import Banner from '../Home/Banner';
 import VoterRegAlert from '../Home/VoterRegAlert';
+import ElectionsLinks from '../Home/ElectionsLinks';
 
 const ElectionsScreen = props => {
   return (
@@ -22,7 +23,6 @@ const ElectionsScreen = props => {
         subtitle="Click to learn more about each candidate."
         icon="megaphone"
       />
-
       {props.electionCandidates.electionCandidates.map(item => {
         return (
           <View key={item.electionIds} style={styles.candidateContainer}>
@@ -42,6 +42,10 @@ const ElectionsScreen = props => {
           </View>
         );
       })}
+      <ElectionsLinks
+        onRegisterButtonPress={props.goToVoterRegistration}
+        onSurveyButtonPress={props.goToSurvey}
+      />
     </ScrollView>
   );
 };
@@ -49,6 +53,7 @@ const ElectionsScreen = props => {
 ElectionsScreen.propTypes = {
   goToCandidateDetail: PropTypes.func.isRequired,
   goToVoterRegistration: PropTypes.func.isRequired,
+  goToSurvey: PropTypes.func.isRequired,
   electionCandidates: PropTypes.object.isRequired,
   isUserRegistered: PropTypes.bool.isRequired,
   saveUserRegistered: PropTypes.func.isRequired,

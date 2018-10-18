@@ -6,6 +6,7 @@ import styles from './styles';
 
 const SurveyStack = createStackNavigator(
   {
+    Survey: SurveyMainScreen,
     Main: {
       screen: SurveyMainScreen
     },
