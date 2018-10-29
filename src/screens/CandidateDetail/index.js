@@ -16,7 +16,7 @@ class CandidatesScreen extends React.Component {
   static propTypes = propTypes;
   render() {
     return (
-      <ScreenContainer candidateId={this.props.navigation.state.params.id} />
+      <ScreenContainer navigation={this.props.navigation} candidateId={this.props.navigation.state.params.id} />
     );
   }
 }
@@ -37,7 +37,7 @@ const propTypes = {
 const ScreenView = props => (
   <ScrollView style={styles.container}>
     <CandidateDetail summary={props.summary} toggleFavorite={props.toggleFavorite} />
-    <TabBar {...props.tabBar} />
+    <TabBar navigation={props.navigation} {...props.tabBar} />
   </ScrollView>
 );
 

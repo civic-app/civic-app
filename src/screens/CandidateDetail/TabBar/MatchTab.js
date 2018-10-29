@@ -37,7 +37,7 @@ const MatchTab = props => {
     <View style={styles.container}>
       <MatchCard matchPercent={props.matchPercent} />
       {props.issueMatchData.map(({ id, ...rest }) => (
-        <IssueCard key={id} {...rest} />
+        <IssueCard key={id} navigation={props.navigation} {...rest} />
       ))}
     </View>
   );

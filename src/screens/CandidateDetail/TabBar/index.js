@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,Button } from 'react-native';
 import PropTypes from 'prop-types';
 import AboutTab from './AboutTab';
 import MatchTab from './MatchTab';
@@ -15,7 +15,7 @@ class TabBar extends Component {
   renderSelectedView = () => {
     switch(this.state.selectedTab){
       case 'Match':
-        return <MatchTab {...this.props.matchTab} />;
+        return <MatchTab {...this.props.matchTab} navigation={this.props.navigation}/>;
       case 'About':
         return <AboutTab {...this.props.aboutTab} />;
       case 'News':
@@ -47,9 +47,9 @@ class TabBar extends Component {
           />
           {/* TODO: Implement news backend */}
           {/*<TabItem*/}
-            {/*name='News'*/}
-            {/*selectedTab={selectedTab}*/}
-            {/*handlePress={handlePress}*/}
+          {/*name='News'*/}
+          {/*selectedTab={selectedTab}*/}
+          {/*handlePress={handlePress}*/}
           {/*/>*/}
         </View>
         <View styles={styles.viewArea}>

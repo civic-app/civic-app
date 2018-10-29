@@ -45,6 +45,7 @@ const getMatchTabProps = (state, candidateId) => {
           id: questionId,
           type: surveyQuestions[questionId] && surveyQuestions[questionId].type || 'other',
           body: candidatePositions[questionId].explanation,
+          source: toSourceList(candidatePositions[questionId].source),
           agreesWithUser: agreesWithUser
         }
       }
@@ -70,10 +71,12 @@ const getAboutTabProps = (state, candidateId) => {
   };
 };
 
+//source links is stored in an array of text
+const toSourceList = sourceLinks =>
+  sourceLinks.split(/[\r\n]+/)
 // platform is stored in text, with bullets separated by newlines
 const toPlatformList = platformText =>
   platformText.split(/[\r\n]+/).map((bullet, idx) => ({ id: idx, content: bullet }));
-
 const testImage = require('../../assets/images/gavin.png');
 
 const getNewsTabProps = (state, candidateId) => ({
