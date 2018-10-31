@@ -3,17 +3,20 @@ import { getUserDistrict } from '../../user/selectors';
 
 export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
 
+export const getAllCandidates = state => Object.keys(state[CANDIDATE_NAMESPACE]);
+
 export const getCandidates = (state, viewMapper) =>
   getFilteredCandidates(state, viewMapper, Object.keys(state[CANDIDATE_NAMESPACE]));
 
-export const getFilteredCandidates = (state, viewMapper, candidateIds) =>
+export const getSelectCandidates = (state, viewMapper, candidateIds) =>
   candidateIds.map(id => viewMapper(getCandidate(state, id)));
-/* export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
+
+export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
   const district = getUserDistrict(state);
   // parse num out of district once so we can later match by passing the number
   // to matchDistrictToElections
-  const parsedNum = (typeof district === 'string') ? district.match(/([0-9])+/g) : null;
-  const districtNum = (parsedNum && parsedNum.length > 0) && parsedNum[0] || null;
+  const parsedNum = typeof district === 'string' ? district.match(/([0-9])+/g) : null;
+  const districtNum = (parsedNum && parsedNum.length > 0 && parsedNum[0]) || null;
 
   // reduce all candidates to just the list of matches
   return candidateIds.reduce((filteredCandidates, id) => {
@@ -26,7 +29,7 @@ export const getFilteredCandidates = (state, viewMapper, candidateIds) =>
     }
     return filteredCandidates;
   }, []);
-}; */
+};
 
 /**
  * matchDistrictToElections()
