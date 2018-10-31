@@ -3,14 +3,14 @@ import { getUserDistrict } from '../../user/selectors';
 
 export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
 
-export const getAllCandidates = state => Object.keys(state[CANDIDATE_NAMESPACE]);
-
 export const getCandidates = (state, viewMapper) =>
   getFilteredCandidates(state, viewMapper, Object.keys(state[CANDIDATE_NAMESPACE]));
 
+// Get details about candidates from the passed in candidateIds, mapped by viewMapper
 export const getSelectCandidates = (state, viewMapper, candidateIds) =>
   candidateIds.map(id => viewMapper(getCandidate(state, id)));
 
+// Get details about only candidates matching the user's district (or statewide elections), mapped by viewMapper
 export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
   const district = getUserDistrict(state);
   // parse num out of district once so we can later match by passing the number
