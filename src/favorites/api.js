@@ -1,8 +1,10 @@
-import { setByPath } from '../firebase';
+import { setByPath, deleteByPath } from '../firebase';
 import { Category } from './models';
 
-export const updateFavorite = (userId, favoriteId, isFavorite, category) =>
-  setByPath(`users/${userId}/favorites/${category}/${favoriteId}`, isFavorite);
+export const updateFavorite = (userId, favoriteId, isFavorite, category) => {
+  const path = `users/${userId}/favorites/${category}/${favoriteId}`;
+  return isFavorite ? setByPath(path, isFavorite) : deleteByPath(path);
+};
 
 export const toFavorites = (apiFavorites = {}) => ({
   [Category.Candidates]: definedToArray(apiFavorites[Category.Candidates]),

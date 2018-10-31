@@ -71,10 +71,6 @@ const FavoritesScreen = props => {
 
 FavoritesScreen.propTypes = {
   data: PropTypes.array,
-  favorites: PropTypes.bool,
-  name: PropTypes.string,
-  electionIds: PropTypes.string,
-  imageURI: PropTypes.string,
   goToCandidateDetail: PropTypes.func,
 };
 

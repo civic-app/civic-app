@@ -24,3 +24,5 @@ export const getByPath = tablePath =>
     .then(snapshot => snapshot.val());
 
 export const setByPath = (tablePath, newVal) => database.ref(tablePath).set(newVal);
+
+export const deleteByPath = tablePath => database.ref(tablePath).remove();

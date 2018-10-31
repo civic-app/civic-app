@@ -6,12 +6,17 @@ export const getCandidate = (state, id) => state[CANDIDATE_NAMESPACE][id];
 export const getCandidates = (state, viewMapper) =>
   getFilteredCandidates(state, viewMapper, Object.keys(state[CANDIDATE_NAMESPACE]));
 
+// Get details about candidates from the passed in candidateIds, mapped by viewMapper
+export const getSelectCandidates = (state, viewMapper, candidateIds) =>
+  candidateIds.map(id => viewMapper(getCandidate(state, id)));
+
+// Get details about only candidates matching the user's district (or statewide elections), mapped by viewMapper
 export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
   const district = getUserDistrict(state);
   // parse num out of district once so we can later match by passing the number
   // to matchDistrictToElections
-  const parsedNum = (typeof district === 'string') ? district.match(/([0-9])+/g) : null;
-  const districtNum = (parsedNum && parsedNum.length > 0) && parsedNum[0] || null;  
+  const parsedNum = typeof district === 'string' ? district.match(/([0-9])+/g) : null;
+  const districtNum = (parsedNum && parsedNum.length > 0 && parsedNum[0]) || null;
 
   // reduce all candidates to just the list of matches
   return candidateIds.reduce((filteredCandidates, id) => {
@@ -30,7 +35,7 @@ export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
  * matchDistrictToElections()
  * @param {string} districtNum - the parsed number of a user district
  * @param {string} election - the zero index of electionIds array
- * @return {boolean} - returns true if election string has no numbers (i.e. 
+ * @return {boolean} - returns true if election string has no numbers (i.e.
  * is a state-wide race) or matches on districtNum
  * @example matchDistrictToElections("11", "Senator")
  * // returns true
@@ -38,13 +43,13 @@ export const getFilteredCandidates = (state, viewMapper, candidateIds) => {
  * // returns true
  * @example matchDistrictToElections("11", "California District 10")
  * // returns false
- */ 
+ */
 
 const matchDistrictToElections = (districtNum, election) => {
   // return false if election is null / undefined
-  if(!election) return false;
+  if (!election) return false;
   // return true if districtNum is null
-  if(!districtNum) return true;
+  if (!districtNum) return true;
   const numberToMatch = new RegExp(districtNum);
   const hasNumber = new RegExp(/([0-9])+/);
   return numberToMatch.test(election) || !hasNumber.test(election);
