@@ -94,7 +94,7 @@ jobs:
           command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
       - run:
           name: 'Publish'
-          command: exp publish --max-workers 1 --release-channel alpha
+          command: yarn exp publish --max-workers 1 --release-channel alpha
 
 workflows:
 
