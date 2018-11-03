@@ -2,41 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, Share } from 'react-native';
 import PropTypes from 'prop-types';
 import Colors from '../../../styles/colors';
-import IssueCard from './IssueCard';
 import ShareButton from '../../components/ShareButton';
+import IssueCard from './IssueCard';
 
-const MatchCard = props => (
-  <View style={styles.matchCard}>
-    <Text style={styles.matchCardText}>
-      You're a  <Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text>  match!
-    </Text>
-    <ShareButton
-      title={"Share"}
-      buttonStyle={styles.buttonStyle}
-      onPress={()=>{
-        const url = "https://www.getcivicapp.com/";
-        Share.share({
-          message: `I'm a ${props.matchPercent} with ${'candidate name placeholder'}! Register to vote and find your election matches with Civic in 5 minutes.`,
-          url: url,
-          title: "Civic App"
-        },
-        {
-          dialogTitle: "Civic App"
-        })
-      }}
-    />
-  </View>
-);
-
-MatchCard.propTypes = {
-  matchPercent: PropTypes.number,
-};
-
-const MatchTab = props => {
+const MatchTab = ({ issueMatchData, ...props}) => {
   return (
     <View style={styles.container}>
-      <MatchCard matchPercent={props.matchPercent} />
-      {props.issueMatchData.map(({ id, ...rest }) => (
+      <MatchCard {...props} />
+      <PartialMatchMessage {...props} />
+      {issueMatchData.map(({ id, ...rest }) => (
         <IssueCard key={id} navigation={props.navigation} {...rest} />
       ))}
     </View>
@@ -46,6 +20,61 @@ const MatchTab = props => {
 MatchTab.propTypes = {
   matchPercent: PropTypes.number,
   issueMatchData: PropTypes.array,
+  shouldShowMatch: PropTypes.bool,
+  known: PropTypes.number,
+  total: PropTypes.number,
+  candidateName: PropTypes.string,
+};
+
+const MatchCard = props => (
+  <View style={styles.matchCard}>
+    {props.shouldShowMatch
+      ? <Text style={styles.matchCardText}>
+        {`You're a `}<Text style={styles.matchCardPercentText}>{props.matchPercent}%</Text>  match!
+      </Text>
+      : <Text style={styles.matchCardText}>No match calculated</Text>
+    }
+    <ShareButton
+      title={'Share'}
+      buttonStyle={styles.buttonStyle}
+      onPress={()=>{
+        const url = 'https://www.getcivicapp.com/';
+        Share.share({
+          message: toMessage(props.matchPercent, props.shouldShowMatch, props.candidateName),
+          url: url,
+          title: 'Civic App'
+        },
+        {
+          dialogTitle: 'Civic App'
+        })
+      }}
+    />
+  </View>
+);
+
+const toMessage = (match, shouldShow, name) =>
+  shouldShow
+    ? `I'm a ${match} with ${name}! Register to vote and find your election matches with Civic in 5 minutes.`
+    : `I'm finding out what ${name} thinks about issues I care about!` +
+      ' Register to vote and find your election matches with Civic in 5 minutes.';
+
+MatchCard.propTypes = {
+  matchPercent: PropTypes.number,
+  shouldShowMatch: PropTypes.bool,
+  candidateName: PropTypes.string,
+};
+
+const PartialMatchMessage = props =>
+  props.known < props.total
+    ? <Text style={styles.partialMatchMessage}>
+      Info for {props.known}/{props.total} issues - {props.shouldShowMatch ? 'partial': 'no'} match calculated
+    </Text>
+    : null;
+
+PartialMatchMessage.propTypes = {
+  shouldShowMatch: PropTypes.bool,
+  known: PropTypes.number,
+  total: PropTypes.number,
 };
 
 const styles = StyleSheet.create({
@@ -76,9 +105,15 @@ const styles = StyleSheet.create({
     flex: 2,
     marginBottom: 5
   },
-  matchCardPercentText:{
+  matchCardPercentText: {
     fontSize: 24
-  }
+  },
+  partialMatchMessage: {
+    fontSize: 16,
+    color: Colors.gray,
+    textAlign: 'center',
+    paddingBottom: 5,
+  },
 });
 
 export default MatchTab;

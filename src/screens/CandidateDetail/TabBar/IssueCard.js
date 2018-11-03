@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements'
 import Colors from '../../../styles/colors';
 import PropTypes from 'prop-types';
 import Mixins from '../../../styles/mixins';
+import { Opinion } from '../viewSelectors';
 
 class IssueCard extends Component {
   state = {
@@ -28,19 +29,20 @@ class IssueCard extends Component {
     const { toggleExpand } = this;
     const { isExpanded } = this.state;
     const { type, body, source, agreesWithUser } = this.props;
+    const cardConfig = toCardConfig(agreesWithUser);
     return(
       <View styles={styles.container}>
         <View style={styles.issueCard}>
           <View style={styles.issueCardTop}>
             <Icon
-              name={agreesWithUser ? 'check' : 'close'}
+              name={cardConfig.icon}
               type="material-community"
               size={30}
-              color={agreesWithUser ? Colors.green : Colors.red }
+              color={cardConfig.color }
               containerStyle={styles.issueMatchIcon}
             />
             <Text style={styles.issueText}>
-              {agreesWithUser ? 'Agree' : 'Disagree'} on {type} issues</Text>
+              {cardConfig.message} on {type} issues</Text>
             <View
               style={styles.issueExpandButton}
             >
@@ -61,21 +63,21 @@ class IssueCard extends Component {
             {isExpanded &&
             <View style={styles.issueBody}>
               <Text style={styles.issueBodyText}>
-                {body}  
-              </Text> 
-              <FlatList 
+                {body}
+              </Text>
+              <FlatList
                 data={source}
                 horizontal={true}
                 keyExtractor={(item) =>  item}
                 ItemSeparatorComponent={this.renderSeparator}
                 renderItem={({item, index}) => (
-                  <Text 
+                  <Text
                     onPress={() => this.props.navigation.navigate('Content', {
                       otherParam: this.toTitleCase(type), uri: item})}
                     style={styles.sourceText}>
                           [{(++index).toString()}]
                   </Text>
-                  
+
                 )}
               />
             </View>
@@ -86,6 +88,20 @@ class IssueCard extends Component {
     )
   }
 }
+
+const toCardConfig = opinion => {
+  switch (opinion) {
+    case Opinion.Agree:
+      return { icon: 'check', message: 'Agree', color: Colors.green } ;
+    case Opinion.Disagree:
+      return { icon: 'close', message: 'Disagree', color: Colors.red } ;
+    case Opinion.StronglyDisagree:
+      return { icon: 'close', message: 'Strongly Disagree', color: Colors.red } ;
+    case Opinion.Unknown:
+    default:
+      return { icon: 'question', message: 'Unknown', color: Colors.gray } ;
+  }
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -137,7 +153,7 @@ IssueCard.propTypes = {
   type: PropTypes.string,
   body: PropTypes.string,
   source:PropTypes.array,
-  agreesWithUser: PropTypes.bool,
+  agreesWithUser: PropTypes.oneOf(Object.values(Opinion)),
 };
 
 const propTypes = {
