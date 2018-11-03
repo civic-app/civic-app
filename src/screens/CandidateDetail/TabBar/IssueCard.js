@@ -39,7 +39,7 @@ class IssueCard extends Component {
               type="material-community"
               size={30}
               color={cardConfig.color }
-              containerStyle={styles.issueMatchIcon}
+              containerStyle={toIconContainerStyles(agreesWithUser)}
             />
             <Text style={styles.issueText}>
               {cardConfig.message} on {type} issues</Text>
@@ -103,6 +103,9 @@ const toCardConfig = opinion => {
   }
 };
 
+const toIconContainerStyles = opinion =>
+  opinion === Opinion.Unknown ? styles.unknownIcon : styles.issueMatchIcon;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -125,7 +128,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white
   },
   issueMatchIcon: {
-    padding: 10
+    padding: 10,
+  },
+  unknownIcon: {
+    padding: 10,
+    paddingRight: 17,
+    paddingLeft: 17,
   },
   issueExpandButton: {
     position: 'absolute',
