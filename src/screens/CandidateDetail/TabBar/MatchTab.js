@@ -67,7 +67,7 @@ MatchCard.propTypes = {
 const PartialMatchMessage = props =>
   props.known < props.total
     ? <Text style={styles.partialMatchMessage}>
-      Info for {props.known}/{props.total} issues - {props.shouldShowMatch ? 'partial': 'no'} match calculated
+      Info for {props.known}/{props.total} relevant issues - {props.shouldShowMatch ? 'partial': 'no'} match calculated
     </Text>
     : null;
 

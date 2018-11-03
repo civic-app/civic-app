@@ -1,7 +1,7 @@
 import { getCandidate } from '../../candidate/redux/candidates';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
-import { getKnownAnswers, getMatchPercent, shouldShowMatchPercent } from '../../match/selectors';
+import { getMatchData, shouldShowMatch } from '../../match/selectors';
 import { getSurveyQuestions, getUserPositions } from '../../match/redux';
 import { getPositionsForCandidate } from '../../candidate/redux/positions';
 import { getPositionResponse, isAgreement, isNeutral, isStrongDisagreement } from '../../match/calculate';
@@ -9,7 +9,7 @@ import { getPositionResponse, isAgreement, isNeutral, isStrongDisagreement } fro
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
   const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
-  const matchPercent = getMatchPercent(state, candidateId);
+  const matchData = getMatchData(state, candidateId);
   return (
     candidate && {
       id: candidate.id,
@@ -18,8 +18,8 @@ export const getCandidateSummary = (state, candidateId) => {
       positions: candidate.electionIds,
       partyPreference: candidate.partyPreference,
       isFavorite,
-      matchPercent,
-      shouldShowMatchPercent: shouldShowMatchPercent(state, candidateId),
+      matchPercent: matchData.match,
+      shouldShowMatchPercent: shouldShowMatch(matchData),
     }
   );
 };
@@ -35,6 +35,7 @@ const getMatchTabProps = (state, candidateId) => {
   const candidatePositions = getPositionsForCandidate(state, candidateId);
   const surveyQuestions = getSurveyQuestions(state);
   const candidate = getCandidate(state, candidateId);
+  const matchData = getMatchData(state. candidateId);
 
   const issueMatchData = (candidatePositions && userPositions && surveyQuestions) ?
     Object.keys(userPositions).map(
@@ -54,12 +55,13 @@ const getMatchTabProps = (state, candidateId) => {
     ) : [];
 
   return {
-    matchPercent: getMatchPercent(state, candidateId),
+
     issueMatchData,
-    shouldShowMatch: shouldShowMatchPercent(state, candidateId),
     candidateName: candidate && candidate.name,
-    known: getKnownAnswers(state, candidateId),
-    total: Object.keys(userPositions).length,
+    shouldShowMatch: shouldShowMatch(matchData),
+    matchPercent: matchData.match,
+    known: matchData.known,
+    total: matchData.totalWithUserOpinions,
   };
 };
 
