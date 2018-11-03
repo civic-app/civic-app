@@ -16,7 +16,8 @@ describe('calculateMatch', () => {
       'd': { response: 1 },
       'e': { response: -1 },
     };
-    expect(calculateMatch(userPositions, candidatePositions)).toEqual({ match: 69, certainty: 80 });
+    expect(calculateMatch(userPositions, candidatePositions)).toEqual(
+      { match: 69, certainty: 75, known: 3, totalWithUserOpinions: 4});
   })
 });
 

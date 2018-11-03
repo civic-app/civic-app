@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { getMatchPercent } from '../../match/selectors';
+import { getCertaintyPercent, getMatchPercent, shouldShowMatchPercent } from '../../match/selectors';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 import { getCandidate, getCandidates, loadCandidates } from '../../candidate/redux/candidates';
@@ -30,6 +30,7 @@ export const getCandidateData = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
   const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
   const matchPercent = getMatchPercent(state, candidateId);
+  const shouldShowMatch = shouldShowMatchPercent(state, candidateId);
   return (
     candidate && {
       id: candidate.id,
@@ -38,6 +39,7 @@ export const getCandidateData = (state, candidateId) => {
       electionIds: candidate.electionIds,
       isFavorite,
       matchPercent,
+      shouldShowMatch,
     }
   );
 };

@@ -1,10 +1,10 @@
 import { getCandidate } from '../../candidate/redux/candidates';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
-import { getMatchPercent } from '../../match/selectors';
+import { getKnownAnswers, getMatchPercent, shouldShowMatchPercent } from '../../match/selectors';
 import { getSurveyQuestions, getUserPositions } from '../../match/redux';
 import { getPositionsForCandidate } from '../../candidate/redux/positions';
-import { getPositionResponse, isAgreement, isNeutral } from '../../match/calculate';
+import { getPositionResponse, isAgreement, isNeutral, isStrongDisagreement } from '../../match/calculate';
 
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -33,20 +33,21 @@ const getMatchTabProps = (state, candidateId) => {
   const userPositions = getUserPositions(state);
   const candidatePositions = getPositionsForCandidate(state, candidateId);
   const surveyQuestions = getSurveyQuestions(state);
+  const candidate = getCandidate(state, candidateId);
 
   const issueMatchData = (candidatePositions && userPositions && surveyQuestions) ?
     Object.keys(userPositions).map(
       questionId => {
         const userResponse = getPositionResponse(questionId, userPositions);
         const candidateResponse = getPositionResponse(questionId, candidatePositions);
-        // TODO: how to handle neutral user
-        const agreesWithUser = isAgreement(userResponse, candidateResponse) || isNeutral(userResponse);
+        const agreesWithUser = toOpinion(userResponse, candidateResponse);
+
         return {
           id: questionId,
           type: surveyQuestions[questionId] && surveyQuestions[questionId].type || 'other',
           body: candidatePositions[questionId].explanation,
           source: toSourceList(candidatePositions[questionId].source),
-          agreesWithUser: agreesWithUser
+          agreesWithUser,
         }
       }
     ) : [];
@@ -54,8 +55,25 @@ const getMatchTabProps = (state, candidateId) => {
   return {
     matchPercent: getMatchPercent(state, candidateId),
     issueMatchData,
+    shouldShowMatch: shouldShowMatchPercent(state, candidateId),
+    candidateName: candidate && candidate.name,
+    known: getKnownAnswers(state, candidateId),
+    total: Object.keys(userPositions).length,
   };
 };
+
+export const Opinion = {
+  Agree: 'agree',
+  Disagree: 'disagree',
+  StronglyDisagree: 'stronglyDisagree',
+  Unknown: 'unknown',
+};
+
+const toOpinion = (userResponse, candidateResponse) =>
+  isAgreement(userResponse, candidateResponse) ? Opinion.Agree
+    : (isNeutral(userResponse) || isNeutral(candidateResponse)) ? Opinion.Unknown
+      : isStrongDisagreement(userResponse, candidateResponse) ? Opinion.StronglyDisagree
+        : Opinion.Disagree;
 
 const getAboutTabProps = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
