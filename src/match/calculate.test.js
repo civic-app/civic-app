@@ -16,40 +16,40 @@ describe('calculateMatch', () => {
       'd': { response: 1 },
       'e': { response: -1 },
     };
-    expect(calculateMatch(userPositions, candidatePositions)).toEqual(68.75);
+    expect(calculateMatch(userPositions, candidatePositions)).toEqual({ match: 69, certainty: 80 });
   })
 });
 
 describe('calculateGapForSingle', () => {
   it('handles agreement', () => {
-    expect(calculateGapForSingle(1, 1)).toEqual([0, 4]);
-    expect(calculateGapForSingle(-1, -1)).toEqual([0, 4]);
+    expect(calculateGapForSingle(1, 1)).toEqual({ gap: 0, max: 1, unknown: 0});
+    expect(calculateGapForSingle(-1, -1)).toEqual({ gap: 0, max: 1, unknown: 0});
   });
 
   it('handles agreement with strong agreement', () => {
-    expect(calculateGapForSingle(2, 1)).toEqual([0, 4]);
-    expect(calculateGapForSingle(-2, -1)).toEqual([0, 4]);
+    expect(calculateGapForSingle(2, 1)).toEqual({ gap: 0, max: 1, unknown: 0});
+    expect(calculateGapForSingle(-2, -1)).toEqual({ gap: 0, max: 1, unknown: 0});
   });
 
   it('handles neutral candidate', () => {
-    expect(calculateGapForSingle(1, 0)).toEqual([1, 4]);
-    expect(calculateGapForSingle(-1, 0)).toEqual([1, 4]);
-    expect(calculateGapForSingle(2, 0)).toEqual([2, 4]);
-    expect(calculateGapForSingle(-2, 0)).toEqual([2, 4]);
+    expect(calculateGapForSingle(1, 0)).toEqual({ gap: .25, max: 1, unknown: 1});
+    expect(calculateGapForSingle(-1, 0)).toEqual({ gap: .25, max: 1, unknown: 1});
+    expect(calculateGapForSingle(2, 0)).toEqual({ gap: .5, max: 1, unknown: 1});
+    expect(calculateGapForSingle(-2, 0)).toEqual({ gap: .5, max: 1, unknown: 1});
   });
 
   it('returns no max when user is neutral', () => {
-    expect(calculateGapForSingle(0, 1)).toEqual([0, 0]);
-    expect(calculateGapForSingle(0, -1)).toEqual([0, 0]);
+    expect(calculateGapForSingle(0, 1)).toEqual({ gap: 0, max: 0, unknown: 0});
+    expect(calculateGapForSingle(0, -1)).toEqual({ gap: 0, max: 0, unknown: 0});
   });
 
   it('handles disagreement', () => {
-    expect(calculateGapForSingle(1, -1)).toEqual([3, 4]);
-    expect(calculateGapForSingle(-1, 1)).toEqual([3, 4]);
+    expect(calculateGapForSingle(1, -1)).toEqual({ gap: .75, max: 1, unknown: 0});
+    expect(calculateGapForSingle(-1, 1)).toEqual({ gap: .75, max: 1, unknown: 0});
   });
 
   it('handles strong disagreement', () => {
-    expect(calculateGapForSingle(2, -1)).toEqual([4, 4]);
-    expect(calculateGapForSingle(-2, 1)).toEqual([4, 4]);
+    expect(calculateGapForSingle(2, -1)).toEqual({ gap: 1, max: 1, unknown: 0});
+    expect(calculateGapForSingle(-2, 1)).toEqual({ gap: 1, max: 1, unknown: 0});
   });
 });

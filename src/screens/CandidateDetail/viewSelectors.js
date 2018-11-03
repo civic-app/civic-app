@@ -4,7 +4,7 @@ import { Category } from '../../favorites/models';
 import { getMatchPercent } from '../../match/selectors';
 import { getSurveyQuestions, getUserPositions } from '../../match/redux';
 import { getPositionsForCandidate } from '../../candidate/redux/positions';
-import { getPositionResponse, isAgreement, isUserNeutral } from '../../match/calculate';
+import { getPositionResponse, isAgreement, isNeutral } from '../../match/calculate';
 
 export const getCandidateSummary = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
@@ -40,7 +40,7 @@ const getMatchTabProps = (state, candidateId) => {
         const userResponse = getPositionResponse(questionId, userPositions);
         const candidateResponse = getPositionResponse(questionId, candidatePositions);
         // TODO: how to handle neutral user
-        const agreesWithUser = isAgreement(userResponse, candidateResponse) || isUserNeutral(userResponse);
+        const agreesWithUser = isAgreement(userResponse, candidateResponse) || isNeutral(userResponse);
         return {
           id: questionId,
           type: surveyQuestions[questionId] && surveyQuestions[questionId].type || 'other',
