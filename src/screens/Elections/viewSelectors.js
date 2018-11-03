@@ -32,7 +32,7 @@ export const getCandidateData = (state, candidateId) => {
   const matchData = getMatchData(state, candidateId);
 
   return (
-    candidate && {
+    candidate && matchData && {
       id: candidate.id,
       name: candidate.name,
       image: candidate.image,

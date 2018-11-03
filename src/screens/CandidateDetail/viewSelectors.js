@@ -11,7 +11,7 @@ export const getCandidateSummary = (state, candidateId) => {
   const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
   const matchData = getMatchData(state, candidateId);
   return (
-    candidate && {
+    candidate && matchData && {
       id: candidate.id,
       name: candidate.name,
       imageURI: candidate.image,
@@ -35,7 +35,7 @@ const getMatchTabProps = (state, candidateId) => {
   const candidatePositions = getPositionsForCandidate(state, candidateId);
   const surveyQuestions = getSurveyQuestions(state);
   const candidate = getCandidate(state, candidateId);
-  const matchData = getMatchData(state. candidateId);
+  const matchData = getMatchData(state, candidateId);
 
   const issueMatchData = (candidatePositions && userPositions && surveyQuestions) ?
     Object.keys(userPositions).map(
@@ -54,8 +54,7 @@ const getMatchTabProps = (state, candidateId) => {
       }
     ) : [];
 
-  return {
-
+  return matchData && {
     issueMatchData,
     candidateName: candidate && candidate.name,
     shouldShowMatch: shouldShowMatch(matchData),
@@ -70,13 +69,22 @@ export const Opinion = {
   Disagree: 'disagree',
   StronglyDisagree: 'stronglyDisagree',
   Unknown: 'unknown',
+  Neutral: 'neutral',
 };
 
-const toOpinion = (userResponse, candidateResponse) =>
-  isAgreement(userResponse, candidateResponse) ? Opinion.Agree
-    : (isNeutral(userResponse) || isNeutral(candidateResponse)) ? Opinion.Unknown
-      : isStrongDisagreement(userResponse, candidateResponse) ? Opinion.StronglyDisagree
-        : Opinion.Disagree;
+const toOpinion = (userResponse, candidateResponse) => {
+  if (isAgreement(userResponse, candidateResponse)) {
+    return Opinion.Agree;
+  } else if (isNeutral(userResponse)) {
+    return Opinion.Neutral;
+  } else if (isNeutral(candidateResponse)) {
+    return Opinion.Unknown;
+  } else if (isStrongDisagreement(userResponse, candidateResponse)) {
+    return Opinion.StronglyDisagree;
+  } else {
+    return Opinion.Disagree;
+  }
+};
 
 const getAboutTabProps = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
