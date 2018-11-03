@@ -8,35 +8,35 @@ import Fave from './FavoriteContainer'
 const DataContainer = props => {
   return (
     <View style={styles.container}>
-      {props.data == undefined ? null : 
+      {props.data == undefined ? null :
         <View key={props.data.id} style={styles.container}>
           <View style={styles.newsCard}>
             <View style={styles.pictureBody}>
               <Image style={styles.candidatePicture}
-                source={{ uri: props.data.image}} 
+                source={{ uri: props.data.image}}
               />
               <Fave isFavorite={props.data.isFavorite}/>
-            </View> 
+            </View>
             <View style={styles.contentContainer}>
               <View style={styles.contentBody}>
                 <Text style={styles.matchCardText}>
-                  <Text style={styles.nameText}>{props.data.name}{'\n\n'}</Text>  
-                  {props.data.matchPercent != undefined
+                  <Text style={styles.nameText}>{props.data.name}{'\n\n'}</Text>
+                  {props.data.matchPercent != undefined && props.data.shouldShowMatch
                     ?
                     <Text style={styles.matchCardPercentText}>{props.data.matchPercent}{'%'}</Text>
                     :
-                    <Text>{'No'}</Text>
+                    <Text>{'Incomplete'}</Text>
                   }{' match'}
                 </Text>
               </View>
-            </View>   
-          </View> 
+            </View>
+          </View>
         </View>
       }
     </View>
   );
 }
-  
+
 DataContainer.propTypes = {
   data: PropTypes.object,
   id: PropTypes.string,
@@ -45,8 +45,9 @@ DataContainer.propTypes = {
   electionIds: PropTypes.string,
   image: PropTypes.string,
   matchPercent: PropTypes.number,
+  shouldShowMatch: PropTypes.bool,
 };
-    
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent:'space-between',
     alignItems: 'stretch',
-  },  
+  },
   contentContainer: {
     marginLeft:15,
   },
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     height: 150,
-    width: 200, 
+    width: 200,
     backgroundColor: Colors.white,
     borderRadius: 2,
     ...Mixins.shadow
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
   matchCardText: {
     textAlign: 'left',
     fontSize: 16,
+    color: Colors.gray,
   },
   matchCardPercentText: {
     fontSize: 18,
@@ -97,6 +99,6 @@ const styles = StyleSheet.create({
     width:'100%',
   },
 })
-  
+
 
 export default DataContainer
