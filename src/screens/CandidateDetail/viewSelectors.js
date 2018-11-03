@@ -19,6 +19,7 @@ export const getCandidateSummary = (state, candidateId) => {
       partyPreference: candidate.partyPreference,
       isFavorite,
       matchPercent,
+      shouldShowMatchPercent: shouldShowMatchPercent(state, candidateId),
     }
   );
 };
