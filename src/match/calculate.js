@@ -40,8 +40,6 @@ export const isAgreement = (user, candidate) => (
 
 export const isNeutral = answer => answer === 0;
 
-export const isStrongDisagreement = (user, candidate) => calculateGapForSingle(user, candidate) === 1;
-
 export const getPositionResponse = (id, positions) => (
   positions && positions[id] && positions[id].response
 );

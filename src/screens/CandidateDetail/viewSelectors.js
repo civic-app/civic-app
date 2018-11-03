@@ -67,7 +67,6 @@ const getMatchTabProps = (state, candidateId) => {
 export const Opinion = {
   Agree: 'agree',
   Disagree: 'disagree',
-  StronglyDisagree: 'stronglyDisagree',
   Unknown: 'unknown',
   Neutral: 'neutral',
 };
@@ -79,8 +78,6 @@ const toOpinion = (userResponse, candidateResponse) => {
     return Opinion.Neutral;
   } else if (isNeutral(candidateResponse)) {
     return Opinion.Unknown;
-  } else if (isStrongDisagreement(userResponse, candidateResponse)) {
-    return Opinion.StronglyDisagree;
   } else {
     return Opinion.Disagree;
   }

@@ -95,10 +95,8 @@ const toCardConfig = opinion => {
       return { icon: 'check', message: 'Agree', color: Colors.green } ;
     case Opinion.Disagree:
       return { icon: 'close', message: 'Disagree', color: Colors.red } ;
-    case Opinion.StronglyDisagree:
-      return { icon: 'close', message: 'Strongly Disagree', color: Colors.red } ;
     case Opinion.Neutral:
-      return { icon: 'minus', message: 'Unknown', color: Colors.gray } ;
+      return { icon: 'minus', message: 'You\'re neutral', color: Colors.gray } ;
     case Opinion.Unknown:
     default:
       return { icon: 'question', message: 'Unknown', color: Colors.gray } ;
