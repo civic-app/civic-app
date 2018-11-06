@@ -26,8 +26,11 @@ const CandidatePreview = props => {
         <Text style={styles.nameText}>{props.name}</Text>
         <Text style={styles.positionsText}>Running for {props.positions[0]}</Text>
         <Text>
-          <Text style={styles.matchText}>{props.matchPercent}% </Text>
-          match | {props.partyPreference}
+          {props.shouldShowMatchPercent ?
+            <Text style={styles.matchText}>{props.matchPercent}% </Text>
+            : 'Incomplete'
+          }
+          {' match'} | {props.partyPreference}
         </Text>
       </View>
       <Favorite
@@ -41,17 +44,6 @@ const CandidatePreview = props => {
 CandidateDetail.propTypes = {
   summary: PropTypes.shape(CandidatePreview.propTypes).isRequired,
   toggleFavorite: PropTypes.func.isRequired,
-  positions: PropTypes.arrayOf(PropTypes.string),
-  candidateId: PropTypes.string,
-  partyPreference: PropTypes.string,
-  matchPercent: PropTypes.number,
-};
-
-CandidateDetail.defaultProps = {
-  positions: undefined,
-  candidateId: undefined,
-  partyPreference: undefined,
-  matchPercent: undefined,
 };
 
 CandidatePreview.propTypes = {
@@ -62,6 +54,7 @@ CandidatePreview.propTypes = {
   partyPreference: PropTypes.string,
   positions: PropTypes.array,
   onToggleFavorite: PropTypes.func,
+  shouldShowMatchPercent: PropTypes.bool,
 };
 
 CandidateDetail.propTypes = {

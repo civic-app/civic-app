@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { getMatchPercent } from '../../match/selectors';
+import { getMatchData, shouldShowMatch } from '../../match/selectors';
 import { getIsFavorite } from '../../favorites/redux';
 import { Category } from '../../favorites/models';
 import { getCandidate, getCandidates, loadCandidates } from '../../candidate/redux/candidates';
@@ -29,15 +29,17 @@ export const getElectionsViewProps = state => {
 export const getCandidateData = (state, candidateId) => {
   const candidate = getCandidate(state, candidateId);
   const isFavorite = getIsFavorite(state, candidateId, Category.Candidates);
-  const matchPercent = getMatchPercent(state, candidateId);
+  const matchData = getMatchData(state, candidateId);
+
   return (
-    candidate && {
+    candidate && matchData && {
       id: candidate.id,
       name: candidate.name,
       image: candidate.image,
       electionIds: candidate.electionIds,
       isFavorite,
-      matchPercent,
+      matchPercent: matchData.match,
+      shouldShowMatch: shouldShowMatch(matchData),
     }
   );
 };
