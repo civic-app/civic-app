@@ -31,6 +31,10 @@ references:
     branches:
       only: alpha
 
+  filters: &only_master
+    branches:
+      only: master
+
   filters: &ignore_release_branches
     branches:
       ignore:
@@ -82,8 +86,8 @@ jobs:
           name: Login to Expo
           command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
       - run:
-          name: 'Publish'
-          command: yarn exp publish --max-workers 1
+          name: 'Publish to dev'
+          command: yarn exp publish --max-workers 1 --release-channel dev
 
   deploy_expo_alpha:
     <<: *build_config
@@ -93,8 +97,30 @@ jobs:
           name: Login to Expo
           command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
       - run:
-          name: 'Publish'
-          command: exp publish --max-workers 1 --release-channel alpha
+          name: 'Publish to alpha'
+          command: yarn exp publish --max-workers 1 --release-channel alpha
+
+  deploy_expo_master:
+    <<: *build_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Login to Expo
+          command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
+      - run:
+          name: 'Publish to master'
+          command: yarn exp publish --max-workers 1
+
+  deploy_expo_branch_preview:
+    <<: *build_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Login to Expo
+          command: yarn exp login -u $EXPO_EMAIL_ADDRESS -p $EXPO_PASSWORD
+      - run:
+          name: 'Publish to preview'
+          command: yarn exp publish --max-workers 1 --release-channel $CIRCLE_SHA1
 
 workflows:
 
@@ -107,6 +133,10 @@ workflows:
       - test_unit:
           requires:
             - create_workspace
+      - deploy_expo_branch_preview:
+          requires:
+            - test_unit
+
   merge_dev:
     jobs:
       - create_workspace:
@@ -123,5 +153,13 @@ workflows:
       - create_workspace:
           filters: *only_alpha
       - deploy_expo_alpha:
+          requires:
+            - create_workspace
+
+  release_master:
+    jobs:
+      - create_workspace:
+          filters: *only_master
+      - deploy_expo_master:
           requires:
             - create_workspace

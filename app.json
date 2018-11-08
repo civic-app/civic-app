@@ -1,11 +1,13 @@
 {
   "expo": {
     "name": "Civic App",
-    "version": "0.1.0",
+    "version": "0.1.3",
+    "description": "Connecting people to politics",
     "slug": "civic-app",
     "sdkVersion": "27.0.0",
+    "icon": "./icon.png",
     "ios": {
-      "bundleIdentifier": "com.civic.civicapp"
+      "bundleIdentifier": "com.civiclabs.civicapp"
     },
     "android": {
       "package": "com.civic.civicapp"
